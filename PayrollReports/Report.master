@@ -1,0 +1,293 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Report.master.cs" Inherits="Hrms_Reports_Report" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ePay-HRMS</title>
+    <link href="../Css/Cand_BaseStyle.css" rel="stylesheet" type="text/css" />
+    <link href="/aspnet_client/System_Web/2_0_50727/CrystalReportWebFormViewer3/css/default.css"
+        rel="stylesheet" type="text/css" />
+
+    <script language="javascript" type="text/javascript">
+function fn_chkall(chkid,chklistid)
+    { 
+        var chkBoxList = document.getElementById(chklistid);
+        var chkBoxCount= chkBoxList.getElementsByTagName("input");
+
+       if(document.getElementById(chkid).checked==true)
+       {       
+            for(var i=0;i<chkBoxCount.length;i++) 
+            {
+                chkBoxCount[i].checked = true;
+            }                
+       }
+       else
+       {       
+            for(var i=0;i<chkBoxCount.length;i++) 
+            {
+                chkBoxCount[i].checked = false;
+            }               
+       }             
+    }       
+    
+   /*===================*/
+   
+   function fn_date(event,txtid)
+ {  
+       var len;
+       var txtvalue; 
+       var bool_obj; 
+       var i;    
+      
+       txtvalue= document.getElementById(txtid).value;
+       txtlen=txtvalue.length;  
+       
+  if(event.keyCode!=8 && event.keyCode!=46 && event.keyCode!=35 && event.keyCode!=36 && event.keyCode!=37 && event.keyCode!=38 && event.keyCode!=39 && event.keyCode!=40)     
+   {     
+           if(txtlen!=0)
+           {       
+               bool_obj=fn_validate(txtlen,txtvalue);
+                          
+               if(bool_obj==true)
+                 {
+                      if(txtlen==2 || txtlen==5)
+                      {
+                      document.getElementById(txtid).value=txtvalue+"/";
+                      }
+                      else
+                      {
+                      document.getElementById(txtid).value=txtvalue;
+                      }
+                     
+                 }
+                 else
+                 {            
+                     
+                   document.getElementById(txtid).value= txtvalue.substring(0,txtlen-1);              
+                 
+                 }                       
+                
+            } 
+           
+    }                                 
+ }
+    
+    
+    function fn_validate(len,tval)
+    {
+    var str;
+    
+          switch(len)
+           {
+     
+        case 1: if(tval<=3)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                 
+        case 2:               
+                
+                if(tval<=31 && tval>0)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+        case 3: str=tval.charAt(2);
+        
+                if(str=="/")
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+      case 4: str=tval.charAt(3);
+        
+                if(str<=1)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+      case 5: str=tval.substring(3,5); 
+        
+                if(str<=12 && str>0)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+       case 6: str=tval.charAt(5);
+        
+                if(str=="/")
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+        case 7: str=tval.charAt(6);
+        
+                if(str<=9 && str>0)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+        case 8: str=tval.substring(6,8);
+        
+                if(str>=18)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+        case 9: str=tval.charAt(8);
+        
+                if(str<=9)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                
+        case 10: str=tval.charAt(9);
+        
+                if(str<=9)
+                {
+                return true; 
+                }
+                else
+                {
+                return false; 
+                }                 
+                break;
+                                
+        default :return false;   
+                 break;
+           }        
+    }
+    </script>
+
+    <style type="text/css">
+.menuItem
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;
+cursor : hand;
+}
+.menuItem1
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;	
+cursor : hand;
+}
+</style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table width="100%" height="120px">
+            <tr valign="top">
+                <td>
+                  <asp:Image ID="Image1" runat="server" ImageUrl="~/hrimages/Ebanner1.jpg"  
+                    Height="280" Width="1350" />
+                </td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr>
+                <td>
+                     <asp:Menu CssClass="menuItem" Orientation="Horizontal" StaticSubMenuIndent="0" StaticDisplayLevels="2"
+                        MaximumDynamicDisplayLevels="2" ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"
+                        ForeColor="white" DynamicPopOutImageUrl="~/Images/arr_collapsed1.gif"
+                        StaticPopOutImageUrl="~/Images/arr_expanded.gif" Width="100%" 
+                        Height="31px">
+                        <DynamicHoverStyle CssClass="menuItem"  Font-Underline="true" ForeColor="white" />
+                        <DynamicMenuItemStyle BackColor="#DCDCDC" ForeColor="#43375B" HorizontalPadding="5px"
+                            VerticalPadding="2px" Font-Bold="false" />
+                        <StaticHoverStyle CssClass="menuItem" Font-Bold="false"/>
+                        <StaticMenuItemStyle HorizontalPadding="2px" VerticalPadding="2px" Font-Bold="false" />
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                </td>
+            </tr>
+        </table>
+        <table id="mainLayoutTable">
+            <tbody>
+                <tr valign="top">
+                <td  id="tdContentLeft"><%--width="8%"--%>
+                <div id="contentLeft" style="height: 100%">
+                            <div id="contentFolderList" style="height: 100%">
+                                <center>
+                                    <div style="text-align: center; vertical-align: top">
+                                        <table class="ContentTable" width="100%" height="50%">
+                                            <tr>
+                                                <td align="center" valign="bottom">
+                                                    <asp:Image ID="img_photo" runat="server" Height="106px" Width="90px" /><br />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <asp:Label ID="lblmsg" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                </td>
+                
+                <td id="tdContentRight" valign="top" style="width: 90%; height: 50%;">
+                <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <table width="99%" align="center">
+            <tr valign="top">
+                <td align="right" width="100%" background="../Images/bg.jpg" height="15px">
+                    Powered by <a href="http://www.epayindia.com" target="_blank"><font color="#0099ff"
+                        size="4px" title="Click to Know more about ePay Solutions">ePay</font></a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

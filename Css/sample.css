@@ -1,0 +1,19 @@
+﻿body
+ {
+ }
+ 
+ .button, .button:visited, .button:hover, .button:active
+ {
+       width: 140px;                                    /*Make these the size of the image*/
+       height: 18px;
+       background-image: url(..\Images\button-blank.GIF);  /*Blank button image*/
+       background-repeat: no-repeat;
+       color: Black;                                     /*Color of text*/
+       display: inline-block;                           /*Required*/
+       margin-left: 5px;                                /*Spacing so buttons can...*/
+       margin-right: 5px;                               /*simply be side-by-side*/
+       text-align: center;                              /*Alignment of text*/
+       padding-top:5px;                                 /*Push text down like v-align:center*/
+       text-decoration:none;                            /*Do not show link underline*/
+} 
+

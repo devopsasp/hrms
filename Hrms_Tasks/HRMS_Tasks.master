@@ -1,0 +1,87 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="HRMS_Tasks.master.cs" Inherits="Hrms_Tasks_HRMS_Tasks" %>
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI" TagPrefix="asp" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Welcome to HRMS</title>
+    <link href="../Css/Cand_BaseStyle.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+.menuItem
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;
+cursor : hand;
+}
+.menuItem1
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;	
+cursor : hand;
+}
+
+        .ContentTable
+        {
+            width: 64%;
+        }
+
+    </style>
+</head>
+<body class="body">
+    <form id="form1" runat="server">
+        <table width="100%" height="140px">
+            <tr valign="top">
+                <td>
+                 <asp:Image ID="Image1" runat="server" ImageUrl="~/hrimages/Ebanner1.jpg"  
+                    Height="280" Width="1350" />
+                </td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr>
+                <td>
+                   <asp:Menu CssClass="menuItem" Orientation="Horizontal" StaticSubMenuIndent="0" StaticDisplayLevels="2"
+                        MaximumDynamicDisplayLevels="2" ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"
+                        ForeColor="white" DynamicPopOutImageUrl="~/Images/arr_collapsed1.gif"
+                        StaticPopOutImageUrl="~/Images/arr_expanded.gif" Width="100%" 
+                        Height="31px">
+                        <DynamicHoverStyle CssClass="menuItem"  Font-Underline="true" ForeColor="white" />
+                        <DynamicMenuItemStyle BackColor="#DCDCDC" ForeColor="#43375B" HorizontalPadding="5px"
+                            VerticalPadding="2px" Font-Bold="false" />
+                        <StaticHoverStyle CssClass="menuItem" Font-Bold="false"/>
+                        <StaticMenuItemStyle HorizontalPadding="2px" VerticalPadding="2px" Font-Bold="false" />
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                </td>
+            </tr>
+        </table>
+        <table id="mainLayoutTable">
+            <tbody>
+                <tr valign="top">
+                    
+                    <td id="tdContentRight" valign="top" style="width: 90%" height="100%">
+                        <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </td></tr>
+            </tbody>
+        </table>
+        <table width="100%">
+            <tr valign="top">
+                <td>
+                </td>
+                <td align="right" width="100%" background="../Images/bg.jpg" height="15px">
+                    Powered by <a href="http://www.epayindia.com" target="_blank"><font color="#0099ff"
+                        size="4px" title="Click to Know more about ePay Solutions">ePay</font></a>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

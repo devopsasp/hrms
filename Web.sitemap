@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode>
+    
+    <!--Admin Menu-->
+
+    <!--<siteMapNode url="Hrms_Company/Company_Home.aspx" title="Home" description="Home"/>-->
+
+    <siteMapNode url="" title="Company" description="Company">
+      <siteMapNode url="Hrms_Company/Company_Home.aspx" title="Home" description="Home"/>
+      <siteMapNode url="Hrms_Company/PreviewCompany.aspx" title="HeadOffice" description="HeadOffice"/>
+      <siteMapNode url="Hrms_Company/PreviewBranch.aspx" title="Branches" description="Branches"/>
+    </siteMapNode>
+
+    <siteMapNode url="" title="Master" description="Master">
+      <siteMapNode url="" title="Academics" description="Academics">
+        <siteMapNode url="Hrms_Master/Common/Course.aspx" title="Course" description="Course" />
+        <siteMapNode url="Hrms_Master/Common/Skill.aspx" title="Skills" description="Skills" />
+      </siteMapNode>
+      <siteMapNode url="" title="Employee" description="Employee">
+        <siteMapNode url="Hrms_Master/Employee/Department.aspx" title="Department" description="Department" />
+        <siteMapNode url="Hrms_Master/Employee/Division.aspx" title="Division" description="Division" />
+        <siteMapNode url="Hrms_Master/Employee/Level.aspx" title="Level" description="Level" />
+        <siteMapNode url="Hrms_Master/Employee/Designation.aspx" title="Designation" description="Designation" />
+        <siteMapNode url="Hrms_Master/Employee/Grade.aspx" title="Grade" description="Grade" />
+        <siteMapNode url="Hrms_Master/Employee/Category.aspx" title="Category" description="Category" />
+        <siteMapNode url="Hrms_Master/Employee/JobStatus.aspx" title="Jobtype" description="Jobtype" />
+        <siteMapNode url="Hrms_Master/Employee/Shiftpattern.aspx" title="Shift Pattern" description="Shift Pattern" />
+        <siteMapNode url="Hrms_Master/Employee/ProjectSite.aspx" title="Projectsite" description="Projectsite" />
+      </siteMapNode>
+
+      <siteMapNode url="" title="Time Attendance" description="Training">
+        <siteMapNode url="Hrms_Master/time_card/timecardsetup.aspx" title="Time Card Setup" description="Time Card Setup" />
+        <siteMapNode url="Hrms_Master/time_card/shiftbalanceentry.aspx" title="Shift Balance Entry" description="Shift Balance Entry" />
+        <siteMapNode url="Hrms_Master/time_card/otslab.aspx" title="OT Slab Master" description="OT Slab Master" />
+      </siteMapNode>
+      
+      <siteMapNode url="" title="Training" description="Training">
+        <siteMapNode url="Hrms_Master/Training/Institution.aspx" title="Institution Profile" description="Institution Profile" />
+        <siteMapNode url="Hrms_Master/Training/Programtype.aspx" title="Program Type" description="Program Type" />
+        <!--<siteMapNode url="Hrms_Master/Training/ProgramName.aspx" title="Program Name" description="Program Name" />
+        <siteMapNode url="Hrms_Master/Training/TrainerProfile.aspx" title="Trainer Profile" description="Trainer Profile" />-->
+      </siteMapNode>
+      <siteMapNode url="" title="Appraisal" description="Appraisal">
+        <siteMapNode url="Hrms_Master/Appraisal/App_Increment_New.aspx" title="Appraisal Increment" description="Appraisal Slab" />
+        <siteMapNode url="Hrms_Master/Appraisal/Appraisal1.aspx" title="Appraisal Setup" description="Appraisal Criteria" />
+        <!--<siteMapNode url="Hrms_Master/Appraisal/promotion.aspx" title="Promotion Slab" description="Promotion slab" />-->
+        <!--<siteMapNode url="Hrms_Master/Appraisal/Annual_Increment.aspx" title="Annual Increment Slab" description="Annual Increment Slab" />-->
+        <!--<siteMapNode url="Hrms_Master/Appraisal/Appraisal1.aspx" title="Appraisal Setup" description="Appraisal Setup" />-->
+        <!--<siteMapNode url="Hrms_Master/Appraisal/App_Bonus.aspx" title="Appraisal Bonus" description="Appraisal Bonus" />-->
+      </siteMapNode>
+      <siteMapNode url="" title="Bonus" description="Bonus">
+        <!--<siteMapNode url="Hrms_Master/Bonus/Bonus.aspx" title="Bonus" description="Bonus" />-->
+        <siteMapNode url="Hrms_Master/Bonus/Bonus_Increment_New.aspx" title="Bonus Increment" description="Bonus Increment" />
+      </siteMapNode>
+      <siteMapNode url="" title="Leave / Holiday" description="Leave / Holiday">
+        <siteMapNode url="Hrms_Master/Leave/Holiday.aspx" title="Holiday" description="Holiday" />
+        <siteMapNode url="Hrms_Master/Leave/Leave.aspx" title="Leave" description="Leave" />
+        <siteMapNode url="Hrms_Master/Leave/leaveAllocation.aspx" title="Allocation" description="Allocation" />
+      </siteMapNode>
+      <siteMapNode url="" title="Payroll" description="Payroll">
+        <siteMapNode url="Hrms_PayRoll/pf.aspx" title="PF" description="PF" />
+        <siteMapNode url="Hrms_PayRoll/ESI.aspx" title="ESI" description="ESI" />
+        <siteMapNode url="Hrms_Master/PayRoll/Earnings.aspx" title="Earnings" description="Earnings" />
+        <siteMapNode url="Hrms_Master/PayRoll/Deduction.aspx" title="Deduction" description="Deduction" />
+        <siteMapNode url="Hrms_Master/Payroll/Benefits.aspx" title="Benefits" description="Benefits" />
+        <siteMapNode url="Hrms_Master/PayRoll/Bank.aspx" title="Bank" description="Bank" />
+        <siteMapNode url="Hrms_Master/PayRoll/Loans.aspx" title="Loan" description="Loan" />
+      </siteMapNode>
+    </siteMapNode>
+
+    <siteMapNode url="" title="Employee" description="Employee">
+      <siteMapNode url="Hrms_Company/Employee.aspx" title="Select/Add" description="Select/Add" />
+      <!--<siteMapNode url="Hrms_Employee/Employee_Profile.aspx" title="Profile" description="Profile" />
+      <siteMapNode url="Hrms_Employee/Employee_Education.aspx" title="Qualification" description="Qualification" />
+      <siteMapNode url="Hrms_Employee/Employee_Skills.aspx" title="Skills" description="Skills" />
+      <siteMapNode url="Hrms_Employee/WorkExperience.aspx" title="Work Experience" description="Work Experience" />
+      <siteMapNode url="Hrms_Employee/Employee_WorkDetails.aspx" title="Work Details" description="Work Details" />
+      <siteMapNode url="Hrms_Employee/Employee_Earnings.aspx" title="Earnings" description="Earnings" />
+      <siteMapNode url="Hrms_Employee/Employee_Deducation.aspx" title="Deduction" description="Deduction" />
+      <siteMapNode url="Hrms_Master/Employee/OverHeadiingCost.aspx" title="OverHeadiingCost" description="OverHeadiingCost" />
+      --><!--<siteMapNode url="Hrms_Employee/Employee_Training.aspx" title="Training" description="Training" />--><!--
+      <siteMapNode url="Hrms_Employee/Employee_Date.aspx" title="Date" description="Date" />
+      <siteMapNode url="Hrms_Employee/Employee_Photo.aspx" title="Photo" description="Photo" />
+      <siteMapNode url="Hrms_Employee/Employee_Preview.aspx" title="Preview" description="Preview" />-->
+    </siteMapNode>  
+
+    
+
+    <siteMapNode url="" title="Task" description="Task" >
+      <!--<siteMapNode url="Hrms_Tasks/Tasks_List.aspx" title="My Task" description="My Task" />-->
+      <!--<siteMapNode url="Hrms_Tasks/Task_Scheduler1.aspx" title="Task Scheduler" description="Task Scheduler" />-->
+      <siteMapNode url="Hrms_Tasks/Task_Scheduler1.aspx" title="Task Scheduler" description="Task Scheduler" />
+      <siteMapNode url="Hrms_Tasks/Tasks_Online.aspx" title="Online Test" description="Online Test" />
+      <siteMapNode url="Hrms_Tasks/Reimbursement.aspx" title="Reimbursement" description="Reimbursement" />
+      <siteMapNode url="Hrms_Tasks/Backup.aspx" title="Backup/Restore" description="Backup/Restore" />
+    </siteMapNode>
+
+    <siteMapNode url="" title="Actions" description="Actions">
+      <siteMapNode url="Hrms_Operations/Hr_Authentications.aspx" title="HR Authentications" description="HR Authentications" />
+      <siteMapNode url="Hrms_Operations/Transfer.aspx" title="Transfers" description="Transfers" />
+      <siteMapNode url="Hrms_Operations/CreateUser.aspx" title="User Creation" description="User Creation" />
+      <siteMapNode url="Hrms_Operations/Authentications.aspx" title="User Authentications" description="User Authentications" />
+      <siteMapNode url="Hrms_Operations/DeletionEntry.aspx" title="Deletion" description="Deletion" />
+      <siteMapNode url="Hrms_Company/Settings.aspx" title="Password Change" description="Password Change" />
+      
+    </siteMapNode>
+
+    <!--<siteMapNode url="" title="Setting" description="Setting">
+      <siteMapNode url="Hrms_Company/Settings.aspx" title="Password Change" description="Password Change" />
+     
+    </siteMapNode>-->
+    
+    <siteMapNode url="" title="Performance" description="Performance">
+      <siteMapNode url="Hrms_Additional/Bonus.aspx" title="Bonus  " description="Bonus" />
+      <siteMapNode url="Hrms_Additional/Training.aspx" title="Training" description="Training" />
+      <siteMapNode url="Hrms_Additional/Project_Details.aspx" title="Project Details" description="Project Details" />
+      <siteMapNode url="Hrms_Additional/Appraisalnew.aspx" title="Performance Appraisal" description="Performance Appraisal" />
+      <siteMapNode url="Hrms_Additional/Promotion_setup.aspx" title="Promotion Setup" description="Promotion Setup" />
+      <siteMapNode url="Hrms_Additional/Annual_increment.aspx" title="Annual Increment Setup" description="Annual Increment" />
+      <!--<siteMapNode url="Hrms_Additional/Appraisalnew.aspx" title="Appraisal New" description="Appraisal New" />-->
+    </siteMapNode>
+
+    <siteMapNode url="" title="Attendance" description="Attendance">
+      <siteMapNode url="Hrms_TimeAndAttendance/Connection.aspx" title="Connection" description="Connection"/>
+      <siteMapNode url="Hrms_TimeAndAttendance/Dailycard.aspx" title="Daily Time Card" description="Daily Time Card"/>
+      <siteMapNode url="Hrms_PayRoll/payinput.aspx" title="Input" description="Input"/>
+      <siteMapNode url="Hrms_Attendance/onduty.aspx" title="On Duty" description="On Duty"/>
+      <siteMapNode url="Hrms_Attendance/Daily.aspx" title="Leave Entry" description="Leave Entry" />
+      <siteMapNode url="Hrms_Attendance/LeaveDetails.aspx" title="Leave Details" description="Leave Details" />
+      <siteMapNode url="Hrms_Attendance/Leaveyear.aspx" title="Leave Year End Process" description="Leave Year End Process" />
+
+
+      <!--<siteMapNode url="Hrms_Attendance/Monthly.aspx" title="Monthly" description="Monthly" />-->
+    </siteMapNode>
+
+    <siteMapNode url="" title="Payroll" description="Payroll">
+      <siteMapNode url="" title="Salary Change Entry" description="Salary Change Entry" >
+        <siteMapNode url="Hrms_PayRoll/Employee_Earnings.aspx" title="Employee VS Allowance" description="Employee VS Allowance" />
+        <siteMapNode url="Hrms_PayRoll/Employee_Deductions.aspx" title="Employee VS Deduction" description="Employee VS Deduction" />
+      </siteMapNode>
+      <!--<siteMapNode url="Hrms_PayRoll/Non_Reg_Earnings.aspx" title="Non-Regular Earnings" description="Non Regular Earnings" />
+      <siteMapNode url="Hrms_PayRoll/Non_Reg_Deductions.aspx" title="Non-Regular Deduction" description="Non-Regular Deduction" />-->
+      <siteMapNode url="Hrms_PayRoll/pt.aspx" title="PT" description="PT" />
+      <siteMapNode url="" title="Loan" description="Loan" >
+        <siteMapNode url="Hrms_PayRoll/LoanEntry.aspx" title="Loan Entry" description="Loan Entry" />
+        <siteMapNode url="Hrms_PayRoll/LoanPreclosure.aspx" title="Loan Preclosure" description="Loan Preclosure" />
+        <siteMapNode url="Hrms_PayRoll/Loan_cancel.aspx" title="Loan Cancel" description="Loan Cancel" />
+      </siteMapNode>
+      <!--<siteMapNode url="" title="Settings" description="Settings">
+        <siteMapNode url="Hrms_PayRoll/Settings_Bonus.aspx" title="Bonus" description="Bonus"/>
+        <siteMapNode url="Hrms_PayRoll/Settings_Common.aspx" title="Common" description="Common" />
+        <siteMapNode url="Hrms_PayRoll/Settings_PT.aspx" title="PT" description="PT" />
+        <siteMapNode url="Hrms_PayRoll/Settings_OT.aspx" title="OT" description="OT" />
+        <siteMapNode url="Hrms_PayRoll/Settings_LWF.aspx" title="LWF" description="LWF" />
+      </siteMapNode>-->
+      <siteMapNode url="Hrms_PayRoll/PaySlip_process.aspx" title="Pay Slip Processing" description="Salary Period" />
+      <!--<siteMapNode url="Hrms_PayRoll/Processing.aspx" title="Processing" description="Processing" />-->
+    </siteMapNode>
+
+
+
+
+    <siteMapNode url="" title="Reports" description="Reports">
+      <siteMapNode url="Hrms_Reports/ReportSelection.aspx" title="Employee Reports" description="Employee Reports" />
+      <siteMapNode url="" title="Payroll Reports" description="Payroll Reports" >
+        <siteMapNode url="PayrollReports/Payslip.aspx" title="Payslip Reports" description="Payslip Reports" />
+        <siteMapNode url="PayrollReports/EsiReport.aspx" title="ESI Reports" description="ESI Reports" />
+        <siteMapNode url="PayrollReports/PFReport.aspx" title="PF Reports" description="PF Reports" />
+        
+      </siteMapNode>
+      <siteMapNode url="PayrollReports/Attendance.aspx" title="Attendance Reports" description="Attendance Reports" />
+    </siteMapNode>
+
+    <!--<siteMapNode url="test.aspx" title="test" description="test"/>-->
+
+    <siteMapNode url="Login.aspx" title="Signout" description="Signout" />
+  </siteMapNode>
+
+
+</siteMap>

@@ -1,0 +1,96 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AttendanceMaster.master.cs"
+    Inherits="Hrms_Attendance_AttendanceMaster" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Welcome to HRMS</title>
+    <link href="../Css/Cand_BaseStyle.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+.menuItem
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;
+cursor : hand;
+}
+.menuItem1
+{
+background-image : url(../Images/header1.gif);
+background-repeat:repeat-x;	
+cursor : hand;
+}
+
+    </style>
+</head>
+<body class="body">
+    <form id="form1" runat="server">
+        <br />
+          <%--<table width="100%" height="145px">
+            <tr valign="top">
+                <td>
+                 <asp:Image ID="Image1" runat="server" ImageUrl="~/hrimages/Ebanner1.jpg"  
+                    Height="280" Width="1350" />
+                </td>
+            </tr>
+        </table>--%>
+        <table align="center" width="90%">
+            <tr>
+                <td>
+                   <asp:Menu CssClass="menuItem" Orientation="Horizontal" StaticSubMenuIndent="0" StaticDisplayLevels="2"
+                        MaximumDynamicDisplayLevels="2" ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"
+                        ForeColor="white" DynamicPopOutImageUrl="~/Images/arr_collapsed1.gif"
+                        StaticPopOutImageUrl="~/Images/arr_expanded.gif" Width="100%" 
+                        Height="31px">
+                        <DynamicHoverStyle CssClass="menuItem"  Font-Underline="true" ForeColor="white" />
+                        <DynamicMenuItemStyle BackColor="#DCDCDC" ForeColor="#43375B" HorizontalPadding="5px"
+                            VerticalPadding="2px" Font-Bold="false" />
+                        <StaticHoverStyle CssClass="menuItem" Font-Bold="false"/>
+                        <StaticMenuItemStyle HorizontalPadding="2px" VerticalPadding="2px" Font-Bold="false" />
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                </td>
+            </tr>
+        </table>
+        <table id="mainLayoutTable" align="center" 
+           style="border-style: outset; border-width: thin">
+            <tbody>
+                <tr valign="top" style="border-style: outset; border-width: thin">
+                    <td id="tdContentLeft" style="background-color:#5D7B9D; width: 15.4em">
+                        <div id="contentLeft" style="height: 100%; width: 150px;">
+                            <div id="contentFolderList" style="height: 100%">
+                                <center>
+                                    <div style="text-align: center">
+                                        <table align="center" style="background-color:#5D7B9D" class="ContentTable" width="100%" 
+                                            height="50%">
+                                            <tr>
+                                                <td align="center" valign="bottom">
+                                                    <asp:Image ID="img_photo" runat="server" Height="106px" Width="106px" /><br />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <asp:Label ID="lblmsg" runat="server" Font-Bold="True" Font-Size="Small" 
+                                            Font-Names="Calibri"></asp:Label>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </td>
+                    <td id="tdContentRight" valign="top" style="width: 90%" height="80%">
+                        <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </td>
+            </tbody>
+        </table>
+        <table style="width: 90%" align="center">
+            <tr valign="top">
+                <td style="background-color:#483C48; font-family: Calibri; font-size: medium; font-weight: bold; color: #FFFFFF;" 
+                    align="right" height="15px">
+                    Powered by Epay</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

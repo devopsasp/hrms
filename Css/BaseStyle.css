@@ -1,0 +1,707 @@
+﻿body 
+{
+    margin:0px;
+}
+
+#mainLayoutTable {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; BORDER-COLLAPSE: collapse;
+	width:100%; height:75%;	
+}
+#contentLeftTable {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; BORDER-COLLAPSE: collapse
+}
+#rightLayoutTable {
+	BORDER-RIGHT: 0px; PADDING-RIGHT: 0px; BORDER-TOP: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px; PADDING-TOP: 0px; BORDER-BOTTOM: 0px; BORDER-COLLAPSE: collapse
+}
+#contentLeft {
+	WIDTH: 11.4em
+}
+#tdContentLeft {
+	WIDTH: 15.4em;
+	padding-left:1px;	
+}
+#contentFolderList {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid
+}
+#contentFolderListSeparator {
+	HEIGHT: 4px; BACKGROUND-COLOR: transparent
+}
+.SearchButton SPAN {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; VERTICAL-ALIGN: middle; COLOR: #ffffff; LINE-HEIGHT: 19px; WHITE-SPACE: nowrap
+}
+#header {
+	CLEAR: both; BACKGROUND-POSITION: 50% bottom; height:150px; MARGIN-BOTTOM: -21px; COLOR: #ffffff; BACKGROUND-REPEAT: repeat-x; TEXT-ALIGN: center;
+	background: url(../Images/Header_985_1.jpg) #ffffff repeat-x;
+}
+#header A {
+	COLOR: #ffffff
+}
+#header .stroke {
+	BORDER-TOP: #04306d 1px solid; FONT-SIZE: 0px; LINE-HEIGHT: 0; BORDER-BOTTOM: #1e4a87 1px solid; HEIGHT: 0px
+}
+#header .inside {
+	PADDING-TOP: 2px; HEIGHT: 74px; TEXT-ALIGN: center
+}
+#header .BrandSection {
+	FLOAT: left; MARGIN-LEFT: 6px; WIDTH: auto; PADDING-TOP: 2px; WHITE-SPACE: nowrap; POSITION: relative; HEIGHT: 50px; TEXT-ALIGN: left
+}
+#header .MeSection {
+	FONT-SIZE: 11px; Z-INDEX: 2; FLOAT: right; WIDTH: auto; MARGIN-RIGHT: 8px; PADDING-TOP: 4px; POSITION: relative; HEIGHT: 58px; TEXT-ALIGN: right
+}
+#header .BrandSection A.jewel {
+	DISPLAY: inline; VERTICAL-ALIGN: top; CURSOR: hand
+}
+#header .BrandSection A.deferred {
+	DISPLAY: inline-block; 
+}
+#header .BrandSection A.jewelB {
+	DISPLAY: inline; VERTICAL-ALIGN: bottom; CURSOR: hand
+}
+#header .BrandSection A.deferred {
+	DISPLAY: inline-block; 
+}
+#header .BrandSection SPAN.PoweredBy {
+	DISPLAY: inline-block; 
+}
+#header .BrandSection SPAN.WLFlag {
+	DISPLAY: inline-block; 
+}
+.ProductName {
+	MARGIN-TOP: 7px; PADDING-LEFT: 4px; FONT-SIZE: 17px; VERTICAL-ALIGN: middle; COLOR: #ffffff; FONT-FAMILY: Verdana,Tahoma,Arial,sans-serif; POSITION: relative
+}
+#header .MeSection A {
+	COLOR: #ffffff; WHITE-SPACE: nowrap
+}
+#header .MeSection A.ppl IMG {
+	MARGIN-LEFT: 4px; VERTICAL-ALIGN: middle
+}
+#LiveMenu {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; Z-INDEX: 999999; LEFT: -500px; BORDER-LEFT: #dbdce3 1px solid; WIDTH: 26.5em; BORDER-BOTTOM: #dbdce3 1px solid; POSITION: absolute; BACKGROUND-COLOR: #e9f5f7
+}
+#LiveMenu .ItemHover {
+	BACKGROUND-COLOR: #e9f5f7
+}
+#LiveMenu UL.tools {
+	MARGIN-LEFT: 16.25em; WIDTH: 10.5em; BOTTOM: 0px; POSITION: absolute
+}
+#LiveMenu UL.tools A {
+	MARGIN-TOP: 6px; DISPLAY: block; FONT-SIZE: 95%; MARGIN-BOTTOM: 6px; MARGIN-LEFT: 3px; COLOR: #444444; LINE-HEIGHT: 105%; WHITE-SPACE: normal
+}
+#header .BrandSection .Menu {
+	DISPLAY: none
+}
+#header .tm {
+	FONT-SIZE: 6px; VERTICAL-ALIGN: super
+}
+#header .BrandSection .BottomRow {
+	MARGIN-TOP: 3px
+}
+#header .MeSection SPAN {
+	VERTICAL-ALIGN: middle; WHITE-SPACE: nowrap
+}
+#header .DIV {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+LI.ListItemHover {
+	BACKGROUND-COLOR: #d9f1f9; TEXT-DECORATION: none
+}
+.ListItemHover {
+	BACKGROUND-COLOR: #d9f1f9; TEXT-DECORATION: none
+}
+.ItemHover {
+	BACKGROUND-COLOR: #d9f1f9; TEXT-DECORATION: none
+}
+.ContactPickerHeader {
+	BACKGROUND-COLOR: #d9f1f9; TEXT-DECORATION: none
+}
+LI.MenuItemHover {
+	BACKGROUND-COLOR: #d9f1f9; TEXT-DECORATION: none
+}
+#folderList LI SPAN {
+	COLOR: #444444
+}
+#contentFolderList {
+	BACKGROUND-COLOR: #e9f5f7;
+	background: url(../Images/bg_blue.jpg) #ffffff repeat-x;
+	height:100px;	
+}
+.contentSpaceList
+{
+    background-color:#e9f5f7;
+    height:100%; 
+    BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 0px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;   
+}
+#contentBottomList
+{
+    background-color:White;
+    height:100%; 
+    BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 0px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;   
+}
+#folderList LI A.dIndexListItemEmptyLink {
+	MARGIN-TOP: 2px; DISPLAY: block; FLOAT: right; WIDTH: 10px; MARGIN-RIGHT: 2px
+}
+.FolderItemHover {
+	BACKGROUND-COLOR: #d9f1f9
+}
+.FolderItemSelected {
+	BACKGROUND-COLOR: #c3ebf9
+}
+#tdContentRight {
+	WIDTH: 100%; padding-right:5px; height:100%;
+}
+#tdbottomToolBar {
+	PADDING-TOP: 0px
+}
+#tdbottomToolBar {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+#tdToolBar {
+	PADDING-BOTTOM: 0px
+}
+#contentCenter {
+	WIDTH: auto; padding-left:0px; padding-top:0px; 
+}
+.ToolBarList A {
+	PADDING-RIGHT: 4px; DISPLAY: block; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px; WHITE-SPACE: nowrap
+}
+* HTML .ToolBarList A {
+	WIDTH: 1%
+}
+.ToolBarList A IMG {
+	VERTICAL-ALIGN: middle
+}
+.MenuContainer {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; Z-INDEX: 100; BORDER-BOTTOM-WIDTH: 2px; BORDER-RIGHT-WIDTH: 2px
+}
+.TopSeparator {
+	BORDER-TOP: 1px solid
+}
+.MenuLabel {
+	CURSOR: default
+}
+.ToolsColumnSplitter {
+	CURSOR: e-resize
+}
+.bottomLine {
+	PADDING-TOP: 1px; BACKGROUND-COLOR: #bec6c7
+}
+#contentShortCut LI {
+	BACKGROUND: url(http://gfx2.mail.live.com/mail/w1/ltr/theme0/sc_rest.gif) #ffffff repeat-x center 50%; BORDER-BOTTOM: #dbdce3 1px solid
+}
+#contentShortCut LI.dIndexListSelected {
+	BACKGROUND: url(http://gfx1.mail.live.com/mail/w1/ltr/theme0/sc_press.gif) #ffffff repeat-x center 50%
+}
+#contentShortCut LI.dIndexListHover {
+	BACKGROUND: url(http://gfx2.mail.live.com/mail/w1/ltr/theme0/sc_hover.gif) #ffffff repeat-x center 50%;
+	
+}
+.ListItem IMG {
+	MARGIN: 0px; VERTICAL-ALIGN: middle
+}
+.ListItem .dIndexListItemEmptyLink IMG {
+	FLOAT: none
+}
+.ListItem A {
+	TEXT-DECORATION: none
+}
+.ListItem A:hover {
+	TEXT-DECORATION: none
+}
+.ListItem {
+	CURSOR: pointer;
+	background: url(../Images/ItemBackground.gif) #ffffff repeat-x;				
+	height:25px;	
+}
+.ListItem img
+{
+    border:0px; vertical-align:middle; padding-top:5px; padding-left:10px;
+}
+.ListItemHover
+{
+     cursor:pointer;
+     background: url(../Images/item_hoverBg.gif) #ffffff repeat-x;
+     height:25px;    
+}
+.ListItemHover IMG {
+	MARGIN: 0px; VERTICAL-ALIGN: middle;padding-top:5px; padding-left:10px;
+}
+.ListItemHover .dIndexListItemEmptyLink IMG {
+	FLOAT: none
+}
+.ListItemHover A {
+	TEXT-DECORATION: none
+}
+.ListItemHover A:hover {
+	TEXT-DECORATION: none
+}
+.ListItemHover img
+{
+    border:0px; vertical-align:middle; padding-top:5px
+}
+#contentShortCut LI {
+	BACKGROUND: url(http://gfx2.mail.live.com/mail/w1/ltr/theme0/sc_rest.gif) #ffffff repeat-x center 50%; BORDER-BOTTOM: #dbdce3 1px solid
+}
+#contentShortCut LI.dIndexListSelected {
+	BACKGROUND: url(http://gfx1.mail.live.com/mail/w1/ltr/theme0/sc_press.gif) #ffffff repeat-x center 50%
+}
+#contentShortCut LI.dIndexListHover {
+	BACKGROUND: url(http://gfx2.mail.live.com/mail/w1/ltr/theme0/sc_hover.gif) #ffffff repeat-x center 50%
+}
+#shortcut LI IMG {
+	FLOAT: left
+}
+#shortcut LI {
+	CLEAR: left; PADDING-RIGHT: 4px; PADDING-LEFT: 5px
+}
+#shortcut LI SPAN {
+	MARGIN-LEFT: 3px; COLOR: #444444
+}
+.contentFolderList {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;
+}
+#ContainerInnerList
+{
+    BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;    
+    padding-left:20px; padding-top:40px; height:100%;
+}
+#ContainerInnerListTABLE
+{
+    border:0px;
+}
+#ContainerInnerListTABLE SPAN
+{
+    COLOR:Black; FONT-FAMILY: Verdana,Tahoma,Arial,sans-serif; POSITION: relative; font-weight:normal; text-align:center;
+}
+.contentFolderListRight
+{
+    BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 0px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;
+}
+.SpanName {
+	MARGIN-TOP: 8px; PADDING-LEFT: 6px; FONT-SIZE: 11px; VERTICAL-ALIGN:text-bottom; COLOR:Black; FONT-FAMILY: Verdana,Tahoma,Arial,sans-serif; POSITION: relative; font-weight:normal;	
+}
+.Space {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #fffff 1px solid; BORDER-LEFT: #ffffff 1px solid; BORDER-BOTTOM: #ffffff 1px solid; height:3px;	
+	background-color:#ffffff;
+}
+.dToolbarContent {
+	BACKGROUND: url(../Images/ToolbarBG.gif) #ffffff
+}
+#ContentStart {
+	CLEAR: both; MIN-HEIGHT:100%; BACKGROUND-COLOR: #E9F5F7; vertical-align:top; height:100%; width:100%
+}
+#contentCenter {
+	BORDER-TOP: 0px; WIDTH: 100%; background-color: #E9F5F7; height:100%;
+}
+.TodayContainerPadding {
+	PADDING-RIGHT: 8px; PADDING-LEFT: 8px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.TodayHeaderStorageMeter {
+	DISPLAY: block; PADDING-TOP: 4px
+}
+.TodayHeaderStorageMeter .StorageMeterBar {
+	BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #808080 1px solid; FONT-SIZE: 0.55em; BORDER-LEFT: #808080 1px solid; WIDTH: 40%; BORDER-BOTTOM: #808080 1px solid; BACKGROUND-COLOR: white
+}
+.TodayHeaderStorageMeter .StorageMeterBar .Bar {
+	BORDER-RIGHT: white 1px solid; BORDER-TOP: white 1px solid; BORDER-LEFT: white 1px solid; BORDER-BOTTOM: white 1px solid; HEIGHT: 1em; BACKGROUND-COLOR: #1aab1f
+}
+.TodayHeaderStorageMeter .StorageMeterText {
+	MARGIN-TOP: 4px; DISPLAY: block; MARGIN-BOTTOM: 5px
+}
+.TodayHeaderStorageMeter .StorageMeterText .MeterText {
+	DISPLAY: inline
+}
+.TodayHeaderStorageMeter .StorageMeterText .NewsletterLink {
+	DISPLAY: inline
+}
+.TodayTabContainer {
+	HEIGHT: 100%
+}
+.TabContentContainer {
+	HEIGHT: 100%
+}
+.TodayTabContainer .TabHeaders {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected {
+	DISPLAY: block; FONT-WEIGHT: bold; MARGIN: 0px; WIDTH: 32%; WHITE-SPACE: nowrap; HEIGHT: auto; TEXT-ALIGN: center
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected {
+	DISPLAY: block; FONT-WEIGHT: bold; MARGIN: 0px; WIDTH: 32%; WHITE-SPACE: nowrap; HEIGHT: auto; TEXT-ALIGN: center
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; CURSOR: pointer; PADDING-TOP: 1px
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected A {
+	COLOR: #ffffff
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected DIV {
+	PADDING-BOTTOM: 3px; WIDTH: 100%; PADDING-TOP: 3px; BACKGROUND-COLOR: #bec6c7
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected {
+	BORDER-RIGHT: #bfbfbf 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #bfbfbf 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: #bfbfbf 1px solid; PADDING-TOP: 0px
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected A {
+	CURSOR: default; COLOR: #333333
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected DIV {
+	PADDING-BOTTOM: 7px; WIDTH: 100%; PADDING-TOP: 0px; POSITION: relative; TOP: 3px; BACKGROUND-COLOR: #ffffff
+}
+.TodayTabContainer .TabContentContainer {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BORDER-LEFT: #bfbfbf 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #bfbfbf 1px solid
+}
+.TodayTabContainer .TabContentContainer .TabContentSelected {
+	DISPLAY: block
+}
+.TodayHeaderGreetingDate {
+	DISPLAY: inline; POSITION: relative
+}
+.InnerText
+{
+    background-color: #E9F5F7;
+}
+#inbox 
+{
+	BACKGROUND: #e9f5f7
+}
+#inbox A {
+	COLOR: #444444;
+	text-decoration:none;
+}
+
+.dItemListContentTable TH {
+	BORDER-BOTTOM: #dbdce3 1px solid;
+	font-weight : bold;
+	FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif
+	position : relative;
+	color:White;
+	left : 2px;
+	float: left;	
+	border-right : inset 1px #dbdce3;	
+	height : auto;	
+}
+.dItemListContentTable TD {
+	BORDER-BOTTOM: #f0f0f0 1px solid; background-color:White;
+	font-weight :lighter;
+	/*FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif
+	position : relative;
+	left : 2px;
+	float: left;		
+	height : auto;*/
+}
+.dItemListContentTable TR TH {
+	/*BACKGROUND: #e9f5f7;*/
+	WHITE-SPACE: nowrap;
+	background-position:center ;
+	background-image: url(../Images/header.jpg);
+	font-weight:bold;
+	border-width:0px;
+	padding-top:4px;
+	padding-bottom:4px;
+	height: 20px;
+	color:White;	
+	text-align:left;
+	padding-left:2px; 
+}
+.dItemListContentTable TR TH.dItemListHeaderBorder {
+	BORDER-LEFT: #dbdce3 1px solid
+}
+.dItemListContentTable TR TH A
+{
+     color: White;
+     text-decoration:none;    
+}
+.dItemListContentTable TR TH A SPAN
+{
+    color:White;
+    text-decoration:none;
+}
+.smcMainContentContainer {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: 0px; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid
+}
+.dItemListContentTable {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: 0px; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;	
+}
+.dContactListTableNameCol A {
+	COLOR: #444444;
+	text-decoration:none;	
+}
+.dContactListTableEmailCol A {
+	COLOR: #444444;
+	text-decoration:none;
+}
+.dItemListContentTable TR TD A {
+	COLOR: #444444;
+	text-decoration:none;
+}
+.dInboxContentTableImportanceCol {
+	WIDTH: 20px
+}
+.dInboxContentTableSentStateCol {
+	WIDTH: 20px
+}
+.dInboxContentTableAttachmentCol {
+	WIDTH: 20px
+}
+.dInboxContentTableCheckBoxCol {
+	WIDTH: 20px; left:0px;
+}
+.dInboxContentTableFromCol {
+	WIDTH: 200px
+}
+.from {
+	OVERFLOW: hidden; WIDTH: 196px! important; WHITE-SPACE: nowrap; 
+}
+.dInboxContentTableTitleCol {
+	WIDTH: 55%
+}
+.dInboxContentTableDateCol {
+	WIDTH: 10%
+}
+.dInboxContentTableSizeCol {
+	WIDTH: 10%
+}
+#contentCenter .TodayUpsell {
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: 0px; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid
+}
+.TodayUpsell {
+	BORDER-BOTTOM: #bec6c7 1px solid; /*BACKGROUND-COLOR: #ffbe73;*/ background-color:#e9f5f7; height:25px;
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid;
+	padding-left:10px;
+}
+.list-table
+{
+	background : threedlightshadow;
+	width : 100%;
+}
+.list-table-column
+{
+	font-weight : bold;
+	FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif
+	position : relative;
+	left : 0px;
+	float: left;
+	padding-top: 2px;
+	padding-left: 1px;
+	padding-bottom: 2px;
+	padding-right: 2px;
+	border-right : inset 1px #FFFFFF;
+	border-bottom : solid 2px threedlightshadow;
+	height : auto;
+}
+.list-table-column-sortable
+{
+	font-weight : bold;
+	position : relative;
+	left : 0px;
+	float: left;
+	padding-top: 2px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+	padding-right: 2px;
+	border-right : inset 1px #FFFFFF;
+	height : 15px;
+	cursor : hand;
+	border-bottom : solid 2px orange;
+}
+.list-table-item
+{
+	position : relative;
+	FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;float: left;
+	border-bottom: solid 1px #CCCCCC;
+	padding-top: 2px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+	padding-right: 2px;
+	height: 20px;
+	cursor : hand;
+}
+.SpanText
+{    
+	font-weight : bold;
+	FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;	
+	text-align:right;
+	position : relative;
+	left : 0px;	
+	padding-top: 2px;
+	padding-left: 1px;
+	padding-bottom: 2px;
+	padding-right: 2px;			
+}
+#inlineContactPicker {
+	WIDTH: 177px; PADDING-TOP: 3px; HEIGHT: 100%;
+}
+#contactPickerTable {
+	HEIGHT: 100%
+}
+#contactPickerToArrow {
+	POSITION: relative; TOP: 2.2em
+}
+.ContactPickerInlineTable {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; BACKGROUND: white; BORDER-BOTTOM-WIDTH: 1px; WIDTH: 150px; BORDER-COLLAPSE: separate; HEIGHT: 100%; BORDER-RIGHT-WIDTH: 1px;
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid; BORDER-BOTTOM: #dbdce3 1px solid;		
+}
+.ContactPickerInlineList {
+	WIDTH: 150px
+}
+.ContactPickerInlineTableTitle {
+	PADDING-RIGHT: 8px; PADDING-LEFT: 8px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.ContactPickerInlineTable TR {
+	VERTICAL-ALIGN: top
+}
+#compose {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #e9f5f7; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; height:100%;
+}
+#compose TABLE {
+	border-spacing: 0px; padding-left:0px; padding-top:0px;
+}
+.composeTable {
+	WIDTH: 100%; height:100%; padding-left:0px; padding-top:0px;
+}
+.BorderLeft {
+	BORDER-LEFT: #dbdce3 0px solid
+}
+.BorderBottom {
+	BORDER-BOTTOM: #dbdce3 1px solid
+}
+#tdComposeHeader {
+	BORDER-RIGHT: #dbdce3 1px solid; WIDTH: 100%; height:100%; padding:0px; background:#ffffff; border-top: #dbdce3 1px solid;
+}
+.TodayHeaderGreeting {
+	FONT-WEIGHT: bold
+}
+.TodayContainerPadding {
+	PADDING-RIGHT: 8px; PADDING-LEFT: 8px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.TopContainShell
+{
+    BORDER-BOTTOM: #bec6c7 1px solid; /*BACKGROUND-COLOR: #ffbe73;*/ background-color:#fdfbe7; height:25px;
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid;    	
+}
+.TodayTabContainer {
+	HEIGHT: 100%
+}
+.TabContentContainer {
+	HEIGHT: 100%
+}
+.TodayTabContainer .TabHeaders {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected {
+	DISPLAY: block; FONT-WEIGHT: bold; MARGIN: 0px; WIDTH: 32%; WHITE-SPACE: nowrap; HEIGHT: auto; TEXT-ALIGN: center
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected {
+	DISPLAY: block; FONT-WEIGHT: bold; MARGIN: 0px; WIDTH: 32%; WHITE-SPACE: nowrap; HEIGHT: auto; TEXT-ALIGN: center
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; CURSOR: pointer; PADDING-TOP: 1px
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected A {
+	COLOR: #ffffff
+}
+.TodayTabContainer .TabHeaders .TabHeaderUnselected DIV {
+	PADDING-BOTTOM: 3px; WIDTH: 100%; PADDING-TOP: 3px; BACKGROUND-COLOR: #bec6c7
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected {
+	BORDER-RIGHT: #bfbfbf 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #bfbfbf 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: #bfbfbf 1px solid; PADDING-TOP: 0px
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected A {
+	CURSOR: default; COLOR: #333333
+}
+.TodayTabContainer .TabHeaders .TabHeaderSelected DIV {
+	PADDING-BOTTOM: 7px; WIDTH: 100%; PADDING-TOP: 0px; POSITION: relative; TOP: 3px; BACKGROUND-COLOR: #ffffff
+}
+.TodayTabContainer .TabContentContainer {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BORDER-LEFT: #bfbfbf 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #bfbfbf 1px solid
+}
+.TodayTabContainer .TabContentContainer .TabContentSelected {
+	DISPLAY: block
+}
+.dComposeItemLabel {
+	TEXT-ALIGN:right;FONT-SIZE: 12px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; font-weight:bold; color:Gray; width:125px;
+	text-decoration:none;
+}
+.dComposeItemInput {
+	PADDING-RIGHT: 4px; MARGIN-LEFT: 0.5em; MARGIN-RIGHT: 4px; TEXT-ALIGN: left
+}
+.TodayUpsellContentTable {
+	/*BORDER-BOTTOM: #bec6c7 1px solid; /*BACKGROUND-COLOR: #ffbe73;*/ background-color:#ffffff; height:100%;
+	/*BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid;*/
+	 padding-left:0px; padding-top:20px; vertical-align:top;
+}
+.Label
+{
+    FONT-SIZE: 11px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; vertical-align:text-top;   
+}
+.lbl
+{
+    FONT-SIZE: 13px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; vertical-align:text-top; text-align:center;   
+}
+.InputDefaultStyle
+{
+	font:menu;
+	border:1px solid darkgray;	
+	border-style:groove;
+	width: 200px;
+}
+.loginInput
+{
+	font:menu;
+	border:1px solid darkgray;	
+	border-style:groove;
+	width: 100px;
+}
+.InputMandatoryStyle
+{
+	font:menu;
+	border:1px solid darkgray;
+	background-color: #FAFAD2;
+	border-style:groove;
+	width:200px;
+}
+.Input_halfmand
+{
+	font:menu;
+	border:1px solid darkgray;
+	background-color: #FAFAD2;
+	border-style:groove;
+	width:100px;
+}
+.CalendarStyle
+{
+    border-style:none;        
+}
+
+.SelectedDateStyle
+{
+    background: url(../Images/btnHoverBg.gif)
+}
+
+.Error
+{
+    font:menu;
+    border: 0px;
+    width:400px;    
+    TEXT-ALIGN:center;FONT-SIZE: 12px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; font-weight:bold;
+}
+.Created
+{
+    font:menu;
+    border: 0px;
+    width:400px;    
+    TEXT-ALIGN:center;FONT-SIZE: 12px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; font-weight:bold;
+}
+.igtbl_RubberBlackFooter
+{
+    background : url(../Images/l_containertitle_rightbg.jpg) repeat-x;	
+}
+.BottomTopShell
+{
+    BORDER-BOTTOM: #bec6c7 1px solid; /*BACKGROUND-COLOR: #ffbe73;*/ background-color:#fdfbe7; height:25px;
+	BORDER-RIGHT: #dbdce3 1px solid; BORDER-TOP: #dbdce3 1px solid; BORDER-LEFT: #dbdce3 1px solid;    	
+	padding-left:5px; padding-right:5px;
+}
+.Form_Header
+{
+    FONT-SIZE: 14px; FONT-FAMILY: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;color:Orange;font-weight:bold;    
+}

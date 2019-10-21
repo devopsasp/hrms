@@ -1,0 +1,111 @@
+﻿#ratinglist li
+{
+display: inline;
+
+}
+
+a
+{
+    display:block;
+    float:left;
+	width: 91px;
+	height: 19px;
+}
+
+.EmptyStar1
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+.EmptyStar2
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+.EmptyStar3
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+.EmptyStar4
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+
+.EmptyStar5
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+.EmptyStar6
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+.EmptyStar7
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+.EmptyStar8
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+.EmptyStar9
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+.EmptyStar10
+{
+    background         :  url(../Images/EmptyStar.png) no-repeat;
+    width:13px;
+    height:12px;
+
+}
+
+
+
+.EmptyStar1:Hover
+{
+     background         :  url(../Images/FilledStar.png) no-repeat;
+     width:13px;
+     height:12px;
+}
+
+
+.FilledStar 
+{
+    background         :  url(../Images/FilledStar.png) no-repeat;
+     width:13px;
+     height:12px;
+}
+
+
+
+

@@ -1,0 +1,493 @@
+﻿  <%@ Master Language="C#" AutoEventWireup="true" CodeFile="HRMS.master.cs" Inherits="HRMSMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="Head1" runat="server">
+    <script type="text/javascript">
+       
+    </script>
+    <meta http-equiv="Refresh" content="1800;url=/hrms/Login.aspx" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HRMS</title>
+
+    <!-- Bootstrap Core CSS -->
+
+    <link id="Link1" href="~/js/bootstrap.min.css" rel="stylesheet" runat="server" />
+    <!-- MetisMenu CSS -->
+    <link id="Link2" href="~/Styles/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet" runat="server">
+
+    <!-- Custom CSS -->
+    <link id="Link3" href="~/Styles/css/sb-admin-2.css" rel="stylesheet" runat="server">
+
+    <!-- Custom Fonts -->
+    <link id="Link4" href="~/Styles/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" runat="server">
+
+    <link href="~/JQuery/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/JQuery/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Scripts/Index.css" rel="stylesheet" />
+    <link id="Link5" rel="stylesheet" href="~/Libraries/bootstrap-table.min.css" type="text/css" runat="server" />
+    <link href="~/Css/Cand_BaseStyle.css" type="text/css" rel="stylesheet" />
+    <link href="~/Libraries/bootstrap-datetimepicker.css" rel="stylesheet" />
+   
+</head>
+
+<body>
+
+
+    <form id="form1" autocomplete="off" runat="server">
+
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<%= ResolveUrl("~/Company_Home.aspx") %>">Human Resource Management System</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-comment fa-fw"></i><i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+
+                            <div>
+                                <center>
+                        <i class="glyphicon glyphicon-globe"></i>  <strong>Support</strong>
+                        </center>
+                            </div>
+                            <li>
+                                <div style="width: 30%; float: left; height: 100%; padding-left: 2%;">
+
+                                    <i class="glyphicon glyphicon-send"></i>Mail ID :
+                        
+                                </div>
+                                <div style="width: 70%; float: left; height: 100%;">
+                                    <ul>
+                                        <li>sales@hesperusinfo.com
+                                        </li>
+                                        <li>services@epayindia.com
+                                        </li>
+                                        <li>support@epayindia.com
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div style="width: 35%; float: left; height: 100%; padding-left: 2%;">
+
+                                    <i class="glyphicon glyphicon-earphone"></i>Contact No :
+                       
+                                </div>
+                                <div style="width: 65%; float: left; height: 100%;">
+                                    <ul>
+                                        <li>+91 9841243026
+                                        </li>
+                                        <li>+91 44 32575850
+                                        </li>
+                                        <li>+91 44 45543026
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i><i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i>Tasks
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-users fa-fw"></i>Users
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-bolt fa-fw"></i>Notifications & Alerts
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i>Messages
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-support fa-fw"></i>Analytics
+                                    
+                                    </div>
+                                </a>
+
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-bar-chart-o fa-fw"></i>Charts
+                                    
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>
+                            <asp:Label ID="UserName" runat="server"></asp:Label>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="<%= ResolveUrl("~/Company_Home.aspx") %>"><i class="fa fa-user fa-fw"></i>Home</a>
+                            </li>
+                            <li><a href="<%= ResolveUrl("~/Hrms_Company/PreviewBranch.aspx") %>"><i class="glyphicon glyphicon-tower"></i>Branch</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="<%= ResolveUrl("/HRMS/Login.aspx") %>"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav " id="side-menu">
+                              <li ><a href="<%= ResolveUrl("~/Company_Home.aspx") %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                            <li id="menuA"></li>
+                            <li id="menuB"></li>
+                            <li id="menuC"></li>
+                            <li id="menuD"></li>
+                            <li id="menuE"></li>
+                            <li id="menuF"></li>
+                        </ul>
+                        <ul class="nav " id="side-menu1"> 
+                           <li ><a href="<%= ResolveUrl("~/Company_Home.aspx") %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                             <li>
+                                <a ><i class="fa fa-wrench fa-fw"></i> Setup<span class="fa arrow"></span></a>
+                               <%-- <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/time_card/timecardsetup.aspx") %>">Time Card</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/time_card/shiftbalanceentry.aspx") %>">Shift Balance</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/time_card/otslab.aspx") %>">Over Time Slab</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/Employee/Shiftpattern.aspx") %>">Attendance Bonus</a>
+                                    </li>
+                                </ul>--%>
+                            </li>
+                            <li>
+                               <a ><i class="fa fa-gear fa-fw"></i> Settings<span class="fa arrow"></span></a>
+                                 <%--<ul class="nav nav-second-level">
+
+                                    <li>
+                                        <a href="#">Payroll<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/Computation.aspx") %>">Salary Breakups</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/pf.aspx") %>">PF</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/EDLI.aspx") %>">EDLI</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_PayRoll/Vpf.aspx") %>">VPF</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/ESI.aspx") %>">ESI</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_PayRoll/pt.aspx") %>">PT</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_PayRoll/Annual_Increment.aspx") %>">Annual Increment</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Company/Settings.aspx") %>">Change Password</a>
+                                    </li>
+
+
+                                </ul>--%>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a ><i class="fa fa-sitemap fa-fw"></i> Masters <span class="fa arrow"></span></a>
+                               <%-- <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#">Allowances &amp; Deductions<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/Earnings.aspx") %>">Allowances</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/Deduction.aspx") %>">Deductions</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Student<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/StudentMaster.aspx") %>">Student Course Setup</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/Student_Profile.aspx") %>">Add/View Students</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/AcademicChange.aspx") %>">Student Academic Change</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Instant Attendance Report</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Monitor Student's performance</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Assessment of Student's strong and weak Areas</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Intimation through Email & IVRS</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Fees Reminders and Confirmations</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="color: #C0C0C0">Information for upcoming exams and extra activities</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Employee<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Company/Employee.aspx") %>">Employee Setup</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/Employee/Employee_Master.aspx") %>">Employee Position</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/AllEmpBasic.aspx") %>">All Employee Basic</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/AllEmployeeAllowance.aspx") %>">All Employee Allowance</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Employee/AllEmpDeduction.aspx") %>">All Employee Deduction</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">Leave<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/Leave/Leave.aspx") %>">Leave Setup</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/Leave/Holiday.aspx") %>">Holiday</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Master/Leave/leaveAllocation.aspx") %>">Leave Allocation</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/Common/Course.aspx") %>">Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/Common/Specialization.aspx") %>">Specializations</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/Common/Skill.aspx") %>">Skills</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/Loans.aspx") %>">Loans</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Master/PayRoll/Bank.aspx") %>">Bank</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" style="color: #C0C0C0">Corporate Social Responsibilities</a>
+                                    </li>
+                                </ul>--%>
+                            </li>
+                            <li>
+                                <a ><i class="fa fa-clock-o fa-fw"></i>Time Attendance<span class="fa arrow"></span></a>
+                                <%--<ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_TimeAndAttendance/Connection.aspx") %>">Download Data</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_TimeAndAttendance/Dailycard.aspx") %>">Daily Time Card</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_TimeAndAttendance/DailycardStudent.aspx") %>">Students Time Card</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_PayRoll/payinput.aspx") %>">Manual Attendance</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_Attendance/onduty.aspx") %>">Permission</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Leave / On Duty<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Attendance/Daily.aspx") %>">Leave / On Duty Entry</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Attendance/LeaveDetails.aspx") %>">Leave / On Duty Details</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Hrms_Attendance/Leaveyear.aspx") %>">Leave Year End Process</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>--%>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a ><i class="fa fa-money fa-fw"></i> Payroll<span class="fa arrow"></span></a>
+                             <%--  <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<%= ResolveUrl("~/Hrms_PayRoll/EmpAnnualIncrement.aspx") %>">Annual Increment</a>
+                                    </li>
+                                    <a href="#">Loan<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/LoanEntry.aspx") %>">Loan Entry</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/LoanPreclosure.aspx") %>">Preclosure</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/loanpost.aspx") %>">Postponement</a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/Loan_cancel.aspx") %>">Cancellation</a>
+                                        </li>
+                                    </ul>
+                                  
+                            </li>
+                            <li>
+                                <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/PaySlip_process.aspx") %>">Pay Slip Process</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="<%= ResolveUrl("~/Hrms_PayRoll/Pf_NominiDetails.aspx") %>">PF Nominee</a>
+                            </li>
+                            <li>
+                                <a href="<%= ResolveUrl("~/Hrms_PayRoll/Final_settlement_new.aspx") %>">Final Settlement</a>
+                            </li>
+                        </ul>--%>
+                       
+
+                            <li>
+                                <a ><i class="fa fa-credit-card fa-fw"></i> Reports<span class="fa arrow"></span></a>
+                               <%-- <ul class="nav nav-second-level">
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/EmployeeGeneral.aspx") %>">Employee General</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/Attendance.aspx") %>">Attendance</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/PFReport.aspx") %>">PF Monthly</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/EsiReport.aspx") %>">ESI Monthly</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/Payslip.aspx") %>">Payslip</a></li>
+                                </ul>--%>
+                                <!-- /.nav-second-level -->
+                            </li>
+                       
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+                                                                                                                                                                                                                                                                   
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- /#page-wrapper -->
+            <div id="Div1">
+                <a style="float: right;">© 2019 hesperusinfo.com - All rights reserved.</a>
+            </div>
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+
+        <script src='<%= ResolveUrl("~/JQuery/jquery-1.10.2.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Libraries/jquery-1.9.1.min.js") %>'></script>
+        <script src='<%= ResolveUrl("~/JQuery/jquery-ui.min.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Libraries/bootstrap.min.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Libraries/moment.min.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Libraries/bootstrap-datetimepicker.min.js") %>'></script>
+        <!-- Bootstrap Core JavaScript -->
+        
+        <script src='<%= ResolveUrl("~/Libraries/bootstrap-table.min.js") %>'></script>
+        <!-- Metis Menu Plugin JavaScript -->
+
+        <script src='<%= ResolveUrl("~/js/Menu_lode.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Styles/js/plugins/metisMenu/metisMenu.min.js") %>'></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src='<%= ResolveUrl("~/Styles/js/sb-admin-2.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Scripts/Datavalid.js") %>'></script>
+         <script src='<%= ResolveUrl("~/Scripts/Base.js") %>'></script>
+         <script src='<%= ResolveUrl("~/JQuery/BNBPlugins.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Hrms_Employee/Employee.js") %>'></script>
+      
+    </form>
+</body>
+
+</html>

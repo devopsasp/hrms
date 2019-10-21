@@ -1,0 +1,70 @@
+﻿/************************************************************************************************
+* Project Name 		    : Learning
+* Module Name		    : 
+* File Name 		    : fileUpload.css 
+* File Type     		: CSS 
+* Created by 			: Thamotharan <thamotharan@bowandbaan.com>, <thamotharan.tk@gamil.com>
+* Created date		    : 
+* Discription           : To upload the file with drag and drop
+* Powered By			: Bow and Baan Technology Solutions Private Limited
+
+Modification  History			
+* Modified by 			:
+* Modified date 		:
+* Modification	 1		: 
+*************************************************************************************************/
+
+.app-actions-bar img
+{
+    float:left;
+    padding: 5px;
+    border: 1px solid white;
+}
+.img-selected
+{
+    background: #96CFFA !important;
+    border: 1px solid #96CFFA !important;
+}
+.app-actions-bar img:hover
+{
+    border: 1px solid blue;
+}
+.app-actions-bar img:active
+{
+    background: red;
+}
+.app-actions-bar
+{
+    width: 100%;
+}
+.file-upload-imgThumbnail
+{
+    margin: 10px;
+}
+.file-upload-imgThumbnail:hover
+{
+    background: #D5EAF9;
+}
+.file-upload-imgThumbnail .imgName div
+{
+    padding:5px;
+}
+.file-upload-img-caption div
+{
+    float:left;
+    padding:5px;    
+}
+.file-upload-img-caption-text label
+{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}

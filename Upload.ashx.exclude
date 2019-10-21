@@ -1,0 +1,172 @@
+﻿<%@ WebHandler Language="C#" Class="Upload" %>
+
+using System;
+using System.Web;
+using System.IO;
+using Microsoft.Office.Interop.Word;
+using System.Data.SqlClient;
+
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+public class Upload : IHttpHandler {
+    private SqlConnection _Connection;
+    ePayHrms.Connection.Connection Con = new ePayHrms.Connection.Connection();
+
+    SqlConnection mycon = new SqlConnection(ConfigurationManager.AppSettings["Connectionstring"]);
+    
+    SqlCommand cmd = new SqlCommand();
+    SqlCommand cmd1 = new SqlCommand();
+    public void ProcessRequest (HttpContext context) {
+        context.Response.ContentType = "text/plain";
+        context.Response.Expires = -1;
+  
+        try
+        {
+            string imageid = context.Request.QueryString["keyword"];
+            HttpPostedFile postedFile = context.Request.Files["Filedata"];
+            string extn = string.Empty;
+            int j = 0;
+            object missingType = Type.Missing;
+            object readOnly = true;
+            object isVisible = false;
+            string savepath = "";
+            object documentFormat = 8;
+            string tempPath = "";
+            tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
+          
+            string filename = postedFile.FileName;
+            object filename1 = postedFile.FileName;
+            savepath = System.Web.HttpContext.Current.Server.MapPath("Resumes/");
+            //object htmlFilePath = System.Web.HttpContext.Current.Server.MapPath("Resumes/") + filename + ".htm";
+           // string directoryPath = Server.MapPath("~/Temp/") + filename + "_files";
+            if (!Directory.Exists(savepath))
+                Directory.CreateDirectory(savepath);
+            while (File.Exists(savepath + @"\" + filename))
+            {
+                filename = filename.Replace(Path.GetExtension(filename), "_" + j + Path.GetExtension(filename));
+                extn = Path.GetExtension(filename);
+                extn = extn.Remove(0, 1).ToLower();
+                if ((extn != "doc") && (extn != "docx"))
+                {
+                    return;
+                }
+                j++;
+            }
+            filename = filename.Replace(Path.GetExtension(filename),Path.GetExtension(filename));
+            extn = Path.GetExtension(filename);
+            extn = extn.Remove(0, 1).ToLower();
+            if ((extn != "doc") && (extn != "docx"))
+            {
+                return;
+            }
+            postedFile.SaveAs(savepath + @"\" + filename);
+            context.Response.Write(tempPath + "/" + filename);
+            context.Response.StatusCode = 200;
+            //Microsoft.Office.Interop.Word.ApplicationClass Application = new Microsoft.Office.Interop.Word.ApplicationClass();
+            //object nullobj = System.Reflection.Missing.Value;
+            ////FileUpload1.SaveAs(Serv MapPath("Resumes/" + Filename));
+            //object file = Path.GetFullPath(savepath + @"\" + filename);
+            //Microsoft.Office.Interop.Word.Document doc = Application.Documents.Open(ref file, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj, ref nullobj);
+            //Application.Visible = false;
+            //Microsoft.Office.Interop.Word.ApplicationClass applicationclass = new Microsoft.Office.Interop.Word.ApplicationClass();
+            //applicationclass.Documents.Open(ref filename1,
+            //                                ref readOnly,
+            //                                ref missingType, ref missingType, ref missingType,
+            //                                ref missingType, ref missingType, ref  missingType,
+            //                                ref missingType, ref missingType, ref isVisible,
+            //                                ref missingType, ref missingType, ref missingType,
+            //                                ref missingType, ref missingType);
+            //applicationclass.Visible = false;
+            //Document document = applicationclass.ActiveDocument;
+            //document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType,
+            //        ref missingType, ref missingType, ref missingType,
+            //        ref missingType, ref missingType, ref missingType,
+            //        ref missingType, ref missingType, ref missingType,
+            //        ref missingType, ref missingType, ref missingType,
+            //        ref missingType);
+
+            ////Close the word document
+            //document.Close(ref missingType, ref missingType, ref missingType);
+            //applicationclass.Quit(ref missingType, ref missingType, ref missingType);
+            //document.Close(ref missingType, ref missingType, ref missingType);
+          
+            //Microsoft.Office.Interop.Word.ApplicationClass Application = new Microsoft.Office.Interop.Word.ApplicationClass();
+            //object nullobj = System.Reflection.Missing.Value;
+            ////FileUpload1.SaveAs(Serv MapPath("Resumes/" + Filename));
+            //object file = Path.GetFullPath(savepath + @"\" + filename);
+            //Microsoft.Office.Interop.Word.Document doc = Application.Documents.Open(ref file, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj,
+            //                                  ref nullobj, ref nullobj, ref nullobj, ref nullobj);
+            //doc.Activate();
+            //string Doc_Content = doc.Content.Text;
+            //string str = Doc_Content;
+            //var words = str.Split(new char[] {'\a','-', ' ',',',':', '\r', '\t' });
+          
+            //for (int i = 0; i < words.Length; i++)
+            //{
+            //    string val1 = words[i].ToString();
+               
+            //    char[] splitchar = { '/', ',' };
+            //    string[] strarr = qualification.Split(splitchar);
+            //    for (int count = 0; count <= strarr.Length - 1; count++)
+            //    {
+            //        int result = string.Compare(val1, strarr[count], true);
+            //        if (result == 0)
+            //        {
+            //            doc.Close(ref nullobj, ref nullobj, ref nullobj);
+
+
+            //            string filename1 = Path.GetFileName(filename);
+            //            FileStream stream = File.OpenRead(savepath + @"\" + filename);
+            //            BinaryReader br = new BinaryReader(stream);
+            //            Byte[] size = br.ReadBytes((int)stream.Length);
+            //            cmd = new SqlCommand("insert into fileinfo(filename,filetype,filedata)values(@filename,@filetype,@filedata)", con);
+            //            cmd.Parameters.AddWithValue("@filename", filename1);
+            //            cmd.Parameters.AddWithValue("@filetype", "application/word");
+            //            cmd.Parameters.AddWithValue("@filedata", size);
+            //            con.Open();
+            //            cmd.ExecuteNonQuery();
+            //            con.Close();
+            //            stream.Close();
+
+
+
+            //        }
+            //        else
+            //        {
+            //        }
+
+            //    }
+            //}
+            //doc.Close(ref nullobj, ref nullobj, ref nullobj);
+            //Application.Quit(ref nullobj, ref nullobj, ref nullobj); 
+           
+
+        }
+        catch (Exception ex)
+        {
+            context.Response.Write("Error: " + ex.Message);
+        }
+    }
+ 
+    public bool IsReusable {
+        get {
+            return false;
+        }
+    }
+}
