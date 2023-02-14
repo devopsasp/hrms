@@ -42,7 +42,7 @@ public partial class PayrollReports_ProjectReport : System.Web.UI.Page
     Collection<Employee> EmployeeList;
     Collection<Company> ddlBranchsList;
     Collection<Employee> EmpProfileList;
-    char s_login_role;
+    string s_login_role;
     int empid, count, s, n;
     string query;
     string[] sd, ed;
@@ -57,7 +57,7 @@ public partial class PayrollReports_ProjectReport : System.Web.UI.Page
     double act_basic = 0, earned_basic = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["Msg_session"] = "";
+        
         Session["Repordid"] = "";
         Session["fdate"] = "";
         Session["tdate"] = "";
@@ -65,7 +65,7 @@ public partial class PayrollReports_ProjectReport : System.Web.UI.Page
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         Session["formulaBonus"] = "";
         l.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
         if (!IsPostBack)
         {
@@ -81,13 +81,13 @@ public partial class PayrollReports_ProjectReport : System.Web.UI.Page
                 {
 
 
-                    case 'h':
+                    case "h":
                         ddl_department_load();
 
                         break;
 
-                    case 'e':
-                        l.EmployeeID = (int)Session["Login_temp_EmployeeID"];
+                    case "e":
+                        l.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
 
                         break;
 

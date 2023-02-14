@@ -33,7 +33,7 @@
         else
         {
            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
-           Response.Redirect("/HRMS/Login.aspx");
+           //Response.Redirect("/HRMS/Login.aspx");
 
         }  
 

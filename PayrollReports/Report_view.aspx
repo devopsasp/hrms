@@ -1,7 +1,6 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_view.aspx.cs" Inherits="Hrms_Reports_Report_view" %>
+ <%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_view.aspx.cs" Inherits="Hrms_Reports_Report_view" %>
 
-<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
-    Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,7 +8,11 @@
     <title>Report View</title>
     
     <link href="../Css/Cand_BaseStyle.css" rel="stylesheet" type="text/css" />
-    <link href="/aspnet_client/System_Web/2_0_50727/CrystalReportWebFormViewer3/css/default.css" rel="stylesheet" type="text/css" />
+ <link href="../Css/Cand_BaseStyle.css" rel="stylesheet" type="text/css" />
+    <link href="../crystalreportviewers13/js/crviewer/images/style.css" rel="stylesheet" />
+    <link href="../crystalreportviewers13/css/default.css" rel="stylesheet" />
+    <script src="../crystalreportviewers13/js/crviewer/crv.js"></script>
+    
     
     <style type="text/css">
         .style1
@@ -19,7 +22,7 @@
         }
     </style>
     <style type="text/css">
-    .verticaltext
+    
     </style>
 </head>
 <body>

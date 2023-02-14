@@ -145,16 +145,16 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="left" style="width: 120px;">
-                                                                                From Amount</td>
-                                                                            <td align="left" style="width: 120px;">
+                                                                                From Amount </td>
+                                                                            <td align="left" style="width: 120px; padding-left:30px;">
                                                                                 To Amount</td>
-                                                                            <td align="left" style="width: 120px;">
+                                                                            <td align="left" style="width: 120px;padding-left:70px;">
                                                                                 HalfYearly</td>
-                                                                            <td align="left" style="width: 120px;">
+                                                                            <td align="left" style="width: 120px;padding-left:90px;">
                                                                                 Monthly</td>
-                                                                            <td align="left" style="width: 120px;">
+                                                                            <td align="left" style="width: 120px;padding-left:100px;">
                                                                                 Quaterly</td>
-                                                                            <td align="left" style="width: 120px;">
+                                                                            <td align="left" style="width: 120px;padding-left:110px;">
                                                                                 Annually</td>
                                                                             <%--<td align="left" style="border-style:groove;width: 120px;">
                                                                             </td>--%>

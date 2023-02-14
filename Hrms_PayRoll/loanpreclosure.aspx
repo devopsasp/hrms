@@ -20,16 +20,16 @@
     </asp:ToolkitScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        <div style="width: 80%">
+        <div style="width: 90%">
                     <table cellpadding="1%" cellspacing="1%" width="100%" class="table table-striped table-bordered table-hover">
                         
                         <tr>
                             <td>
                                 Application Date</td>
-                            <td >
-                            <div style=" width:150px; float:left;">
+                            <td style="width:30%;";>
+                            <div style=" float:left;">
                                 <asp:TextBox ID="Txtappdate" runat="server" CssClass="form-control" maxlength="10" 
-                                    onkeyup="fn_date(event,this.id);" Width="150px"></asp:TextBox> 
+                                    onkeyup="fn_date(event,this.id);"></asp:TextBox> 
                                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="Txtappdate" Format="dd/MM/yyyy">
                                 </asp:CalendarExtender>
                                     </div>
@@ -38,15 +38,18 @@
                                                         Text="" Width="25px" 
                                                         ImageUrl="~/Images/calendaricon.png" />
                                                 </div>
-
-                                <br />
-                                <asp:RequiredFieldValidator ID="val_app_date" runat="server" 
+                                  <br />
+                                
+                             
+                                  <asp:RequiredFieldValidator ID="val_app_date" runat="server" 
                                     ControlToValidate="Txtappdate" ErrorMessage="Application Date is Required" 
                                     Font-Names="Calibri"></asp:RequiredFieldValidator>
+                               
+                              
                             </td>
                             <td >
                                 Closure Type</td>
-                            <td colspan="2" >
+                            <td >
                                 <asp:DropDownList ID="ddl_closure_type" runat="server" AutoPostBack="True" 
                                     CssClass="form-control" onselectedindexchanged="ddl_closure_type_SelectedIndexChanged">
                                     <asp:ListItem>Select</asp:ListItem>
@@ -65,11 +68,11 @@
                             </td>
                             <td>
                                 Loan ID</td>
-                            <td colspan="2">
+                            <td >
                                 <asp:DropDownList ID="ddl_loan" runat="server" AutoPostBack="True" 
                                     CssClass="form-control" onselectedindexchanged="ddl_loan_SelectedIndexChanged">
                                 </asp:DropDownList>
-                                <br />
+                              
                                 <asp:RequiredFieldValidator ID="val_loan_process" runat="server" 
                                     ControlToValidate="txt_loan_process" ErrorMessage="Select the Loan Id" 
                                     Font-Names="Calibri"></asp:RequiredFieldValidator>
@@ -83,7 +86,7 @@
                             </td>
                             <td>
                                 Loan Process</td>
-                            <td colspan="2">
+                            <td >
                                 <asp:TextBox ID="txt_loan_process" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                             </td>
                         </tr>
@@ -96,7 +99,7 @@
                             </td>
                             <td>
                                 Loan Intererst</td>
-                            <td colspan="2">
+                            <td >
                                 <asp:TextBox ID="txt_int_amt" runat="server" CssClass="form-control"
                                     ReadOnly="True"></asp:TextBox>
                             </td>
@@ -110,7 +113,7 @@
                             </td>
                             <td>
                                 Balance Amount</td>
-                            <td colspan="2">
+                            <td >
                                 <asp:TextBox ID="txtbalamount" runat="server" CssClass="form-control"
                                     onkeydown="AllowOnlyNumeric1(event);" ReadOnly="True"></asp:TextBox>
                             </td>
@@ -124,7 +127,7 @@
                             </td>
                             <td>
                                 &nbsp;</td>
-                            <td colspan="2">
+                            <td >
                                 &nbsp;</td>
                         </tr>
                         <tr>
@@ -138,14 +141,14 @@
                                     <asp:ListItem>Cheque Pre Closure</asp:ListItem>
                                     <asp:ListItem>Cheque Force Closure</asp:ListItem>
                                 </asp:RadioButtonList>
-                                <br />
+
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ControlToValidate="rdo_check" ErrorMessage="Select any option" 
                                     Font-Names="Calibri"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Remarks</td>
-                            <td colspan="2">
+                            <td >
                                 <asp:TextBox ID="txtremarks" runat="server" CssClass="form-control"
                                    onkeypress="AllowOnlyText3();" TextMode="MultiLine" type="text"></asp:TextBox>
                             </td>
@@ -159,15 +162,15 @@
                             </td>
                             <td>
                                 Cheque Date</td>
-                            <td colspan="2">
-                                 <div style=" width:150px; float:left;">
+                            <td >
+                                 <div style="float:left;">
                              
                                      <asp:TextBox  id="txtchkdate" runat="server" class="form-control"
-                                    onkeyup="fn_date(event,this.id);" maxlength="10" Width="150px"></asp:TextBox>
+                                    onkeyup="fn_date(event,this.id);" maxlength="10" ></asp:TextBox>
 
                                      <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtchkdate" Format="dd/MM/yyyy">
                                      </asp:CalendarExtender>
-                                    </div>
+                                        </div>   
                                     <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">                                                
                                                     <asp:Image ID="Image1" runat="server"  
                                                         Text="" Width="25px" 
@@ -185,29 +188,25 @@
                             </td>
                             <td>
                                 Bank Name</td>
-                            <td colspan="2">
+                            <td >
                                 <input type="text" runat="server" id="txtchkbankname" class="form-control" onkeypress="AllowOnlyText3();"
                                     onkeydown="AllowOnlyText1(event);" />
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
+                            <td colspan="2">
+                                &nbsp;</td>                                         
+                            <td colspan="2">
                                 <asp:Button ID="loan_details" runat="server" CssClass="btn btn-info"
                                     OnClick="loan_details_Click" Text="Loan Details" Visible="false" />
-                            </td>
-                            <td>
+                           
                                 <asp:Button ID="btn_save" runat="server" CssClass="btn btn-success" 
                                     OnClick="btn_save_Click" Text="Save" />
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="5">
+              
+                     </table>   
+                     </div>
                                 <asp:GridView ID="grid_closere" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-striped"
                                     GridLines="None" onrowcancelingedit="grid_closere_RowCancelingEdit" 
                                     onrowediting="grid_closere_RowEditing" onrowupdating="grid_closere_RowUpdating">
@@ -278,7 +277,7 @@
                                                 <asp:Label ID="lbl_bank_nam" runat="server" Text='<%# Eval("bankname") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Pay  Mode">
+                                        <asp:TemplateField HeaderText="Pay Mode">
                                             <EditItemTemplate>
                                                 <asp:DropDownList ID="ddl_pay_mode" runat="server" AutoPostBack="True" 
                                                     DataTextField='<%# Bind("pay_mode") %>' class="form-control"
@@ -293,13 +292,12 @@
                                                 <asp:Label ID="lbl_pay_mode" runat="server" Text='<%# Eval("pay_mode") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:CommandField ShowEditButton="True" />
+                                        
+                                         <asp:CommandField HeaderText="Edit"  ItemStyle-Width="25px" EditImageUrl="~/Images/edit_icon.png" ButtonType="Image" UpdateImageUrl="~/Images/save_icon.jpg" CancelImageUrl="~/Images/cancel.png" ShowEditButton="True" />
+                        
                                     </Columns>
                                 </asp:GridView>
-                               </td>
-                        </tr>
-                     </table>   
-                     </div>
+                        
     </ContentTemplate>
     </asp:UpdatePanel>
 

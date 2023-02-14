@@ -95,16 +95,16 @@ public partial class Hrms_Tasks_Default : System.Web.UI.Page
     {
         string qry;
         string dt = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();
-        //con = new SqlConnection("server=aru;user id=admin;password=;database=Hesperus_Hrms");
+        //con = new SqlConnection("server=aru;user id=admin;password=;database=Hrms_haspl");
         con = new SqlConnection();
         con.ConnectionString = ConfigurationManager.AppSettings["Connectionstring"];
         if (rdo_button2.Checked == true)
         {
-            qry = "backup database Hesperus_Hrms to disk='D:\\Hrms_" + dt + ".bak'";
+            qry = "backup database Hrms_haspl to disk='D:\\Hrms_" + dt + ".bak'";
         }
         else
         {
-            qry = "backup database Hesperus_Hrms to disk='D:\\" + txt_name.Text + ".bak'";
+            qry = "backup database Hrms_haspl to disk='D:\\" + txt_name.Text + ".bak'";
         }
         con.Open();
         cmd = new SqlCommand(qry, con);
@@ -113,11 +113,11 @@ public partial class Hrms_Tasks_Default : System.Web.UI.Page
         ClientScriptManager manager = Page.ClientScript;
         if (rdo_button1.Checked == false)
         {
-            qry = "restore database Hesperus_Hrms to disk='D:\\Hrms_" + dt + ".bak'";
+            qry = "restore database Hrms_haspl to disk='D:\\Hrms_" + dt + ".bak'";
         }
         else
         {
-            qry = "restore database Hesperus_Hrms to disk='D:\\" + txt_name.Text + ".bak'";
+            qry = "restore database Hrms_haspl to disk='D:\\" + txt_name.Text + ".bak'";
         }
         manager.RegisterStartupScript(this.GetType(), "Call", "show_message('Backup successful');", true);
         //con.Dispose();
@@ -164,7 +164,7 @@ public partial class Hrms_Tasks_Default : System.Web.UI.Page
 
             if (flag == ds.Tables[0].Rows.Count)
             {
-                qry = "RESTORE DATABASE Hesperus_Hrms FROM disk ='" + file + "'";
+                qry = "RESTORE DATABASE Hrms_haspl FROM disk ='" + file + "'";
                 con1.Open();
                 cmd = new SqlCommand(qry, con1);
                 cmd.ExecuteNonQuery();
@@ -174,7 +174,7 @@ public partial class Hrms_Tasks_Default : System.Web.UI.Page
         }
         else
         {
-            qry = "RESTORE DATABASE Hesperus_Hrms FROM disk ='" + file + "'";
+            qry = "RESTORE DATABASE Hrms_haspl FROM disk ='" + file + "'";
             con1.Open();
             cmd = new SqlCommand(qry, con1);
             cmd.ExecuteNonQuery();
@@ -185,7 +185,7 @@ public partial class Hrms_Tasks_Default : System.Web.UI.Page
 
     public void connect()
     {
-        con = new SqlConnection("server=aru;user id=admin;password=;database=Hesperus_Hrms");
+        con = new SqlConnection("server=aru;user id=admin;password=;database=Hrms_haspl");
         con.Open();
 
         Response.Write("<script>alert(\"Restore completed succesfully..\");</script>");

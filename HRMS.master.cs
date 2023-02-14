@@ -12,7 +12,7 @@ public partial class HRMSMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        UserName.Text = Request.Cookies["Login_Name"].Value;
+         UserName.Text = Request.Cookies["Login_Name"].Value;
         HtmlMeta meta = new HtmlMeta();
         meta.HttpEquiv = "Refresh";
         meta.Content = "2000;url=/hrms/Login.aspx";

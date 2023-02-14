@@ -192,7 +192,8 @@ function fn_save()
 
 
 <div><h2 class="page-header">Employee Vs Deduction</h2></div>
-<div><asp:Label ID="lbl_Error" runat="server" style="text-align: center"></asp:Label><div style="float:left;"> <asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" 
+<div><asp:Label ID="lbl_Error" runat="server" style="text-align: center"></asp:Label><div style="float:left;">
+     <asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" 
                             CssClass="form-control" 
                             OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged">
                         </asp:DropDownList></div></div>

@@ -23,12 +23,14 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     Company company = new Company();
 
     Employee employee = new Employee();
-
+    
     string s_login_role;
     string s_form = "";
     string[] str_array = new string[12];
     DataSet ds_userrights;
     int i;
+
+   
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -41,10 +43,14 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             switch (s_login_role)
             {
-                case "a": load_admin();
+                case "a":
+
+                    load_admin();
+                    //access();
                     break;
 
                 case "h":
+                   // ddl_branch.Visible = true;
                     load();
                     access();
                     break;
@@ -73,7 +79,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     public void load()
     {
         //lbl_branch.Visible = false;
-        DropDownList1.Visible = false;
+        ddl_branch.Visible =false;
 
         SqlDataAdapter ad = new SqlDataAdapter("SELECT * FROM shift_details where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "'", myConnection);
 
@@ -95,8 +101,10 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         else
         {
+            //GridView1.Enabled = true;
             GridView1.DataSource = ds;
             GridView1.DataBind();
+
         }
 
         myConnection.Open();
@@ -236,32 +244,39 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
 
     public void load_admin()
     {
-        
-        
-        branch_time.Visible = false; // Table
-        
         myConnection.Open();
-
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = myConnection;
-        cmd.CommandType = CommandType.Text;
-        cmd.CommandText = "select * from paym_branch";
-
-        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-
-        DataSet ds1 = new DataSet();
-        adp.Fill(ds1, "paym_branch");
-
-        DropDownList1.DataSource = ds1;
-        DropDownList1.DataTextField = "branchname";
-        DropDownList1.DataValueField = "pn_branchid";
-        DropDownList1.DataBind();
-
-
-       
+        SqlDataAdapter ad = new SqlDataAdapter("select * from paym_branch", myConnection);
+        DataSet ds = new DataSet();
+        ad.Fill(ds);
+        ddl_branch.DataTextField = "branchname";
+        ddl_branch.DataValueField = "pn_branchid";
+        ddl_branch.DataSource = ds;
+        ddl_branch.DataBind();
+        ddl_branch.Items.Insert(0, "select Branch");
         myConnection.Close();
-            
-        }
+
+        //branch_time.Visible = false; // Table
+        //myConnection.Open();
+        //SqlCommand cmd = new SqlCommand();
+        //cmd.Connection = myConnection;
+        //cmd.CommandType = CommandType.Text;
+        //cmd.CommandText = "select * from paym_branch";
+
+        //SqlDataAdapter adp = new SqlDataAdapter(cmd);
+
+        //DataSet ds1 = new DataSet();
+        //adp.Fill(ds1, "paym_branch");
+
+        //ddl_branch.DataSource = ds1;
+        //ddl_branch.DataTextField = "branchname";
+        //ddl_branch.DataValueField = "pn_branchid";
+        //ddl_branch.DataBind();
+
+
+
+        //myConnection.Close();
+
+    }
         
     public void access()
     {
@@ -337,12 +352,10 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Deletion Error: This record has a relationship with pattern code!');", true);
         }
-        else
-        {
-            if (s_login_role == "a")
+
+        if (s_login_role == "a")
             {
-                string sqlStatement = "DELETE FROM shift_details WHERE shift_code = @shift_code and pn_branchid = '" + DropDownList1.SelectedItem.Value + "'";
-   
+                string sqlStatement = "DELETE FROM shift_details WHERE shift_code = @shift_code and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'";
                 SqlCommand cmd = new SqlCommand(sqlStatement, myConnection);
                 cmd.Parameters.AddWithValue("@shift_code", ID);
                 cmd.CommandType = CommandType.Text;
@@ -352,31 +365,26 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             else
             {
                 string sqlStatement = "DELETE FROM shift_details WHERE shift_code = @shift_code and pn_branchid = '" + employee.BranchId + "'";
-            
                 SqlCommand cmd = new SqlCommand(sqlStatement, myConnection);
                 cmd.Parameters.AddWithValue("@shift_code", ID);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Deleted Successfully!');", true);
             }
-
-
-        }
+        
         myConnection.Close();
     }
-
-
     protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         if (s_login_role == "a")
         {
             GridView1.EditIndex = -1;
-            load1();
+            load();
         }
         else if(s_login_role == "h")
         {
             GridView1.EditIndex = -1;
-            load();
+            load1();
         }
     }
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -423,8 +431,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
         if (s_login_role == "a")
         {
-            
-            GridView1.EditIndex = e.NewEditIndex; // turn to edit mode
+            GridView1.EditIndex = e.NewEditIndex;   // turn to edit mode
             load1();
             access();
         }
@@ -442,6 +449,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+
     }
 
     private void AddNewRecord(string scode, string stime, string btimeo, string btimei, string etime, string sindicator)
@@ -450,6 +458,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             if (s_login_role == "a")
             {
+
                 if (stime == etime)
                 {
                     ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Give Start Time and End Time Different!');", true);
@@ -460,13 +469,16 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 }
                 else if (sindicator != "Select" && stime != "" && btimeo != "" && btimei != "" && etime != "" && scode != "")
                 {
-                    string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + DropDownList1.SelectedItem.Value + "','" + scode + "','" + stime + "','" + btimeo + "','" + btimei + "','" + etime + "','" + sindicator + "')";
+                    string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + ddl_branch.SelectedItem.Value + "','" + scode + "','" + stime + "','" + btimeo + "','" + btimei + "','" + etime + "','" + sindicator + "')";
                     SqlCommand myCommand = new SqlCommand(query, myConnection);
                     myConnection.Open();
                     myCommand.ExecuteNonQuery();
                     myConnection.Close();
                     load1();
                     access();
+                    shift1(scode, stime, etime, sindicator);
+                    
+
                 }
                 //else if(stime != etime)
                 //{
@@ -497,6 +509,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                     myConnection.Close();
                     load();
                     access();
+                    shift(scode,stime,etime,sindicator);
                 }
                 //else if(stime != etime)
                 //{
@@ -521,7 +534,24 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
 
     }
-
+    public void shift(string scode,string stime, string etime,string sindicator)
+    {
+        string query = @"insert into paym_Shift(pn_CompanyID,v_ShiftName,v_ShiftFrom,v_ShiftTo,status,BranchID,v_ShiftCategory)VALUES('" + employee.CompanyId + "','" + scode + "','" + stime + "','" + etime + "','Y','" + employee.BranchId + "','" + sindicator + "')";
+        //string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + ddl_branch.SelectedItem.Value + "','" + scode + "','" + stime + "','" + etime + "','" + sindicator + "')";
+        SqlCommand myCommand = new SqlCommand(query, myConnection);
+        myConnection.Open();
+        myCommand.ExecuteNonQuery();
+        myConnection.Close();
+    }
+    public void shift1(string scode, string stime, string etime, string sindicator)
+    {
+        string query = @"insert into paym_Shift(pn_CompanyID,v_ShiftName,v_ShiftFrom,v_ShiftTo,status,BranchID,v_ShiftCategory)VALUES('" + employee.CompanyId + "','" + scode + "','" + stime + "','" + etime + "','Y','" + ddl_branch.SelectedValue + "','" + sindicator + "')";
+        //string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + ddl_branch.SelectedItem.Value + "','" + scode + "','" + stime + "','" + etime + "','" + sindicator + "')";
+        SqlCommand myCommand = new SqlCommand(query, myConnection);
+        myConnection.Open();
+        myCommand.ExecuteNonQuery();
+        myConnection.Close();
+    }
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
         GridViewRow Gvrow = GridView1.Rows[e.RowIndex];
@@ -539,7 +569,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             string sindicatoredit = ((DropDownList)Gvrow.FindControl("ddl_shiftindicator_edit")).Text;
 
             //myConnection.Open();
-            //cmd = new SqlCommand("update shift_details set shift_code='" + scodeedit + "', start_time='" + stimeedit + "', break_time_out='" + btimeoedit + "', break_time_in='" + btimeiedit + "', end_time='" + etimeedit + "', shift_indicator='" + sindicatoredit + "' where shift_code='" + scodeedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + DropDownList1.SelectedItem.Value + "'", myConnection);
+            //cmd = new SqlCommand("update shift_details set shift_code='" + scodeedit + "', start_time='" + stimeedit + "', break_time_out='" + btimeoedit + "', break_time_in='" + btimeiedit + "', end_time='" + etimeedit + "', shift_indicator='" + sindicatoredit + "' where shift_code='" + scodeedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + ddl_branch.SelectedItem.Value + "'", myConnection);
             //cmd.ExecuteNonQuery();
             //myConnection.Close();
             //GridView1.EditIndex = -1; // turn off edit mode
@@ -585,7 +615,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 }
                 else if (sindicatoredit != "Select" && stimeedit != "" && btimeoedit != "" && btimeiedit != "" && etimeedit != "" && scodeedit != "")
                 {
-                    //string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + DropDownList1.SelectedItem.Value + "','" + scode + "','" + stime + "','" + btimeo + "','" + btimei + "','" + etime + "','" + sindicator + "')";
+                    //string query = @"INSERT INTO shift_details (pn_CompanyID, pn_BranchID, shift_code, start_time, break_time_out, break_time_in, end_time, shift_indicator) VALUES('" + employee.CompanyId + "','" + ddl_branch.SelectedItem.Value + "','" + scode + "','" + stime + "','" + btimeo + "','" + btimei + "','" + etime + "','" + sindicator + "')";
                     //SqlCommand myCommand = new SqlCommand(query, myConnection);
                     //myConnection.Open();
                     //myCommand.ExecuteNonQuery();
@@ -675,7 +705,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
         if (s_login_role == "a")
         {
-            employee.BranchId = Convert.ToInt32(DropDownList1.SelectedItem.Value);
+            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
             if (btn_save.Text == "Modify")
             {
                 string m_ot = "No", month_type = "";
@@ -712,7 +742,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                     }
                 }
 
-                string query = "update attendance_ceiling set intime ='" + txt_intimelt.Text + "',early_intime ='" + txt_earlyin.Text + "',shift_lin ='" + txt_shiftLin.Text + "',lunch_ein ='" + txt_lunchEin.Text + "',halfday ='" + txt_halfdaylt.Text + "',ot_limit ='" + txt_otlt.Text + "',permission_limit ='" + txt_perlt.Text + "',leave_days ='" + txt_leavelt.Text + "', morning_ot = '" + m_ot + "', month_type = '" + month_type + "', week_off1 = '" + ddl_weeloff1.Text + "', week_off2 = '" + ddl_weekoff2.Text + "', manual_days = '" + txt_manual.Text + "',ot_days = '" + txt_otdays.Text + "',ot_hrs = '" + txt_othrs.Text + "',time_card = '" + rdo_timecard.SelectedItem.Text + "',ptax_month='" + pt + "', reader_name = '" + ddl_reader.SelectedItem.Text + "' where pn_branchid ='" + DropDownList1.SelectedItem.Value + "' ";
+                string query = "update attendance_ceiling set intime ='" + txt_intimelt.Text + "',early_intime ='" + txt_earlyin.Text + "',shift_lin ='" + txt_shiftLin.Text + "',lunch_ein ='" + txt_lunchEin.Text + "',halfday ='" + txt_halfdaylt.Text + "',ot_limit ='" + txt_otlt.Text + "',permission_limit ='" + txt_perlt.Text + "',leave_days ='" + txt_leavelt.Text + "', morning_ot = '" + m_ot + "', month_type = '" + month_type + "', week_off1 = '" + ddl_weeloff1.Text + "', week_off2 = '" + ddl_weekoff2.Text + "', manual_days = '" + txt_manual.Text + "',ot_days = '" + txt_otdays.Text + "',ot_hrs = '" + txt_othrs.Text + "',time_card = '" + rdo_timecard.SelectedItem.Text + "',ptax_month='" + pt + "', reader_name = '" + ddl_reader.SelectedItem.Text + "' where pn_branchid ='" + ddl_branch.SelectedItem.Value + "' ";
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 myConnection.Open();
                 cmd.ExecuteNonQuery();
@@ -773,7 +803,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                                 }
                             }
                             myConnection.Open();
-                            cmd = new SqlCommand("insert into attendance_ceiling(pn_companyid, pn_branchid, intime, early_intime, shift_lin, lunch_ein, halfday, ot_limit, permission_limit, leave_days, morning_ot, month_type, week_off1, week_off2, manual_days, ot_days, ot_hrs, time_card, ptax_month, reader_name) values ('" + employee.CompanyId + "' , '" + DropDownList1.SelectedItem.Value + "' , '" + txt_intimelt.Text + "' , '" + txt_earlyin.Text + "' , '" + txt_shiftLin.Text + "' , '" + txt_lunchEin.Text + "' , '" + txt_halfdaylt.Text + "' , '" + txt_otlt.Text + "' , '" + txt_perlt.Text + "' , '" + txt_leavelt.Text + "' , '" + m_ot + "' , '" + month_type + "' , '" + ddl_weeloff1.SelectedItem.Text + "' , '" + ddl_weekoff2.SelectedItem.Text + "' , '" + txt_manual.Text + "' , '" + txt_otdays.Text + "' , '" + txt_othrs.Text + "' , '" + rdo_timecard.SelectedItem.Text + "' , '" + pt + "' , '" + ddl_reader.SelectedItem.Text + "')", myConnection);
+                            cmd = new SqlCommand("insert into attendance_ceiling(pn_companyid, pn_branchid, intime, early_intime, shift_lin, lunch_ein, halfday, ot_limit, permission_limit, leave_days, morning_ot, month_type, week_off1, week_off2, manual_days, ot_days, ot_hrs, time_card, ptax_month, reader_name) values ('" + employee.CompanyId + "' , '" + ddl_branch.SelectedItem.Value + "' , '" + txt_intimelt.Text + "' , '" + txt_earlyin.Text + "' , '" + txt_shiftLin.Text + "' , '" + txt_lunchEin.Text + "' , '" + txt_halfdaylt.Text + "' , '" + txt_otlt.Text + "' , '" + txt_perlt.Text + "' , '" + txt_leavelt.Text + "' , '" + m_ot + "' , '" + month_type + "' , '" + ddl_weeloff1.SelectedItem.Text + "' , '" + ddl_weekoff2.SelectedItem.Text + "' , '" + txt_manual.Text + "' , '" + txt_otdays.Text + "' , '" + txt_othrs.Text + "' , '" + rdo_timecard.SelectedItem.Text + "' , '" + pt + "' , '" + ddl_reader.SelectedItem.Text + "')", myConnection);
                             cmd.ExecuteNonQuery();
                             Response.Write("<script language='javascript'>alert('Information Saved Successfully')</script>");
                             myConnection.Close();
@@ -884,6 +914,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                                 myConnection.Open();
                                 cmd = new SqlCommand("insert into attendance_ceiling(pn_companyid , pn_branchid , intime , early_intime , shift_lin , lunch_ein , halfday , ot_limit , permission_limit , leave_days , morning_ot , month_type , week_off1 , week_off2 , manual_days , ot_days , ot_hrs , time_card , ptax_month , reader_name) values ('" + employee.CompanyId + "' , '" + employee.BranchId + "' , '" + txt_intimelt.Text + "' , '" + txt_earlyin.Text + "' , '" + txt_shiftLin.Text + "' , '" + txt_lunchEin.Text + "' , '" + txt_halfdaylt.Text + "' , '" + txt_otlt.Text + "' , '" + txt_perlt.Text + "' , '" + txt_leavelt.Text + "' , '" + m_ot + "' , '" + month_type + "' , '" + ddl_weeloff1.SelectedItem.Text + "' , '" + ddl_weekoff2.SelectedItem.Text + "' , '" + txt_manual.Text + "' , '" + txt_otdays.Text + "' , '" + txt_othrs.Text + "' , '" + rdo_timecard.SelectedItem.Text + "' , '" + pt + "' , '" + ddl_reader.SelectedItem.Text + "')", myConnection);
                                 cmd.ExecuteNonQuery();
+                                
                                 Response.Write("<script language='javascript'>alert('Information Saved Successfully)</script>");
                                 myConnection.Close();
                             }
@@ -960,12 +991,12 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         ddl_weekoff2.SelectedValue = "Select";
         ddl_weeloff1.SelectedValue = "Select";
     }
-
-    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    public void Grid_Load()
     {
         branch_time.Visible = true;
+
         clear();
-        SqlDataAdapter ad = new SqlDataAdapter("SELECT * FROM shift_details where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + DropDownList1.Text + "'", myConnection);
+        SqlDataAdapter ad = new SqlDataAdapter("SELECT * FROM shift_details where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + ddl_branch.Text + "'", myConnection);
         DataSet ds = new DataSet();
         ad.Fill(ds, "shift_details");
         if (ds.Tables[0].Rows.Count == 0)
@@ -986,7 +1017,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
 
         myConnection.Open();
-        cmd = new SqlCommand("Select * from attendance_ceiling where pn_companyid = '" + employee.CompanyId + "' and pn_branchid = '" + DropDownList1.SelectedItem.Value+ "'", myConnection);
+        cmd = new SqlCommand("Select * from attendance_ceiling where pn_companyid = '" + employee.CompanyId + "' and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'", myConnection);
         SqlDataReader re1 = cmd.ExecuteReader();
         if (re1.Read())
         {
@@ -1066,16 +1097,29 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             btn_save.Text = "Modify";
         }
+
+
+    }
+    protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
         
-        
+        if (s_login_role == "a")
+        {
+            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
+        }
+
+        SqlDataSource1.SelectCommand = "select employee_first_name,employeecode from paym_employee where pn_companyid='" + employee.CompanyId + "' and pn_branchid='" + employee.BranchId + "' ";
+
+        Grid_Load();
     }
 
     public void load1()
     {
         //lbl_branch.Visible = true;
-        DropDownList1.Visible = true;
+        //ddl_branch.Visible = true;
 
-        SqlDataAdapter ad = new SqlDataAdapter("SELECT * FROM shift_details where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + DropDownList1.SelectedItem.Value + "'", myConnection);
+        SqlDataAdapter ad = new SqlDataAdapter("SELECT * FROM shift_details where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + ddl_branch.SelectedItem.Value + "'", myConnection);
 
         DataSet ds = new DataSet();
 
@@ -1100,7 +1144,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
 
         myConnection.Open();
-        cmd = new SqlCommand("Select * from attendance_ceiling where pn_companyid = '" + employee.CompanyId + "' and pn_branchid = '" + DropDownList1.SelectedItem.Value + "'", myConnection);
+        cmd = new SqlCommand("Select * from attendance_ceiling where pn_companyid = '" + employee.CompanyId + "' and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'", myConnection);
         SqlDataReader re1 = cmd.ExecuteReader();
         if (re1.Read())
         {

@@ -81,8 +81,18 @@
                             Allowance Settings
                             <div class="pull-right">
                     <asp:DropDownList ID="ddl_branch" CssClass="form-control" runat="server" 
-                        style="margin-left: 0px; width:auto" AutoPostBack="True">
+                        style="margin-left: 0px; width:auto" AutoPostBack="True" OnSelectedIndexChanged="ddlbranch_SelectedIndexChanged" >
                     </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                            ConnectionString="<%$ ConnectionStrings:connectionstring %>"
+                            SelectCommand="SELECT ([EmployeeCode]+'-'+[Employee_First_Name]) as Employee_first_name , [EmployeeCode] FROM [paym_Employee] WHERE (([pn_CompanyID] = @pn_CompanyID) AND ([pn_BranchID] = @pn_BranchID))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="pn_CompanyID" SessionField="Login_temp_CompanyID"
+                                    Type="Int32" />
+                                <asp:SessionParameter Name="pn_BranchID" SessionField="Login_temp_BranchID"
+                                    Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
                             </div>
                         </div>
                         <div class="panel-body">

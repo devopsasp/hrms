@@ -53,7 +53,8 @@
         <!--<siteMapNode url="Hrms_Master/Bonus/Bonus.aspx" title="Bonus" description="Bonus" />-->
         <siteMapNode url="Hrms_Master/Bonus/Bonus_Increment_New.aspx" title="Bonus Increment" description="Bonus Increment" />
       </siteMapNode>
-      <siteMapNode url="" title="Leave / Holiday" description="Leave / Holiday">
+      <siteMapNode url="" title="Leave/Holiday" description="Leave / Holiday">
+        <siteMapNode url="Hrms_Master/Leave/Approval.aspx" title="Add_approval" description="Approval" />
         <siteMapNode url="Hrms_Master/Leave/Holiday.aspx" title="Holiday" description="Holiday" />
         <siteMapNode url="Hrms_Master/Leave/Leave.aspx" title="Leave" description="Leave" />
         <siteMapNode url="Hrms_Master/Leave/leaveAllocation.aspx" title="Allocation" description="Allocation" />

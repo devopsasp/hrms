@@ -43,7 +43,9 @@ public partial class Hrms_Employee_AllEmployeeAllowance : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a":
-
+                    load_admin();
+                    BindDepartment();
+                    BindAllowance();
                     //ddl_branch_load();
 
                     break;
@@ -123,6 +125,19 @@ public partial class Hrms_Employee_AllEmployeeAllowance : System.Web.UI.Page
             e_list.Value = "se";
             ddlAllowance.Items.Add(e_list);
         }
+    }
+    public void load_admin()
+    {
+        myConnection.Open();
+        SqlDataAdapter ad = new SqlDataAdapter("select * from paym_branch", myConnection);
+        DataSet ds = new DataSet();
+        ad.Fill(ds);
+        ddl_branch.DataTextField = "branchname";
+        ddl_branch.DataValueField = "pn_branchid";
+        ddl_branch.DataSource = ds;
+        ddl_branch.DataBind();
+        ddl_branch.Items.Insert(0, "select Branch");
+        myConnection.Close();
     }
     public void BindDepartment()
     {
@@ -252,6 +267,16 @@ public partial class Hrms_Employee_AllEmployeeAllowance : System.Web.UI.Page
 
         ((TextBox)GridView1.Rows[rowindex].FindControl("txt_contribution")).Text = a.ToString("F2");
 
+    }
+    protected void ddlbranch_SelectedIndexChanged(object sender,EventArgs e)
+    {
+        if (s_login_role == "a")
+        {
+            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
+        }
+        SqlDataSource1.SelectCommand = "select employee_first_name,employeecode from paym_employee where pn_companyid='" + employee.CompanyId + "' and pn_branchid='" + employee.BranchId + "' ";
+
+        load();
     }
     protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
     {

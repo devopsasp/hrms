@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
       <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
-     <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="true" />
+     <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="UploadMultipleFiles" accept="image/gif, image/jpeg" />
         <hr />
      <asp:Button ID="btndownload" Text="Download" runat="server" OnClick="DownloadFiles" />

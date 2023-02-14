@@ -43,6 +43,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a": load_admin();
+                   
                     break;
 
                 case "h":

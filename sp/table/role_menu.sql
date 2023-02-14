@@ -72,6 +72,9 @@ INSERT INTO tbl_Menu (PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Paren
 
 INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES(57,'User Access', 'CK','/Hrms_Employee/user_access.aspx',1,-16, 1,1,1,1)
 
+INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES(58,'Hierarchy', 'Cl','/Hrms_Master/Employee/hierarchy_new.aspx',1,-16, 1,1,1,1)
+
+
 INSERT INTO tbl_Menu (PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES (-17,' Leave','CL','#',1,15,1,1,1,1)
 
 INSERT INTO tbl_Menu (PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES (23,' Leave Setup','CM','/Hrms_Master/Leave/Leave.aspx',1,-17,1,1,1,1)
@@ -118,8 +121,8 @@ INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent
  (33,' Daily Time Card', 'DE','/Hrms_TimeAndAttendance/Dailycard.aspx',1,31, 1,1,1,1)
 
 
-INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES
- (34,' Students Time Card', 'DF','/Hrms_TimeAndAttendance/DailycardStudent.aspx',1,31,1,1,1,1)
+--INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES
+-- (34,' Students Time Card', 'DF','/Hrms_TimeAndAttendance/DailycardStudent.aspx',1,31,1,1,1,1)
 
 INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES
  (35,' Manual Attendance', 'DG','/Hrms_PayRoll/payinput.aspx',1,31, 1,1,1,1)

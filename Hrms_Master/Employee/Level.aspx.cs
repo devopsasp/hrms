@@ -46,8 +46,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        lbl_Error.Text = "";
-        Error.Text = "";
+     
 
 
         if (!IsPostBack)
@@ -276,8 +275,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
-
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
 
         }
 
@@ -342,8 +340,8 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
-
+            
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
 
         }
 
@@ -367,7 +365,8 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+           
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
         }
     }
 
@@ -407,11 +406,14 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 _Value = employee.LevelUpdate(employee);
                 if (_Value != "1")
                 {
-                    Error.Text = "<font color=Blue>Added Successfully</font>";
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Added Successfully');", true);
+                 
                 }
                 else
                 {
-                    Error.Text = "<font color=Red>Error Occured</font>";
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+
+                  
                 }
                 ToolBarCode.Value = "0";
 
@@ -436,7 +438,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
 
 
         }
@@ -468,12 +470,13 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 {
                     load1();
                 }
-                lbl_Error.Text = "Level Deleted Successfully";
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Level Deleted Successfully');", true);
+              
             }
             catch (Exception exc)
             {
-                lbl_Error.Text = "Couldnt delete because the level is assigned to employee";
-                lbl_Error.Visible = true;
+             
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Couldnt delete because the level is assigned to employee');", true);
             }
         }
         mycon.Close();

@@ -64,7 +64,7 @@
                                                 <asp:DropDownList ID="ddl_department" runat="server" AutoPostBack="True" 
                                                     class="form-control" 
                                                     
-                                    onselectedindexchanged="ddl_department_SelectedIndexChanged" Width="90%">
+                                    onselectedindexchanged="ddl_department_SelectedIndexChanged" Width="100%">
                                                 </asp:DropDownList>
                                                 </span></td>
                             <td >
@@ -113,7 +113,7 @@
                                     <asp:ListItem Value="12">December</asp:ListItem>
                                 </asp:DropDownList></td>
                             <td >
-                                <asp:Button  ID="btn_year" runat="server" OnClick="btn_year_Click"  CssClass="btn btn-success" Text="View Details"/>
+                                <asp:Button  ID="Button1" runat="server" OnClick="btn_year_Click"  CssClass="btn btn-success" Text="View Details"/>
                                 </td>
                             <td >
                                 <asp:Button  ID="btn_view" 
@@ -121,7 +121,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"></td>
+                              <td colspan="4"></td>
+
                         </tr>
                      </table>     
                      

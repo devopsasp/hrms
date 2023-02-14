@@ -1,31 +1,11 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Data.SqlClient;
-using ePayHrms.Login;
-using ePayHrms.Connection;
 using ePayHrms.Candidate;
-using System.IO;
 using ePayHrms.Company;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ePayHrms.BE.Recruitment;
 using ePayHrms.Employee;
 using ePayHrms.Leave;
-using CrystalDecisions.Web;
-using CrystalDecisions.Enterprise;
-using CrystalDecisions.ReportAppServer;
-using CrystalDecisions.Reporting;
-using CrystalDecisions.ReportSource;
-using CrystalDecisions.Shared;
-using CrystalDecisions.CrystalReports.Engine;
 
 public partial class DB_Refresh : System.Web.UI.Page
 {
@@ -38,25 +18,25 @@ public partial class DB_Refresh : System.Web.UI.Page
     Candidate c = new Candidate();
     Leave l = new Leave();
 
-  
+
 
     Collection<Employee> EmployeeList;
     Collection<Employee> EmpFirstList;
     Collection<Employee> EmpGeneralList;
     Collection<Employee> EmpProfileList;
-    Collection<Employee> EmpWorkList;   
-   
+    Collection<Employee> EmpWorkList;
+
     Collection<Leave> LeaveList;
- 
+
     Collection<PayRoll> EarningsList;
     Collection<PayRoll> DeductionList;
 
     string s_login_role;
 
-    int temp_i = 0, i = 0,count=0;  
+    int temp_i = 0, i = 0, count = 0;
 
-    string temp_string = "", temp_earn = "",temp_query=""; 
-   
+    string temp_string = "", temp_earn = "", temp_query = "";
+
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -73,7 +53,7 @@ public partial class DB_Refresh : System.Web.UI.Page
         Temp_employee_Load();
 
         temp_query = "update temp_Employee set DateofBirth=null where  DateofBirth='1900/01/01'";
-        temp_query =temp_query+ " update temp_Employee set JoiningDate=null where  JoiningDate='1900/01/01'";
+        temp_query = temp_query + " update temp_Employee set JoiningDate=null where  JoiningDate='1900/01/01'";
         temp_query = temp_query + "update temp_Employee set OfferDate=null where  OfferDate='1900/01/01'";
         temp_query = temp_query + " update temp_Employee set ProbationUpto=null where  ProbationUpto='1900/01/01'";
         temp_query = temp_query + " update temp_Employee set ExtendedUpto=null where  ExtendedUpto='1900/01/01'";
@@ -99,8 +79,8 @@ public partial class DB_Refresh : System.Web.UI.Page
 
         lbl_refresh.Text = "Database Updated";
 
-        
-    }      
+
+    }
 
 
 
@@ -111,7 +91,7 @@ public partial class DB_Refresh : System.Web.UI.Page
     public void Temp_employee_Drop()
     {
         temp_string = "drop table Temp_Employee";
-       // temp_string = "DELETE FROM Temp_Employee";
+
         employee.Temp_Employee(temp_string);
 
     }
@@ -121,7 +101,6 @@ public partial class DB_Refresh : System.Web.UI.Page
     //    temp_string = "Delete from Temp_Employee";
 
     //    employee.Temp_Employee(temp_string);
-
 
 
     //}
@@ -139,7 +118,7 @@ public partial class DB_Refresh : System.Web.UI.Page
         temp_string = temp_string + "JoiningDate datetime,OfferDate datetime,ProbationUpto datetime,ExtendedUpto datetime,ConfirmationDate datetime,RetirementDate datetime,ContractRenviewDate datetime,";
         temp_string = temp_string + "EmailId varchar(50),AlternateEmailId varchar(50),BloodGroup varchar(20),Religion varchar(50),Nationality varchar(50),PresentHouseNo varchar(20),PresentStreetName varchar(50),PresentAddLine1 varchar(100),PresentAddLine2 varchar(100),PresentCity varchar(50),PresentState varchar(50),PermanentHouseNo varchar(50),";
         temp_string = temp_string + "PermanentStreetName varchar(50),PermanentAddLine1 varchar(100),PermanentAddLine2 varchar(100),PermanentCity varchar(50),PermanentState varchar(50),ph_Office varchar(20),ph_Residence varchar(20),CellNo varchar(20),Fax varchar(20),emgName varchar(30),emgPhone varchar(30),Salutation  varchar(20),M_Status varchar(20),";
-        temp_string = temp_string + "FatherName varchar(30),MotherName varchar(30),Children varchar(3),SpouseName varchar(30),Ref1_Name varchar(30),Ref1_Phno varchar(20),Ref1_Email varchar(50),Ref1_Relation varchar(50),Ref2_Name varchar(30),Ref2_Phno varchar(30),Ref2_Email varchar(50),Ref2_Relation varchar(50), v_ESIno varchar(20), v_PFno varchar(20),Bank_Name varchar(30), Acno varchar(20) )";
+        temp_string = temp_string + "FatherName varchar(30),MotherName varchar(30),Children varchar(3),SpouseName varchar(30),Ref1_Name varchar(30),Ref1_Phno varchar(20),Ref1_Email varchar(50),Ref1_Relation varchar(50),Ref2_Name varchar(30),Ref2_Phno varchar(30),Ref2_Email varchar(50),Ref2_Relation varchar(50), v_ESIno varchar(20), v_PFno varchar(20),Bank_Name varchar(30), Acno varchar(20),IFSC_Code varchar(30) )";
 
 
         employee.Temp_Employee(temp_string);
@@ -179,15 +158,10 @@ public partial class DB_Refresh : System.Web.UI.Page
 
         }
 
-
-
-
-
     }
 
     public void Temp_employee_Load()
     {
-
 
         //Employee Profile
 
@@ -200,9 +174,9 @@ public partial class DB_Refresh : System.Web.UI.Page
 
             for (temp_i = 0; temp_i < EmpFirstList.Count; temp_i++)
             {
-                temp_string = "insert into Temp_Employee(CompanyName,BranchName,pn_EmployeeID,EmployeeCode,Employee_First_Name,Employee_Middle_Name,Employee_Last_Name,Status,Gender,DateofBirth,Password,v_ESIno,v_PFno,bank_name,acno) values(";
+                temp_string = "insert into Temp_Employee(CompanyName,BranchName,pn_EmployeeID,EmployeeCode,Employee_First_Name,Employee_Middle_Name,Employee_Last_Name,Status,Gender,DateofBirth,Password,v_ESIno,v_PFno,bank_name,acno,IFSC_Code) values(";
                 temp_string = temp_string + "'" + EmpFirstList[temp_i].CourseName + "','" + EmpFirstList[temp_i].SkillName + "'," + EmpFirstList[temp_i].EmployeeId + ",'" + EmpFirstList[temp_i].EmployeeCode + "',";
-                temp_string = temp_string + "'" + EmpFirstList[temp_i].FirstName + "','" + EmpFirstList[temp_i].MiddleName + "','" + EmpFirstList[temp_i].LastName + "','" + EmpFirstList[temp_i].status + "','" + /*Convert_gender(*/EmpFirstList[temp_i].Gender/*)*/ + "','" + employee.Convert_ToSqlDatestring(EmpFirstList[temp_i].d_birth.ToShortDateString()) + "','" + EmpFirstList[temp_i].password + "','" + EmpFirstList[temp_i].ESIno + "','" + EmpFirstList[temp_i].PFno + "','" + EmpFirstList[temp_i].Bank_Name + "','" + EmpFirstList[temp_i].Account_Type + "')";
+                temp_string = temp_string + "'" + EmpFirstList[temp_i].FirstName + "','" + EmpFirstList[temp_i].MiddleName + "','" + EmpFirstList[temp_i].LastName + "','" + EmpFirstList[temp_i].status + "','" + /*Convert_gender(*/EmpFirstList[temp_i].Gender/*)*/ + "','" + employee.Convert_ToSqlDatestring(EmpFirstList[temp_i].d_birth.ToShortDateString()) + "','" + EmpFirstList[temp_i].password + "','" + EmpFirstList[temp_i].ESIno + "','" + EmpFirstList[temp_i].PFno + "','" + EmpFirstList[temp_i].Bank_Name + "','" + EmpFirstList[temp_i].Account_Type + "','" + EmpFirstList[temp_i].IFSC_Code + "')";
 
                 employee.Temp_Employee(temp_string);
 
@@ -210,7 +184,6 @@ public partial class DB_Refresh : System.Web.UI.Page
             }
 
         }
-
 
         //Employee General
 
@@ -256,7 +229,6 @@ public partial class DB_Refresh : System.Web.UI.Page
             }
         }
 
-
         //Employee WorkDetails 2
 
         EmpWorkList = employee.Temp_Emp_WorkDetails(employee);
@@ -267,7 +239,7 @@ public partial class DB_Refresh : System.Web.UI.Page
             for (temp_i = 0; temp_i < EmpWorkList.Count; temp_i++)
             {
 
-                temp_string = "update Temp_Employee set JoiningDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_join.ToShortDateString()) + "',OfferDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_Offer.ToShortDateString()) + "',ProbationUpto='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_probotion.ToShortDateString())+ "',ExtendedUpto='" +employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_extended.ToShortDateString()) + "',ConfirmationDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_confirmation.ToShortDateString()) + "',RetirementDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_retirement.ToShortDateString()) + "',ContractRenviewDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_renue.ToShortDateString())+ "'";
+                temp_string = "update Temp_Employee set JoiningDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_join.ToShortDateString()) + "',OfferDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_Offer.ToShortDateString()) + "',ProbationUpto='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_probotion.ToShortDateString()) + "',ExtendedUpto='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_extended.ToShortDateString()) + "',ConfirmationDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_confirmation.ToShortDateString()) + "',RetirementDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_retirement.ToShortDateString()) + "',ContractRenviewDate='" + employee.Convert_ToSqlDatestring(EmpWorkList[temp_i].d_renue.ToShortDateString()) + "'";
 
                 temp_string = temp_string + " where pn_EmployeeID=" + EmpWorkList[temp_i].EmployeeId + "";
 
@@ -277,7 +249,6 @@ public partial class DB_Refresh : System.Web.UI.Page
             }
 
         }
-
 
         //Employee Earnings
 
@@ -322,10 +293,6 @@ public partial class DB_Refresh : System.Web.UI.Page
 
 
         }
-
-
-
-
 
     }
 
@@ -487,7 +454,6 @@ public partial class DB_Refresh : System.Web.UI.Page
         }
 
 
-
     }
 
     public void temp_deductions_load()
@@ -536,8 +502,8 @@ public partial class DB_Refresh : System.Web.UI.Page
         }
 
     }
-
-
+   
+ 
     public void Temp_leave_Drop()
     {
         temp_string = "drop table temp_leave";
@@ -577,12 +543,12 @@ public partial class DB_Refresh : System.Web.UI.Page
 
 
 
- //***************************************************************************************************
-
-       
+    //***************************************************************************************************
 
 
-   
+
+
+
     public void Temp_Earnings_Load()
     {
 
@@ -680,7 +646,7 @@ public partial class DB_Refresh : System.Web.UI.Page
         employee.Temp_Employee(temp_string);
 
 
-    }   
+    }
 
 
     protected void btn_start_Click(object sender, ImageClickEventArgs e)
@@ -695,9 +661,9 @@ public partial class DB_Refresh : System.Web.UI.Page
     public string Convert_ToSqlDateformat(string cur_date)
     {
         string _d, _m, _y, sql_date = "";
-        char[] splitter ={ '/' };
+        char[] splitter = { '/' };
         string[] str_ary = new string[4];
-      
+
 
         if (cur_date != "")
         {
@@ -727,7 +693,7 @@ public partial class DB_Refresh : System.Web.UI.Page
         }
         else
         {
-            sql_date ="1900/01/01";
+            sql_date = "1900/01/01";
 
         }
 
@@ -761,7 +727,7 @@ public partial class DB_Refresh : System.Web.UI.Page
         if (p_gender == "1")
         {
             r_gender = "Male";
-        }   
+        }
         else
         {
             r_gender = "Female";
@@ -779,19 +745,24 @@ public partial class DB_Refresh : System.Web.UI.Page
 
         switch (p_Salutation)
         {
-            case '1': r_Salutation = "Mr.";
+            case '1':
+                r_Salutation = "Mr.";
                 break;
 
-            case '2': r_Salutation = "Ms.";
+            case '2':
+                r_Salutation = "Ms.";
                 break;
 
-            case '3': r_Salutation = "Mrs.";
+            case '3':
+                r_Salutation = "Mrs.";
                 break;
 
-            case '4': r_Salutation = "Dr.";
+            case '4':
+                r_Salutation = "Dr.";
                 break;
 
-            default: r_Salutation = "";
+            default:
+                r_Salutation = "";
                 break;
         }
 
@@ -819,9 +790,5 @@ public partial class DB_Refresh : System.Web.UI.Page
 
 
     }
-
-  
-
-
 
 }

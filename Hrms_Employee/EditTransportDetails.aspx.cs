@@ -53,6 +53,7 @@ public partial class Hrms_Employee_EditTransportDetails : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a":
+                    AccessTransportDetails();
                     break;
 
                 case "h":
@@ -84,8 +85,8 @@ public partial class Hrms_Employee_EditTransportDetails : System.Web.UI.Page
 
             if (s_login_role == "a")
             {
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
                 TransportDetails();
             }
 
@@ -150,8 +151,8 @@ public partial class Hrms_Employee_EditTransportDetails : System.Web.UI.Page
         {
             if (s_login_role == "a")
             {
-                employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
             if (s_login_role == "h")
             {

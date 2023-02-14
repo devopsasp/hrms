@@ -29,7 +29,7 @@ public partial class PayrollReports_Transport : System.Web.UI.Page
     Collection<Company> CompanyList;
     Collection<Employee> vehicleList1, ddl_DestinationList, ddl_driversList, RouteList, ddl_DestinationList1;
     //Collection<Company> ddlBranchsList;
-    char s_login_role;
+    string s_login_role;
     int ddl_i, cs_k = 0, i;
     string s_form = "", _Value, _Value1;
     DataSet ds_userrights;
@@ -37,7 +37,7 @@ public partial class PayrollReports_Transport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+            s_login_role = Request.Cookies["Login_temp_Role"].Value;
             employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
             employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
             CompanyList = company.fn_getCompany();
@@ -48,7 +48,7 @@ public partial class PayrollReports_Transport : System.Web.UI.Page
             if (CompanyList.Count > 0)
             {
 
-                if (s_login_role == 'a' || s_login_role == 'h')
+                if (s_login_role == "a" || s_login_role == "h")
                 {
                     //invisible();
                     //Branch_Load(ddl_frombranch);
@@ -56,14 +56,14 @@ public partial class PayrollReports_Transport : System.Web.UI.Page
                 }
                 else
                 {
-                    Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                    Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                     Response.Redirect("~/Company_Home.aspx");
                 }
 
             }
             else
             {
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("Company_Home.aspx");
             }
         }

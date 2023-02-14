@@ -445,11 +445,18 @@ namespace ePayHrms.Student
         }
 
         private TimeSpan _Intimestr;
-
+        
         public TimeSpan Intimestr
         {
             get { return _Intimestr; }
             set { _Intimestr = value; }
+        }
+        private TimeSpan ot_hrs;
+
+        public TimeSpan _ot_hrs
+        {
+            get { return _ot_hrs; }
+            set { _ot_hrs = value; }
         }
 
         private TimeSpan _Outtimestr;
@@ -798,6 +805,9 @@ namespace ePayHrms.Student
             set { _dat = value; }
         }
 
+        public string e_Date { get; set; }
+        public string e_date { get; set; }
+
         public Collection<Student> fn_getStudentList(Student e)
         {
             Collection<Student> StudentList = new Collection<Student>();
@@ -871,7 +881,27 @@ namespace ePayHrms.Student
             }
             return StudentList;
         }
-
+        public Collection<Student> fn_calc(Student e)
+        {
+            Collection<Student> StudentList = new Collection<Student>();
+            _Connection = Con.fn_Connection();
+            SqlCommand _Course = new SqlCommand("select * from time_card_student where pn_CompanyID=" + e.CompanyId + " and pn_BranchID =" + e.BranchId + " and dates = '" + e.d_Date + "' and registerno = '" + e.RegisterNo + "' order by RegisterNo asc", _Connection);
+            _Connection.Open();
+            SqlDataReader dr = _Course.ExecuteReader();
+            while (dr.Read())
+            {
+                Student Student = new Student();
+                Student.FirstName = Convert.IsDBNull(dr["StudentName"]) ? "" : (string)dr["StudentName"];
+                Student.ot_hrs = TimeSpan.Parse(dr["ot_hrs"].ToString());
+                //Student.Intimestr = TimeSpan.Parse(dr["intime"].ToString());
+                //Student.Outtimestr = TimeSpan.Parse(dr["outtime"].ToString());  //Convert.IsDBNull(dr["outtime"]) ? "" : (string)dr["outtime"];
+                //Student.Lateinstr = TimeSpan.Parse(dr["Late_in"].ToString());  //Convert.IsDBNull(dr["Late_in"]) ? "" : (string)dr["Late_in"];
+                //Student.Lateoutstr = TimeSpan.Parse(dr["Late_out"].ToString());  //Convert.IsDBNull(dr["Late_out"]) ? "" : (string)dr["Late_out"];
+                Student.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
+                StudentList.Add(Student);
+            }
+            return StudentList;
+        }
         public Collection<Student> fn_StudentTimeCard(Student e)
         {
             Collection<Student> StudentList = new Collection<Student>();

@@ -1,9 +1,8 @@
 <%@ Page MaintainScrollPositionOnPostback="true" Language="C#" AutoEventWireup="true" EnableEventValidation="false" MasterPageFile="~/HRMS.master" CodeFile="Company_Home.aspx.cs" Inherits="Hrms_Company_Default" Title="Welcome to HRMS" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:content Id="content1"  ContentPlaceHolderId="contentPlaceHolder1" runat="server">
  
-
     <br />
  
 
@@ -12,7 +11,7 @@
 .blink
 {
 text-decoration:"blink";
-}
+    }
 </style>
  
 <style type="text/css">
@@ -26,7 +25,7 @@ cursor:pointer;
 
 
 <%-- <link href="../_assets/css/meiii.css" rel="stylesheet" type="text/css" />--%>
- <link href="Themes/js-image-slider.css" rel="stylesheet" type="text/css" />
+ <link href="Themes/js-image-slider.css" rel="stylesheet" type="text/css" /> 
  <script src="Themes/js-image-slider.js" type="text/javascript"></script>
   <link href="Css/GridViewStyles.css" rel="stylesheet" type="text/css" />
   <link href="Css/GridViewStyles1.css" rel="stylesheet" type="text/css" />
@@ -158,11 +157,15 @@ function confirmMsg(frm)
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <span class="pull-left">View Details</span>  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp; 
+                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="16px" ImageUrl="~/Images/Arrow_Yelloe.png" Width="15px" />
+                                <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
+                        <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
+                        <div class="clearfix">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -173,17 +176,21 @@ function confirmMsg(frm)
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">
+                                        <asp:Label ID="Label1" runat="server"></asp:Label>
+                                        </div>
                                     <div>No. of Absent</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <span class="pull-left">View Details</span> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 
+                                <asp:ImageButton ID="ImageButton1" runat="server" Height="16px" ImageUrl="~/Images/arrow_red.gif" Width="29px" />
+                                <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
                                 <div class="clearfix"></div>
                             </div>
+                        </a>
                         </a>
                     </div>
                 </div>
@@ -216,7 +223,7 @@ function confirmMsg(frm)
                                 </div>
                             </div>
                         </div>
-                        <!-- /.panel-heading -->
+                        <!-- /.panel-heading --> 
                         <div class="panel-body">
                             <div class="panel panel-info panel-body" >
                                 <asp:Chart ID="Chart2" runat="server" 
@@ -260,16 +267,16 @@ function confirmMsg(frm)
                             </div>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="panel-body" style="font-family: 'Times New Roman', Times, serif; font-size: medium; font-weight: normal; font-style: normal; font-variant: inherit; text-transform: inherit">
 
                                         <div class="panel panel-info panel-body">
 
                                          <asp:Chart ID="Chart1" runat="server" BackImageAlignment="Center" Width="600px">
                                             <Series>
                                                 <asp:Series Name="Series1" XValueMember="Status" YValueMembers="Numbers" 
-                                                    Legend="Legend1" ChartType="Bar" IsXValueIndexed="True" 
+                                                    Legend="Present" ChartType="Bar" IsXValueIndexed="True" 
                                                     Palette="Excel" Label="#VALX #VAL" LegendText="#LEGENDTEXT" 
-                                                    YValuesPerPoint="6" BorderColor="Gray">
+                                                    YValuesPerPoint="6" BorderColor="Gray" ChartArea="ChartArea1">
                                                     <EmptyPointStyle AxisLabel="No Data Found.." />
                                                 </asp:Series>
                                             </Series>
@@ -277,11 +284,13 @@ function confirmMsg(frm)
                                                 <asp:ChartArea Name="ChartArea1">
                                                     <Area3DStyle Rotation="10" Perspective="10" Inclination="15" IsRightAngleAxes="true"
                         WallWidth="0" IsClustered="False" Enable3D="true"></Area3DStyle>
+                                                  <AxisY2></AxisY2>
                                                 </asp:ChartArea>
                                             </ChartAreas>
                                         </asp:Chart>  
+                                      
                                          </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <div class="col-lg-8">
                                     <div id="morris-bar-chart"></div>
                                 </div>
@@ -343,7 +352,7 @@ function confirmMsg(frm)
                         </div>
                         <div class="panel-body">
                             <div id="morris-donut-chart">
-                                <asp:Chart ID="Chart3" runat="server" BackImageAlignment="Center">
+                                <asp:Chart ID="Chart3" runat="server" BackImageAlignment="Center" Palette="SemiTransparent">
                                             <Series>
                                                 <asp:Series Name="Series1" XValueMember="Status" YValueMembers="Numbers" 
                                                     Legend="Legend1" IsXValueIndexed="True" 

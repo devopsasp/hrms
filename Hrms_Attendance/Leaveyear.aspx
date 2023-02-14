@@ -35,14 +35,13 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div><h2 class="page-header">Leave Year End Process</h2>
-        <div align="center">
-           <asp:Label ID="lbl_Error" runat="server" CssClass="Error" ForeColor="Red" Font-Bold="True" Width="35%"></asp:Label>
-            <div style="float:left;">
+
+            <div align="center">
                 <asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged"
-                                CssClass="form-control">
+                           Width="35%"     CssClass="form-control">
                             </asp:DropDownList>
             </div>
-        </div>
+     
     </div>
 
                                     <table cellpadding="0" cellspacing="1" align="center"  class="table"

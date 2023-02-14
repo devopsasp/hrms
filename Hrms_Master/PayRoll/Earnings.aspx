@@ -17,7 +17,8 @@
         else {
             return false;
         }
-        }
+    }
+    
 
    function show_message()
     {
@@ -178,9 +179,9 @@
                                                     </asp:RadioButtonList> </td>
                                                     
                                                     <td>
-                                                        <asp:CheckBoxList ID="rdo_earn" runat="server" RepeatDirection="Horizontal" 
-                                                            Enabled="False" >
-                                                            <asp:ListItem  Value="0">LOP</asp:ListItem>
+                                                        <asp:CheckBoxList ID="rdo_earn"  runat="server" RepeatDirection="Horizontal" 
+                                                            Enabled="false" OnCheckedChanged="checkboxAttendanceStatus_CheckedChanged" >
+                                                            <asp:ListItem  Value="0" >LOP</asp:ListItem>
                                                             <asp:ListItem  Value="1">OT</asp:ListItem>
                                                             <asp:ListItem  Value="2">PT</asp:ListItem>
                                                         </asp:CheckBoxList>

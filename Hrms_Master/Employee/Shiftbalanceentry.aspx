@@ -685,7 +685,7 @@ function fn_date1(event, txtid) {
                                 <asp:ListItem Text="Select"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                ConnectionString="<%$ ConnectionStrings:Hesperus_HrmsConnectionString %>" 
+                                ConnectionString="<%$ ConnectionStrings:Hrms_hasplConnectionString %>" 
                                 SelectCommand="SELECT [shift_code] FROM [shift_details] WHERE (([pn_companyid] = @pn_companyid) AND ([pn_branchid] = @pn_branchid))">
                                 <SelectParameters>
                                     <asp:SessionParameter  Name="pn_companyid" 

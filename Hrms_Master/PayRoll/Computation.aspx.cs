@@ -45,25 +45,26 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
          pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
-        if (s_login_role == "a")
-        {
-            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
-        }
+        //if (s_login_role == "a")
+        //{
+        //    employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
+        //}
         if (!IsPostBack)
         {
 
             switch (s_login_role)
             {
-                case "a": 
+                case "a":
                     load_admin();
                     //ddl_category.Visible = false;
-
+                    ddl_branch.Visible =true;
                     
+                    //RadioButtonList1.Visible = false;
                     break;
 
                 case "h":
                     ddl_branch.Visible = false;
-
+                  
                     load_page();
                     access();
                     ddl_load();   
@@ -208,7 +209,6 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             {
                 ad = new SqlDataAdapter("SELECT * FROM paym_computation where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + ddl_branch.SelectedItem.Value + "'", myConnection);
             }
-
             if (s_login_role == "h")
             {
                 ad = new SqlDataAdapter("SELECT * FROM paym_computation where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "'", myConnection);
@@ -463,7 +463,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
         load_page();
         ddl_load();
-        ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).Visible = true;
+        //((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).Visible = true;
     }
     protected void Button1_Click(object sender, EventArgs e)
     {

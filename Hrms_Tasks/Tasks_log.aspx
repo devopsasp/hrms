@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/HRMS.master" AutoEventWireup="true"
     CodeFile="Tasks_log.aspx.cs" Inherits="Hrms_Tasks_Default" Title="Task Log" %>
 
-<%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
+<%@ Register assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

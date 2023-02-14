@@ -52,7 +52,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                 case "a":
                     
                     ddl_branch_load();
-
+                        BindDepartment();
                      break;
 
                 case "h":

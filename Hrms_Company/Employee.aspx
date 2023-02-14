@@ -73,6 +73,7 @@
                                     <asp:Button ID="Button2" runat="server" CssClass="btn btn-toolbar"
                                         ImageUrl="~/Images/Show.png" OnClick="btn_show_Click" Text="Show Details"
                                         Width="100" />
+                                  
                                 </td>
                                 <td align="left" style="height: 58px">
 

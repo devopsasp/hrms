@@ -13,7 +13,7 @@ public partial class Hrms_Tasks_task_report : System.Web.UI.Page
         ReportDocument reportdocument = new ReportDocument();
 
         reportdocument.Load(Server.MapPath("~/CrystalReport.rpt"));
-        reportdocument.SetDatabaseLogon("", "", "SQL-SERVER", "Hesperus_Hrms");
+        reportdocument.SetDatabaseLogon("", "", "SQL-SERVER", "Hrms_haspl");
 
         CrystalReportViewer1.ReportSource = reportdocument;
         CrystalReportViewer1.RefreshReport();

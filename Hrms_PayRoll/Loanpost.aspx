@@ -192,7 +192,7 @@
                     ID="ToolkitScriptManager1" runat="server">
                 </asp:ToolkitScriptManager>
    <div><h2 class="page-header">Loan Post</h2></div>
-   <div><asp:Label ID="lbl_error" runat="server" CssClass="Error" ForeColor="Red"></asp:Label><div style="float:right;"></div></div>
+   <div><asp:Label runat="server" ></asp:Label><div style="float:right;"></div></div>
     <table style="width: 100%;"  class="table">
    
         <tr>
@@ -214,7 +214,7 @@
                 Date </td>
             <td >
             <div style=" width:150px; float:left;">
-               <asp:TextBox ID="txt_req_date" runat="server" MaxLength="10" CssClass="form-control" Width="150px"  onkeyup="fn_date(event,this.id);"></asp:TextBox>
+               <asp:TextBox ID="txt_req_date" runat="server" MaxLength="10" CssClass="form-control"   onkeyup="fn_date(event,this.id);"></asp:TextBox>
 
                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" 
                     TargetControlID="txt_req_date" Format="MM/dd/yyyy" >
@@ -301,34 +301,36 @@
         <tr>
             <td>
                 Balance Amount </td>
-            <td colspan="3">
+            <td >
                 <input type="text" ID="txt_bal_amt" runat="server" class="form-control" onkeypress="return onlyNumbersWithDot(event);"/></td>
-           
-        </tr>
-        <tr>
             <td>
                 Approved By
             </td>
             <td>
                 <input type="text" ID="txt_app_by" runat="server" class="form-control"  onkeypress="return isNumberKey(event)"/>
             </td>
-            <td colspan="2"></td>
         </tr>
+
         <tr>
-            <td colspan="4">
+            <td></td>
+            <td colspan="3">
                 <table style="width: 60%" align="center">
                     <tr>
                         <td >
-                <asp:Button ID="btn_save" runat="server" Text="Save"  CssClass="btn btn-success"
-                    onclick="btn_save_Click"  />
+                
                         </td>
                         <td>
+                            <asp:Button ID="btn_save" runat="server" Text="Save"  CssClass="btn btn-success"
+                    onclick="btn_save_Click"  />
+
                 <asp:Button ID="btn_undo" runat="server" Text="Undo"  CssClass="btn btn-primary"
                                 onclick="btn_undo_Click"  />
+
+                                 <asp:Button ID="btn_clear" runat="server" Text="Clear" CssClass="btn btn-warning"
+                    onclick="btn_clear_Click" />
                         </td>
                         <td >
-                <asp:Button ID="btn_clear" runat="server" Text="Clear" CssClass="btn btn-warning"
-                    onclick="btn_clear_Click" />
+           
                         </td>
                     </tr>
                 </table>

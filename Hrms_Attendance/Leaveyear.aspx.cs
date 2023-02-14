@@ -57,12 +57,6 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        lbl_Error.Text = "";
-
-        
-        lbl_Error.Text = "";
-
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
@@ -141,7 +135,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
     }
 
@@ -202,13 +196,13 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
             else
             {
-
-                lbl_Error.Text = "Select Branch";
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Select Branch');};", true);
             }
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+          
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
     }
 
@@ -245,7 +239,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error. Please check the branch details.";
+           
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Please check the branch details.');};", true);
         }              
         finally
         {
@@ -266,7 +261,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = " Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -285,7 +280,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = " Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -352,14 +347,14 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                     }
                     else
                     {
-                        lbl_Error.Text = "Error Occured";
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -449,7 +444,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -471,7 +466,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -496,7 +491,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -530,7 +525,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -578,7 +573,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                         }
                         else
                         {
-                            lbl_Error.Text = "Error Occured";
+                            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
                         }
                         LeaveGridList = l.fn_leave_PerYear1(l);
                         if (LeaveGridList.Count > 0)
@@ -648,7 +643,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error Occured";
+  
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
         finally
         {
@@ -662,11 +658,11 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         leave_allocation_update();
         //Encashment_Details();
         Branch_update();
-
-        lbl_Error.Text = "Leave Year End process is done successfully";
+        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Leave Year End process is done successfully.');};", true);
     }
     protected void Img_Clear_Click(object sender, EventArgs e)
     {
 
     }
 }
+    

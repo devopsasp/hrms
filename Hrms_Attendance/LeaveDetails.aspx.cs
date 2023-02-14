@@ -55,8 +55,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        
-        lbl_Error.Text = "";
+  
 
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
@@ -84,18 +83,21 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                     case "a": row_emp.Visible = false;
                               row_month.Visible = false;
                               row_year.Visible = false;
-                              ddl_Branch_load();                        
-                              break;
+                              ddl_Branch_load();
+                        ddl_employee_load();
+                        lreq.Visible = false;
+                        break;
 
                     case "h": ddl_Branch.Visible = false;
                               ddl_Department_load();
                               ddl_employee_load();
-                              //hr_edit();
-                              break;
+                        lreq.Visible = false;
+                        break;
 
                     case "e": ddl_Branch.Visible = false;
                               row_emp.Visible = false;
                               lreq.Visible = false;
+                        ddl_department.Enabled = false;
                               break;
 
                     case "u": s_form = "42";
@@ -195,7 +197,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured.');", true);
         }
     }
 
@@ -210,8 +212,10 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                 row_emp.Visible = true;
                 row_month.Visible = true;
                 row_year.Visible = true;
-                grid_leave.Visible = false;
+                grid_leave.Visible = false;              
                 ddl_employee_load();
+                ddl_Department_load();
+
             }
 
             else
@@ -223,7 +227,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured.');", true);
         }
     }
 
@@ -234,10 +238,10 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         ddl_Employee.Items.Clear();
 
         //row_emp.Visible = true;
-        if (s_login_role == "a")
-        {
-            employee.BranchId = (int)ViewState["Leave_BranchID"];
-        }   
+        //if (s_login_role == "a")
+        //{
+        //    employee.BranchId = (int)ViewState["Leave_BranchID"];
+        //}   
 
         if (s_login_role == "h")
         {
@@ -271,8 +275,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         else
         {
-            ddl_Employee.Enabled = false;
-            lbl_Error.Text = "No Employees Available";
+            ddl_Employee.Enabled = false;     
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Employees Available.');", true);
         }
     }     
 
@@ -294,7 +298,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured.');", true);
         }
     }
 
@@ -316,13 +320,13 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured.');", true);
         }
     }
 
     public void Leave_History()
     {
-        SqlDataAdapter adap = new SqlDataAdapter("select * from leave_apply where pn_BranchID='" + employee.BranchId + "' and  pn_EmployeeID = '" + l.EmployeeID + "' and yearend = '" + ddl_Year.Text + "'", myConnection);
+        SqlDataAdapter adap = new SqlDataAdapter("select * from leave_apply where pn_BranchID='" + employee.BranchId + "' and  pn_EmployeeID = '" + l.EmployeeID + "' and DATEPART(YEAR, from_date) = '" + ddl_Year.Text + "'", myConnection);
         DataSet ds1 = new DataSet();
         adap.Fill(ds1, "leave_apply");
         Grid_Details.DataSource = ds1;
@@ -386,7 +390,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No Data found in LeaveMaster";
+      
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Data found in LeaveMaster.');", true);
             leave_check = false;
         }
     }
@@ -405,14 +410,13 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
             {
                 if (Convert.ToInt32(grid_leave.DataKeys[i].Value) == LeaveList[i].leaveID)
                 {
-                    ((Label)grid_leave.Rows[i].FindControl("grdallowed")).Text = LeaveList[i].Count.ToString();
+                    ((Label)grid_leave.Rows[i].FindControl("grdallowed")).Text = LeaveList[i].Count1.ToString();
                 }
             }
         }
         else
         {
-            lbl_Error.Text = "Leave Not Allotted for this Employee";
-            //leave_check = false;
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "Leave Not Allotted for this Employee.');", true);
         }
     }
 
@@ -517,7 +521,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            //lbl_error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured.');", true);
         }
     }
 

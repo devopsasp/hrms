@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 using ePayHrms.Company;
 using ePayHrms.Employee;
 using System.Data.SqlClient;
-
+using System.Drawing;
 
 public partial class Hrms_Master_Default7 : System.Web.UI.Page
 {
@@ -38,6 +38,9 @@ public partial class Hrms_Master_Default7 : System.Web.UI.Page
     string s_login_role;
     string s_form = "";
     DataSet ds_userrights;
+
+    public object rdo_earn { get; private set; }
+    public Color BackColor { get; private set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -100,13 +103,17 @@ public partial class Hrms_Master_Default7 : System.Web.UI.Page
         }
     }
 
-
+    protected void checkboxAttendanceStatus_CheckedChanged(object sender, EventArgs e)
+    {
+     
+    }
     public void load1()
     {
         EarningsList = pay.fn_Earnings(pay);
 
         if (EarningsList.Count > 0)
         {
+            
             grid_Earnings.DataSource = EarningsList;
             grid_Earnings.DataBind();
             grd_rdo_chk();

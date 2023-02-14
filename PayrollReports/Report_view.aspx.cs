@@ -34,7 +34,7 @@ public partial class Hrms_Reports_Report_view : System.Web.UI.Page
         lblmsg.Text = "Hi " + Request.Cookies["Login_UserID"].Value + "!";
         lbl_error.Text = "";
 
-        string usrname = "", pwd = "", server = "", database = "", rid = "";
+        string usrname = "", pwd = "", server = "DESKTOP-AH2NJLT/SQLEXPRESS", database = "Hesperus_Hrms", rid = "";
         DataSet ds = new DataSet();
         ds.ReadXml(Server.MapPath("..\\Database_Log.xml"));
         if (ds.Tables.Count > 0)
@@ -54,8 +54,8 @@ public partial class Hrms_Reports_Report_view : System.Web.UI.Page
             reportdoc.DataSourceConnections[0].SetConnection(server, database, usrname, pwd);
             if (Session["ReportName"].ToString() == "~/crystalreports/SalaryRegisterYTD.rpt")
             {
-                TextObject p = (TextObject)reportdoc.ReportDefinition.Sections[2].ReportObjects["Period"];
-                p.Text = Session["ReportSelection"].ToString();
+                //TextObject p = (TextObject)reportdoc.ReportDefinition.Sections[2].ReportObjects["Period"];
+                //p.Text = Session["ReportSelection"].ToString();
             }
             //if (rid == "3a" || rid == "6a")
             //{

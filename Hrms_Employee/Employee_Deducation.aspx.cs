@@ -195,7 +195,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             if (s_login_role == "a")
             {
                 //pay.EmployeeId = 0;
-                pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
 
             }
 
@@ -324,7 +324,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             //else
             //{
 
-            //    Response.Redirect("Employee_Profile.aspx");
+            Response.Redirect("Employee_Profile.aspx");
             //}
 
 

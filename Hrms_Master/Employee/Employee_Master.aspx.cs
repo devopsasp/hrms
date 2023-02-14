@@ -57,7 +57,8 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a":
-                    //load_admin();                    
+                    load_admin();
+                    ddl_branch.Visible = true;
                     break;
                 case "h":
                     load();
@@ -97,7 +98,20 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         load_lvl();
         load_oc();
     }
-
+    
+    public void load_admin()
+    {
+        myConnection.Open();
+        SqlDataAdapter ad = new SqlDataAdapter("select * from paym_branch", myConnection);
+        DataSet ds = new DataSet();
+        ad.Fill(ds);
+        ddl_branch.DataTextField = "branchname";
+        ddl_branch.DataValueField = "pn_branchid";
+        ddl_branch.DataSource = ds;
+        ddl_branch.DataBind();
+        ddl_branch.Items.Insert(0, "select Branch");
+        myConnection.Close();
+    }
     public void load_dept()
     {
         string Qry = "SELECT * FROM paym_department where pn_branchID='" + employee.BranchId + "' and pn_companyID = '" + employee.CompanyId + "' order by v_DepartmentName asc";
@@ -408,6 +422,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             if (s_login_role == "a")
             {
+               
                 employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
             }
             myConnection.Open();

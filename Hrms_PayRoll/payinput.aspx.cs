@@ -46,17 +46,17 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
          pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        
-
+       
+        Label5.Visible = false;
+        grid_input.Visible = true;
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
-        lbl_error.Text = "";
 
         if (!IsPostBack)
         {
             date_load();
             grd_mcalc();
-            row_category.Visible = false;
-            div_grd.Visible = false;
+            //row_category.Visible = false;
+            //div_grd.Visible = false;
             
             CompanyList = company.fn_getCompany();
 
@@ -127,7 +127,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         //{
         //    chk_Empcode.DataSource = EmployeeList;
         //    chk_Empcode.DataTextField = "LastName";
-        //    chk_Empcode.DataValueField = "EmployeeId";
+        //    sachk_Empcode.DataValueField = "EmployeeId";
         //    chk_Empcode.DataBind();
         //}
         //else
@@ -147,7 +147,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
 
         //}  
     }
-
+    
     public void hr()
     {
         try
@@ -164,7 +164,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            lbl_error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
         }
     }
 
@@ -174,17 +174,18 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         switch (Request.Cookies["Query_Session"].Value)
         {
             case "start":
-                lbl_error.Text = "";
+              
                 Response.Cookies["Query_Session"].Value= "start";
                 break;
 
             case "nil":
-                lbl_error.Text = "No Result Found";
+               
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Result Found.');};", true);
                 Response.Cookies["Query_Session"].Value= "start";
                 break;
 
             case "back":
-                lbl_error.Text = "";
+              
                 Response.Cookies["Query_Session"].Value= "start";
                 break;
 
@@ -212,12 +213,14 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             //        }
             //    }
             //}
-            lbl_error.Text = EmployeeList.Count + " Employees Selected!";
+            
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('"+EmployeeList.Count+"' Employees Selected!);};", true);
             Response.Cookies["Query_Session"].Value= "start";
         }
         else
         {
-            lbl_error.Text = "No Employees has been selected";
+          
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Employees has been selected.');};", true);
             Response.Cookies["Query_Session"].Value= "start";
         }
     }
@@ -326,11 +329,15 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             _Value = pay.payinput_insert(pay);
             if (_Value != "1")
             {
-                lbl_error.Text = "Added Successfully";
+               // Label7.Text = "Saved";
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+               // ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Added Successfully.');};", true);
             }
             else
             {
-                lbl_error.Text = "Error";
+              //  Label7.Text = "Error Occured";
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Failed')", true);
+               // ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured.');};", true);
             }
             if (ddl_category.SelectedValue == "0")
             {
@@ -346,17 +353,21 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_error.Text = "Enter OT Hours in 'HH:MM' Format";
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Enter OT Hours in 'HH:MM' Format.')", true);
+
+            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Enter OT Hours in 'HH:MM' Format.');};", true);
         }
     }
 
     public void grid_load_id()
     {
+       
         if (s_login_role == "a")
         {
             //employee.BranchId = (int)ViewState["Payinput_BranchID"];
             pay.BranchId = (int)ViewState["Payinput_BranchID"];
         }
+     
         pay.DepartmentID = Convert.ToInt32(ddl_department.SelectedValue);
         //paylist = pay.fn_getemployeeid(pay);
         year = Int32.Parse(ddl_Year.SelectedValue);
@@ -394,7 +405,8 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         }
         else
         {
-            lbl_error.Text = "No Data";
+           
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Data.');};", true);
         }
         for (int i = 0; i < grid_input.Rows.Count; i++)
         {
@@ -406,7 +418,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                 }
             }
         }
-        days_calculation(paylist);
+       // days_calculation(paylist);
         //days_check();
         exam();
     }
@@ -589,6 +601,10 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
 
     public void get_load_alldetails()
     {
+        ddl_Month.Enabled = false;
+        ddl_Year.Enabled = false;
+        ddl_category.Enabled = false;
+        ddl_department.Enabled = false;
         if (s_login_role == "a")
         {
             pay.BranchId = (int)ViewState["Payinput_BranchID"];
@@ -598,8 +614,9 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         y = Convert.ToString(year);
         m = Convert.ToString(month);
         d = "01";
+        //pay.d_date = Convert.ToDateTime(m + "/" + d + "/" + y);
+        //pay.d_date = Convert.ToDateTime(m + "/" + d + "/" + y);
         pay.d_date = Convert.ToDateTime(m + "/" + d + "/" + y);
-
         paylist = pay.fn_getAll_Employeedetails(pay);
         if (paylist.Count > 0)
         {
@@ -625,15 +642,15 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             days_calculation(paylist);
         }
          //days_check();
-    }
+   }
 
     protected void btn_refresh_Click(object sender, EventArgs e)
     {
         get_load_alldetails();
         exam();
         ddl_category.SelectedValue = "0";
-        txt_department.Visible = false;
-        ddl_department.Visible = false;
+        //txt_department.Visible = false;
+        //ddl_department.Visible = false;
         row_category.Visible = true;
         div_grd.Visible = true;
     }
@@ -744,8 +761,6 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
     {
         int datenum;
         paylist = pay.calc_days(pay);
-        year = Int32.Parse(ddl_Year.SelectedValue);
-        month = Int32.Parse(ddl_Month.SelectedValue);
         y = Convert.ToString(year);
         m = Convert.ToString(month);
         datenum = Convert.ToInt32(DateTime.DaysInMonth(year, month));
@@ -871,6 +886,8 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         }
     }
 
+
+
     protected void ddl_category_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (s_login_role == "a")
@@ -878,38 +895,48 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             employee.BranchId = (int)ViewState["Payinput_BranchID"];
             //pay.BranchId = (int)ViewState["Payinput_BranchID"];
         }
+       
+        ddl_Month.Enabled = false;
+        ddl_category.Enabled = false;
+        ddl_Year.Enabled = false;
         string categoryid;
         categoryid = ddl_category.SelectedItem.Value;
         if (categoryid == "0")
         {
-            txt_department.Visible = false;
-            ddl_department.Visible = false;
+            //txt_department.Visible = false;
+           // ddl_department.Visible = false;
         }
         
         else if (categoryid == "1")
         {
+            int s = 0;
             txt_department.Text = "Employee";
             txt_department.Visible = true;
             ddl_department.Visible = true;
-            emplist = employee.fn_getEmployeeList(employee); //employee.fn_getAllEmployees();
+            //ddl_Employee_load();
+            emplist = employee.fn_getEmployeeList(employee);// employee.fn_getAllEmployees();
             ddl_department.DataSource = emplist;
             ddl_department.DataValueField = "EmployeeId";
             ddl_department.DataTextField = "LastName";
             ddl_department.DataBind();
+            ddl_department.Items.Insert(0, "Select Employee");
         }
-        
+
         else if (categoryid == "2")
         {
-            txt_department.Text = "Department";
+            
+             txt_department.Text = "Department";
             txt_department.Visible = true;
             ddl_department.Visible = true;
-            emplist = employee.fn_Department(employee.BranchId);
+            //ddl_Department_load();
+            emplist =employee.fn_getDepartmentList1(employee.BranchId); //employee.fn_Department(employee.BranchId);
             ddl_department.DataSource = emplist;
             ddl_department.DataValueField = "DepartmentId";
             ddl_department.DataTextField = "DepartmentName";
             ddl_department.DataBind();
+            ddl_department.Items.Insert(0, "Select Department");
         }
-        
+
         else if (categoryid == "3")
         {
             txt_department.Text = "Designation";
@@ -920,6 +947,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             ddl_department.DataValueField = "DesignationId";
             ddl_department.DataTextField = "DesignationName";
             ddl_department.DataBind();
+            ddl_department.Items.Insert(0, "Select Designation");
         }
         
         else if (categoryid == "4")
@@ -930,8 +958,12 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
             ddl_department.DataValueField = "CategoryId";
             ddl_department.DataTextField = "CategoryName";
             ddl_department.DataBind();
+            ddl_department.Items.Insert(0, "Other");
         }
+        
     }
+
+
     protected void ddl_department_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (s_login_role == "a")
@@ -977,7 +1009,12 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         }
         else
         {
-            lbl_error.Text = "No Data";
+
+            // Label5.Visible = true;
+            grid_input.Visible = false;
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('NO Records Found')", true);
+            // ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Data.');};", true);
+
         }
         for (int i = 0; i < grid_input.Rows.Count; i++)
         {
@@ -998,6 +1035,9 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         //days_check();
         exam();
     }
+
+
+
 
     public void ddl_Branch_load()
     {
@@ -1044,11 +1084,24 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         get_load_alldetails();
         exam();
         ddl_category.SelectedValue = "0";
-        txt_department.Visible = false;
-        ddl_department.Visible = false;
+        //txt_department.Visible = false;
+        //ddl_department.Visible = false;
         row_category.Visible = true;
         div_grd.Visible = true;
     }
+    protected void btn_reset1(object sender,EventArgs e)
+    {
+        ddl_Month.Enabled = true;
+        ddl_Year.Enabled = true;
+        ddl_category.Enabled = true;
+        ddl_department.Enabled = true;
+        ddl_Month.ClearSelection();
+        ddl_Year.ClearSelection();
+        ddl_category.ClearSelection();
+        ddl_department.ClearSelection();
+        grid_input.Visible = false;
+    }
+
 
     protected void btn_saveall_Click1(object sender, EventArgs e)
     {
@@ -1066,7 +1119,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                     double basic = 0, ern_basic = 0, ot_calc = 0, ot_amt = 0, ovt = 0, otround = 0;
                     TimeSpan tot_ot = new TimeSpan(0, 0, 0);
                     pay.EmployeeId = Convert.ToInt32(((HtmlInputHidden)row.FindControl("grdhd_txt_empid")).Value);
-                    pay.EmployeeCode = Convert.ToString(((HtmlInputText)row.FindControl("grd_txt_employeecode")).Value);
+                    pay.EmployeeCode = Convert.ToString(((Label)row.FindControl("grd_txt_employeecode")).Text);
                     year = Int32.Parse(ddl_Year.SelectedValue);
                     month = Int32.Parse(ddl_Month.SelectedValue);
                     days = Convert.ToInt32(DateTime.DaysInMonth(year, month));
@@ -1078,21 +1131,22 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                     pay.d_FromDate = Convert.ToDateTime(y + "/" + m + "/" + d1);
                     pay.d_ToDate = Convert.ToDateTime(y + "/" + m + "/" + d);
                     pay.strDate = y + "/" + m + "/" + d;
-                    pay.Calc_Days = Convert.ToDouble(((TextBox)row.FindControl("grd_txt_calcdays")).Text);
+                    pay.Calc_Days = dayCount;
                     pay.Paid_Days = Convert.ToDouble(((TextBox)row.FindControl("grd_txt_paiddays")).Text);
                     pay.Present_Days = Convert.ToDouble(((TextBox)row.FindControl("grd_txt_presdays")).Text);
                     pay.Absent_Days = Convert.ToDouble(((TextBox)row.FindControl("grd_txt_absdays")).Text);
                     pay.TotLeave_Days = Convert.ToDouble(((TextBox)row.FindControl("txt_leavedays")).Text);
-                    pay.WeekOffDays = Convert.ToDouble(((TextBox)row.FindControl("text_weekdays")).Text);
+                    pay.WeekOffDays = count;
                     pay.Holidays = Convert.ToDouble(((TextBox)row.FindControl("text_holiday")).Text);
                     pay.OnDuty_days = Convert.ToDouble(((TextBox)row.FindControl("txt_dutyday")).Text);
                     pay.Compoff_Days = Convert.ToDouble(((TextBox)row.FindControl("txt_compday")).Text);
                     pay.Tour_Days = Convert.ToDouble(((TextBox)row.FindControl("txt_tourday")).Text);
-                    pay.Att_Bonus = Convert.ToString(((TextBox)row.FindControl("text_attbonus")).Text);//'m';
+                    //pay.Att_Bonus = Convert.ToString(((TextBox)row.FindControl("text_attbonus")).Text);//'m';
+                    pay.Att_Bonus = "0";
                     pay.Att_BonusAmount = 0;//Convert.ToDouble(((HtmlInputText)row.FindControl("text_attbonusamount")).Value);
                     pay.temp_str = Convert.ToString(((TextBox)row.FindControl("text_othours")).Text);
-                    pay.Earn_Arrears = 0;//Convert.ToDouble(((HtmlInputText)grid_input.Rows[e.NewEditIndex].FindControl("txt_earnarrear")).Value);
-                    pay.Ded_Arrears = 0;//Convert.ToDouble(((HtmlInputText)grid_input.Rows[e.NewEditIndex].FindControl("txt_dedarrear")).Value);
+                    pay.Earn_Arrears = 0;//Convert.ToDouble(((HtmlInputText)row.FindControl("txt_earnarrear")).Value);
+                    pay.Ded_Arrears = 0;//Convert.ToDouble(((HtmlInputText)row.FindControl("txt_dedarrear")).Value);
                     if (pay.temp_str == "0")
                     {
                         pay.temp_str = "00:00";
@@ -1148,6 +1202,7 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                             ot_amt = ((basic / OT_Settings[0].OT_Days) / OT_Settings[0].OT_HRS) * ovt * ot_calc;
                         }
                     }
+
                     pay.Act_Basic = basic;
                     pay.Earned_Basic = ern_basic;
                     pay.Date = Convert.ToDateTime(str_ot);
@@ -1157,11 +1212,12 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                     _Value = pay.payinput_insert(pay);
                     if (_Value != "1")
                     {
-                        lbl_error.Text = "Added Successfully";
+
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
                     }
                     else
                     {
-                        lbl_error.Text = "Error";
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Insert Failed')", true);
                     }
                     if (ddl_category.SelectedValue == "0")
                     {
@@ -1171,17 +1227,17 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
                     {
                         grid_load_id();
                     }
-                    //((LinkButton)grid_input.Rows[e.NewEditIndex].FindControl("img_save")).Visible = true;
+                    //((LinkButton)row.FindControl("img_save")).Visible = true;
                     exam();
                 }
             }
         }
         catch (Exception ex)
         {
-            lbl_error.Text = "Enter OT Hours in 'HH:MM' Format";
+
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Enter OT Hours in 'HH:MM' Format.');};", true);
         }
     }
-
 
     protected void grd_txt_presdays_TextChanged(object sender, EventArgs e)
     {
@@ -1340,4 +1396,9 @@ public partial class Hrms_PayRoll_Default : System.Web.UI.Page
         txtcomp.Focus();
     }
 
+
+    protected void ddl_department_PreRender(object sender, EventArgs e)
+    {
+
+    }
 }

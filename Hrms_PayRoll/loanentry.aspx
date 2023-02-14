@@ -193,9 +193,9 @@
                             <td>
                                 Sanction Date</td>
                             <td>
-                            <div style=" width:150px; float:left;">
+                            <div style=" float:left;">
                                 <asp:TextBox ID="Txt_loan_sdate" runat="server" 
-                                    onkeyup="fn_date(event,this.id);" CssClass="form-control" Width="150px" />
+                                    onkeyup="fn_date(event,this.id);" CssClass="form-control"  />
                                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="Txt_loan_sdate" Format="dd/MM/yyyy">
                                 </asp:CalendarExtender>
                              </div>
@@ -210,14 +210,14 @@
                             <td>
                                 Effective Date</td>
                             <td colspan="3">
-                            <div style=" width:150px; float:left;">
+                            <div style="  float:left;">
                                 <asp:TextBox ID="Txt_loan_effdate" runat="server" AutoPostBack="True" 
                                     CssClass="form-control" maxlength="10" onkeyup="fn_date(event,this.id);" 
-                                    ontextchanged="Txt_loan_effdate_TextChanged" Width="150px"></asp:TextBox>
+                                    ontextchanged="Txt_loan_effdate_TextChanged"></asp:TextBox>
                                 <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="Txt_loan_effdate" Format="dd/MM/yyyy" >
                                 </asp:CalendarExtender>
                                     </div>
-                                     <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">                                                
+                                     <div style="  float:left;  margin-left:10px; margin-top:3px;">                                                
                                                     <asp:Image ID="Image2" runat="server"  
                                                         Text="" Width="25px" 
                                                         ImageUrl="~/Images/calendaricon.png" />
@@ -316,7 +316,7 @@
                                                 <asp:DropDownList ID="ddl_lid" runat="server" CssClass="form-control" Width="80px">
                                                 </asp:DropDownList>
                                                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                                    ConnectionString="<%$ ConnectionStrings:Hesperus_HrmsConnectionString24 %>" 
+                                                    ConnectionString="<%$ ConnectionStrings:Hrms_hasplConnectionString24 %>" 
                                                     SelectCommand="SELECT [v_LoanName], [pn_LoanID] FROM [paym_Loan]">
                                                 </asp:SqlDataSource>
                                             </EditItemTemplate>
@@ -342,7 +342,7 @@
                                                     DataValueField="pn_EmployeeID" CssClass="form-control" Width="80px">
                                                 </asp:DropDownList>
                                                 <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                                                    ConnectionString="<%$ ConnectionStrings:Hesperus_HrmsConnectionString26 %>" 
+                                                    ConnectionString="<%$ ConnectionStrings:Hrms_hasplConnectionString26 %>" 
                                                     SelectCommand="SELECT [pn_EmployeeID], [Employee_First_Name] FROM [paym_Employee] WHERE ([pn_BranchID] = @pn_BranchID) ORDER BY [pn_EmployeeID]">
                                                     <SelectParameters>
                                                         <asp:SessionParameter DefaultValue="0" Name="pn_BranchID" 

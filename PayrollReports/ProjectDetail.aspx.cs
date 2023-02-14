@@ -43,7 +43,7 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
     Collection<Employee> DepartmentList;
     Collection<Employee> EmployeeList;
     Collection<PayRoll> PayList;
-    char s_login_role;
+    string s_login_role;
     int i = 0, j, temp_count = 0;
     int ddl_i = 0;
     string query = "";
@@ -61,7 +61,7 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
     int presentdays = 1;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["Msg_session"] = "";
+        
         Session["Repordid"] = "";
         Session["fdate"] = "";
         Session["tdate"] = "";
@@ -71,10 +71,10 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
         c.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
 
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+         pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
         if (!IsPostBack)
         {
@@ -84,27 +84,27 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
             {
                 switch (s_login_role)
                 {
-                    case 'a':
+                    case "a":
                         tbl_pfreport.Visible = false;
                         ddl_Branch.Visible = true;
                         break;
 
-                    case 'h':
+                    case "h":
                         ddl_Branch.Visible = false;
                         tbl_pfreport.Visible = true;
                         ddl_department_load1();
 
                         break;
 
-                    case 'u': s_form = "80";
+                    case "u": s_form = "80";
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 
                         if (ds_userrights.Tables[0].Rows.Count > 0)
                         {
                             ddl_Branch.Visible = false;
                             li = new ListItem();
-                            li.Text = Session["Login_temp_EmpCodeName"].ToString();
-                            li.Value = Session["Login_temp_EmployeeID"].ToString();
+                            li.Text = Request.Cookies["EmpCodeName"].Value;
+                            li.Value = Request.Cookies["Login_temp_EmployeeID"].Value;
                             li.Selected = true;
                             chk_Empcode.Items.Add(li);
                             chk_Empcode.Enabled = false;
@@ -114,16 +114,16 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
                         }
                         else
                         {
-                            Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                            Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                             Response.Redirect("~/Company_Home.aspx");
                         }
                         break;
 
-                    case 'e':
+                    case "e":
                         ddl_Branch.Visible = false;
                         li = new ListItem();
-                        li.Text = Session["Login_temp_EmpCodeName"].ToString();
-                        li.Value = Session["Login_temp_EmployeeID"].ToString();
+                        li.Text = Request.Cookies["EmpCodeName"].Value;
+                        li.Value = Request.Cookies["Login_temp_EmployeeID"].Value;
                         li.Selected = true;
                         chk_Empcode.Items.Add(li);
                         chk_Empcode.Enabled = false;
@@ -132,7 +132,7 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
                         break;
 
                     default:
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("~/Company_Home.aspx");
                         break;
                 }
@@ -141,7 +141,7 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
             else
             {
 
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("~/Company_Home.aspx");
             }
         }
@@ -178,11 +178,11 @@ public partial class PayrollReports_ProjectDetail : System.Web.UI.Page
     {
         ddl_department.Items.Clear();
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        if (s_login_role == 'a')
+        if (s_login_role == "a")
         {
             DepartmentList = employee.fn_getDepartmentList1(Convert.ToInt32(ddl_Branch.SelectedItem.Value));
         }
-        else if (s_login_role == 'h')
+        else if (s_login_role == "h")
         {
             DepartmentList = employee.fn_getDepartmentList1(employee.BranchId);
         }

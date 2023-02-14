@@ -95,7 +95,6 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             period_load();
-
             CompanyList = company.fn_getCompany();
             if (CompanyList.Count > 0)
             {
@@ -103,7 +102,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                 switch (s_login_role)
                 {
                     case "a":
-                        tbl_deductions.Visible = false;
+                        tbl_deductions.Visible = true;
                         ddl_Branch.Visible = true;
                         ddl_Branch_load();
                         break;
@@ -174,11 +173,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
 
         ddl_allowance_load();
-
-
     }
-
-
     public void ddl_allowance_load()
     {
         con.Open();
@@ -206,7 +201,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         SqlDataAdapter ad = new SqlDataAdapter(pay.temp_str, con);
         DataSet ds = new DataSet();
         ad.Fill(ds);
-        if (ds.Tables[0].Rows.Count == 0)
+         if (ds.Tables[0].Rows.Count == 0)
         {
 
             ds.Tables[0].Rows.Add(ds.Tables[0].NewRow());
@@ -281,6 +276,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         re.Close();
         con.Close();
+        if (s_login_role == "a")
+        {
+            ddl_department_load();
+        }
     }
 
     protected void ddl_periodcode_SelectedIndexChanged(object sender, EventArgs e)
@@ -299,12 +298,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
     public void ddl_department_load()
     {
-
-
-        if (s_login_role == "a")
-        {
-            employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedItem.Value);
-        }
+        //if (s_login_role == "a")
+        //{
+        //    employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
+        //}
         EmployeeList = employee.fn_getDepartmentList1(employee.BranchId);
         if (EmployeeList.Count > 0)
         {
@@ -334,6 +331,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
             ClientScript.RegisterStartupScript(this.Page.GetType(), "alert", "alert('No Department Available');", true);
             //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Department Available');", true);
         }
+        //if(s_login_role=="a")
+        //{
+        //    ddl_employee_load();
+        //}
 
     }
 
@@ -344,11 +345,8 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
     protected void ddl_department_SelectedIndexChanged(object sender, EventArgs e)
     {
-        tr_chk.Visible = true;
-        if (ddl_department.SelectedValue != "sd")
-        {
-            ddl_employee_load();
-        }
+        // ddl_ename.Enabled = true;
+        ddl_employee_load();
     }
 
     public void ddl_employee_load()
@@ -358,7 +356,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
         if (s_login_role == "a")
         {
-            employee.BranchId = (int)ViewState["Appraisal_BranchID"];
+            employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
         }
 
         if (s_login_role == "h")

@@ -79,7 +79,7 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
          pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        lbl_Error.Text = "";
+    
         // Error.Text = "";
 
         if (!IsPostBack)
@@ -87,6 +87,7 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a": //load();
+                    ddl_year_load(ddl_year);
                     break;
 
                 case "h":
@@ -151,7 +152,8 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No Department Available";
+     
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Department Available');};", true);
         }
 
     }
@@ -215,7 +217,8 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
            
         else
         {
-            lbl_Error.Text = "No Employee";
+          
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Employee');};", true);
         }
          mycon.Close();
     }
@@ -277,8 +280,9 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
                 //txt_retirementDate.Text = retirement_date.ToString("dd/MM/yyyy");
                 if (rd_final_process.SelectedValue == "")
                 {
-                    lbl_Error.Text = "Choose any one Settlement Process";
-                }
+                    
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Choose any one Settlement Process');};", true);
+            }
                 //else
                 //{
                 //    cmd = new SqlCommand("select datediff(YY,joiningdate,offerdate) as serviceyear from paym_employee_workdetails a where pn_employeeid='" + ddl_employee.SelectedValue + "'", mycon);
@@ -359,7 +363,7 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
                     }
                     else
                     {
-                        //lbl_Error.Text = "Error Occured";
+             
                         txt_encashment.Text = "0.0";
                     }
                     LeaveGridList = l.fn_leave_PerYear1(l);
@@ -500,11 +504,13 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
             mycon.Open();
             if (ddl_employee.SelectedValue == "0")
             {
-                lbl_Error.Text = "Select Employee";
+           
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Select Employee');};", true);
             }
             else if (ddl_year.SelectedItem.Text == "Select")
             {
-                lbl_Error.Text = "Select Year";
+               
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Select Year');};", true);
             }
             else
             {
@@ -589,7 +595,8 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error'"+ex+");", true);
         }
     }
 
@@ -612,7 +619,7 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            //lbl_error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error"+ex+"');};", true);
         }
     }
 
@@ -653,12 +660,14 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
               _Value = pay.finalsettlement(pay);
               if (_Value != "1")
               {
-                  lbl_Error.Text = "<font color=Blue>Updated Successfully</font>";
-              }
+         
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Updated Successfully');};", true);
+            }
               else
               {
-                  lbl_Error.Text = "<font color=Red>Error Occured</font>";
-                  load();
+        
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
+                load();
               }
               grid_settlement.EditIndex = -1;
               load();
@@ -738,12 +747,14 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
             _Value = pay.finalsettlement(pay);
             if (_Value != "1")
             {
-                lbl_Error.Text = "<font color=Blue>Added Successfully</font>";
+             
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Added Successfully');};", true);
                 load();
             }
             else
             {
-                lbl_Error.Text = "<font color=Red>Error Occured</font>";
+         
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
                 load();
             }
             txt_joiningDate.Text = "";
@@ -781,7 +792,7 @@ public partial class Hrms_PayRoll_Final_settlement_new : System.Web.UI.Page
         txt_basic_pay.Text = "";
         ddl_dept.SelectedValue = "sd";
         ddl_employee.SelectedValue = "0";
-
+        ddl_year.SelectedValue = "Select";
         ckh_deduct.Checked = false;
     }
 }

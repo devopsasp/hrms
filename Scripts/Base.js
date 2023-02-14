@@ -32,8 +32,7 @@ window.alert = function (msg, classes, callback) {
     }
 }
 
-window.confirm = function (msg, classes, successCallback, failedCallback)
-{
+window.confirm = function (msg, classes, successCallback, failedCallback) {
     if (classes == undefined || classes == null || classes == "") {
         classes = "normal";
     }
@@ -50,9 +49,9 @@ window.confirm = function (msg, classes, successCallback, failedCallback)
             "<div class='alert-message-content confirm'>",
             "<div class='alert-message-header'><h3><img src='/hrms/Images/info_danger.png'>&nbsp;E-PAY Confirmation</h3></div>",
             "<div class='alert-message-body'></div>",
-            "<div class='alert-message-footer1'>",            
+            "<div class='alert-message-footer1'>",
             "<button class='alert-message-yes-button btn btn-primary'>Yes</button>&nbsp;&nbsp;",
-            "<button class='alert-message-no-button btn btn-default '>No</button>",            
+            "<button class='alert-message-no-button btn btn-default '>No</button>",
             "</div>",
             "</div>",
             "</div>",
@@ -61,7 +60,7 @@ window.confirm = function (msg, classes, successCallback, failedCallback)
         divAlert.find(".alert-message-body").html(msg);
 
         divAlert.find(".alert-message-yes-button").click(function () {
-         
+
             $(".alert-message-backdrop,#alert-message.alert-message").remove();
             if (typeof successCallback == "function") {
                 successCallback.call();
@@ -76,8 +75,15 @@ window.confirm = function (msg, classes, successCallback, failedCallback)
             }
         });
         $(document.body).append(divAlert).append("<div class='alert-message-backdrop'></div>");
-        return true;
+
     }
-  
+
 }
+
+$('[id$="=txt_monyear"]').datetimepicker({
+    changeMonth: true,
+    changeYear: true,
+    format: "dd/mm/yyyy",
+    language: "tr"
+});
 

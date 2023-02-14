@@ -55,6 +55,8 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                     case "a":
                         ddl_Branch.Visible = true;
                         ddl_Branch_load();
+                        ddl_Department_load();
+                        ddl_load(ddl_Loancode, ddl_empcode);
                         ddl_Loancode.Items.Insert(0, "Select");
                         break;
 

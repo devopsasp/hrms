@@ -42,36 +42,40 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
-         pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
-        if (s_login_role == "a")
-        {
-            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
-        }
+        //if (s_login_role == "a")
+        //{
+        //    employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
+        //}
         if (!Page.IsPostBack)
         {
 
             switch (s_login_role)
             {
-                case "a": 
+                case "a":
+
                     load_admin();
                     //ddl_category.Visible = false;
+
+                    //ddl_branch.Visible = false;
+                    
                     break;
 
                 case "h":
                     ddl_branch.Visible = false;
-
+                 
                     load_page();
                     access();
                     category();
-                    ddl_load();   
+                    ddl_load();
                     break;
 
-                case "u": s_form = "6";
+                case "u":
+                    s_form = "6";
                     ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 
                     if (ds_userrights.Tables[0].Rows.Count > 0)
@@ -80,12 +84,13 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                     }
                     else
                     {
-                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
+                        Response.Cookies["Msg_Session"].Value = "Permission Restricted. Please Contact Administrator.";
                         Response.Redirect("~/Company_Home.aspx");
                     }
                     break;
 
-                default: Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
+                default:
+                    Response.Cookies["Msg_Session"].Value = "Permission Restricted. Please Contact Administrator";
                     Response.Redirect("~/Company_Home.aspx");
                     break;
 
@@ -201,7 +206,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         ddl_branch.Items.Insert(0, "Select Branch");
         myConnection.Close();
 
-        
+
     }
 
     public void category()
@@ -219,7 +224,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             ad = new SqlDataAdapter("select distinct pn_category from otslab where pn_companyid='" + employee.CompanyId + "' and pn_branchid='" + employee.BranchId + "'", myConnection);
         }
-        
+
         DataSet ds = new DataSet();
         ad.Fill(ds, "otslab");
         ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).DataSource = ds;
@@ -230,11 +235,11 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).Items.Insert(1, "All Category");
         myConnection.Close();
     }
-        
+
     public void access()
     {
-        // MessageBox.Show(employee.BranchId.ToString());
-        // MessageBox.Show(employee.CompanyId.ToString());
+         //MessageBox.Show(employee.BranchId.ToString());
+         //MessageBox.Show(employee.CompanyId.ToString());
         _connection = con.fn_Connection();
         _connection.Open();
         cmd = new SqlCommand("Select * from hr_authentication where pn_CompanyID = '" + employee.CompanyId + "' and pn_BranchID='" + employee.BranchId + "' and sectionid=2 and section_view='No'", _connection);
@@ -261,7 +266,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
 
     }
 
-    
+
 
 
     protected void Edit(object sender, GridViewEditEventArgs e)
@@ -288,7 +293,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
+
         }
 
     }
@@ -300,9 +305,9 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             string sqlStatement = "DELETE FROM otslab WHERE slab_id = @slab_id and pn_branchid = '" + employee.BranchId + "'";
             if (s_login_role == "a")
             {
-                sqlStatement = "DELETE FROM otslab WHERE slab_id = @slab_id and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'";      
+                sqlStatement = "DELETE FROM otslab WHERE slab_id = @slab_id and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'";
             }
-            
+
             myConnection.Open();
             SqlCommand cmd = new SqlCommand(sqlStatement, myConnection);
             cmd.Parameters.AddWithValue("@slab_id", ID);
@@ -328,7 +333,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         GridView1.EditIndex = -1;
         load_page();
         category();
-        ddl_load();   
+        ddl_load();
     }
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
@@ -350,18 +355,18 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            // loop all data rows
+           //  loop all data rows
             foreach (DataControlFieldCell cell in e.Row.Cells)
             {
                 // check all cells in one row
                 foreach (Control control in cell.Controls)
                 {
-                    // Must use LinkButton here instead of ImageButton
-                    // if you are having Links (not images) as the command button.
+                     //Must use LinkButton here instead of ImageButton
+                   // if you are having Links (not images) as the command button.
                     ImageButton button = control as ImageButton;
                     if (button != null && button.CommandName == "Delete")
-                        // Add delete confirmation
-                        button.OnClientClick = "if (!confirm('Are you sure you want to delete this record?')) return false;";
+                       //  Add delete confirmation
+                        button.OnClientClick = "if (!confirm('Are you sure you want to delete this record?')) ;return false";
                 }
             }
         }
@@ -381,13 +386,13 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
         if (s_login_role == "a")
         {
-            
+
             GridView1.EditIndex = e.NewEditIndex; // turn to edit mode
             load();
             ddl_load();
             access();
         }
-        else if(s_login_role == "h")
+        else if (s_login_role == "h")
         {
             GridView1.EditIndex = e.NewEditIndex; // turn to edit mode
             load();
@@ -479,7 +484,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             }
             else
             {
-                if (otfrom == "" || otto == "" || otslab== "")
+                if (otfrom == "" || otto == "" || otslab == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Enter all the Fields');", true);
                     return;
@@ -495,7 +500,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             category();
             access();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Record Already Exist!');", true);
         }
@@ -504,40 +509,40 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
         GridViewRow Gvrow = GridView1.Rows[e.RowIndex];
-        //Label8.Text = Gvrow.ToString();
-            string otidedit = ((Label)Gvrow.FindControl("txt_id_edit")).Text;
-            string otfromedit = ((TextBox)Gvrow.FindControl("txt_otfrom_edit")).Text;
-            string ottoedit = ((TextBox)Gvrow.FindControl("txt_otto_edit")).Text;
-            string otslabedit = ((TextBox)Gvrow.FindControl("txt_otslab_edit")).Text;
-            
-            myConnection.Open();
-            if (s_login_role == "a")
-            {
-                cmd = new SqlCommand("update otslab set ot_from='" + otfromedit + "', ot_to='" + ottoedit + "', ot_slab='" + otslabedit + "' where slab_id='" + otidedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + ddl_branch.SelectedItem.Value + "'", myConnection);
-                cmd.ExecuteNonQuery();
-                myConnection.Close();
-                GridView1.EditIndex = -1; // turn to edit mode
-               
-            }
-            else if (s_login_role == "h")
-            {
-                cmd = new SqlCommand("update otslab set ot_from='" + otfromedit + "', ot_to='" + ottoedit + "', ot_slab='" + otslabedit + "' where slab_id='" + otidedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + employee.BranchId + "'", myConnection);
-                cmd.ExecuteNonQuery();
-                myConnection.Close();
-                GridView1.EditIndex = -1; // turn to edit mode
-                
-            }
-            load_page();
-            ddl_load();   
-            category();
+      //  Label8.Text = Gvrow.ToString();
+        string otidedit = ((Label)Gvrow.FindControl("txt_id_edit")).Text;
+        string otfromedit = ((TextBox)Gvrow.FindControl("txt_otfrom_edit")).Text;
+        string ottoedit = ((TextBox)Gvrow.FindControl("txt_otto_edit")).Text;
+        string otslabedit = ((TextBox)Gvrow.FindControl("txt_otslab_edit")).Text;
+
+        myConnection.Open();
+        if (s_login_role == "a")
+        {
+            cmd = new SqlCommand("update otslab set ot_from='" + otfromedit + "', ot_to='" + ottoedit + "', ot_slab='" + otslabedit + "' where slab_id='" + otidedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + ddl_branch.SelectedItem.Value + "'", myConnection);
+            cmd.ExecuteNonQuery();
+            myConnection.Close();
+            GridView1.EditIndex = -1; // turn to edit mode
+
+        }
+        else if (s_login_role == "h")
+        {
+            cmd = new SqlCommand("update otslab set ot_from='" + otfromedit + "', ot_to='" + ottoedit + "', ot_slab='" + otslabedit + "' where slab_id='" + otidedit + "' and pn_companyid= '" + employee.CompanyId + "' and  pn_branchid= '" + employee.BranchId + "'", myConnection);
+            cmd.ExecuteNonQuery();
+            myConnection.Close();
+            GridView1.EditIndex = -1; // turn to edit mode
+
+        }
+        load_page();
+        ddl_load();
+        category();
     }
-        
+
 
 
     protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
     {
         load_page();
-        //category();
+        category();
         ddl_load();
         ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).Visible = true;
     }
@@ -545,10 +550,11 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     {
 
     }
-    
+
+
     protected void ddl_category_SelectedIndexChanged1(object sender, EventArgs e)
     {
-        var catValue = ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).SelectedValue;  
+        var catValue = ((DropDownList)GridView1.HeaderRow.FindControl("ddl_category")).SelectedValue;
         load();
         ddl_load();
         category();
@@ -568,11 +574,11 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         {
             cmd_ddl = new SqlCommand("select v_categoryname from paym_category where pn_companyid='" + employee.CompanyId + "' and branchid='" + employee.BranchId + "' ", myConnection);
         }
-        
-        
+
+
         SqlDataAdapter ddl = new SqlDataAdapter(cmd_ddl);
-        DataSet ds= new DataSet();
-        ddl.Fill(ds,"paym_category");
+        DataSet ds = new DataSet();
+        ddl.Fill(ds, "paym_category");
         ((DropDownList)GridView1.FooterRow.FindControl("ddl_catid")).DataTextField = "v_categoryname";
         ((DropDownList)GridView1.FooterRow.FindControl("ddl_catid")).DataSource = ds;
         ((DropDownList)GridView1.FooterRow.FindControl("ddl_catid")).DataBind();
@@ -582,12 +588,12 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
 }
 
 
-    
 
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+

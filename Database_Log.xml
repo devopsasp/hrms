@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <data>
-  <server>HESPERUS16-PC</server>
+  <server>DESKTOP-AH2NJLT\SQLEXPRESS</server>
   <database>Hesperus_Hrms</database>
   <username>sa</username>
   <password>1234</password>
 </data>
+

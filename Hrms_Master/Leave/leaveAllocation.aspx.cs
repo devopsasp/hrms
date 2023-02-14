@@ -71,7 +71,8 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a": 
-                    load();                    
+                    load();
+                    ddl_employee_load();
                     break;
 
                 case "h": load1();

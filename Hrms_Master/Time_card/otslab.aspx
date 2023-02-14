@@ -69,8 +69,9 @@
      
     </script>
 
-    <div><h2 class="page-header">Over Time Slab Details</h2></div>
-                <asp:DropDownList ID="ddl_branch" runat="server"  CssClass="form-control"
+    <div ><h2 class="page-header" >Over Time Slab Details</h2></div>
+    
+               <asp:DropDownList ID="ddl_branch" runat="server"  CssClass="form-control"
                     onselectedindexchanged="ddl_branch_SelectedIndexChanged" 
                     AutoPostBack="True">
                 </asp:DropDownList>
@@ -84,8 +85,9 @@
                 <asp:Panel HorizontalAlign="Center" ID="Panel1" runat="server" Width="100%" 
                     Height="100%">
                     <br />
-                    <br />                    
-                    <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
+                    <br />
+                    <%--<asp:Label ID="Label1" runat="server" Text="This page access for Branch Users only" Font-Bold="true" Font-Size="Larger" ></asp:Label>--%>
+       <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False"  ShowFooter="True"
             onrowcommand="GridView1_RowCommand" 
              onrowdeleting="GridView1_RowDeleting"  CssClass="table table-striped table-bordered table-hover"

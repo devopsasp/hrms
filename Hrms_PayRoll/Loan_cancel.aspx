@@ -4,12 +4,13 @@ CodeFile="Loan_cancel.aspx.cs" Inherits="Bank_Loan_Default" Title="Loan Cancel" 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
 <div><h2 class="page-header">Loan Cancel</h2></div>
-<div><asp:Label ID="lbl_Error" runat="server" CssClass="Error" ForeColor="Red"></asp:Label><div style="float:right;"><asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" CssClass="InputDefaultStyle"
-                    OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged">
-                </asp:DropDownList></div></div>
+<div><asp:Label  runat="server" CssClass="Error" ForeColor="Red"></asp:Label><div style="float:right;"><asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" CssClass="InputDefaultStyle form-control"
+                    OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged" >
+                </asp:DropDownList></div>
+    </div>
   
                 
-                <table runat="server" id="tab_ddl" width="100%" cellpadding="5" cellspacing="1" class="table">
+                <table runat="server" id="tab_ddl" style="width:70%;"  cellspacing="1" class="table">
                
                     <tr runat="server">
                         <td runat="server">
@@ -56,7 +57,7 @@ CodeFile="Loan_cancel.aspx.cs" Inherits="Bank_Loan_Default" Title="Loan Cancel" 
                             
                     </tr>
                     <tr runat="server">
-                        <td class="dComposeItemLabel" nowrap="nowrap">
+                        <td class="" nowrap="nowrap">
                             Employee Code:</td>
                         <td >
                         <asp:DropDownList ID="ddl_empcode" runat="server" CssClass="form-control">

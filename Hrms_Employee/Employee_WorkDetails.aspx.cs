@@ -55,12 +55,12 @@ public partial class Hrms_Employee_Default4 : System.Web.UI.Page
 
                 if (Convert.ToInt32(Request.Cookies["Select_Employee"].Value) == 1)
                 {
-                    r.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
-                    r.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+                    
 
                     employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
                     employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-
+                    r.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
+                    r.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
                     pr_emp = Convert.ToInt32(Request.Cookies["preview_emp"].Value);
 
                     if (!IsPostBack)
@@ -310,7 +310,7 @@ public partial class Hrms_Employee_Default4 : System.Web.UI.Page
             {              
                 
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Updated Successfully');", true);
-                //Response.Redirect("Employee_Preview.aspx");
+               Response.Redirect("Employee_Preview.aspx");
             }
             else
             {
@@ -627,8 +627,8 @@ public partial class Hrms_Employee_Default4 : System.Web.UI.Page
                     else
                     {
                         ListItem es_list = new ListItem();
-                        es_list.Value = jobStatusList[ddl_i].ShiftTypeID.ToString();
-                        es_list.Text = jobStatusList[ddl_i].ShiftTypeName.ToString();
+                        es_list.Value = shiftList[ddl_i].ShiftTypeID.ToString();
+                        es_list.Text = shiftList[ddl_i].ShiftTypeName.ToString();
                         ddl_Shift.Items.Add(es_list);
                     }
                 }

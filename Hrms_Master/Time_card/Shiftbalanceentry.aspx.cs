@@ -44,6 +44,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a": load_admin();
+                    ddl_Department_load();
                     break;
 
                 case "h":
@@ -193,7 +194,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         txt_bran.Text = employee.BranchId.ToString();
         txt_bran.Enabled = false;
 
-        cmd = new SqlCommand("select * from shift_details ", myConnection);
+        cmd = new SqlCommand("select * from shift_details where pn_branchid='"+employee.BranchId+"'", myConnection);
         rea = cmd.ExecuteReader();
         while (rea.Read())
         {
@@ -467,6 +468,20 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             myConnection.Close();
         }
     }
+    protected void Edit(object sender, GridViewEditEventArgs e)
+    {
+        try
+        {
+
+        }
+
+        catch (Exception ex)
+        {
+
+        }
+
+
+    }
 
     protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -484,202 +499,202 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            //// loop all data rows
-            //foreach (DataControlFieldCell cell in e.Row.Cells)
-            //{
-            //    //TextBox tbox = e.Row.FindControl("txt_pattern") as TextBox;
-            //    //tbox.Attributes.Add("onKeyDown", "javascript:if(window.event.keycode == 13)return false;}");
-            //    // check all cells in one row
-            //    foreach (Control control in cell.Controls)
-            //    {
-            //        // Must use LinkButton here instead of ImageButton
-            //        // if you are having Links (not images) as the command button.
-            //        ImageButton button = control as ImageButton;
-            //        if (button != null && button.CommandName == "Delete")
-            //            // Add delete confirmation
-            //            button.OnClientClick = "if (!confirm('Are you sure " +
-            //                   "you want to delete this record?')) return;";
-            //    }
-            //}
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{
+        // loop all data rows
+        //foreach (DataControlFieldCell cell in e.Row.Cells)
+        //{
+        //    //TextBox tbox = e.Row.FindControl("txt_pattern") as TextBox;
+        //    //tbox.Attributes.Add("onKeyDown", "javascript:if(window.event.keycode == 13)return false;}");
+        //    // check all cells in one row
+        //    foreach (Control control in cell.Controls)
+        //    {
+        //        // Must use LinkButton here instead of ImageButton
+        //        // if you are having Links (not images) as the command button.
+        //        ImageButton button = control as ImageButton;
+        //        if (button != null && button.CommandName == "Delete")
+        //            // Add delete confirmation
+        //            button.OnClientClick = "if (!confirm('Are you sure " +
+        //                   "you want to delete this record?')) return;";
+        //    }
+        //}
 
-            for (int i = 0; i < GridView1.Columns.Count; i++)
-            {
-                if (i == 0)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_branch")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 1)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_pattern")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 2)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode1")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 3)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days1")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 4)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode2")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 5)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days2")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 6)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode3")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 7)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days3")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 8)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode4")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-                if (i == 9)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days4")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //    for (int i = 0; i < GridView1.Columns.Count; i++)
+        //    {
+        //        if (i == 0)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_branch")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 1)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_pattern")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 2)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode1")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 3)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days1")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 4)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode2")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 5)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days2")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 6)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode3")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 7)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days3")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 8)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode4")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //        if (i == 9)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days4")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 10)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode5")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 10)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode5")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 11)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days5")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 11)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days5")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 12)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode6")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 12)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode6")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 13)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days6")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 13)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days6")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 14)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode7")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 14)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode7")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 15)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days7")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 15)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days7")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 16)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode8")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
+        //        if (i == 16)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_shiftcode8")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
 
-                if (i == 17)
-                {
-                    string txt1 = ((Label)e.Row.FindControl("lbl_days8")).Text;
-                    string str = txt1;
-                    if (str == "0")
-                    {
-                        e.Row.Cells[i].Text = "";
-                    }
-                }
-            }
+        //        if (i == 17)
+        //        {
+        //            string txt1 = ((Label)e.Row.FindControl("lbl_days8")).Text;
+        //            string str = txt1;
+        //            if (str == "0")
+        //            {
+        //                e.Row.Cells[i].Text = "";
+        //            }
+        //        }
+        //    }
 
 
-        }
+        //}
     }
 
     public void delete_tables()
@@ -746,12 +761,15 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             }
             else
             {
-                delete_tables();
+                //delete_tables();
                 myConnection.Open();
                 for (int em = 0; em < CheckBoxList1.Items.Count; em++)
                 {
+
                     _Value = CheckBoxList1.Items[em].Text.Split('-');
                     employee.EmployeeCode = _Value[1].ToString().Trim();
+                    cmd = new SqlCommand("Delete from shift_balance where pn_EmployeeCode= '" + CheckBoxList1.Items[em].Value + "' and monthyear='" + txt_monyear.Text + "' and pn_branchID = '" + employee.BranchId + "';Delete from shift_month where pn_EmployeeCode= '" + CheckBoxList1.Items[em].Value + "' and monthyear='" + txt_monyear.Text + "' and pn_branchID = '" + employee.BranchId + "'", myConnection);
+                    cmd.ExecuteNonQuery();
                     if (CheckBoxList1.Items[em].Selected == true)
                     {
                         cmd = new SqlCommand("insert into shift_balance (pn_companyid,pn_branchid,pn_employeecode,pn_employeename,monthyear,pattern_code,slot,balance_days) values ('" + employee.CompanyId + "' , '" + employee.BranchId + "' , '" + CheckBoxList1.Items[em].Value + "' , '" + employee.EmployeeCode + "','" + txt_monyear.Text + "','" + ddl_patterncode.Text + "' , '" + txt_slot.Text + "' , '" + txt_balance.Text + "')", myConnection);
@@ -796,7 +814,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 //if (wk1 != wk2 && (dow == wk1 || dow == wk2))
                 if (dow == wk1)
                 {
-                    bday = bday+1;
+                    bday = bday + 1;
                 }
                 if (dow == wk2)
                 {
@@ -1053,6 +1071,332 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             }
         }
     }
+    //protected void btn_save_Click(object sender, EventArgs e)
+    //{
+    //    if (txt_monyear.Text == "" || ddl_patterncode.Text == "Select" || txt_balance.Text == "")
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Enter all details.');", true);
+    //    }
+    //    else if (Convert.ToInt32(txt_balance.Text) > 7)
+    //    {
+    //        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Balance days must be less than 7');", true);
+    //        //ClientScript.RegisterStartupScript(this.Page.GetType(), "alert", "alert('Balance days must be less than 7');", true);
+    //    }
+    //    else
+    //    {
+    //        if (CheckBoxList1.SelectedItem == null)
+    //        {
+    //            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Select Employees');", true);
+    //        }
+    //        else
+    //        {
+    //            delete_tables();
+    //            myConnection.Open();
+    //            for (int em = 0; em < CheckBoxList1.Items.Count; em++)
+    //            {
+    //                _Value = CheckBoxList1.Items[em].Text.Split('-');
+    //                employee.EmployeeCode = _Value[1].ToString().Trim();
+    //                if (CheckBoxList1.Items[em].Selected == true)
+    //                {
+    //                    cmd = new SqlCommand("insert into shift_balance (pn_companyid,pn_branchid,pn_employeecode,pn_employeename,monthyear,pattern_code,slot,balance_days) values ('" + employee.CompanyId + "' , '" + employee.BranchId + "' , '" + CheckBoxList1.Items[em].Value + "' , '" + employee.EmployeeCode + "','" + txt_monyear.Text + "','" + ddl_patterncode.Text + "' , '" + txt_slot.Text + "' , '" + txt_balance.Text + "')", myConnection);
+    //                    cmd.ExecuteNonQuery();
+    //                }
+    //            }
+    //            //DateTime sdate = Convert.ToDateTime("01/"+txt_monyear.Text);
+    //            string scode1 = "", scode2 = "", scode3 = "", scode4 = "", scode5 = "", scode6 = "", scode7 = "", scode8 = "", dat = "";
+    //            string day1 = "", day2 = "", day3 = "", day4 = "", day5 = "", day6 = "", day7 = "", day8 = "";
+    //            int days1 = 0, days2 = 0, days3 = 0, days4 = 0, days5 = 0, days6 = 0, days7 = 0, days8 = 0;
+    //            string strdate = txt_monyear.Text;
+    //            string[] datespt = strdate.Split('/');
+    //            int bday = Convert.ToInt32(txt_balance.Text);
+    //            int month = Convert.ToInt32(datespt[0]);
+    //            int year = Convert.ToInt32(datespt[1]);
+
+    //            // Checking the first day of the monthhsd
+    //            if (s_login_role == "a")
+    //            {
+    //                //cmd = new SqlCommand("Select week_off1 , week_off2 from attendance_ceiling where pn_companyid='" + employee.CompanyId + "' and pn_branchid = '" + ddl_branch.Text + "'", myConnection);
+    //            }
+    //            if (s_login_role == "h")
+    //            {
+    //                cmd = new SqlCommand("Select week_off1 , week_off2 from attendance_ceiling where pn_companyid='" + employee.CompanyId + "' and pn_branchid = '" + employee.BranchId + "'", myConnection);
+    //            }
+    //            SqlDataReader rdw = cmd.ExecuteReader();
+
+    //            string wk1 = "", wk2 = "";
+    //            if (rdw.Read())
+    //            {
+    //                wk1 = Convert.ToString(rdw[0]);
+    //                wk2 = Convert.ToString(rdw[1]);
+    //            }
+
+    //            string f1 = "01/" + strdate;
+    //            string f2 = "02/" + strdate;
+    //            //string f1 = datespt[0] + "/01/" + datespt[1];
+    //            DateTime sun = Convert.ToDateTime(f1);
+    //            DateTime sat = Convert.ToDateTime(f2);
+    //            string dow = sun.DayOfWeek.ToString();
+    //            string dow2 = sat.DayOfWeek.ToString();
+    //            //if (wk1 != wk2 && (dow == wk1 || dow == wk2))
+    //            if (dow == wk1)
+    //            {
+    //                bday = bday+1;
+    //            }
+    //            if (dow == wk2)
+    //            {
+    //                bday = bday + 1;
+    //            }
+
+    //            // End
+
+    //            int enddate = System.DateTime.DaysInMonth(year, month);
+    //            cmd1 = new SqlCommand("Select * from shift_pattern where pn_companyid = '" + employee.CompanyId + "' and pn_branchid= '" + employee.BranchId + "' and pattern_code = '" + ddl_patterncode.Text + "'", myConnection);
+    //            SqlDataReader rd_sp = cmd1.ExecuteReader();
+    //            if (rd_sp.Read())
+    //            {
+    //                scode1 = Convert.ToString(rd_sp["shift_code1"]);
+    //                day1 = Convert.ToString(rd_sp["days1"]);
+    //                scode2 = Convert.ToString(rd_sp["shift_code2"]);
+    //                day2 = Convert.ToString(rd_sp["days2"]);
+    //                scode3 = Convert.ToString(rd_sp["shift_code3"]);
+    //                day3 = Convert.ToString(rd_sp["days3"]);
+    //                scode4 = Convert.ToString(rd_sp["shift_code4"]);
+    //                day4 = Convert.ToString(rd_sp["days4"]);
+    //                scode5 = Convert.ToString(rd_sp["shift_code5"]);
+    //                day5 = Convert.ToString(rd_sp["days5"]);
+    //                scode6 = Convert.ToString(rd_sp["shift_code6"]);
+    //                day6 = Convert.ToString(rd_sp["days6"]);
+    //                scode7 = Convert.ToString(rd_sp["shift_code7"]);
+    //                day7 = Convert.ToString(rd_sp["days7"]);
+    //                scode8 = Convert.ToString(rd_sp["shift_code8"]);
+    //                day8 = Convert.ToString(rd_sp["days8"]);
+    //            }
+    //            //rd_sp.Close();
+    //            int d, f, g, h, i, j, k, l, m, n, o, p, r, s, t;
+    //            for (d = 1; d <= enddate; d++)
+    //            {
+    //                dat = Convert.ToString(month + "/" + d + "/" + year);
+    //                DateTime ch = Convert.ToDateTime(year + "/" + month + "/" + d);
+    //                for (int ec = 0; ec < CheckBoxList1.Items.Count; ec++)
+    //                {
+    //                    if (CheckBoxList1.Items[ec].Selected == true)
+    //                    {
+    //                        _Val = CheckBoxList1.Items[ec].Text.Split('-');
+    //                        employee.EmployeeCode = _Val[1].ToString();
+    //                        if (wk1 != wk2 && (dow == wk1 || dow == wk2) && ch == sun)
+    //                        {
+    //                            scode1 = "W";
+    //                        }
+    //                        else
+    //                        {
+    //                            scode1 = Convert.ToString(rd_sp["shift_code1"]);
+    //                        }
+    //                        cmd = new SqlCommand("insert into shift_month values('" + employee.CompanyId + "' , '" + employee.BranchId + "' , '" + CheckBoxList1.Items[ec].Value + "' , '" + employee.EmployeeCode + "' , '" + txt_monyear.Text + "' , '" + dat + "' , '" + scode1 + "')", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+    //                }
+    //            }
+    //            int first = bday + 1;
+    //            if ((dow == wk1 || dow == wk2) && (dow2 == wk1 || dow2 == wk2))
+    //            {
+    //                first = bday;
+    //            }
+    //            else if ((dow == wk1 || dow == wk2) && dow2 != wk1 && dow2 != wk2)
+    //            {
+    //                first = bday + 6;
+    //            }
+
+    //            days2 = Convert.ToInt32(day2);
+    //            for (f = first; f < first + days2; f++)
+    //            {
+    //                dat = Convert.ToString(month + "/" + f + "/" + year);
+    //                cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                cmd.ExecuteNonQuery();
+    //            }
+
+    //            if (scode3 != "")
+    //            {
+    //                int second = f;
+    //                days3 = Convert.ToInt32(day3);
+    //                for (g = second; g < second + days3; g++)
+    //                {
+    //                    dat = Convert.ToString(month + "/" + g + "/" + year);
+    //                    cmd = new SqlCommand("update shift_month set Shift_Code='" + scode3 + "' where date='" + dat + "'", myConnection);
+    //                    cmd.ExecuteNonQuery();
+    //                }
+    //                int third = g;
+    //                days4 = Convert.ToInt32(day4);
+    //                for (i = third; i < third + days4; i++)
+    //                {
+    //                    dat = Convert.ToString(month + "/" + i + "/" + year);
+    //                    cmd = new SqlCommand("update shift_month set Shift_Code='" + scode4 + "' where date='" + dat + "'", myConnection);
+    //                    cmd.ExecuteNonQuery();
+    //                }
+
+    //                if (scode5 != "")
+    //                {
+    //                    int fourth = i;
+    //                    days5 = Convert.ToInt32(day5);
+    //                    for (j = fourth; j < fourth + days5; j++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + j + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode5 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+    //                    int fifth = j;
+    //                    days6 = Convert.ToInt32(day6);
+    //                    for (k = fifth; k < fifth + days6; k++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + k + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode6 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+    //                    if (scode7 != "")
+    //                    {
+    //                        int svn = k;
+    //                        days7 = Convert.ToInt32(day7);
+    //                        for (r = svn; r < svn + days7; r++)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + r + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode7 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                        int egt = r;
+    //                        days8 = Convert.ToInt32(day8);
+    //                        for (s = egt; s < egt + days8; s++)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + s + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode8 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                    }
+    //                    else
+    //                    {
+    //                        int svn1 = k;
+    //                        days1 = Convert.ToInt32(day1);
+    //                        for (r = svn1; r < svn1 + days1; r++)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + r + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode1 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                        int egt1 = r;
+    //                        days2 = Convert.ToInt32(day2);
+    //                        for (s = egt1; s < egt1 + days2; s++)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + s + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    int fourth1 = i;
+    //                    days1 = Convert.ToInt32(day1);
+    //                    for (j = fourth1; j < fourth1 + days1; j++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + j + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode1 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+    //                    int fifth1 = j;
+    //                    days2 = Convert.ToInt32(day2);
+    //                    for (k = fifth1; k < fifth1 + days2; k++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + k + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+
+    //                    int sixth1 = k;
+    //                    days3 = Convert.ToInt32(day3);
+    //                    for (l = sixth1; l < sixth1 + days3; l++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + l + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode3 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+    //                    int seventh1 = l;
+    //                    days4 = Convert.ToInt32(day4);
+    //                    for (m = seventh1; m < seventh1 + days4; m++)
+    //                    {
+    //                        dat = Convert.ToString(month + "/" + m + "/" + year);
+    //                        cmd = new SqlCommand("update shift_month set Shift_Code='" + scode4 + "' where date='" + dat + "'", myConnection);
+    //                        cmd.ExecuteNonQuery();
+    //                    }
+
+    //                    int eighth1 = m;
+    //                    days1 = Convert.ToInt32(day1);
+    //                    for (n = eighth1; n < eighth1 + days1; n++)
+    //                    {
+    //                        if (n <= enddate)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + n + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode1 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                    }
+    //                    int ninth1 = n;
+    //                    days2 = Convert.ToInt32(day2);
+    //                    for (o = seventh1; o < seventh1 + days2; o++)
+    //                    {
+    //                        if (n <= enddate)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + o + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            else
+    //            {
+    //                int second1 = f;
+    //                days1 = Convert.ToInt32(day1);
+    //                for (g = second1; g < second1 + days1; g++)
+    //                {
+    //                    dat = Convert.ToString(month + "/" + g + "/" + year);
+    //                    cmd = new SqlCommand("update shift_month set Shift_Code='" + scode1 + "' where date='" + dat + "'", myConnection);
+    //                    cmd.ExecuteNonQuery();
+    //                }
+    //                int third1 = g;
+    //                days1 = Convert.ToInt32(day1);
+    //                days2 = Convert.ToInt32(day2);
+    //                for (h = third1; h <= enddate; h += days1 + 1)
+    //                {
+    //                    dat = Convert.ToString(month + "/" + h + "/" + year);
+    //                    cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                    cmd.ExecuteNonQuery();
+    //                    if (days2 == 2)
+    //                    {
+    //                        int x = h + 1;
+    //                        if (x <= enddate)
+    //                        {
+    //                            dat = Convert.ToString(month + "/" + x + "/" + year);
+    //                            cmd = new SqlCommand("update shift_month set Shift_Code='" + scode2 + "' where date='" + dat + "'", myConnection);
+    //                            cmd.ExecuteNonQuery();
+    //                            h++;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            rd_sp.Close();
+    //            cmd = new SqlCommand("create table temp_shift(pn_CompanyID int , pn_BranchID int , pn_EmployeeCode varchar(50) , pn_EmployeeName varchar(50) , monthyear varchar(8) , date datetime , shift_Code varchar(5))", myConnection);
+    //            cmd.ExecuteNonQuery();
+    //            cmd = new SqlCommand("INSERT INTO temp_shift SELECT DISTINCT * FROM shift_month where pn_companyid='" + employee.CompanyId + "' and pn_branchid = '" + employee.BranchId + "'", myConnection);
+    //            cmd.ExecuteNonQuery();
+    //            cmd = new SqlCommand("drop table shift_month", myConnection);
+    //            cmd.ExecuteNonQuery();
+    //            cmd = new SqlCommand("EXEC sp_rename 'temp_shift', 'shift_month'", myConnection);
+    //            cmd.ExecuteNonQuery();
+
+    //            myConnection.Close();
+    //            //Response.Write("<script language='javascript'>alert('Shift balance saved successfully')</script>");
+    //            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Saved Successfully');", true);
+    //        }
+    //    }
+    //}
     
     protected void btn_reset_Click(object sender, EventArgs e)
     {
@@ -1132,6 +1476,25 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         else
         {
             RadioButtonList1.SelectedIndex = 0;
+        }
+    }
+    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        if (s_login_role == "a")
+        {
+
+            GridView1.EditIndex = e.NewEditIndex; // turn to edit mode
+            load();
+            access();
+        }
+        else if (s_login_role == "h")
+        {
+            GridView1.EditIndex = e.NewEditIndex; // turn to edit mode
+            load();
+            access();
+            ddl_Pattern_load();
+            //Edit();
+            //AddNewRecord(scode, stime, btimeo, btimei, etime, sindicator);
         }
     }
     protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -1251,7 +1614,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             else
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
-               
+
             }
         }
         finally
@@ -1259,6 +1622,65 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             myConnection.Close();
         }
     }
+
+    //protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    //{
+    //    string ID = ((Label)GridView1.Rows[e.RowIndex].Cells[0].FindControl("lbl_pattern")).Text;
+    //    DeleteRecord(ID);
+    //    if (s_login_role == "a")
+    //    {
+    //        load();
+    //    }
+    //    else
+    //    {
+    //        load1();
+    //    }
+    //}
+
+    //private void DeleteRecord(string ID)
+    //{
+
+    //    string Statement = " SELECT * FROM shift_pattern where pattern_code='" + ID + "'"; /*or shift_code2 = '" + ID + "' or shift_code3 = '" + ID + "' or shift_code4 = '" + ID + "' or shift_code5 = '" + ID + "' or shift_code6 = '" + ID + "' or shift_code7 = '" + ID + "'";*/
+    //    myConnection.Open();
+    //    SqlCommand cmd1 = new SqlCommand(Statement, myConnection);
+    //    cmd1.CommandType = CommandType.Text;
+    //    SqlDataReader rdrdel = cmd1.ExecuteReader();
+    //    myConnection.Close();
+    //    try
+    //    {
+    //        if (rdrdel.Read())
+    //        {
+    //            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Deletion Error: This record has a relationship with pattern code!');", true);
+    //        }
+    //        else
+    //        {
+    //            string sqlStatement = "DELETE FROM shift_pattern WHERE pattern_code = @pattern_code and pn_branchid = '" + ddl_branch.SelectedItem.Value + "'";/* "DELETE FROM shift_details WHERE shift_code = @shift_code and ";*/
+    //        myConnection.Open();
+    //        SqlCommand cmd = new SqlCommand(sqlStatement, myConnection);
+    //        cmd.Parameters.AddWithValue("@pattern_code", ID);
+    //        cmd.CommandType = CommandType.Text;
+    //        cmd.ExecuteNonQuery();
+    //        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Delete Successfully');", true);
+    //        }
+    //    }
+    //    catch (System.Data.SqlClient.SqlException ex)
+    //    {
+    //        if (ex.Number == 547)
+    //        {
+    //            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Unable to Delete. transaction Exists.');", true);
+
+    //        }
+    //        else
+    //        {
+    //            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+
+    //        }
+    //    }
+    //    finally
+    //    {
+    //        myConnection.Close();
+    //    }
+    //}
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {

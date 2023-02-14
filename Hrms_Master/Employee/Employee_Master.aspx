@@ -104,10 +104,22 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="page-header">Employee Position Master</h2>
+                     
                     </div>
                     <span class="pull-right" > <asp:DropDownList ID="ddl_branch" runat="server" AutoPostBack="True" 
-                                    onselectedindexchanged="ddl_branch_SelectedIndexChanged" Width="115px">
-                                </asp:DropDownList> </span>
+                                    onselectedindexchanged="ddl_branch_SelectedIndexChanged" Width="115px" Visible="true">
+                                </asp:DropDownList>
+                         <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                            ConnectionString="<%$ ConnectionStrings:connectionstring %>"
+                            SelectCommand="SELECT ([EmployeeCode]+'-'+[Employee_First_Name]) as Employee_first_name , [EmployeeCode] FROM [paym_Employee] WHERE (([pn_CompanyID] = @pn_CompanyID) AND ([pn_BranchID] = @pn_BranchID))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="pn_CompanyID" SessionField="Login_temp_CompanyID"
+                                    Type="Int32" />
+                                <asp:SessionParameter Name="pn_BranchID" SessionField="Login_temp_BranchID"
+                                    Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                    </span>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->

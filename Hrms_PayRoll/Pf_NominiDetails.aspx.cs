@@ -40,7 +40,7 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
     Collection<Employee> emp_available;
     Collection<Employee> EmpFirstList;
     Collection<Employee> EmpGeneralList;
-
+    Collection<Company> CompanyList, ddlBranchsList;
     Collection<PayRoll> emp_edu_List;
     Collection<PayRoll> Empty_gridList;
     Collection<PayRoll> EpsList;
@@ -64,7 +64,7 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
          pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        lbl_Error.Text = "";
+       
         // Error.Text = "";
 
         if (!IsPostBack)
@@ -72,6 +72,9 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a": //load();
+                    ddl_Branch_load();
+                    ddl_department_load();
+                
                     break;
 
                 case "h":
@@ -122,7 +125,8 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+          
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error'"+ ex + ");", true);
         }
     }
     public void hr()
@@ -162,7 +166,8 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
             }
             else
             {
-                lbl_Error.Text = "No Employees Available";
+             
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Employees Available');", true);
 
             }
 
@@ -170,7 +175,7 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error'" + ex + ");", true);
         }
     }
         
@@ -226,10 +231,53 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No Department Available";
+         
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Department Available');", true);
         }
 
     }
+    public void ddl_Branch_load()
+    {
+        int ddl_i;
+
+        //branck dropdown
+        ddlBranchsList = company.fn_getBranchs();
+
+        if (ddlBranchsList.Count > 0)
+        {
+            for (ddl_i = -1; ddl_i < ddlBranchsList.Count; ddl_i++)
+            {
+                if (ddl_i == -1)
+                {
+                    ListItem list = new ListItem();
+                    list.Text = "Select Branch";
+                    list.Value = "sb";
+                    ddl_Branch.Items.Add(list);
+                }
+                else
+                {
+                    ListItem list = new ListItem();
+                    list.Text = ddlBranchsList[ddl_i].CompanyName;
+                    list.Value = ddlBranchsList[ddl_i].CompanyId.ToString();
+                    ddl_Branch.Items.Add(list);
+                }
+            }
+        }
+    }
+
+    protected void ddl_Branch_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddl_Branch.SelectedValue != "sb")
+        {
+            ViewState["NonEarn_BranchID"] = Convert.ToInt32(ddl_Branch.SelectedValue);
+        //    tbl_deductions.Visible = true;
+        }
+        else
+        {
+           // tbl_deductions.Visible = false;
+        }
+    }
+
     public void ddl_employee_load()
     {
         //employee dropdown
@@ -237,9 +285,8 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
 
         if (s_login_role == "a")
         {
-            employee.BranchId = (int)ViewState["Appraisal_BranchID"];
+            employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
         }
-
         if (s_login_role == "h")
         {
             employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
@@ -271,8 +318,13 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No Employee";
+    
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Employee');", true);
         }
+        //if(s_login_role=="a")
+        //{
+        //    ddl_employee_load();
+        //}
     }
   
     protected void chk_address_eps_CheckedChanged(object sender, EventArgs e)
@@ -358,12 +410,14 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
             _value = pay.EPF(pay);
             if (_value != "1")
             {
-                lbl_Error.Text = "Updated Successfully";
+               
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Updated Successfully');", true);
                 gridload();
             }
             else
             {
-                lbl_Error.Text = "Error while updating";
+          
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error while updating');", true);
             }
         }
         GridView1.EditIndex = -1;
@@ -444,7 +498,7 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error'" + ex + ");", true);
         }
     }
     protected void GridView3_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -476,12 +530,14 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
                 _Value = pay.fn_epsdetails(pay);
                 if (_Value != "1")
                 {
-                    lbl_Error.Text = "<font color=Blue>Updated Successfully</font>";
+     
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Updated Successfully');", true);
                     load();
                 }
                 else
                 {
-                    lbl_Error.Text = "<font color=Red>Error Occured</font>";
+                  
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
                     load();
                 }
                 GridView3.EditIndex = -1;
@@ -571,12 +627,13 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
             _Value = pay.fn_epsdetails(pay);
             if (_Value != "1")
             {
-                lbl_Error.Text = "<font color=Blue>Added Successfully</font>";
+                
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Added Successfully');", true);
                 // load();
             }
             else
             {
-                lbl_Error.Text = "<font color=Red>Error Occured</font>";
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
                 // load();
             }
 
@@ -609,12 +666,13 @@ public partial class Hrms_PayRoll_Pf_NominiDetails : System.Web.UI.Page
             _value = pay.EPF(pay);
             if (_value != "1")
             {
-                lbl_Error.Text = "Added Successfully";
+       ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Added Successfully');", true);
 
             }
             else
             {
-                lbl_Error.Text = "Error";
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error');", true);
+
             }
 
             gridload();

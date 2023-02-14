@@ -44,7 +44,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
     Collection<Employee> DepartmentList;
     Collection<Employee> EmployeeList;
     Collection<PayRoll> PayList;
-    char s_login_role;
+    string s_login_role;
     DataSet ds_userrights;
     string s_form = "";
     int i = 0, j, temp_count = 0;
@@ -53,7 +53,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["Msg_session"] = "";
+        
         Session["Repordid"] = "";
         Session["fdate"] = "";
         Session["tdate"] = "";
@@ -62,7 +62,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
 
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
         //lbl_error.Text = "";
 
         if (!IsPostBack)
@@ -75,7 +75,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
             {
                 switch (s_login_role)
                 {
-                    case 'a':
+                    case "a":
                         //admin();
                         //session_check();
                         
@@ -83,7 +83,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
                         //ddl_Branch_load();
                         break;
 
-                    case 'h':
+                    case "h":
                         //hr();
                         //session_check();
                         ddl_Branch.Visible = false;
@@ -92,7 +92,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
                         //session_check();
                         break;
 
-                    case 'u': s_form = "79";
+                    case "u": s_form = "79";
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 
                         if (ds_userrights.Tables[0].Rows.Count > 0)
@@ -102,18 +102,18 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
                         }
                         else
                         {
-                            Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                            Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                             Response.Redirect("~/Company_Home.aspx");
                         }
                         break;
 
-                    case 'e':
+                    case "e":
                         ddl_Branch.Visible = false;
 
                         break;
 
                     default:
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("~/Company_Home.aspx");
                         break;
                 }
@@ -122,7 +122,7 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
             else
             {
 
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("~/Company_Home.aspx");
             }
         }
@@ -134,11 +134,11 @@ public partial class PayrollReports_PF_NomineeDetails_Rpt : System.Web.UI.Page
         {
             ddl_dept.Items.Clear();
             employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-            if (s_login_role == 'a')
+            if (s_login_role == "a")
             {
                 DepartmentList = employee.fn_getDepartmentList1(Convert.ToInt32(ddl_Branch.SelectedItem.Value));
             }
-            else if (s_login_role == 'h')
+            else if (s_login_role == "h")
             {
                 DepartmentList = employee.fn_getDepartmentList1(employee.BranchId);
             }

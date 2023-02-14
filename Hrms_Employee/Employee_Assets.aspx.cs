@@ -39,6 +39,7 @@ public partial class Hrms_Employee_Employee_Assets : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
         if (s_login_role != "e")
         {
@@ -71,6 +72,9 @@ public partial class Hrms_Employee_Employee_Assets : System.Web.UI.Page
                             case "a": if (pr_emp == 1)
                                 {
                                     ddl();
+                                    admin();
+                                    grd_ddl();
+                                    Lbl();
                                     btn_update.Visible = false;
                                 }
                                 else
@@ -78,8 +82,8 @@ public partial class Hrms_Employee_Employee_Assets : System.Web.UI.Page
                                     ddl();
                                     btn_save.Visible = false;
                                     btn_skip.Visible = false;
-                                    employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                                    employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                                    //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                    //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
                                     admin();
                                     grd_ddl();
                                     Lbl();
@@ -265,8 +269,8 @@ public partial class Hrms_Employee_Employee_Assets : System.Web.UI.Page
 
             if (s_login_role == "a")
             {
-                employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
 
             }
 

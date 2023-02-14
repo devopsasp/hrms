@@ -80,7 +80,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         
-        employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
+         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
@@ -91,7 +91,9 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             switch (s_login_role)
             {
                 case "a":
-                    populate_ddlbranch();                 
+                    populate_ddlbranch();
+                    ddl_Department_load();
+                    access();
                     break;
 
                 case "h":
@@ -138,43 +140,79 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         }
     }
 
-    public void ddl_Employee_load()
-    {
-        ddl_ename.Items.Clear();
-        employee.DepartmentId = Convert.ToInt32(ddl_department.SelectedValue);
-        EmployeeList = employee.fn_getEmployeeDepartment(employee);
-        if (EmployeeList.Count > 0)
-        {
-            for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
-            {
-                if (ddl_i == -1)
-                {
-                    ListItem es_list = new ListItem();
-                    es_list.Text = "Select Employee";
-                    es_list.Value = "0";
-                    ddl_ename.Items.Add(es_list);
-                }
-                else
-                {
-                    ListItem es_list = new ListItem();
-                    es_list.Value = EmployeeList[ddl_i].EmployeeCode.ToString();
-                    es_list.Text = EmployeeList[ddl_i].LastName.ToString();
-                    ddl_ename.Items.Add(es_list);
-                }
-            }
-        }
-    }
+    //public void ddl_Employee_load()
+    //{
+    //    ddl_ename.Items.Clear();
+    //    employee.DepartmentId = Convert.ToInt32(ddl_department.SelectedValue);
+    //    EmployeeList = employee.fn_getEmployeeDepartment(employee);
+    //    if (EmployeeList.Count > 0)
+    //    {
+    //        for (int ddl_i = -2; ddl_i < EmployeeList.Count; ddl_i++)
+    //        {
+    //            if (ddl_i == -1)
+    //            {
+    //                ListItem es_list = new ListItem();
+    //                es_list.Text = "Select Employee";
+    //                es_list.Value = "0";
+    //                ddl_ename.Items.Add(es_list);
+    //            }
+    //            else if (ddl_i == -1)
+    //            {
+    //                ListItem es_list = new ListItem();
 
+    //                es_list.Text = "All";
+    //                es_list.Value = "1";
+    //                ddl_ename.Items.Add(es_list);
+    //            }
+    //            else
+    //            {
+    //                ListItem es_list = new ListItem();
+    //                es_list.Value = EmployeeList[ddl_i].EmployeeCode.ToString();
+    //                es_list.Text = EmployeeList[ddl_i].LastName.ToString();
+    //                ddl_ename.Items.Add(es_list);
+    //            }
+    //        }
+    //    }
+    //}
+
+    //public void ddl_Department_load()
+    //{
+    //    EmployeeList = employee.fn_getDepartmentList1(employee.BranchId);
+    //    if (EmployeeList.Count > 0)
+    //    {
+
+    //        for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
+    //        {
+
+    //            if (ddl_i == -1)
+    //            {
+    //                ListItem es_list = new ListItem();
+
+    //                es_list.Text = "Select Department";
+    //                es_list.Value = "0";
+    //                ddl_department.Items.Add(es_list);
+    //            }
+    //            else
+    //            {
+    //                ListItem es_list = new ListItem();
+
+    //                es_list.Value = EmployeeList[ddl_i].DepartmentId.ToString();
+    //                es_list.Text = EmployeeList[ddl_i].DepartmentName.ToString();
+    //                ddl_department.Items.Add(es_list);
+    //            }
+    //        }
+    //    }
+    //}
     public void ddl_Department_load()
     {
         EmployeeList = employee.fn_getDepartmentList1(employee.BranchId);
         if (EmployeeList.Count > 0)
         {
 
-            for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
+            for (int ddl_i = -2; ddl_i < EmployeeList.Count; ddl_i++)
             {
 
-                if (ddl_i == -1)
+                if (ddl_i == -2)
                 {
                     ListItem es_list = new ListItem();
 
@@ -182,10 +220,17 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     es_list.Value = "0";
                     ddl_department.Items.Add(es_list);
                 }
-                else
+                else if (ddl_i == -1)
                 {
                     ListItem es_list = new ListItem();
 
+                    es_list.Text = "All";
+                    es_list.Value = "1";
+                    ddl_department.Items.Add(es_list);
+                }
+                else
+                {
+                    ListItem es_list = new ListItem();
                     es_list.Value = EmployeeList[ddl_i].DepartmentId.ToString();
                     es_list.Text = EmployeeList[ddl_i].DepartmentName.ToString();
                     ddl_department.Items.Add(es_list);
@@ -193,7 +238,75 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             }
         }
     }
+    public void ddl_Employee_load()
+    {
+        ddl_ename.Items.Clear();
 
+        if (ddl_department.SelectedItem.Text == "All")
+        {
+            EmployeeList = employee.fn_getEmployeeList(employee);
+            if (EmployeeList.Count > 0)
+            {
+                for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
+                {
+                    if (ddl_i == -1)
+                    {
+                        ListItem es_list = new ListItem();
+                        es_list.Text = "Select Employee";
+                        ddl_ename.Items.Add(es_list);
+                    }
+                    //else if (ddl_i == -1)
+                    //{
+                    //    ListItem es_list = new ListItem();
+
+                    //    es_list.Text = "All";
+                    //    es_list.Value = "1";
+                    //    ddl_ename.Items.Add(es_list);
+                    //}
+                    else
+                    {
+                        ListItem es_list = new ListItem();
+                        es_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
+                        es_list.Text = EmployeeList[ddl_i].LastName.ToString();
+                        ddl_ename.Items.Add(es_list);
+                    }
+                }
+            }
+        }
+        else
+        {
+            employee.DepartmentId = Convert.ToInt32(ddl_department.SelectedValue);
+            EmployeeList = employee.fn_getEmployeeDepartment(employee);
+            if (EmployeeList.Count > 0)
+            {
+                for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
+                {
+                    if (ddl_i == -1)
+                    {
+                        ListItem es_list = new ListItem();
+                        es_list.Text = "Select Employee";
+                        ddl_ename.Items.Add(es_list);
+                    }
+                    //else if (ddl_i == -1)
+                    //{
+                    //    ListItem es_list = new ListItem();
+
+                    //    es_list.Text = "All";
+                    //    es_list.Value = "1";
+                    //    ddl_ename.Items.Add(es_list);
+                    //}
+
+                    else
+                    {
+                        ListItem es_list = new ListItem();
+                        es_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
+                        es_list.Text = EmployeeList[ddl_i].LastName.ToString();
+                        ddl_ename.Items.Add(es_list);
+                    }
+                }
+            }
+        }
+    }
     public void populate_ddlbranch()
     {
         myConnection.Open();
@@ -205,7 +318,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         ddl_branch.DataTextField = "branchname";
         ddl_branch.DataValueField = "pn_branchid";
         ddl_branch.DataBind();
-        ddl_branch.SelectedItem.Text = "Select";
+        ddl_branch.Items.Insert(0, "Select ");
+        //ddl_branch.SelectedItem.Text = "Select";
     }
     public void load()
     {
@@ -252,16 +366,16 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         SqlDataAdapter ad = new SqlDataAdapter();
         if (s_login_role == "a")
         {
-            ad = new SqlDataAdapter("SELECT * FROM temp_timecard where pn_companyid = '" + ddl_branch.Text + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
+            ad = new SqlDataAdapter("SELECT * FROM time_card  where pn_companyid = '" + ddl_branch.Text + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
         }
 
         if (s_login_role == "h" || s_login_role == "u")
         {
-            ad = new SqlDataAdapter("SELECT * FROM temp_timecard where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
+            ad = new SqlDataAdapter("SELECT * FROM time_card  where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
         }
         DataSet ds = new DataSet();
 
-        ad.Fill(ds, "temp_timecard");
+        ad.Fill(ds, "time_card ");
 
         if (ds.Tables[0].Rows.Count == 0)
         {
@@ -451,7 +565,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         //}
         if (status == "Import")
         {
-            load1();
+            ViewAttendance();
+            //load1();
         }
         else
         {
@@ -486,7 +601,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             myConnection.Open(); 
             if (s_login_role == "a")
             {
-                SqlCommand updat = new SqlCommand("set dateformat dmy;update temp_timecard set intime = '" + start_time + "', late_in = '" + latein + "',late_out = '" + break_timeo + "',early_out = '" + break_timei + "',outtime ='" + end_time + "',status='" + status + "',leave_code = '" + leave + "' where emp_code = '" + emp_code + "' and emp_name = '" + emp_name + "' and dates = '" + date_edit + "';set dateformat mdy;", myConnection);
+                SqlCommand updat = new SqlCommand("set dateformat dmy;update time_card set intime = '" + start_time + "', late_in = '" + latein + "',late_out = '" + break_timeo + "',early_out = '" + break_timei + "',outtime ='" + end_time + "',status='" + status + "',leave_code = '" + leave + "' ,data='M' where emp_code = '" + emp_code + "' and emp_name = '" + emp_name + "' and dates = '" + date_edit + "';set dateformat mdy;", myConnection);
                 updat.ExecuteNonQuery();
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Updated successfully');", true);
             }
@@ -1676,9 +1791,19 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
     {
 
     }
+
+   
     protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ddl_ename.SelectedItem.Text = "Select";
+        //populate_ddlbranch();
+        if (s_login_role == "a")
+        {
+            employee.BranchId = Convert.ToInt32(ddl_branch.SelectedItem.Value);
+        }
+        SqlDataSource1.SelectCommand = "select employee_first_name,employeecode from paym_employee where pn_companyid='" + employee.CompanyId + "' and pn_branchid='" + employee.BranchId + "' ";
+
+
+        // ddl_ename.SelectedItem.Text = "Select";
     }
     protected void ddl_department_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -1742,4 +1867,4 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
         }
     }
-}
+}                                                                                                                                                                                            

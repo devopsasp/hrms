@@ -89,8 +89,8 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
                         {
 
                             btn_save.Visible = false;                           
-                            employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                            employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                            //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                            //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
                             admin();
                         }
                         break;
@@ -193,7 +193,7 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
             if (s_login_role == "a")
             {
                 //employee.EmployeeId = 0;
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
             if (s_login_role == "h")
             {
@@ -240,7 +240,7 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
             {
 
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Added Successfully');};", true);
-                //   Response.Redirect("Employee_Preview.aspx");
+                   Response.Redirect("Employee_Preview.aspx");
                 img_emp_photo.ImageUrl = Server.MapPath("~/Photo/") + Photo_name;
                 //img_emp_photo.AlternateText = "Employee Code -" + employee.EmployeeCode;
             }
@@ -274,8 +274,8 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
         {
             if (s_login_role == "a")
             {
-                employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
             if (s_login_role == "h")
             {
@@ -303,7 +303,7 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
          
                  ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Added Successfully');};", true);
                 img_emp_photo.ImageUrl = Server.MapPath("~/Photo/") + Photo_name;
-               // Response.Redirect("Employee_Preview.aspx");
+               Response.Redirect("Employee_Preview.aspx");
             }
             else
             {

@@ -68,6 +68,10 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                 {
                     case "a":
                         admin();
+                        ddl_Department_load();
+                       // hr();
+                       
+                        
                         break;
 
                     case "h":

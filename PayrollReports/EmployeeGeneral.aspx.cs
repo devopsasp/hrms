@@ -39,7 +39,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
     Collection<Company> CompanyList, ddlBranchsList;
     Collection<Employee> EmpProfileList;
     Collection<Employee> EmployeeList;
-    char s_login_role;
+    string s_login_role;
 
     int i = 0, j, temp_count = 0, temp_i;
 
@@ -55,21 +55,20 @@ public partial class PayrollReports_Default : System.Web.UI.Page
         Response.Expires = -1;
         Response.ExpiresAbsolute = DateTime.Now.AddSeconds(-1);
         Response.Cache.SetNoStore();
-        Session["Msg_session"] = "";
+        
         Session["Period"] = "";
         Session["Repordid"] = "";
-        Session["Query_Session"] = "start";
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         c.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
 
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+         pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
         lbl_error.Text = "";
-
+       // Label1.Visible = false;
         if (!IsPostBack)
         {
             CompanyList = company.fn_getCompany();
@@ -80,19 +79,20 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 switch (s_login_role)
                 {
 
-                    case 'a':
+                    case "a":
                         ddl_Branch.Visible = true;
                         ddl_Branch_load();
+                        ddl_Department_load();
+                      
                         break;
 
-                    case 'h':
+                    case "h":
                         ddl_Branch.Visible = false;
                         ddl_Department_load();
-                        hr();
-                        session_check();
+                      
                         break;
 
-                    case 'u':
+                    case "u":
                         s_form = "57";
 
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
@@ -102,20 +102,20 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                             ddl_Branch.Visible = false;
 
                             hr();
-                            session_check();
+                            //session_check();
                         }
                         else
                         {
-                            Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                            Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                             Response.Redirect("~/Company_Home.aspx");
                         }
                         break;
 
-                    case 'e':
+                    case "e":
                         ddl_Branch.Visible = false;
                         ListItem li = new ListItem();
-                        li.Text = Session["Login_temp_EmpCodeName"].ToString();
-                        li.Value = Session["Login_temp_EmployeeID"].ToString();
+                        li.Text = Request.Cookies["EmpCodeName"].Value;
+                        li.Value = Request.Cookies["Login_temp_EmployeeID"].Value;
                         li.Selected = true;
                         chk_Empcode.Items.Clear();
                         chk_Empcode.Items.Add(li);
@@ -123,7 +123,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                         chkall.Enabled = false;
                         break;
                     default:
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("~/Company_Home.aspx");
                         break;
                 }
@@ -131,7 +131,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             else
             {
 
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("~/Company_Home.aspx");
             }
         }
@@ -188,7 +188,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                     ListItem es_list = new ListItem();
 
                     es_list.Text = "All";
-                    es_list.Value = "0";
+                    es_list.Value = "1";
                     ddl_department.Items.Add(es_list);
                 }
                 else
@@ -200,22 +200,43 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 }
             }
         }
+        //if (ddl_department.SelectedIndex == 1)
+        //{
+        //    ddl_Employee_load();
+        //}
+
+        
+        //if (ddl_department.SelectedIndex == 0)
+        //{
+        //    if (s_login_role == "a")
+        //    {
+        //        admin();
+        //    }
+        //    if(s_login_role=="h")
+        //    {
+        //        hr();
+        //    }
+           
+        //}
+
     }
 
     
 
     public void hr()
     {
+        
         try
         {
             EmployeeList = employee.fn_getEmployeeList(employee);
-
             if (EmployeeList.Count > 0)
             {
+               
                 chk_Empcode.DataSource = EmployeeList;
-                chk_Empcode.DataTextField = "LastName";
                 chk_Empcode.DataValueField = "EmployeeId";
+                chk_Empcode.DataTextField = "LastName";
                 chk_Empcode.DataBind();
+                
             }
             else
             {
@@ -229,40 +250,39 @@ public partial class PayrollReports_Default : System.Web.UI.Page
         }
     }
 
+    //public void session_check()
+    //{
 
-    public void session_check()
-    {
+    //    switch (Request.Cookies["Query_Session"].Value)
+    //    {
+    //        case "start":
+    //            lbl_error.Text = "Welcome To Report Section!";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
 
-        switch (Convert.ToString(Session["Query_Session"]))
-        {
-            case "start":
-                lbl_error.Text = "Welcome To Report Section!";
-                Session["Query_Session"] = "start";
-                break;
+    //        case "nil":
+    //            lbl_error.Text = "No Result Found";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
 
-            case "nil":
-                lbl_error.Text = "No Result Found";
-                Session["Query_Session"] = "start";
-                break;
+    //        case "back":
+    //            lbl_error.Text = "";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
 
-            case "back":
-                lbl_error.Text = "";
-                Session["Query_Session"] = "start";
-                break;
+    //        default:
+    //            final_query_execute();
+    //            break;
 
-            default:
-                final_query_execute();
-                break;
-
-        }
+    //    }
 
 
-    }
+    //}
 
     public void final_query_execute()
     {
 
-        employee.temp_str = (string)Session["Query_Session"];
+        employee.temp_str = Request.Cookies["Query_Session"].Value;
 
         EmployeeList = employee.Temp_Selected_EmployeeList(employee);
 
@@ -282,13 +302,13 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             }
 
             lbl_error.Text = EmployeeList.Count + " Employees Selected!";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
 
         }
         else
         {
             lbl_error.Text = "No Employees has been selected";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
         }
     }
 
@@ -304,7 +324,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
     {
         try
         {
-            if (s_login_role == 'a')
+            if (s_login_role == "a")
             {
                 pay.BranchId = (int)ViewState["Pay_BranchID"];
                 employee.BranchId = (int)ViewState["Pay_BranchID"];
@@ -359,7 +379,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
             c.BranchID = Convert.ToInt32(ddl_Branch.SelectedValue);
             admin();
-            session_check();
+            //session_check();
         }
         else
         {
@@ -406,7 +426,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
     {
         chk_Empcode.Items.Clear();
 
-        if (ddl_department.SelectedValue == "0" || ddl_department.SelectedValue == "0")
+        if (ddl_department.SelectedItem.Text == "All")
         {
             EmployeeList = employee.fn_getEmployeeList(employee);
             if (EmployeeList.Count > 0)
@@ -415,7 +435,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 {
                     if (ddl_i == -1)
                     {
-                        
+
                     }
                     else
                     {
@@ -429,34 +449,27 @@ public partial class PayrollReports_Default : System.Web.UI.Page
         }
         else
         {
-            try
+            employee.DepartmentId = Convert.ToInt32(ddl_department.SelectedValue);
+            EmployeeList = employee.fn_getEmployeeDepartment(employee);
+            if (EmployeeList.Count > 0)
             {
-                employee.DepartmentId = Convert.ToInt32(ddl_department.SelectedValue);
-                EmployeeList = employee.fn_getEmployeeDepartment(employee);
-                if (EmployeeList.Count > 0)
+                for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
                 {
-                    for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
+                    if (ddl_i == -1)
                     {
-                        if (ddl_i == -1)
-                        {
 
-                        }
-                        else
-                        {
-                            ListItem es_list = new ListItem();
-                            es_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
-                            es_list.Text = EmployeeList[ddl_i].LastName.ToString();
-                            chk_Empcode.Items.Add(es_list);
-                        }
+                    }
+                    else
+                    {
+                        ListItem es_list = new ListItem();
+                        es_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
+                        es_list.Text = EmployeeList[ddl_i].LastName.ToString();
+                        chk_Empcode.Items.Add(es_list);
                     }
                 }
             }
-            catch
-            {
-            }
         }
     }
-
     protected void ddl_department_SelectedIndexChanged(object sender, EventArgs e)
     {
         ddl_Employee_load();

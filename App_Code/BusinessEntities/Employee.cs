@@ -1133,6 +1133,8 @@ namespace ePayHrms.Employee
             set { _EmployeeCode = value; }
         }
 
+        public DateTime Dates { get; private set; }
+
         public string FullName
         {
             get { return _FullName; }
@@ -1530,12 +1532,13 @@ namespace ePayHrms.Employee
             set { _ReaderId = value; }
         }
         private char _OT_Eligible;
-
         public char OT_Eligible
         {
             get { return _OT_Eligible; }
             set { _OT_Eligible = value; }
         }
+        
+        
         private string _PFno;
         public string PFno
         {
@@ -1636,7 +1639,12 @@ namespace ePayHrms.Employee
             get { return _d_Date; }
             set { _d_Date = value; }
         }
-
+        public string _e_date;
+        public string e_date
+        {
+            get { return _e_date; }
+            set { _e_date = value; }
+        }
         private DateTime _dat;
 
         public DateTime dat
@@ -1683,7 +1691,49 @@ namespace ePayHrms.Employee
             get { return _Earlyout; }
             set { _Earlyout = value; }
         }
+        private DateTime _whours;
+
         
+        public DateTime whours
+
+        {
+            get { return _whours; }
+            set{ _whours = value; }
+        }
+        private string _dept;
+        public string dept
+        {
+            get { return _dept; }
+            set { _dept = value; }
+        }
+        private string _shiftcode;
+        
+        public string shiftcode
+
+        {
+            get { return _shiftcode; }
+            set { _shiftcode = value; }
+        }
+            private DateTime _dates;
+
+        public DateTime dates
+
+        {
+            get { return _dates; }
+            set { _dates = value; }
+        }
+        
+        private string _data;
+        public string data
+        {
+            get { return _data; }
+            set { _data = value; }
+        }
+
+        public string depid { get; private set; }
+        public string depname { get; private set; }
+        public object e { get; private set; }
+
         //##########################################################################################
 
         public Collection<Employee> EmployeeDesignation(Employee e)
@@ -1837,6 +1887,8 @@ namespace ePayHrms.Employee
                 return "1";
             }
         }
+
+        
 
         //***************************************************************************************************************//
 
@@ -3958,14 +4010,16 @@ namespace ePayHrms.Employee
             SqlCommand _SSDepartment = new SqlCommand(_SqlString, _Connection);
             _Connection.Open();
             SqlDataReader dr_Department = _SSDepartment.ExecuteReader();
-            while (dr_Department.Read())
-            {
-                Employee employee = new Employee();
-                employee.DepartmentId = (int)dr_Department["pn_DepartmentID"];
-                employee.DepartmentName = Convert.IsDBNull(dr_Department["v_DepartmentName"]) ? "" : (string)dr_Department["v_DepartmentName"];
-                DepartmentList.Add(employee);
-            }
+               while (dr_Department.Read())
+                {
+                    Employee employee = new Employee();
+                    employee.DepartmentId = (int)dr_Department["pn_DepartmentID"];
+                    employee.DepartmentName = Convert.IsDBNull(dr_Department["v_DepartmentName"]) ? "" : (string)dr_Department["v_DepartmentName"];
+                    DepartmentList.Add(employee);
+                }
+            
             return DepartmentList;
+           
         }
 
 
@@ -4969,8 +5023,6 @@ namespace ePayHrms.Employee
             try
             {
                 _Connection = Con.fn_Connection();
-
-
                 SqlCommand _Cmd = new SqlCommand("sp_Shift", _Connection);
                 _Cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter[] _ISPParamter = new SqlParameter[3];
@@ -5661,6 +5713,36 @@ namespace ePayHrms.Employee
             Collection<Employee> EmployeeList = new Collection<Employee>();
             _Connection = Con.fn_Connection();
             //SqlCommand _Course = new SqlCommand("select * from time_card where pn_CompanyID=" + e.CompanyId + " and pn_BranchID =" + e.BranchId + " and dates = '" + e.d_Date + "' and pn_employeeid = '" + e.EmployeeId + "' order by emp_name asc", _Connection);
+            SqlCommand _Course = new SqlCommand("select a.*, b.pn_gradeid from time_card a, paym_employee_profile1 b where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.dates between '" + e.d_Date + "' and'"+e.e_date+"' and a.pn_employeeid = '" + e.EmployeeId + "' and a.pn_Employeeid = b.pn_Employeeid order by b.pn_gradeid asc", _Connection);
+            _Connection.Open();
+            SqlDataReader dr = _Course.ExecuteReader();
+            while (dr.Read())
+            {
+                Employee employee = new Employee();
+                employee.FirstName = Convert.IsDBNull(dr["emp_name"]) ? "" : (string)dr["emp_name"];
+                employee.EmployeeCode = Convert.IsDBNull(dr["emp_code"]) ? "" : (string)dr["emp_code"];
+                employee.Intime = Convert.IsDBNull(dr["intime"]) ? DateTime.Now : Convert.ToDateTime(dr["intime"]);
+                employee.Outtime = Convert.IsDBNull(dr["outtime"]) ? DateTime.Now : Convert.ToDateTime(dr["outtime"]);
+                employee.Latein = Convert.IsDBNull(dr["Late_in"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_in"]);
+                employee.Lateout = Convert.IsDBNull(dr["Late_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_out"]);
+                employee.Earlyout = Convert.IsDBNull(dr["Early_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Early_out"]);
+                employee.whours = Convert.IsDBNull(dr["ot_hrs"]) ? DateTime.Now : Convert.ToDateTime(dr["ot_hrs"]);
+                employee.shiftcode = Convert.IsDBNull(dr["shift_code"]) ?"": (string)dr["shift_code"];
+                employee.dates = Convert.IsDBNull(dr["dates"]) ? DateTime.Now : Convert.ToDateTime(dr["dates"]);
+                employee.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
+                employee.Status21 = Convert.IsDBNull(dr["leave_code"]) ? "" : (string)dr["leave_code"];
+                employee.shiftcode = Convert.IsDBNull(dr["Shift_code"]) ? "" : (string)dr["Shift_code"];
+                employee.GradeId = Convert.IsDBNull(dr["pn_gradeid"]) ? 0 : Convert.ToInt32(dr["pn_gradeid"]);
+                employee.data = Convert.IsDBNull(dr["data"]) ? "" : (string)dr["data"];
+                EmployeeList.Add(employee);
+            }
+            return EmployeeList;
+        }
+        public Collection<Employee> fn_shift(Employee e)
+        {
+            Collection<Employee> EmployeeList = new Collection<Employee>();
+            _Connection = Con.fn_Connection();
+            //SqlCommand _Course = new SqlCommand("select * from time_card where pn_CompanyID=" + e.CompanyId + " and pn_BranchID =" + e.BranchId + " and dates = '" + e.d_Date + "' and pn_employeeid = '" + e.EmployeeId + "' order by emp_name asc", _Connection);
             SqlCommand _Course = new SqlCommand("select a.*, b.pn_gradeid from time_card a, paym_employee_profile1 b where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.dates = '" + e.d_Date + "' and a.pn_employeeid = '" + e.EmployeeId + "' and a.pn_Employeeid = b.pn_Employeeid order by b.pn_gradeid asc", _Connection);
             _Connection.Open();
             SqlDataReader dr = _Course.ExecuteReader();
@@ -5674,6 +5756,7 @@ namespace ePayHrms.Employee
                 employee.Latein = Convert.IsDBNull(dr["Late_in"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_in"]);
                 employee.Lateout = Convert.IsDBNull(dr["Late_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_out"]);
                 employee.Earlyout = Convert.IsDBNull(dr["Early_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Early_out"]);
+                employee.whours = Convert.IsDBNull(dr["ot_hrs"]) ? DateTime.Now : Convert.ToDateTime(dr["ot_hrs"]);
                 employee.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
                 employee.Status21 = Convert.IsDBNull(dr["leave_code"]) ? "" : (string)dr["leave_code"];
                 employee.GradeId = Convert.IsDBNull(dr["pn_gradeid"]) ? 0 : Convert.ToInt32(dr["pn_gradeid"]);
@@ -5681,6 +5764,31 @@ namespace ePayHrms.Employee
             }
             return EmployeeList;
         }
+        //public Collection<Employee> otcall(Employee e)
+        //{
+        //    Collection<Employee> EmployeeList = new Collection<Employee>();
+        //    _Connection = Con.fn_Connection();
+        //    //SqlCommand _Course = new SqlCommand("select * from time_card where pn_CompanyID=" + e.CompanyId + " and pn_BranchID =" + e.BranchId + " and dates = '" + e.d_Date + "' and pn_employeeid = '" + e.EmployeeId + "' order by emp_name asc", _Connection);
+        //    SqlCommand _Course = new SqlCommand("select a.*, b.pn_gradeid from time_card a, paym_employee_profile1 b where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.dates = '" + e.d_Date + "' and a.pn_employeeid = '" + e.EmployeeId + "' and a.pn_Employeeid = b.pn_Employeeid order by b.pn_gradeid asc", _Connection);
+        //    _Connection.Open();
+        //    SqlDataReader dr = _Course.ExecuteReader();
+        //    while (dr.Read())
+        //    {
+        //        Employee employee = new Employee();
+        //        employee.FirstName = Convert.IsDBNull(dr["emp_name"]) ? "" : (string)dr["emp_name"];
+        //        employee.EmployeeCode = Convert.IsDBNull(dr["emp_code"]) ? "" : (string)dr["emp_code"];
+        //        employee.Intime = Convert.IsDBNull(dr["intime"]) ? DateTime.Now : Convert.ToDateTime(dr["intime"]);
+        //        employee.Outtime = Convert.IsDBNull(dr["outtime"]) ? DateTime.Now : Convert.ToDateTime(dr["outtime"]);
+        //        employee.Latein = Convert.IsDBNull(dr["Late_in"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_in"]);
+        //        employee.Lateout = Convert.IsDBNull(dr["Late_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Late_out"]);
+        //        employee.Earlyout = Convert.IsDBNull(dr["Early_out"]) ? DateTime.Now : Convert.ToDateTime(dr["Early_out"]);
+        //        employee.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
+        //        employee.Status21 = Convert.IsDBNull(dr["leave_code"]) ? "" : (string)dr["leave_code"];
+        //        employee.GradeId = Convert.IsDBNull(dr["pn_gradeid"]) ? 0 : Convert.ToInt32(dr["pn_gradeid"]);
+        //        EmployeeList.Add(employee);
+        //    }
+        //    return EmployeeList;
+        //}
 
         public Collection<Employee> fn_EmployeeMuster(Employee e)
         {
@@ -5702,6 +5810,7 @@ namespace ePayHrms.Employee
                 employee.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
                 employee.Status21 = Convert.IsDBNull(dr["leave_code"]) ? "" : (string)dr["leave_code"];
                 employee.GradeId = Convert.IsDBNull(dr["pn_gradeid"]) ? 0 : Convert.ToInt32(dr["pn_gradeid"]);
+                employee.dates = Convert.IsDBNull(dr["dates"]) ? DateTime.Now : Convert.ToDateTime(dr["dates"]); 
                 EmployeeList.Add(employee);
             }
             return EmployeeList;
@@ -5719,12 +5828,13 @@ namespace ePayHrms.Employee
                 Employee employee = new Employee();
                 employee.FirstName = Convert.IsDBNull(dr["emp_name"]) ? "" : (string)dr["emp_name"];
                 employee.EmployeeCode = Convert.IsDBNull(dr["emp_code"]) ? "" : (string)dr["emp_code"];
-                employee.Date = Convert.IsDBNull(dr["dates"]) ? DateTime.Now : Convert.ToDateTime(dr["dates"]);
+                employee.Dates = Convert.IsDBNull(dr["dates"]) ? DateTime.Now : Convert.ToDateTime(dr["dates"]);
                 employee.Intime = Convert.IsDBNull(dr["intime"]) ? DateTime.Now : Convert.ToDateTime(dr["intime"]);
                 employee.Outtime = Convert.IsDBNull(dr["outtime"]) ? DateTime.Now : Convert.ToDateTime(dr["outtime"]);
                 employee.Latein = Convert.IsDBNull(dr["late_in"]) ? DateTime.Now : Convert.ToDateTime(dr["late_in"]);
                 employee.Lateout = Convert.IsDBNull(dr["late_out"]) ? DateTime.Now : Convert.ToDateTime(dr["late_out"]);
                 employee.Flag = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
+                employee.shiftcode = Convert.IsDBNull(dr["shift_code"]) ? "" : (string)dr["shift_code"];
                 employee.Status21 = Convert.IsDBNull(dr["leave_code"]) ? "" : (string)dr["leave_code"];
                 employee.GradeId = Convert.IsDBNull(dr["pn_gradeid"]) ? 0 : Convert.ToInt32(dr["pn_gradeid"]);
                 EmployeeList.Add(employee);
@@ -8071,7 +8181,7 @@ namespace ePayHrms.Employee
 
             string _Sqlstring = "select c.CompanyName,b.BranchName,e.pn_EmployeeID,e.EmployeeCode,e.Password,e.Gender,e.Employee_First_Name,";
 
-            _Sqlstring += "e.Employee_Middle_Name,e.Employee_Last_Name,e.basic_salary,e.CTC, e.status, e.DateofBirth, e.Esino, e.Pfno, e.bank_name, e.account_type from paym_Company c,paym_Branch b,paym_Employee e";
+            _Sqlstring += "e.Employee_Middle_Name,e.Employee_Last_Name,e.basic_salary,e.CTC, e.status, e.DateofBirth, e.Esino, e.Pfno, e.bank_name, e.account_type,e.IFSC_Code from paym_Company c,paym_Branch b,paym_Employee e";
 
             _Sqlstring += " where c.pn_CompanyID=e.pn_CompanyID and b.pn_BranchID=e.pn_BranchID and e.pn_BranchID = '"+e.BranchId+"'";
 
@@ -8098,6 +8208,7 @@ namespace ePayHrms.Employee
                 employee.PFno = Convert.IsDBNull(dr["Pfno"]) ? "" : (string)dr["Pfno"];
                 employee.ESIno = Convert.IsDBNull(dr["Esino"]) ? "" : (string)dr["Esino"];
                 employee.Bank_Name = Convert.IsDBNull(dr["bank_name"]) ? "" : (string)dr["bank_name"];
+                employee.IFSC_Code = Convert.IsDBNull(dr["IFSC_Code"]) ? "" : (string)dr["IFSC_Code"];
                 employee.Account_Type = Convert.IsDBNull(dr["account_type"]) ? "" : (string)dr["account_type"];
                 EmployeeList.Add(employee);
             }
@@ -8745,6 +8856,72 @@ namespace ePayHrms.Employee
                 
             }
         }
+        public string fn_DepartmentName( )
+        {
+            string depid = "", depname = "";
+            string query= "select pn_DepartmentId from paym_employee_profile1 where pn_employeeid = '" + EmployeeId + "' ";
+            _Connection = Con.fn_Connection();
+            SqlCommand cmd = new SqlCommand(query, _Connection);
+            try
+            {
+                _Connection.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if(dr.Read())
+                {
+                    depid = dr[0].ToString();
+                }
+                _Connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
+            query = "Select v_DepartmentName from paym_Department where pn_DepartmentID='" + depid + "'";
+            _Connection = Con.fn_Connection();
+            SqlCommand _cmd = new SqlCommand(query, _Connection);
+            try
+            {
+                _Connection.Open();
+                SqlDataReader dr = _cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    depname = dr[0].ToString();
+                }
+                _Connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return depname;
+
+        }
+        public string fn_Date()
+        {
+            string enddate= e_date;
+            return enddate;
+
+        }
+        public int  fn_RowCount(string qry)
+        {
+            int s=0;
+            _Connection = Con.fn_Connection();
+            SqlCommand cmd = new SqlCommand(qry, _Connection);
+            try
+            {
+                _Connection.Open();
+                s = (int)cmd.ExecuteScalar();
+                _Connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return s;
+
+        }
+        
 
 
         public string  fn_procappraisal(string qry)

@@ -230,7 +230,7 @@ m.scrollTop = scrollTop;
             </tr>
         </table>
     </div>
-    <div id="divGrid" style="overflow: auto; height: 500px"> 
+    <div id="divGrid" style="overflow: auto; height: auto"> 
 
      <asp:GridView ID="GridViewPermission" runat="server" 
             CssClass="table table-hover table-striped" GridLines="None"
@@ -254,7 +254,7 @@ m.scrollTop = scrollTop;
                                 </EditItemTemplate>
                                 <FooterTemplate>
                                     <asp:DropDownList ID="ddl_Department" runat="server" CssClass="form-control" 
-                                        Width="150px" onselectedindexchanged="ddl_Department_SelectedIndexChanged" AutoPostBack="true">
+                                         onselectedindexchanged="ddl_Department_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>                                    
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Center" />
@@ -271,7 +271,7 @@ m.scrollTop = scrollTop;
                                 <asp:Label ID="lbl_EmployeeCode" runat="server" Text='<%# Bind("EmployeeName") %>'></asp:Label>
                                 </EditItemTemplate>
                                 <FooterTemplate>
-                                    <asp:DropDownList ID="ddlEmployee_Code" runat="server" CssClass="form-control" Width="150px">
+                                    <asp:DropDownList ID="ddlEmployee_Code" runat="server" CssClass="form-control" >
                                     </asp:DropDownList>                                    
                                 </FooterTemplate>
                                 <FooterStyle HorizontalAlign="Center" />
@@ -291,7 +291,7 @@ m.scrollTop = scrollTop;
                                 </EditItemTemplate>
                                 <FooterTemplate>                                  
                                    
-        <asp:TextBox id="txtDate" runat="server" onkeyup="fn_date(event,this.id);" Width="150px" CssClass="form-control"></asp:TextBox>
+        <asp:TextBox id="txtDate" runat="server" onkeyup="fn_date(event,this.id);" CssClass="form-control"></asp:TextBox>
         <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtDate" Format="dd/MM/yyyy" >
         </asp:CalendarExtender>                                                            
                                 </FooterTemplate>
@@ -340,19 +340,19 @@ m.scrollTop = scrollTop;
                                     </asp:DropDownList>
                                 </EditItemTemplate>
                                 <FooterTemplate>
-                                <table width="90%" cellspacing="3">
+                                <table width="100%" cellspacing="3">
                                 <tr>
                                 <td>
                                <%--<asp:TextBox ID="txt_Status" runat="server" CssClass="form-control" Width="150px"></asp:TextBox>--%>
-                                 <asp:DropDownList ID="ddl_Status" runat="server" CssClass="form-control" Width="150px">
+                                 <asp:DropDownList ID="ddl_Status" runat="server" CssClass="form-control">
                                     <asp:ListItem>Select</asp:ListItem>
                                         <asp:ListItem>Y</asp:ListItem>
                                         <asp:ListItem>N</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td  align="left">
+                                <td  align="Center">
                                     <asp:LinkButton ID="LinkbtnPermission" CommandName="add" runat="server" 
-                              CssClass="btn btn-success btn-circle" ><i class="glyphicon glyphicon-check"></i></asp:LinkButton>
+                              CssClass="btn btn-success "><i class="glyphicon glyphicon-check"></i>Save</asp:LinkButton>
                                    </td>                                
                                 </tr>
                                 </table>
@@ -368,8 +368,10 @@ m.scrollTop = scrollTop;
             </div>
 
   <div><h2 class="page-header"></h2></div> 
-  <div><h3> &nbsp;</h3><div style="float:right; ">
-  <asp:DropDownList ID="ddl_branch" runat="server" Height="16px" Width="124px" AutoPostBack="True" onselectedindexchanged="ddl_branch_SelectedIndexChanged">
+  <div><h3> &nbsp;</h3>
+      
+      <div style="float:right; ">
+  <asp:DropDownList ID="ddl_branch" runat="server" class="form-control" AutoPostBack="True" onselectedindexchanged="ddl_branch_SelectedIndexChanged">
     </asp:DropDownList></div></div>
 <table width="100%">
 <tr>
@@ -652,7 +654,7 @@ m.scrollTop = scrollTop;
 
             <div>                    
                <asp:GridView ID="GridView_hr" runat="server" 
-                        Width="80%"  HorizontalAlign="Center"
+                        Width="100%"  HorizontalAlign="Center"
                         OnRowCommand="GridView_hr_RowCommand" 
                         AutoGenerateColumns="false"   AllowPaging="false"
                         DataKeyNames="Sno" 

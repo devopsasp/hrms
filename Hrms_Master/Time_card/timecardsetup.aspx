@@ -22,7 +22,6 @@
         }
 
         function onlyNumbersWithDot(e) {
-            var charCode;
             if (e.keyCode > 0) {
                 charCode = e.which || e.keyCode;
             }
@@ -188,20 +187,39 @@
                 <!-- /.col-lg-12 -->
             </div>
 
-             <asp:ScriptManager ID="ScriptManager1" runat="server">
+              <asp:ScriptManager ID="ScriptManager1" runat="server">
                         </asp:ScriptManager>
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
     <div class="panel panel-default">
                         <div class="panel-heading">
                             Shift Details
-                            <div class="pull-right">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                            ConnectionString="<%$ ConnectionStrings:connectionstring %>"
+                            SelectCommand="SELECT ([EmployeeCode]+'-'+[Employee_First_Name]) as Employee_first_name , [EmployeeCode] FROM [paym_Employee] WHERE (([pn_CompanyID] = @pn_CompanyID) AND ([pn_BranchID] = @pn_BranchID))">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="pn_CompanyID" SessionField="Login_temp_CompanyID"
+                                    Type="Int32" />
+                                <asp:SessionParameter Name="pn_BranchID" SessionField="Login_temp_BranchID"
+                                    Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                            <span></span>
+                             <div class="pull-right" style="margin-bottom: 0px">
                                 <div class="btn-group">
-                <asp:DropDownList CssClass="form-control" ID="DropDownList1" runat="server" 
-                    onselectedindexchanged="DropDownList1_SelectedIndexChanged" 
-                    AutoPostBack="True" >
-                </asp:DropDownList>
-                                    <ul class="dropdown-menu pull-right" role="menu">
+                                    <div class="btn-group" style="left: -14px; top: 0px; height: 22px; width: 129px">
+                                        <asp:DropDownList ID="ddl_branch" runat="server" AutoPostBack="True" enabled="true" OnSelectedIndexChanged="ddl_branch_SelectedIndexChanged" Visible="true" Width="115px">
+                                            <asp:ListItem>select branch</asp:ListItem>
+                                        </asp:DropDownList>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li><a href="#">Action</a> </li>
+                                            <li><a href="#">Another action</a> </li>
+                                            <li><a href="#">Something else here</a> </li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a> </li>
+                                        </ul>
+                                    </div>
+                                    <%--<ul class="dropdown-menu pull-right" role="menu">
                                         <li><a href="#">Action</a>
                                         </li>
                                         <li><a href="#">Another action</a>
@@ -211,166 +229,135 @@
                                         <li class="divider"></li>
                                         <li><a href="#">Separated link</a>
                                         </li>
-                                    </ul>
+                                    </ul>--%>
                                 </div>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart" style="width:100%";>
+                            <div id="morris-area-chart" style="width:100%" aria-required="true">
+                                <div class="panel-body" >
+                                
+                           
                     <asp:GridView ID="GridView1" runat="server" AllowSorting="True" CssClass="table table-hover table-striped" GridLines="None"
             AutoGenerateColumns="False" ShowFooter="True" onrowcommand="GridView1_RowCommand" onrowdeleting="GridView1_RowDeleting" 
             onrowdatabound="GridView1_RowDataBound" onrowediting="GridView1_RowEditing" onselectedindexchanged="GridView1_SelectedIndexChanged" HorizontalAlign="Center" 
-            onrowupdating="GridView1_RowUpdating" onrowcancelingedit="GridView1_RowCancelingEdit">                      
-                        <Columns>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderText="Shift Code" 
-                    HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_shiftcode" runat="server" Text='<%# Eval("shift_code") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:Label ID="txt_shiftcode_edit" runat="server" Text='<%# Bind("shift_code") %>' 
-                             Width="50px"></asp:Label>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox  ID="txt_shiftcode" placeholder="G" runat="server" CssClass="form-control" Width="65px" MaxLength="2" ></asp:TextBox>
-                                </FooterTemplate>
-                                
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderText="Start Time"  
-                    HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_starttime" runat="server" 
-                            Text='<%# Eval("start_time","{0:HH:mm}") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox CssClass="form-control" ID="txt_starttime_edit" runat="server" 
-                            Text='<%# Bind("start_time","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox  ID="txt_starttime" placeholder="24:00" CssClass="form-control" runat="server" Width="65px" onkeyup="Autocolon(event,this.id);"
-                           onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" MaxLength="5"></asp:TextBox>
-                                </FooterTemplate>
- 
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderText="Break(O)"  
-                    HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_breaktimeo" runat="server" 
-                            Text='<%# Eval("break_time_out","{0:HH:mm}") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox CssClass="form-control" ID="txt_breaktimeo_edit" runat="server" 
-                            Text='<%# Bind("break_time_out","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox  ID="txt_breaktimeo" runat="server" Width="65px" onkeyup="Autocolon(event,this.id);"
-                           onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" placeholder="24:00" MaxLength="5" CssClass="form-control"></asp:TextBox>
-                                </FooterTemplate>
-                               
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderText="Break(I)"  
-                    HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_breaktimei" runat="server" 
-                            Text='<%# Eval("break_time_in","{0:HH:mm}") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox CssClass="form-control" ID="txt_breaktimei_edit" runat="server" 
-                            Text='<%# Bind("break_time_in","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox  ID="txt_breaktimei" runat="server" Width="65px" onkeyup="Autocolon(event,this.id);"
-                           onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" placeholder="24:00" MaxLength="5" CssClass="form-control"
-                                        ontextchanged="txt_breaktimei_TextChanged"></asp:TextBox>
-                                </FooterTemplate>
-                              
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderText="End Time"  
-                    HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_endtime" runat="server" 
-                            Text='<%# Eval("end_time","{0:HH:mm}") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox CssClass="form-control" ID="txt_endtime_edit" runat="server" 
-                            Text='<%# Bind("end_time","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox  ID="txt_endtime" runat="server" Width="65px" onkeypress="return onlyNumbersWithDot(event);"
-                                    placeholder="24:00" MaxLength="5" CssClass="form-control" onkeyup="Autocolon(event,this.id);"
-                           onblur="validateTime(this,this.id);"></asp:TextBox>
-                                </FooterTemplate>
-                                
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Left" 
-                    HeaderText="Shift Indicator"  HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl_shiftindicator" runat="server" 
-                            Text='<%# Eval("shift_indicator") %>'></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:DropDownList CssClass="form-control" ID="ddl_shiftindicator_edit" runat="server" DataTextField="Stat" 
-                            DataValueField="shift_indicator" SelectedValue='<%#Eval("shift_indicator")%>'>
-                                        <asp:ListItem>Select</asp:ListItem>
-                                        <asp:ListItem>Current Day</asp:ListItem>
-                                        <asp:ListItem>Night</asp:ListItem>
-                                        <asp:ListItem>Next Day</asp:ListItem>
-                                        <asp:ListItem>Flexi Time</asp:ListItem>
-                                        <asp:ListItem>Day Count</asp:ListItem>
-                                        <asp:ListItem>Student</asp:ListItem>
-                                    </asp:DropDownList>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                               
-                                    <asp:DropDownList CssClass="form-control" ID="ddl_shiftindicator" runat="server">
-                                        <asp:ListItem>Select</asp:ListItem>
-                                        <asp:ListItem>Current Day</asp:ListItem>
-                                        <asp:ListItem>Night</asp:ListItem>
-                                        <asp:ListItem>Next Day</asp:ListItem>
-                                        <asp:ListItem>Flexi Time</asp:ListItem>
-                                        <asp:ListItem>Day Count</asp:ListItem>
-                                        <asp:ListItem>Student</asp:ListItem>
-                                    </asp:DropDownList>
-                                   
-                                </FooterTemplate>
-                                <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
-                                <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                              <Itemtemplate>
-                                 <asp:ImageButton ID="btnEdit" ImageUrl="~/Images/edit_icon.png" runat="server" CommandName="Edit" />
-                                  <asp:ImageButton ID="btnDelete" ImageUrl="~/Images/delete_icon.jpg" runat="server" CommandName="Delete" />
-                              </Itemtemplate>
-                              <EditItemTemplate>
-                                    <asp:LinkButton ID="btnUpdate" CommandName="Update" runat="server" CssClass="btn btn-xs btn-success " ><i class="glyphicon glyphicon-saved"></i> Update</asp:LinkButton>
-                                <%--<asp:ImageButton ID="btnUpdate" ImageUrl="~/Images/save_icon.jpg"  runat="server" CommandName="Update" AccessKey />--%>
-                              </EditItemTemplate>
-                             
-                              <FooterTemplate>
-                                <asp:LinkButton ID="LinkButton1" CommandName="add" runat="server" 
-                              CssClass="btn btn-sm btn-success " ><i class="glyphicon glyphicon-floppy-disk "></i> Save</asp:LinkButton>
-                               </FooterTemplate>
-                              
-                            </asp:TemplateField>
-
-                           <%-- <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />--%>
-                        </Columns>
-                       
-                    </asp:GridView>
+            onrowupdating="GridView1_RowUpdating" onrowcancelingedit="GridView1_RowCancelingEdit" visible="true">    
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Shift Code" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_shiftcode" runat="server" Text='<%# Eval("shift_code") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:Label ID="txt_shiftcode_edit" runat="server" Text='<%# Bind("shift_code") %>' Width="50px"></asp:Label>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:TextBox ID="txt_shiftcode" runat="server" CssClass="form-control" MaxLength="2" placeholder="G" Width="65px"></asp:TextBox>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Start Time" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_starttime" runat="server" Text='<%# Eval("start_time","{0:HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txt_starttime_edit" runat="server" CssClass="form-control" Text='<%# Bind("start_time","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:TextBox ID="txt_starttime" runat="server" CssClass="form-control" MaxLength="5" onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" onkeyup="Autocolon(event,this.id);" placeholder="24:00" Width="65px"></asp:TextBox>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Break(O)" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_breaktimeo" runat="server" Text='<%# Eval("break_time_out","{0:HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txt_breaktimeo_edit" runat="server" CssClass="form-control" Text='<%# Bind("break_time_out","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:TextBox ID="txt_breaktimeo" runat="server" CssClass="form-control" MaxLength="5" onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" onkeyup="Autocolon(event,this.id);" placeholder="24:00" Width="65px"></asp:TextBox>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Break(I)" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_breaktimei" runat="server" Text='<%# Eval("break_time_in","{0:HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txt_breaktimei_edit" runat="server" CssClass="form-control" Text='<%# Bind("break_time_in","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:TextBox ID="txt_breaktimei" runat="server" CssClass="form-control" MaxLength="5" onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" onkeyup="Autocolon(event,this.id);" ontextchanged="txt_breaktimei_TextChanged" placeholder="24:00" Width="65px"></asp:TextBox>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="End Time" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_endtime" runat="server" Text='<%# Eval("end_time","{0:HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txt_endtime_edit" runat="server" CssClass="form-control" Text='<%# Bind("end_time","{0:HH:mm}") %>' Width="65px"></asp:TextBox>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:TextBox ID="txt_endtime" runat="server" CssClass="form-control" MaxLength="5" onblur="validateTime(this,this.id);" onkeypress="return onlyNumbersWithDot(event);" onkeyup="Autocolon(event,this.id);" placeholder="24:00" Width="65px"></asp:TextBox>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Shift Indicator" ItemStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lbl_shiftindicator" runat="server" Text='<%# Eval("shift_indicator") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:DropDownList ID="ddl_shiftindicator_edit" runat="server" CssClass="form-control" DataTextField="Stat" DataValueField="shift_indicator" SelectedValue='<%#Eval("shift_indicator")%>'>
+                                                    <asp:ListItem>Select</asp:ListItem>
+                                                    <asp:ListItem>Current Day</asp:ListItem>
+                                                    <asp:ListItem>Night</asp:ListItem>
+                                                    <asp:ListItem>Next Day</asp:ListItem>
+                                                    <asp:ListItem>Flexi Time</asp:ListItem>
+                                                    <asp:ListItem>Day Count</asp:ListItem>
+                                                    <asp:ListItem>Student</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:DropDownList ID="ddl_shiftindicator" runat="server" CssClass="form-control">
+                                                    <asp:ListItem>Select</asp:ListItem>
+                                                    <asp:ListItem>Current Day</asp:ListItem>
+                                                    <asp:ListItem>Night</asp:ListItem>
+                                                    <asp:ListItem>Next Day</asp:ListItem>
+                                                    <asp:ListItem>Flexi Time</asp:ListItem>
+                                                    <asp:ListItem>Day Count</asp:ListItem>
+                                                    <asp:ListItem>Student</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </FooterTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <Itemtemplate>
+                                                <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit_icon.png" />
+                                                <asp:ImageButton ID="btnDelete" runat="server" CommandName="Delete" ImageUrl="~/Images/delete_icon.jpg" />
+                                            </Itemtemplate>
+                                            <EditItemTemplate>
+                                                <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Update" CssClass="btn btn-xs btn-success "><i class="glyphicon glyphicon-saved"></i> Update</asp:LinkButton>
+                                                <%--<asp:ImageButton ID="btnUpdate" ImageUrl="~/Images/save_icon.jpg"  runat="server" CommandName="Update" AccessKey />--%>
+                                            </EditItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="add" CssClass="btn btn-sm btn-success "><i class="glyphicon glyphicon-floppy-disk "></i> Save</asp:LinkButton>
+                                            </FooterTemplate>
+                                        </asp:TemplateField>
+                                        <%-- <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />--%>
+                                    </Columns>
+                                </asp:GridView>
                             </div>
                         </div>
                         <!-- /.panel-body -->
+                            
                     </div>
 
                     <div class="panel panel-default">

@@ -52,7 +52,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
 
 
-                    
+
 
                     employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
                     employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
@@ -90,8 +90,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                                         ddl();
                                         btn_save.Visible = false;
                                         btn_skip.Visible = false;
-                                        employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                                        employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                                        //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
                                         admin();
                                         grd_ddl();
                                         Lbl();
@@ -189,14 +189,14 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
             if (s_login_role == "a")
             {
-                //employee.EmployeeId = 0;
+                employee.EmployeeId = 0;
                 employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
 
             }
 
             if (s_login_role == "h")
             {
-                //employee.EmployeeId = 0;
+                employee.EmployeeId = 0;
                 employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
             }
 
@@ -289,7 +289,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             //else
             //{
 
-            //    Response.Redirect("Employee_Profile.aspx");
+            Response.Redirect("Employee_Profile.aspx");
             //}
 
             if (_Value != "1")

@@ -18,15 +18,15 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connectionstring"]);
     PayRoll pay = new PayRoll();
     string loan_process = "";
-        
-    
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
-        pay.BranchId  = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
         if (!IsPostBack)
-        {            
+        {
             ddl_empid_load();
             ListBox1.Visible = false;
             ddl_mon_topost.Items.Insert(0, "Select");
@@ -114,34 +114,35 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
 
         else
         {
-            SqlCommand cmd_insert = new SqlCommand("insert into loan_post(loan_reqno,req_date,employeeid,employeename,loan_appid,loan_type,loan_name,loan_amount,month_to_posted,month_posted_on,rem_month,postedamt,balance_amt,approve_by,pn_companyid,pn_branchid) values('" + txt_loan_req.Text + "','" + txt_req_date.Text + "','" + ddl_emp.SelectedItem.Text + "','" + txt_empnam.Value + "','" + ddl_loan.SelectedItem.Text + "','" + txt_loan_type.Value + "','" + txt_loan_name.Value + "','" + txt_loan_amt.Value + "','" + ddl_mon_topost.SelectedItem.Value + "','" + ddl_mon_posted.SelectedItem.Value + "','" + txt_rem_mon.Value + "','" + txt_post_amt.Value + "','" + txt_bal_amt.Value + "','" + txt_app_by.Value + "','" + pay.CompanyId + "','" + pay.BranchId + "' )", con);
+            SqlCommand cmd_insert = new SqlCommand("insert into loan_post(loan_reqno,req_date,employeeid,employeename,loan_appid,loan_type,loan_name,loan_amount,month_to_posted,month_posted_on,rem_month,postedamt,balance_amt,approve_by,pn_companyid,pn_branchid) values('" + txt_loan_req.Text + "','" + Convert.ToDateTime(txt_req_date.Text) + "','" + ddl_emp.SelectedItem.Text + "','" + txt_empnam.Value + "','" + ddl_loan.SelectedItem.Text + "','" + txt_loan_type.Value + "','" + txt_loan_name.Value + "','" + txt_loan_amt.Value + "','" + ddl_mon_topost.SelectedItem.Value + "','" + ddl_mon_posted.SelectedItem.Value + "','" + txt_rem_mon.Value + "','" + txt_post_amt.Value + "','" + txt_bal_amt.Value + "','" + txt_app_by.Value + "','" + pay.CompanyId + "','" + pay.BranchId + "' )", con);
             cmd_insert.ExecuteNonQuery();
-            lbl_error.Text = "Record Inserted";
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Saved Successfully');", true);
+           
         }
-        
+
         con.Close();
     }
 
     public void ddl_empid_load()
     {
         con.Open();
-        SqlCommand cmd_ddl = new SqlCommand("select pn_employeeid from paym_employee where pn_companyid=" + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " ", con);
+        SqlCommand cmd_ddl = new SqlCommand("select pn_employeeid,Convert(nvarchar(50),EmployeeCode)+'-'+Convert(nvarchar(50),Employee_First_Name) as Employee_First_Name  from paym_employee where pn_companyid=" + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " ", con);
         SqlDataAdapter ad_ddl = new SqlDataAdapter(cmd_ddl);
         DataSet ds = new DataSet();
         ad_ddl.Fill(ds, "paym_employee");
         ddl_emp.DataSource = ds;
-        ddl_emp.DataTextField = "pn_employeeid";
+        ddl_emp.DataTextField = "Employee_First_Name";
         ddl_emp.DataValueField = "pn_employeeid";
-        ddl_emp.DataBind();              
+        ddl_emp.DataBind();
         con.Close();
         ddl_emp.Items.Insert(0, "Select");
-        ddl_loan.Items.Insert(0, "Select"); 
+        ddl_loan.Items.Insert(0, "Select");
     }
 
     protected void ddl_emp_SelectedIndexChanged(object sender, EventArgs e)
     {
         con.Open();
-        SqlCommand cmd_nam   = new SqlCommand("select employee_first_name from paym_employee where pn_companyid=" + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " and pn_employeeid='" + ddl_emp.SelectedItem.Value + "' ", con);
+        SqlCommand cmd_nam = new SqlCommand("select employee_first_name from paym_employee where pn_companyid=" + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " and pn_employeeid='" + ddl_emp.SelectedItem.Value + "' ", con);
         SqlDataReader rd_nam = cmd_nam.ExecuteReader();
         string emp_nam = "";
         if (rd_nam.Read())
@@ -149,9 +150,9 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
             emp_nam = rd_nam[0].ToString();
         }
         txt_empnam.Value = emp_nam;
-        
+
         con.Close();
-        
+
         ddl_loan_load();
 
     }
@@ -159,7 +160,7 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
     public void ddl_loan_load()
     {
         con.Open();
-        SqlCommand cmd_loan    = new SqlCommand("select loan_appid from loanentry where pn_companyid= " + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " and pn_employeeid='" + ddl_emp.SelectedItem.Value + "' ", con);
+        SqlCommand cmd_loan = new SqlCommand("select loan_appid from loanentry where pn_companyid= " + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " and pn_employeeid='" + ddl_emp.SelectedItem.Value + "' ", con);
         SqlDataAdapter ad_loan = new SqlDataAdapter(cmd_loan);
 
         DataSet ds = new DataSet();
@@ -168,8 +169,8 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
         ddl_loan.DataTextField = "loan_appid";
         ddl_loan.DataValueField = "loan_appid";
         ddl_loan.DataBind();
-        ddl_loan.Items.Insert(0, "Select"); 
-               
+        ddl_loan.Items.Insert(0, "Select");
+
         con.Close();
     }
     protected void ddl_loan_SelectedIndexChanged(object sender, EventArgs e)
@@ -189,7 +190,7 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
             cmd_ad.Fill(ds);
             ddl_mon_topost.DataSource = ds;
             ddl_mon_topost.DataTextField = "d_date1";
-            ddl_mon_topost.DataValueField = "d_date";            
+            ddl_mon_topost.DataValueField = "d_date";
             ddl_mon_topost.DataBind();
             ddl_mon_topost.Items.Insert(0, "Select");
 
@@ -218,8 +219,8 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
             ddl_mon_posted.DataSource = ds;
             ddl_mon_posted.DataBind();
             ddl_mon_posted.Items.Insert(0, "Select");
-        }     
-               
+        }
+
         con.Close();
     }
     public void loan_details()
@@ -227,27 +228,27 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
         con.Open();
         SqlCommand cmd_loan_details = new SqlCommand("select instalmentcount,loan_amt,loan_name,loan_process,balance_amt from loanentry where pn_companyid= " + pay.CompanyId + " and pn_branchid=" + pay.BranchId + " and pn_employeeid='" + ddl_emp.SelectedItem.Value + "' and loan_appid='" + ddl_loan.SelectedItem.Value + "' ", con);
         SqlDataReader rd_loan = cmd_loan_details.ExecuteReader();
-        
+
         string loan_amt = "";
         string loan_name = "";
-        
+
         int total_instal = 0;
         int instal_count = 0;
         double main_bal = 0;
 
         if (rd_loan.Read())
-        {           
-            loan_amt     = rd_loan["loan_amt"].ToString();
-            loan_name    = rd_loan["loan_name"].ToString();
+        {
+            loan_amt = rd_loan["loan_amt"].ToString();
+            loan_name = rd_loan["loan_name"].ToString();
             loan_process = rd_loan["loan_process"].ToString();
             total_instal = Convert.ToInt32(rd_loan["instalmentcount"]);
-            main_bal     = Convert.ToDouble(rd_loan["balance_amt"]);
+            main_bal = Convert.ToDouble(rd_loan["balance_amt"]);
         }
 
         if (loan_process == "By Flat Rate")
         {
             SqlCommand cmd_flat_process = new SqlCommand("select installement_count from payoutput_loan where loan_appid='" + ddl_loan.SelectedItem.Value + "' and loan_status='paid' ", con);
-            SqlDataReader rd_flat_process = cmd_flat_process.ExecuteReader();            
+            SqlDataReader rd_flat_process = cmd_flat_process.ExecuteReader();
 
             if (rd_flat_process.Read())
             {
@@ -256,7 +257,7 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
                     instal_count = Convert.ToInt32(rd_flat_process["installement_count"]);
                 }
             }
-            txt_rem_mon.Value = Convert.ToString(total_instal - instal_count);                       
+            txt_rem_mon.Value = Convert.ToString(total_instal - instal_count);
         }
 
         else if (loan_process == "By Diminishing Rate")
@@ -268,45 +269,46 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
             {
                 instal_count = Convert.ToInt32(rd_dim_process["installement_count"]);
             }
-            txt_rem_mon.Value = Convert.ToString(total_instal - instal_count);            
+            txt_rem_mon.Value = Convert.ToString(total_instal - instal_count);
         }
-        
+
         txt_loan_amt.Value = loan_amt;
         txt_loan_name.Value = loan_name;
         txt_loan_type.Value = loan_process;
-        txt_bal_amt.Value =Convert.ToString(main_bal);
+        txt_bal_amt.Value = Convert.ToString(main_bal);
         con.Close();
     }
     protected void btn_clear_Click(object sender, EventArgs e)
     {
-        txt_app_by.Value    = "";
-        txt_bal_amt.Value   = "";
-        txt_empnam.Value    = "";
-        
-        txt_loan_amt.Value  = "";
+        txt_app_by.Value = "";
+        txt_bal_amt.Value = "";
+        txt_empnam.Value = "";
+        ddl_emp.SelectedValue = "Select";
+        ddl_loan.SelectedValue = "Select";
+        txt_loan_amt.Value = "";
         txt_loan_name.Value = "";
-        txt_loan_req.Text  = "";
+        txt_loan_req.Text = "";
         txt_loan_type.Value = "";
-        txt_post_amt.Value  = "";
-        txt_rem_mon.Value   = "";
+        txt_post_amt.Value = "";
+        txt_rem_mon.Value = "";
         txt_req_date.Text = "";
     }
     protected void ddl_mon_topost_SelectedIndexChanged(object sender, EventArgs e)
     {
         con.Open();
         double posted_amt = 0;
-        if(txt_loan_type.Value=="By Flat Rate")
+        if (txt_loan_type.Value == "By Flat Rate")
         {
             SqlCommand cmd_post_flat = new SqlCommand("select instal_amt from payoutput_loan where d_date='" + ddl_mon_topost.SelectedItem.Value + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' ", con);
             SqlDataReader rd_post_flat = cmd_post_flat.ExecuteReader();
-            
+
             if (rd_post_flat.Read())
             {
                 posted_amt = Convert.ToDouble(rd_post_flat["instal_amt"]);
             }
-            txt_post_amt.Value =Convert.ToString(posted_amt);
+            txt_post_amt.Value = Convert.ToString(posted_amt);
         }
-        else if(txt_loan_type.Value=="By Diminishing Rate")
+        else if (txt_loan_type.Value == "By Diminishing Rate")
         {
             SqlCommand cmd_post_dim = new SqlCommand("select instal_amt from paym_loan_diminishing where eff_date='" + ddl_mon_topost.SelectedItem.Value + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' ", con);
             SqlDataReader rd_post_dim = cmd_post_dim.ExecuteReader();
@@ -315,15 +317,15 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
             {
                 posted_amt = Convert.ToDouble(rd_post_dim["instal_amt"]);
             }
-            txt_post_amt.Value =Convert.ToString(posted_amt);
+            txt_post_amt.Value = Convert.ToString(posted_amt);
         }
-        
+
         con.Close();
     }
     protected void btn_undo_Click(object sender, EventArgs e)
     {
         con.Open();
-        if(txt_loan_type.Value=="By Flat Rate")
+        if (txt_loan_type.Value == "By Flat Rate")
         {
             SqlCommand cmd_mon_tpost = new SqlCommand("select instal_amt from payoutput_loan where d_date='" + ddl_mon_topost.SelectedItem.Value + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_companyid='" + pay.CompanyId + "' and pn_branchid='" + pay.BranchId + "'", con);
             SqlDataReader rd_topost = cmd_mon_tpost.ExecuteReader();
@@ -341,14 +343,14 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
                 instal_amount1 = Convert.ToDouble(rd_posted["instal_amt"]);
             }
 
-            double tot = instal_amount1 - instal_amount;           
+            double tot = instal_amount1 - instal_amount;
 
             SqlCommand cmd_flat_post = new SqlCommand("update payoutput_loan set loan_status='Pending' where d_date='" + ddl_mon_topost.SelectedItem.Value + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_companyid='" + pay.CompanyId + "' and pn_branchid='" + pay.BranchId + "'", con);
             cmd_flat_post.ExecuteNonQuery();
             SqlCommand cmd_flat_post1 = new SqlCommand("update payoutput_loan set instal_amt='" + tot + "' where d_date='" + ddl_mon_posted.SelectedItem.Value + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_companyid='" + pay.CompanyId + "' and pn_branchid='" + pay.BranchId + "'", con);
             cmd_flat_post1.ExecuteNonQuery();
         }
-        else if(txt_loan_type.Value=="By Diminishing Rate")
+        else if (txt_loan_type.Value == "By Diminishing Rate")
         {
             SqlCommand cmd_mon_tpost = new SqlCommand("select instal_amt from paym_loan_diminishing where eff_date='" + ddl_mon_topost.SelectedItem.Value + "' and pn_employeeid='" + ddl_emp.SelectedItem.Text + "' and loan_appid='" + ddl_loan.SelectedItem.Text + "' and pn_companyid='" + pay.CompanyId + "' and pn_branchid='" + pay.BranchId + "'", con);
             SqlDataReader rd_topost = cmd_mon_tpost.ExecuteReader();
@@ -419,6 +421,6 @@ public partial class Hrms_PayRoll_Loanpost : System.Web.UI.Page
     }
     protected void txt_loan_req_TextChanged(object sender, EventArgs e)
     {
-        
+
     }
 }

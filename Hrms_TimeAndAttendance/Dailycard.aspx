@@ -7,6 +7,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
+    <strong>
+
 <script language="javascript" type="text/javascript">
     //This Script is used to maintain Grid Scroll on Partial Postback
     var scrollTop;
@@ -113,76 +115,67 @@
     }
     </script>
 
+     </strong>
+
      <link href="../Css/Cand_BaseStyle.css" rel="stylesheet" type="text/css" />
+     <strong>
      <script type="text/javascript" language="javascript" src="../../Scripts/Datavalid.js"></script>
     
     <script language="javascript" type="text/javascript">
 
 
-   function show_message()
-    {
-        alert("Course Name Already Exist");
-    }
-    
-    function show_Error()
-    {
-        alert("Enter Course Name");
-    }
-  
-    function fnSave()
-    {
-        if(document.aspnetForm.ctl00$ContentPlaceHolder1$CourseName.value == "")
-        {
-            alert("Enter Course Name");
-            aspnetForm.ctl00$ContentPlaceHolder1$CourseName.focus();
-            return false;
-        }                        
-        else
-        {
-            return true;
+        function show_message() {
+            alert("Course Name Already Exist");
         }
-    } 
-    function coudnt_del()
-    {
-        alert("Sorry,Couldnt Delete Because it was assigned to employee");
-    }  
-    
- function fn_date(event,txtid)
- {  
-       var len;
-       var txtvalue; 
-       var bool_obj; 
-       var i;    
-      
-       txtvalue= document.getElementById(txtid).value;
-       txtlen=txtvalue.length;  
-       
-  if(event.keyCode!=8 && event.keyCode!=46 && event.keyCode!=35 && event.keyCode!=36 && event.keyCode!=37 && event.keyCode!=38 && event.keyCode!=39 && event.keyCode!=40)     
-   {    
-       if(txtlen!=0)
-       {       
-           bool_obj=true;
-                      
-           if(bool_obj==true)
-             {
-                  if(txtlen==2 || txtlen==5)
-                  {
-                  document.getElementById(txtid).value=txtvalue+"/";
-                  }
-                  else
-                  {
-                  document.getElementById(txtid).value=txtvalue;
-                  }
-             }
-             else
-             {            
-               document.getElementById(txtid).value= txtvalue.substring(0,txtlen-1);              
-             }                       
-        }  
-    }                                 
- }
-     
+
+        function show_Error() {
+            alert("Enter Course Name");
+        }
+
+        function fnSave() {
+            if (document.aspnetForm.ctl00$ContentPlaceHolder1$CourseName.value == "") {
+                alert("Enter Course Name");
+                aspnetForm.ctl00$ContentPlaceHolder1$CourseName.focus();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function coudnt_del() {
+            alert("Sorry,Couldnt Delete Because it was assigned to employee");
+        }
+
+        function fn_date(event, txtid) {
+            var len;
+            var txtvalue;
+            var bool_obj;
+            var i;
+
+            txtvalue = document.getElementById(txtid).value;
+            txtlen = txtvalue.length;
+
+            if (event.keyCode != 8 && event.keyCode != 46 && event.keyCode != 35 && event.keyCode != 36 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40) {
+                if (txtlen != 0) {
+                    bool_obj = true;
+
+                    if (bool_obj == true) {
+                        if (txtlen == 2 || txtlen == 5) {
+                            document.getElementById(txtid).value = txtvalue + "/";
+                        }
+                        else {
+                            document.getElementById(txtid).value = txtvalue;
+                        }
+                    }
+                    else {
+                        document.getElementById(txtid).value = txtvalue.substring(0, txtlen - 1);
+                    }
+                }
+            }
+        }
+
     </script>
+    </strong>
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
 
@@ -445,7 +438,7 @@
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Emp Name" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Emp Name"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lbl_empname" runat="server" Text='<%# Eval("emp_name") %>'></asp:Label>
@@ -456,27 +449,27 @@
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" Width="100px" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Shift Code" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Shift Code"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lbl_shiftcode" runat="server" Text='<%# Eval("shift_code") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:Label ID="ddl_editshiftcode1" runat="server" 
+                                                                <asp:Label ID="ddl_editshiftcode1" runat="server"
                                                                     Text='<%# Eval("shift_code") %>'>
                                                                 </asp:Label>
                                                             </EditItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Date" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Date"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <EditItemTemplate>
-                                                                <asp:Label ID="txt_date_edit" runat="server" Height="21px" 
+                                                                <asp:Label ID="txt_date_edit" runat="server" Height="21px"
                                                                     Text='<%# Bind("dates","{0:dd/MM/yyyy}") %>' Width="50px"></asp:Label>
                                                             </EditItemTemplate>
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_date" runat="server" 
+                                                                <asp:Label ID="lbl_date" runat="server"
                                                                     Text='<%# Eval("dates","{0:dd/MM/yyyy}") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
@@ -492,67 +485,67 @@
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px"
                                                             HeaderText="In Time" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="50px">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_starttime" runat="server" 
-                                                                    Text='<%# Eval("intime") %>'></asp:Label>
+                                                                <asp:Label ID="lbl_starttime" runat="server"
+                                                                    Text='<%# Eval("intime" )  %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txt_starttime_edit" runat="server" onkeyup="fn_time(event,this.id);" onFocus="this.select()"
-                                                                    Text='<%# Bind("intime") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
+                                                                    Text='<%# Bind("intime","{0:HH:mm:ss}") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
                                                             </EditItemTemplate>
-                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <%--<HeaderStyle HorizontalAlign="Left" />--%>
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px"
                                                             HeaderText="Late In" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="50px">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_breaktimei" runat="server" 
+                                                                <asp:Label ID="lbl_breaktimei" runat="server"
                                                                     Text='<%# Eval("late_in") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txt_breaktimei_edit" runat="server" onkeyup="fn_time(event,this.id);" onFocus="this.select()"
-                                                                    Text='<%# Bind("late_in") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
+                                                                    Text='<%# Bind("late_in","{0:HH:mm:ss}") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" Width="50px" />
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px"
                                                             HeaderText="Early Out" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="50px">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_eout" runat="server" 
+                                                                <asp:Label ID="lbl_eout" runat="server"
                                                                     Text='<%# Eval("early_out") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txt_eout_edit" runat="server" onkeyup="fn_time(event,this.id);" onFocus="this.select()"
-                                                                    Text='<%# Bind("early_out") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
+                                                                    Text='<%# Bind("early_out","{0:HH:mm:ss}") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" Width="50px" />
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px"
                                                             HeaderText="Out Time" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="50px">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_endtime" runat="server" 
+                                                                <asp:Label ID="lbl_endtime" runat="server"
                                                                     Text='<%# Eval("outtime") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txt_endtime_edit" runat="server" onkeyup="fn_time(event,this.id);" onFocus="this.select()"
-                                                                    Text='<%# Bind("outtime") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
+                                                                    Text='<%# Bind("outtime","{0:HH:mm:ss}") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" Width="50px" />
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderStyle-Width="50px"
                                                             HeaderText="Late Out" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="50px">
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txt_breaktimeo_edit" runat="server" onkeyup="fn_time(event,this.id);" onFocus="this.select()"
-                                                                    Text='<%# Bind("Late_out") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
+                                                                    Text='<%# Bind("Late_out","{0:HH:mm:ss}") %>' CssClass="form-control" Width="80px" MaxLength="5"></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lbl_breaktimeo" runat="server" Text='<%# Eval("Late_out") %>'></asp:Label>
@@ -561,20 +554,20 @@
                                                             <ItemStyle HorizontalAlign="Left" Width="50px" />
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="OT Hrs" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="OT Hrs"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <EditItemTemplate>
-                                                                <asp:TextBox ID="txt_othrs_edit" Enabled="false" runat="server"  onFocus="this.select()"
+                                                                <asp:TextBox ID="txt_othrs_edit" Enabled="false" runat="server" onFocus="this.select()"
                                                                     Text='<%# Bind("ot_hrs","{0:HH:mm}") %>' Width="50px"></asp:TextBox>
                                                             </EditItemTemplate>
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lbl_othrs" runat="server" 
+                                                                <asp:Label ID="lbl_othrs" runat="server"
                                                                     Text='<%# Eval("ot_hrs","{0:HH:mm}") %>'></asp:Label>
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Leave Name" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Leave Name"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <EditItemTemplate>
                                                                 <asp:DropDownList ID="ddl_leavename" CssClass="form-control" runat="server">
@@ -597,7 +590,7 @@
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Status" 
+                                                        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Status"
                                                             ItemStyle-HorizontalAlign="Left">
                                                             <EditItemTemplate>
                                                                 <asp:DropDownList ID="ddl_status" CssClass="form-control" runat="server">
@@ -631,8 +624,33 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                         <td align="Left" colspan="7" >
+                                           <asp:Label ID="Present" runat="server" style="color:indianred" >'X'</asp:Label>
+                                           <asp:Label ID="Label1" runat="server" >  &nbsp;- Present</asp:Label>
+                                                &nbsp;  &nbsp;
+                                           <asp:Label ID="Absent" runat="server" style="color:indianred" >'A'</asp:Label>
+                                           <asp:Label ID="Label2" runat="server" >  &nbsp;- Absent</asp:Label>
+                                                &nbsp;  &nbsp;
+                                          <asp:Label ID="Leave" runat="server" style="color:indianred">'L'</asp:Label>
+                                          <asp:Label ID="Label3" runat="server" >  &nbsp;- Leave</asp:Label>
+                                                &nbsp;  &nbsp;
+                                           <asp:Label ID="Permission" runat="server" style="color:indianred"  >'P'</asp:Label>
+                                           <asp:Label ID="Label4" runat="server" >  &nbsp;- Permission</asp:Label>
+                                                  &nbsp;  &nbsp;
+                                           <asp:Label ID="WeekOff" runat="server" style="color:indianred">'WW'</asp:Label>
+                                           <asp:Label ID="Label5" runat="server" >  &nbsp;- Week_off</asp:Label>
+                                                 &nbsp;  &nbsp;
+                                            <asp:Label ID="Holiday" runat="server" style="color:indianred" >'H'</asp:Label>
+                                            <asp:Label ID="Label6" runat="server" >  &nbsp;- Holiday</asp:Label>
+                                                 &nbsp;  &nbsp;
+                                            <asp:Label ID="OnDuty" runat="server" style="color:indianred">'D'</asp:Label>
+                                            <asp:Label ID="Label7" runat="server" >  &nbsp;- On_Duty</asp:Label>
+                                                 &nbsp;  &nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td align="center" colspan="7" >
-                                                &nbsp;</td>
+                                                <strong></strong></td>
                                         </tr>
                                     </tbody>
                                 </table> 
@@ -645,10 +663,5 @@
                     </div>
 
     </asp:Content>
-
-
-
-
-
 
 

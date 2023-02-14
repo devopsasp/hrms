@@ -1,22 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HRMS", ".", "{F1262BAB-B679-4691-B5C4-16819CD7969A}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HRMS - Backup - 12-12-20", ".", "{F1262BAB-B679-4691-B5C4-16819CD7969A}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50964"
 		Debug.AspNetCompiler.PhysicalPath = "..\HRMS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50964\"
-		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.Updateable = "false"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_50964"
 		Release.AspNetCompiler.PhysicalPath = "..\HRMS\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50964\"
-		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.Updateable = "false"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
@@ -28,12 +28,18 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Release|x86.ActiveCfg = Debug|Any CPU
+		{F1262BAB-B679-4691-B5C4-16819CD7969A}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

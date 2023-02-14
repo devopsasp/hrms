@@ -476,7 +476,7 @@
                                                                     <asp:Label ID="Label13" Visible="false" runat="server" Text='<%# Eval("sno") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:Label ID="txt_sno" Visible="false" runat="server" Text='<%# Bind("sno") %>' Width="25px"></asp:Label>
+                                                                    <asp:Label ID="txt_sno" Visible="false" runat="server" Text='<%# Bind("sno") %>' ></asp:Label>
                                                                 </EditItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
@@ -620,12 +620,7 @@
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Left" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Comments" ItemStyle-HorizontalAlign="Center">
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="Label24" runat="server" Text='<%# Eval("Comments") %>'></asp:Label>
-                                                                </ItemTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                            </asp:TemplateField>
+                                                   
                                                             <asp:CommandField ShowDeleteButton="True" ShowEditButton="true" />
                                                         </Columns>
                                                     </asp:GridView>

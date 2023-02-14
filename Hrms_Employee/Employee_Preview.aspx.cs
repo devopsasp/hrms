@@ -871,8 +871,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
             if (s_login_role == "a")
             {
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+               // employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
                 emp();
             }
 
@@ -1068,20 +1068,20 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         }
     }
 
-    protected void lbtn_training_Click(object sender, EventArgs e)
-    {
+    //protected void lbtn_training_Click(object sender, EventArgs e)
+    //{
 
-        try
-        {
-            Response.Cookies["Profile_Check"].Value = "1";
-            Response.Cookies["preview_emp"].Value = "2";
-            Response.Redirect("../Hrms_Employee/Employee_Training.aspx");
-        }
-        catch (Exception ex)
-        {
-            lbl_Error.Text = "Error";
-        }
-    }
+    //    try
+    //    {
+    //        Response.Cookies["Profile_Check"].Value = "1";
+    //        Response.Cookies["preview_emp"].Value = "2";
+    //        Response.Redirect("../Hrms_Employee/Employee_Training.aspx");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        lbl_Error.Text = "Error";
+    //    }
+    //}
 
     public void nil()
     {

@@ -68,6 +68,9 @@ public partial class Hrms_Employee_Default3 : System.Web.UI.Page
                                 case "a": if (pr_emp == 1)
                                     {
                                         ddl();
+                                        admin();
+                                        grd_ddl();
+                                        Lbl();    
                                         btn_update.Visible = false;
                                     }
                                     else
@@ -75,9 +78,9 @@ public partial class Hrms_Employee_Default3 : System.Web.UI.Page
                                         ddl();
                                         btn_save.Visible = false;
                                         btn_skip.Visible = false;
-                                        employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                                        employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                                        admin();
+                                        //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                                       admin();
                                         grd_ddl();
                                         Lbl();
                                     }
@@ -169,7 +172,7 @@ public partial class Hrms_Employee_Default3 : System.Web.UI.Page
             if (s_login_role == "a")
             {
                 //employee.EmployeeId = 0;
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
             if (s_login_role == "h")
             {
@@ -233,8 +236,8 @@ public partial class Hrms_Employee_Default3 : System.Web.UI.Page
         {
             if (s_login_role == "a")
             {
-                employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+               // employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
             if (s_login_role == "h")
             {

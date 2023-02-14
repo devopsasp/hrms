@@ -97,6 +97,7 @@
         </tr>
         <tr>
             <td align="left">
+               <%--  <asp:Label ID="Label2" runat="server" Text=";Salary Computation by"></asp:Label>--%>
                 &nbsp;Salary Computation by
                 <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
                     onselectedindexchanged="RadioButtonList1_SelectedIndexChanged" 
@@ -113,6 +114,8 @@
         </tr>
         <tr>
             <td align="center">
+                   
+                    <%--<asp:Label ID="Label1" runat="server" Text="This page access for Branch Users only" Font-Bold="true" Font-Size="Larger" ></asp:Label>--%>
                 <asp:Panel ID="Panel1" runat="server" Height="100%" HorizontalAlign="Center" 
                     Width="100%" Wrap="False">
                     <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 

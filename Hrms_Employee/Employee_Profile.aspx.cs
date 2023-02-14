@@ -98,7 +98,7 @@ public partial class Hrms_Employee_Default2 : System.Web.UI.Page
                             //lbl_empcodename.Text = "New Employee";
                         }
 
-                        lbl_Error.Text = Request.Cookies["Profile_Error"].Value;
+                        //lbl_Error.Text = Request.Cookies["Profile_Error"].Value;
                        
                         switch (s_login_role)
                         {
@@ -842,9 +842,9 @@ public partial class Hrms_Employee_Default2 : System.Web.UI.Page
                     {
                         employee.EmployeeId = 0;
 
-                        employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                        pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                        c.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                        //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                        //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                        //c.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
                     }
 
                     if (s_login_role == "h")

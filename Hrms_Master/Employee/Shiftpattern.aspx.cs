@@ -49,7 +49,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
                 switch (s_login_role)
                 {
                     case "a":
-                
+                    ddl_load1();
                         break;
 
                     case "h": ddl_load();
@@ -127,6 +127,27 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         //}
         //rdrdel.Close();
 
+    }
+    public void ddl_load1()
+    {
+        myConnection.Open();
+        SqlCommand cmd_ddl = new SqlCommand();
+
+        if (s_login_role == "a")
+        {
+            cmd_ddl = new SqlCommand("select v_categoryname, pn_CategoryID from paym_category where pn_companyid='" + employee.CompanyId + "' and branchid='" + employee.BranchId + "' ", myConnection);
+        }
+
+        SqlDataAdapter ddl = new SqlDataAdapter(cmd_ddl);
+        DataSet ds = new DataSet();
+        ddl.Fill(ds, "paym_category");
+        ddl_category.DataTextField = "v_categoryname";
+        ddl_category.DataValueField = "pn_CategoryID";
+        ddl_category.DataSource = ds;
+        ddl_category.DataBind();
+        ddl_category.Items.Insert(0, "Select");
+        ddl_category.Items.Insert(1, "All");
+        myConnection.Close();
     }
 
 

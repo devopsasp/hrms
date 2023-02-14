@@ -46,7 +46,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
     private static Microsoft.Office.Interop.Excel.Sheets mWorkSheets;
     private static Microsoft.Office.Interop.Excel.Worksheet mWSheet1;
     private static Microsoft.Office.Interop.Excel.Application oXL;
-    char s_login_role;
+    string s_login_role;
     int i = 0, j, temp_count = 0; //count = 0, counting = 0, temp_mon = 0, cur_yr, yr_it;
     string query = "", s_form; //str_edu = "", s_Report = "", emp_code = "";
     string fromdate = "", todate, month, year;
@@ -59,7 +59,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["Msg_session"] = "";
+        
         Session["Period"] = "";
         Session["Repordid"] = "";
 
@@ -67,11 +67,11 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         c.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
 
-        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+         pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
         //lblmsg.Text = "";
         lbl_error.Text = "";
@@ -101,31 +101,22 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
 
                 switch (s_login_role)
                 {
-                    case 'a': 
-                        //admin();        
-                        //tbl_esireport.Visible = false;
-
-                        //tbl_details.Visible = false;
+                    case "a":
                         btn_Report.Visible = false;
-
                         ddl_Branch.Visible = true;
                         ddl_Branch_load();
-                        //session_check();
+                        ddl_Department_load();
+
                         break;
 
-                    case 'h':
-                        //hr();
+                    case "h":
                         ddl_Branch.Visible = false;
                         ddl_Department_load();
-                        //tbl_esireport.Visible = true;
-                        chkEmployee_load();
-                        //pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-                        //employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-                        //c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-                        session_check();
-                        break;
 
-                    case 'u':
+                        break;
+                    
+
+                    case "u":
                         s_form = "56";
 
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
@@ -134,13 +125,13 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                         {
                             ddl_Branch.Visible = false;
                             //tbl_esireport.Visible = true;
-                            chkEmployee_load();
+                           // chkEmployee_load();
                         }
                         else
                         {
                             //ddl_Branch.Visible = false;
                             //tbl_esireport.Visible = false;
-                            Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                            Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                             Response.Redirect("~/Company_Home.aspx");
                         }
 
@@ -148,11 +139,11 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                         //session_check();
                         break;
 
-                    case 'e':
+                    case "e":
                         ddl_Branch.Visible = false;
                         ListItem li = new ListItem();
-                        li.Text = Session["Login_temp_EmpCodeName"].ToString();
-                        li.Value = Session["Login_temp_EmployeeID"].ToString();
+                        li.Text = Request.Cookies["EmpCodeName"].Value;
+                        li.Value = Request.Cookies["Login_temp_EmployeeID"].Value;
                         li.Selected = true;
                         chk_Empcode.Items.Clear();
                         chk_Empcode.Items.Add(li);
@@ -162,7 +153,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                         break;
 
                     default:
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("~/Company_Home.aspx");
                         break;
                 }
@@ -170,7 +161,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
             else
             {
 
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("~/Company_Home.aspx");
             }
         }
@@ -178,30 +169,23 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
 
     public void admin()
     {
-        //manually
-        //if (Convert.ToString(Session["ses_report"]) == "1")
-        //{
-        //    EmployeeList = employee.fn_getAllEmployees();
-        //}
-        //else
-        //{
-        //    EmployeeList = employee.fn_getOldEmployees();
 
-        //}
-        //19-05-09
-        //EmployeeList = employee.fn_getAllEmployees();
-        //if (EmployeeList.Count > 0)
-        //{
-        //    chk_Empcode.DataSource = EmployeeList;
-        //    chk_Empcode.DataTextField = "LastName";
-        //    chk_Empcode.DataValueField = "EmployeeId";
-        //    chk_Empcode.DataBind();
-        //}
-        //else
-        //{
-        //    lbl_error.Text = "No employees";
+        EmployeeList = employee.fn_getEmployeeList(employee);
 
-        //}
+        if (EmployeeList.Count > 0)
+        {
+            chk_Empcode.DataSource = EmployeeList;
+            chk_Empcode.DataTextField = "LastName";
+            chk_Empcode.DataValueField = "EmployeeId";
+            chk_Empcode.DataBind();
+        }
+        else
+        {
+            lbl_error.Text = "No employees";
+            chk_Empcode.Items.Clear();
+        }
+
+
         //employee.temp_str = "select * from Temp_Employee";
 
         //EmpFirstList = employee.Temp_Selected_EmployeeList(employee);
@@ -213,38 +197,34 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
         //}  
     }
 
+
     public void hr()
     {
+
         try
         {
-            if (Convert.ToString(Session["ses_report"]) == "1")
+            EmployeeList = employee.fn_getEmployeeList(employee);
+            if (EmployeeList.Count > 0)
             {
-                EmployeeList = employee.fn_getEmployeeList(employee);
+
+                chk_Empcode.DataSource = EmployeeList;
+                chk_Empcode.DataValueField = "EmployeeId";
+                chk_Empcode.DataTextField = "LastName";
+                chk_Empcode.DataBind();
+
             }
             else
             {
-                EmployeeList = employee.fn_getOldEmployeeList(employee);
-
+                lbl_error.Text = "No employees";
+                chk_Empcode.Items.Clear();
             }
-            //19-05-09
-            //if (EmployeeList.Count > 0)
-            //{
-            //    chk_Empcode.DataSource = EmployeeList;
-            //    chk_Empcode.DataTextField = "LastName";
-            //    chk_Empcode.DataValueField = "EmployeeId";
-            //    chk_Empcode.DataBind();
-            //}
-            //else
-            //{
-            //    lbl_error.Text = "No employees";
-
-            //}
         }
         catch (Exception ex)
         {
             lbl_error.Text = "Error";
         }
     }
+
 
 
     public void ddl_Department_load()
@@ -269,7 +249,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                     ListItem es_list = new ListItem();
 
                     es_list.Text = "All";
-                    es_list.Value = "0";
+                    es_list.Value = "1";
                     ddl_department.Items.Add(es_list);
                 }
                 else
@@ -281,37 +261,52 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                 }
             }
         }
-    }
-
-    public void session_check()
-    {
-        string s = Convert.ToString(Session["Query_Session"]);
-        switch (Convert.ToString(Session["Query_Session"]))
+        if (ddl_department.SelectedIndex != 0)
         {
-            case "start":
-                lbl_error.Text = "Welcome To Report Section!";
-                Session["Query_Session"] = "start";
-                break;
+            if (s_login_role == "a")
+            {
+                admin();
+            }
+            if (s_login_role == "h")
+            {
+                hr();
+            }
 
-            case "nil":
-                lbl_error.Text = "No Result Found";
-                Session["Query_Session"] = "start";
-                break;
-
-            case "back":
-                lbl_error.Text = "";
-                Session["Query_Session"] = "start";
-                break;
-
-            default:
-                final_query_execute();
-                break;
         }
+
     }
+
+
+
+    //public void session_check()
+    //{
+    //    string s = Request.Cookies["Query_Session"].Value;
+    //    switch (Request.Cookies["Query_Session"].Value)
+    //    {
+    //        case "start":
+    //            lbl_error.Text = "Welcome To Report Section!";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        case "nil":
+    //            lbl_error.Text = "No Result Found";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        case "back":
+    //            lbl_error.Text = "";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        default:
+    //            final_query_execute();
+    //            break;
+    //    }
+    //}
 
     public void final_query_execute()
     {
-        employee.temp_str = (string)Session["Query_Session"];
+        employee.temp_str = Request.Cookies["Query_Session"].Value;
 
         EmployeeList = employee.Temp_Selected_EmployeeList(employee);
         if (EmployeeList.Count > 0)
@@ -329,12 +324,12 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
             //    }
             //}
             lbl_error.Text = EmployeeList.Count + " Employees Selected!";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
         }
         else
         {
             lbl_error.Text = "No Employees has been selected";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
         }
     }
 
@@ -351,8 +346,8 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
             //tbl_details.Visible = true;
             btn_Report.Visible = true;
 
-            session_check();
-            chkEmployee_load();
+           // session_check();
+            //chkEmployee_load();
         }
         else
         {
@@ -371,7 +366,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
         i_month = Convert.ToInt32(month);
         i_year = Convert.ToInt32(year);
 
-        if (s_login_role == 'a')
+        if (s_login_role == "a")
         {
             pay.BranchId = (int)ViewState["ESI_BranchID"];
             employee.BranchId = (int)ViewState["ESI_BranchID"];
@@ -642,7 +637,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
 
     public void chkEmployee_load()
     {
-        if (s_login_role == 'a')
+        if (s_login_role == "a")
         {
             pay.BranchId = (int)ViewState["ESI_BranchID"];
             employee.BranchId = (int)ViewState["ESI_BranchID"];
@@ -670,7 +665,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
         i_month = Convert.ToInt32(month);
         i_year = Convert.ToInt32(year);
 
-        if (s_login_role == 'a')
+        if (s_login_role == "a")
         {
             pay.BranchId = (int)ViewState["ESI_BranchID"];
             employee.BranchId = (int)ViewState["ESI_BranchID"];
@@ -769,7 +764,7 @@ public partial class Hrms_Reports_EsiReport : System.Web.UI.Page
                         query = "set dateformat dmy;select a.ESIno,a.Employee_First_Name, b.Paid_Days, b.NetPay from paym_employee a, PayOutput_ESI b where a.pn_EmployeeID = b.pn_EmployeeID and a.pn_BranchID = b.pn_BranchID and a.pn_EmployeeID = " + chk_Empcode.Items[i].Value + " and b.d_Date = '" + fromdate + "' and a.pn_branchid = " + employee.BranchId + ";set dateformat mdy";
                         PayList = pay.fn_getESI(query);
                         if (PayList[0].ESI_No == "")
-                            esino = "0";
+                            esino = "N/A";
                         else
                             esino = PayList[0].ESI_No;
                         mWSheet1.Cells[rowCount, 1] = esino;

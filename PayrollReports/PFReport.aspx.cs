@@ -42,7 +42,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
 
     Collection<Employee> EmployeeList;
     Collection<PayRoll> PayList;
-    char s_login_role;
+    string s_login_role;
 
     int i = 0, j, temp_count = 0;
     //int i_sin, i_all, i_emp, earn_count = 0, ded_count = 0, cur_count = 0;
@@ -56,20 +56,20 @@ public partial class PayrollReports_Default : System.Web.UI.Page
     //bool emp_check = false;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["Msg_session"] = "";
+        
         Session["Repordid"] = "";
-
+       
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         pay.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         c.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
 
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+         pay.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
 
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
         lbl_error.Text = "";
-        
+        //Label2.Visible = false;
         if (!IsPostBack)
         {
             date_load();
@@ -108,24 +108,19 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             {
                 switch (s_login_role)
                 {
-                    case 'a': 
-                        //admin();
-                        //session_check();
-
+                    case "a":
                         ddl_Branch.Visible = true;
                         ddl_Branch_load();
-                        break;
-
-                    case 'h':
-                        //hr();
-                        //session_check();
                         ddl_Department_load();
-                        ddl_Branch.Visible = false;
-                        chkEmployee_load();
-                        session_check();
+
                         break;
 
-                    case 'u': 
+                    case "h":
+                        ddl_Branch.Visible = false;
+                        ddl_Department_load();
+
+                        break;
+                    case "u": 
                         s_form = "55";
 
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
@@ -133,22 +128,22 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                         if (ds_userrights.Tables[0].Rows.Count > 0)
                         {
                             ddl_Branch.Visible = false;
-                            chkEmployee_load();
-                            session_check();
+                     //       chkEmployee_load();
+                           // session_check();
                         }
                         else
                         {
-                            Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                            Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                             Response.Redirect("~/Company_Home.aspx");
                         }
                         break;
 
 
-                    case 'e':
+                    case "e":
                         ddl_Branch.Visible = false;
                         ListItem li = new ListItem();
-                        li.Text = Session["Login_temp_EmpCodeName"].ToString();
-                        li.Value = Session["Login_temp_EmployeeID"].ToString();
+                        li.Text = Request.Cookies["EmpCodeName"].Value;
+                        li.Value = Request.Cookies["Login_temp_EmployeeID"].Value;
                         li.Selected = true;
                         chk_Empcode.Items.Add(li);
                         chk_Empcode.Enabled = false;
@@ -156,7 +151,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                         break;
 
                     default:
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("~/Company_Home.aspx");
                         break;
                 }
@@ -165,7 +160,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             else
             {
 
-                Session["Msg_session"] = "Create Company";
+                Response.Cookies["Msg_Session"].Value = "Create Company";
                 Response.Redirect("~/Company_Home.aspx");
             }
         }
@@ -173,30 +168,21 @@ public partial class PayrollReports_Default : System.Web.UI.Page
 
     public void admin()
     {
-        //manually
-        //if (Convert.ToString(Session["ses_report"]) == "1")
-        //{
-        //    EmployeeList = employee.fn_getAllEmployees();
-        //}
-        //else
-        //{
-        //    EmployeeList = employee.fn_getOldEmployees();
 
-        //}
-        //19-05-2009
-        //EmployeeList = employee.fn_getAllEmployees();
-        //if (EmployeeList.Count > 0)
-        //{
-        //    chk_Empcode.DataSource = EmployeeList;
-        //    chk_Empcode.DataTextField = "LastName";
-        //    chk_Empcode.DataValueField = "EmployeeId";
-        //    chk_Empcode.DataBind();
-        //}
-        //else
-        //{
-        //    lbl_error.Text = "No employees";
+        EmployeeList = employee.fn_getEmployeeList(employee);
 
-        //}
+        if (EmployeeList.Count > 0)
+        {
+            chk_Empcode.DataSource = EmployeeList;
+            chk_Empcode.DataTextField = "LastName";
+            chk_Empcode.DataValueField = "EmployeeId";
+            chk_Empcode.DataBind();
+        }
+        else
+        {
+            lbl_error.Text = "No employees";
+            chk_Empcode.Items.Clear();
+        }
 
 
         //employee.temp_str = "select * from Temp_Employee";
@@ -209,33 +195,26 @@ public partial class PayrollReports_Default : System.Web.UI.Page
 
         //}  
     }
-
     public void hr()
     {
+
         try
         {
-            if (Convert.ToString(Session["ses_report"]) == "1")
+            EmployeeList = employee.fn_getEmployeeList(employee);
+            if (EmployeeList.Count > 0)
             {
-                EmployeeList = employee.fn_getEmployeeList(employee);
+
+                chk_Empcode.DataSource = EmployeeList;
+                chk_Empcode.DataValueField = "EmployeeId";
+                chk_Empcode.DataTextField = "LastName";
+                chk_Empcode.DataBind();
+
             }
             else
             {
-                EmployeeList = employee.fn_getOldEmployeeList(employee);
-
+                lbl_error.Text = "No employees";
+                chk_Empcode.Items.Clear();
             }
-            //19-05-2009
-            //if (EmployeeList.Count > 0)
-            //{
-            //    chk_Empcode.DataSource = EmployeeList;
-            //    chk_Empcode.DataTextField = "LastName";
-            //    chk_Empcode.DataValueField = "EmployeeId";
-            //    chk_Empcode.DataBind();
-            //}
-            //else
-            //{
-            //    lbl_error.Text = "No employees";
-
-            //}
         }
         catch (Exception ex)
         {
@@ -265,7 +244,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                     ListItem es_list = new ListItem();
 
                     es_list.Text = "All";
-                    es_list.Value = "0";
+                    es_list.Value = "1";
                     ddl_department.Items.Add(es_list);
                 }
                 else
@@ -277,42 +256,59 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 }
             }
         }
-    }
 
-
-    public void session_check()
-    {
-
-        switch (Convert.ToString(Session["Query_Session"]))
+         if (ddl_department.SelectedIndex !=0)
+      
         {
-            case "start":
-                lbl_error.Text = "Welcome To Report Section!";
-                Session["Query_Session"] = "start";
-                break;
-
-            case "nil":
-                lbl_error.Text = "No Result Found";
-                Session["Query_Session"] = "start";
-                break;
-
-            case "back":
-                lbl_error.Text = "";
-                Session["Query_Session"] = "start";
-                break;
-
-            default:
-                final_query_execute();
-                break;
+            if (s_login_role == "a")
+            {
+                admin();
+            }
+            if (s_login_role == "h")
+            {
+                hr();
+            }
 
         }
 
-
     }
+
+
+
+
+    //public void session_check()
+    //{
+
+    //    switch (Request.Cookies["Query_Session"].Value)
+    //    {
+    //        case "start":
+    //            lbl_error.Text = "Welcome To Report Section!";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        case "nil":
+    //            lbl_error.Text = "No Result Found";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        case "back":
+    //            lbl_error.Text = "";
+    //            Response.Cookies["Query_Session"].Value= "start";
+    //            break;
+
+    //        default:
+    //            final_query_execute();
+    //            break;
+
+    //    }
+
+
+    //}
 
     public void final_query_execute()
     {
 
-        employee.temp_str = (string)Session["Query_Session"];
+        employee.temp_str = Request.Cookies["Query_Session"].Value;
 
         EmployeeList = employee.Temp_Selected_EmployeeList(employee);
 
@@ -332,13 +328,13 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             //}
 
             lbl_error.Text = EmployeeList.Count + " Employees Selected!";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
 
         }
         else
         {
             lbl_error.Text = "No Employees has been selected";
-            Session["Query_Session"] = "start";
+            Response.Cookies["Query_Session"].Value= "start";
         }
     }
 
@@ -534,8 +530,8 @@ public partial class PayrollReports_Default : System.Web.UI.Page
         if (ddl_Branch.SelectedValue != "0")
         {
             ViewState["PF_BranchID"] = Convert.ToInt32(ddl_Branch.SelectedValue);
-            session_check();
-            chkEmployee_load();
+           // session_check();
+           // chkEmployee_load();
         }
         else
         {
@@ -571,30 +567,31 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 }
             }
         }
+      
     }
 
-    public void chkEmployee_load()
-    {
-        if (s_login_role == 'a')
-        {
-            pay.BranchId = (int)ViewState["PF_BranchID"];
-            employee.BranchId = (int)ViewState["PF_BranchID"];
-            c.BranchID = (int)ViewState["PF_BranchID"];
-        }
+    //public void chkEmployee_load()
+    //{
+    //    if (s_login_role == "a")
+    //    {
+    //        pay.BranchId = (int)ViewState["PF_BranchID"];
+    //        employee.BranchId = (int)ViewState["PF_BranchID"];
+    //        c.BranchID = (int)ViewState["PF_BranchID"];
+    //    }
 
-        EmployeeList = employee.fn_getEmployeeList(employee);
-        if (EmployeeList.Count > 0)
-        {
-            chk_Empcode.DataSource = EmployeeList;
-            chk_Empcode.DataValueField = "EmployeeId";
-            chk_Empcode.DataTextField = "LastName";
-            chk_Empcode.DataBind();
-        }
-        else
-        {
-            chk_Empcode.Items.Clear();
-        }
-    }
+    //    EmployeeList = employee.fn_getEmployeeList(employee);
+    //    if (EmployeeList.Count > 0)
+    //    {
+    //        chk_Empcode.DataSource = EmployeeList;
+    //        chk_Empcode.DataValueField = "EmployeeId";
+    //        chk_Empcode.DataTextField = "LastName";
+    //        chk_Empcode.DataBind();
+    //    }
+    //    else
+    //    {
+    //        chk_Empcode.Items.Clear();
+    //    }
+    //}
 
     protected void btn_Report_Click(object sender, EventArgs e)
     {
@@ -603,7 +600,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             int i_month, i_year;
             Collection<Employee> date_list;
 
-            if (s_login_role == 'a')
+            if (s_login_role == "a")
             {
                 pay.BranchId = (int)ViewState["PF_BranchID"];
                 employee.BranchId = (int)ViewState["PF_BranchID"];
@@ -636,41 +633,46 @@ public partial class PayrollReports_Default : System.Web.UI.Page
             switch (Convert.ToInt32(ddl_type.SelectedValue))
             {
                 case 8:
-                    string sFileName = Server.MapPath("~//Files//ECR.txt");
-                    string Ecrtxt = "";
-                    for (i = 0; i < chk_Empcode.Items.Count; i++)
                     {
-                        string Pfno = "", EpsWage = "", EpfRemit = "", EpsRemit = "", NcpDay = "0", Refund = "0";
-                        if (chk_Empcode.Items[i].Selected == true)
+                        string sFileName = Server.MapPath("~//Files//ECR.txt");
+                        string Ecrtxt = "";
+                        for (i = 0; i < chk_Empcode.Items.Count; i++)
                         {
-                            query = "set dateformat dmy;select a.PFno,a.Employee_First_Name, b.NetPay, b.PF, b.EPF, b.FPF from paym_employee a, PayOutput_PF b where a.pn_EmployeeID = b.pn_EmployeeID and a.pn_BranchID = b.pn_BranchID and a.pn_EmployeeID = " + chk_Empcode.Items[i].Value + " and b.d_Date = '" + fromdate + "' and a.pn_branchid = " + employee.BranchId + ";set dateformat mdy";
-                            PayList = pay.fn_getECR(query);
-                            if (PayList[0].PF_No == "")
-                                Pfno = "0";
-                            else
-                                Pfno = PayList[0].PF_No;
-                            if (PayList[0].Gross_Salary > 15000)
-                                EpsWage = "15000";
-                            else
-                                EpsWage = PayList[0].Gross_Salary.ToString();
-                            Ecrtxt += Pfno + "#~#" + PayList[0].FirstName + "#~#" + PayList[0].Gross_Salary.ToString() + "#~#" + PayList[0].Gross_Salary.ToString() + "#~#" + EpsWage + "#~#" + EpsWage + "#~#" + PayList[0].Emp_Con_PF.ToString() + "#~#" + PayList[0].Emp_Con_EPF.ToString() + "#~#" + PayList[0].Emp_Con_FPF.ToString() + "#~#0#~#0" + System.Environment.NewLine;
+                            string Pfno = "", EpsWage = "", EpfRemit = "", EpsRemit = "", NcpDay = "0", Refund = "0";
+                            if (chk_Empcode.Items[i].Selected == true)
+                            {
+                                query = "set dateformat dmy;select a.PFno,a.Employee_First_Name, b.NetPay, b.PF, b.EPF, b.FPF from paym_employee a, PayOutput_PF b where a.pn_EmployeeID = b.pn_EmployeeID and a.pn_BranchID = b.pn_BranchID and a.pn_EmployeeID = " + chk_Empcode.Items[i].Value + " and b.d_Date = '" + fromdate + "' and a.pn_branchid = " + employee.BranchId + ";set dateformat mdy";
+                                PayList = pay.fn_getECR(query);
+                                if (PayList[0].PF_No == "")
+                                    Pfno = "N/A";
+                                if (PayList[0].PF_No != "")
+                                    Pfno = PayList[0].PF_No;
+
+                                //else
+                                //    Pfno = PayList[0].PF_No;
+                                if (PayList[0].Gross_Salary > 15000)
+                                    EpsWage = "15000";
+                                else
+                                    EpsWage = PayList[0].Gross_Salary.ToString();
+                                Ecrtxt += Pfno + "#~#" + PayList[0].FirstName + "#~#" + PayList[0].Gross_Salary.ToString() + "#~#" + PayList[0].Gross_Salary.ToString() + "#~#" + EpsWage + "#~#" + EpsWage + "#~#" + PayList[0].Emp_Con_PF.ToString() + "#~#" + PayList[0].Emp_Con_EPF.ToString() + "#~#" + PayList[0].Emp_Con_FPF.ToString() + "#~#0#~#0" + System.Environment.NewLine;
+                            }
+                    
+
+                        if (File.Exists(sFileName))
+                        {
+                            File.Delete(sFileName);
+                        }
+                        using (StreamWriter sw = new StreamWriter(sFileName))
+                        {
+                            sw.Write(Ecrtxt);
+                            sw.Close();
                         }
                     }
 
-                    if (File.Exists(sFileName))
-                    {
-                        File.Delete(sFileName);
+                        Response.Redirect("~//DownloadECR.ashx?rt=ECR.txt");
+
+                        break;
                     }
-                    using (StreamWriter sw = new StreamWriter(sFileName))
-                    {
-                        sw.Write(Ecrtxt);
-                        sw.Close();
-                    }
-
-                    Response.Redirect("~//DownloadECR.ashx?rt=ECR.txt");
-
-                    break;
-
                 case 1:
                     for (i = 0; i < chk_Empcode.Items.Count; i++)
                     {
@@ -813,7 +815,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 {
                     if (ddl_i == -1)
                     {
-
+                       // Label2.Visible = true;
                     }
                     else
                     {
@@ -835,7 +837,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
                 {
                     if (ddl_i == -1)
                     {
-
+                       // Label2.Visible = true;
                     }
                     else
                     {

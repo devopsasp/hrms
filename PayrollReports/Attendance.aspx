@@ -8,6 +8,16 @@
 { 
     margin-right: 5px; 
 }
+         .auto-style1 {
+             height: 52px;
+         }
+         .auto-style3 {
+             height: 52px;
+             width: 129px;
+         }
+         .auto-style4 {
+             width: 129px;
+         }
     </style>
 
      <script language="javascript">
@@ -158,25 +168,26 @@
                                                  </td>
                                              </tr>
                                              <tr>
-                                                 <td>
-                                                     Category</td>
+                                                 <td class="auto-style4">
+                                                     Shift </td>
                                                  <td>
                                                      <asp:DropDownList ID="ddl_category" runat="server" CssClass="form-control" 
                                                          onselectedindexchanged="ddl_category_SelectedIndexChanged" 
-                                                         AutoPostBack="True" Width="50%">
+                                                         AutoPostBack="True" Width="50%" DataSourceID="SqlDataSource1" DataTextField="v_ShiftName" DataValueField="v_ShiftName">
                                                          <asp:ListItem Value="0">Select</asp:ListItem>
                                                          <asp:ListItem Value="1">Staff</asp:ListItem>
-                                                         <%--<asp:ListItem Value="2">Student</asp:ListItem>--%>
+                                                        <%-- <asp:ListItem Value="2">Student</asp:ListItem>--%>
                                                      </asp:DropDownList>
+                                                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Hesperus_HrmsConnectionString2 %>" SelectCommand="SELECT [v_ShiftName] FROM [paym_Shift]"></asp:SqlDataSource>
                                                  </td>
                                              </tr>
                                              
                                              
-                                             <tr>
+                                             <%--<tr>
                                              <td>Course</td>
                                              <td>
-                                                  <asp:DropDownList class="form-control" ID="ddl_Courselist" Width="50%" 
-                                                    DataSourceID="SqlDSCourse" runat="server" DataTextField="CourseName" 
+                                                  <asp:DropDownList class="form-control" ID="ddl_Courselist" AutoPostBack="true" Width="50%" 
+                                                    DataSourceID="SqlDSCourse" runat="server" DataTextField="CourseName"  
                                                     DataValueField="CourseName">
                                                 </asp:DropDownList>
                                                 <asp:SqlDataSource ID="SqlDSCourse" runat="server" 
@@ -188,21 +199,21 @@
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>
                                              </td>
-                                             </tr>
+                                             </tr>--%>
                                              <tr>
-                                             <td>
+                                             <td class="auto-style4">
                                                 Department
                                              </td>
                                              <td>
                                                  <asp:DropDownList class="form-control" ID="ddl_Departmentlist" 
                                                      Width="50%" runat="server" AutoPostBack="true"
                                                     onselectedindexchanged="ddl_Departmentlist_SelectedIndexChanged">
-                                                    <asp:ListItem>All</asp:ListItem>
+                                                    <%--<asp:ListItem>All</asp:ListItem>--%>
                                                 </asp:DropDownList>
                                              </td>
                                              </tr>
 
-                                             <tr>
+                                             <%--<tr>
                                              <td>Current Year</td>
                                              <td>
                                                  <asp:DropDownList ID="ddl_CurrentYearlist" runat="server" 
@@ -216,9 +227,9 @@
                                                  <asp:ListItem Value="4">4</asp:ListItem>
                                                  </asp:DropDownList>
                                              </td>
-                                             </tr>
+                                             </tr>--%>
                                              <tr>
-                                                 <td>
+                                                 <td class="auto-style4">
                                                      Report Type</td>
                                                  <td>
                                                  <div style="float:left">
@@ -236,6 +247,13 @@
                                                          <asp:ListItem Value="8">On Duty</asp:ListItem>
                                                          <asp:ListItem Value="9">Missing Staff</asp:ListItem>
                                                          <asp:ListItem Value="10">Consolidate</asp:ListItem>
+                                                         <asp:ListItem Value="11">OT report</asp:ListItem>
+                                                         <asp:ListItem Value="12">Frequently Late</asp:ListItem>
+                                                         <asp:ListItem Value="13">Frequent Early leaving</asp:ListItem>
+                                                         <asp:ListItem Value="14">Frequent Absentees</asp:ListItem>
+                                                         <asp:ListItem Value="15">Employee Shift details by date wise</asp:ListItem>
+                                                         <asp:ListItem Value="16">Manual Punch entry details</asp:ListItem>
+                                                         <asp:ListItem Value="17">Compoff details</asp:ListItem>
                                                      </asp:DropDownList>
                                                      </div>
                                                      <div align ="center" style="float:none">
@@ -244,7 +262,7 @@
                                                  </td>
                                              </tr>
                                              <tr>
-                                                 <td>
+                                                 <td class="auto-style4">
                                                      Date</td>
                                                  <td>
                                                  <div style=" width:150px; float:left;">
@@ -265,9 +283,9 @@
                                                  </td>
                                              </tr>
                                              <tr>
-                                                 <td>
+                                                 <td class="auto-style4">
                                                      To Date</td>
-                                                 <td>
+                                                 <td style="font-family: 'Times New Roman', Times, serif; font-size: medium; font-weight: normal; font-style: normal; font-variant: normal; text-transform: inherit; color: #CC3300">
                                                  <div style=" width:150px; float:left;">
                                                      <asp:TextBox ID="txt_tdate" runat="server" CssClass="form-control" 
                                                          Width="150px"></asp:TextBox>
@@ -277,14 +295,25 @@
                                                       <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">
                                                      <asp:Image ID="Image2" runat="server" Text="" Width="25px" ImageUrl="~/Images/calendaricon.png" />
                                                 </div>
+                                                     
                                                  </td>
                                              </tr>
                                              <tr>
-                                                 <td>
-                                                     &nbsp;</td>
-                                                 <td>
-                                                     <asp:Button ID="btn_Report" runat="server" Text="View Report"  class="btn btn-success" OnClick="btn_Report_Click" />
-                                                 </td>
+                                             <td class="auto-style4">
+                                                
+                                                 <asp:Label ID="Label1" runat="server" Text="Select the count for frequent data" Font-Names="Calibri" Font-Overline="False" Font-Size="Medium" ForeColor="Red"></asp:Label>
+                                                
+                                             </td>
+                                             <td>
+                                                 <asp:TextBox ID="TextBox1" runat="server" Width="158px" Enabled="false"></asp:TextBox>
+                                             </td>
+                                             </tr>
+                                                 <tr>
+                                                     <td class="auto-style3"></td>
+                                                     <td class="auto-style1">
+                                                         <asp:Button ID="btn_Report" runat="server" class="btn btn-success" OnClick="btn_Report_Click" Text="View Report" />
+                                                     </td>
+                                                 </tr>
                                              </tr>
                                          </table>
                                      
@@ -311,14 +340,25 @@
                                                  
                                              </td>
                                          </tr>
-                                         <tr>
+                                         <%--<tr>
                                              <td>
 
                                               <%--<asp:CheckBox ID = "chkAll" runat="server" Text = "Select All" />--%>
-                                                 <input type="checkbox" id="chkall" runat="server" 
-                                                     onclick="javascript: fn_chkall(this.id, 'ctl00_ContentPlaceHolder1_chk_Empcode')" visible="True" />
+                                               <%--  <input type="checkbox" id="chkall" runat="server" 
+                                                     onclick="javascript: fn_chkall(this.id, 'ctl00_ContentPlaceHolder1_chk_Empcode')" />
                                                  Select All</td>
-                                         </tr>
+                                         </tr>--%>
+                                             <tr>
+                                        <td align="center" style="overflow: auto; height: 39px;">
+                                            <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True"
+                                                ForeColor="Black"
+                                                OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"
+                                                RepeatDirection="Horizontal">
+                                                <asp:ListItem>All</asp:ListItem>
+                                                <asp:ListItem Selected="True">Selected</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </td>
+                                    </tr>
                                      </table>
 
 

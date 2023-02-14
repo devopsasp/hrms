@@ -892,7 +892,12 @@ if(!isBlank(document.aspnetForm.ctl00$ContentPlaceHolder1$txtEmailId.value))
     
 <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">PF Nominee</h3>
+                    <h3 class="page-header">PF Nominee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" 
+                            CssClass="form-control" 
+                            OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged">
+                        </asp:DropDownList>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -940,7 +945,7 @@ if(!isBlank(document.aspnetForm.ctl00$ContentPlaceHolder1$txtEmailId.value))
                             <td>
                                 Father's Name</td>
                             <td>
-                               <input id="txtfathername" type="text" runat="server" class="form-control" maxlength="10" onkeypress="AllowOnlyText();" /></td>
+                               <input id="txtfathername" type="text" runat="server" class="form-control" maxlength="50" onkeypress="AllowOnlyText();" /></td>
                             <td>
                                 Mother&#39;s Name</td>
                             <td>
@@ -962,12 +967,12 @@ if(!isBlank(document.aspnetForm.ctl00$ContentPlaceHolder1$txtEmailId.value))
                             <td>
                                <%--<input runat="server" onkeyup="fn_date(event,this.id);"  id="txtdob" class="form-control"
                                 onkeypress="AllowOnlyText();" maxlength="50"/>--%>
-                                <div style=" width:150px; float:left;">
+                                <div style=" width:85%; float:left;">
                                 <asp:TextBox  runat="server" onkeyup="fn_date(event,this.id);"  id="txtdob" class="form-control" 
-                                onkeypress="AllowOnlyText();" Width="150px"></asp:TextBox>
+                                onkeypress="AllowOnlyText();" ></asp:TextBox>
                                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txtdob"> </asp:CalendarExtender>
                                   </div> 
-                                   <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">                                                
+                                   <div style=" width:10%; float:left;  margin-left:5px; margin-top:3px;">                                                
                                                     <asp:Image ID="Image2" runat="server"  
                                                         Text="" Width="25px" 
                                                         ImageUrl="~/Images/calendaricon.png" />
@@ -1094,8 +1099,8 @@ if(!isBlank(document.aspnetForm.ctl00$ContentPlaceHolder1$txtEmailId.value))
                         </tr>
                         <tr>
                             <td colspan="6" align="left">
-                        <asp:Label ID="lbl_Error" runat="server" Font-Bold="True" ForeColor="#0066FF" 
-                            style="text-align: center"></asp:Label>
+                  <%--      <asp:Label ID="lbl_Error" runat="server" Font-Bold="True" ForeColor="#0066FF" 
+                            style="text-align: center"></asp:Label>--%>
                                </td>
                         </tr>
                      </table>   
@@ -1180,8 +1185,8 @@ if(!isBlank(document.aspnetForm.ctl00$ContentPlaceHolder1$txtEmailId.value))
                             <td>
                                 Same Address as Member</td>
                             <td>
-                                <asp:CheckBox ID="chkbx_Address" runat="server" AutoPostBack="True" 
-                                    class="roundedbox" oncheckedchanged="chkbx_Address_CheckedChanged1" />
+                                <asp:CheckBox ID="chkbx_Address" runat="server" AutoPostBack="True"
+                                  oncheckedchanged="chkbx_Address_CheckedChanged1" />
                             </td>
                             <td>
                                 &nbsp;</td>

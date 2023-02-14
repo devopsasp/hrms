@@ -111,7 +111,7 @@
                                 Select Year</td>
                             <td>
                 
-                <asp:DropDownList ID="ddl_year" runat="server" class="form-control" Width="70%" 
+                <asp:DropDownList ID="ddl_year" runat="server" class="form-control" Width="100%" 
                     AutoPostBack="True" onselectedindexchanged="ddl_year_SelectedIndexChanged">
                 </asp:DropDownList>
                 
@@ -122,13 +122,13 @@
                                 Select Department</td>
                             <td>
                  <asp:DropDownList ID="ddl_dept" runat="server"
-                                Width="70%" AutoPostBack="True" class="form-control"
+                                Width="100%" AutoPostBack="True" class="form-control"
                                     onselectedindexchanged="ddl_dept_SelectedIndexChanged"></asp:DropDownList>
                             </td>
                             <td>
                                 Select Employee</td>
                             <td>
-                <asp:DropDownList ID="ddl_employee" runat="server" Width="70%" class="form-control" AutoPostBack="True" onselectedindexchanged="ddl_employee_SelectedIndexChanged">
+                <asp:DropDownList ID="ddl_employee" runat="server" Width="100%" class="form-control" AutoPostBack="True" onselectedindexchanged="ddl_employee_SelectedIndexChanged">
                                 
                             </asp:DropDownList>
                             </td>
@@ -139,12 +139,12 @@
                             <td>
                <%--<asp:TextBox ID="txt_joiningDate" runat="server" class="form-control"></asp:TextBox>--%>
 
-                <div style=" width:150px; float:left;">
-                    <asp:TextBox ID="txt_joiningDate" runat="server" class="form-control" Width="150px"></asp:TextBox>
+                <div style=" width:85%; float:left;">
+                    <asp:TextBox ID="txt_joiningDate" runat="server" class="form-control"></asp:TextBox>
                     <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" TargetControlID="txt_joiningDate">
                     </asp:CalendarExtender>
                 </div>
-                 <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">                                                
+                 <div style=" width:10%; float:left;  margin-left:5px; margin-top:3px;">                                                
                                                     <asp:Image ID="Image2" runat="server"  
                                                         Text="" Width="25px" 
                                                         ImageUrl="~/Images/calendaricon.png" />
@@ -154,13 +154,13 @@
                             <td>
                                 Relieving Date</td>
                             <td>
-                             <div style=" width:150px; float:left;">
+                             <div style=" width:85%; float:left;">
                             <asp:TextBox ID="txt_date" runat="server" class="form-control" onkeyup="fn_date(event,this.id);" 
-                                ontextchanged="txt_date_TextChanged" AutoPostBack="True" Width="150px"></asp:TextBox>
+                                ontextchanged="txt_date_TextChanged" AutoPostBack="True"></asp:TextBox>
                                <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy" TargetControlID="txt_date">
                                             </asp:CalendarExtender>             
                                 </div>
-                                <div style=" width:25px; float:left;  margin-left:10px; margin-top:3px;">                                                
+                                <div style=" width:10%; float:left;  margin-left:5px; margin-top:3px;">                                                
                                                     <asp:Image ID="Image1" runat="server"  
                                                         Text="" Width="25px" 
                                                         ImageUrl="~/Images/calendaricon.png" />
@@ -235,7 +235,7 @@
                         </tr>
                         <tr>
                             <td align="center" colspan="4">
-                <asp:Label ID="lbl_Error" CssClass="Error" runat="server" ForeColor="Red"></asp:Label>
+
                             </td>
                         </tr>
                         <tr>

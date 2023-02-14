@@ -39,7 +39,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         
 
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
-        lbl_Error.Text = "";
+        
 
         if (!IsPostBack)
         {
@@ -120,7 +120,8 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No Loans Available";
+      
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Loans Available');};", true);
         }
 
         EmployeeList = employee.fn_getEmployeeList(employee); //employee.fn_getAllEmployees();
@@ -151,7 +152,8 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         else
         {
-            lbl_Error.Text = "No employees Available";
+         
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No employees Available');};", true);
             ddl_empcode.Enabled = false;
             ddl_empcode.Items.Clear();
         }
@@ -173,21 +175,21 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
         _Value=pay.Loancancel(pay);
         if (_Value != "1")
-        {
-            lbl_Error.Text = "<font color=Blue>Added Successfully</font>";
-            //load();
-            grid_load();
+        {  
+        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Saved Successfully');};", true);
+                grid_load();
             grid_ddl_load();
         }
         else
         {
-            lbl_Error.Text = "<font color=Red>Error Occured</font>";
-        }
+          
+                   ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
+            }
     }
     catch (Exception ex)
     {
-        //lbl_Error.Text = "Error";
-    }
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error:'" + ex + "');};", true);
+        }
     }
 
     protected void edit(object sender, GridViewEditEventArgs e)
@@ -206,13 +208,14 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
         if (_Value != "1")
         {
-            lbl_Error.Text = "<font color=Blue>Updated Successfully</font>";
+
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Updated Successfully');};", true);
             grid_load();
             grid_ddl_load();
         }
         else
         {
-            lbl_Error.Text = "<font color=Red>Error Occured</font>";
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
         }
 
         ((DropDownList)grid_loan.Rows[e.NewEditIndex].FindControl("grd_Loan")).Enabled = false;
@@ -267,7 +270,7 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Record Found');", true);
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Record Found');};", true);
         }
 
     }
@@ -287,7 +290,8 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lbl_Error.Text = "Error";
+            
+               ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error:'"+ ex + "');};", true);
         }
     }
 

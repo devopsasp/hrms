@@ -98,9 +98,13 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                 switch (s_login_role)
                 {
                     case "a":
+
                         Row_Emplist.Visible = false;
                         ddl_Branch.Visible = true;
+                        ddl_department.Visible = true;
                         ddl_Branch_load();
+                   //     ddl_department_load();
+
                         break;
 
                     case "h":
@@ -258,6 +262,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                 }
             }
         }
+        if (s_login_role == "a")
+        {
+            ddl_department_load();
+        }
     }
 
     protected void ddl_Branch_SelectedIndexChanged(object sender, EventArgs e)
@@ -279,6 +287,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         }
         re.Close();
         con.Close();
+        if (s_login_role == "a")
+        {
+            ddl_department_load();
+        }
     }
 
     protected void ddl_periodcode_SelectedIndexChanged(object sender, EventArgs e)
@@ -311,16 +323,21 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
             ddl_department.SelectedIndex = 0;
             ddl_Employee.SelectedIndex = 0;
         }
+        if (s_login_role == "a")
+        {
+            ddl_department_load();
+        }
     }
     
     public void ddl_department_load()
     {
 
 
-        if (s_login_role == "a")
-        {
-            employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedItem.Value);
-        }
+        //if (s_login_role == "a")
+        //{
+        //    employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
+        //   // employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedItem.Value);
+        //}
         EmployeeList = employee.fn_getDepartmentList1(employee.BranchId);
         if (EmployeeList.Count > 0)
         {
@@ -347,7 +364,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
         {
             lbl_Error.Text = "No Department Available";
         }
-
+        //if (s_login_role == "a")
+        //{
+        //    ddl_employee_load();
+        //}
     }
 
     protected void chk_empname_SelectedIndexChanged(object sender, EventArgs e)
@@ -370,45 +390,46 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
 
         if (s_login_role == "a")
         {
-            employee.BranchId = (int)ViewState["Appraisal_BranchID"];
+            employee.BranchId = Convert.ToInt32(ddl_Branch.SelectedValue);
         }
 
         if (s_login_role == "h")
-        {
-            employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        }
-
-        str_query = "Select a.pn_EmployeeID, a.EmployeeCode, a.Employee_First_Name from paym_employee a, paym_employee_profile1 b where a.pn_CompanyID=b.pn_CompanyID and a.pn_BranchID=b.pn_BranchID and a.pn_EmployeeID=b.pn_EmployeeID and b.pn_DepartmentID=" + ddl_department.SelectedValue + " and b.pn_CompanyID=" + employee.CompanyId + " and a.status='y' and b.pn_BranchID=" + employee.BranchId;
-
-        EmployeeList = employee.fn_getEmplist(str_query);
-
-        if (EmployeeList.Count > 0)
-        {
-            for (ddl_i = -2; ddl_i < EmployeeList.Count; ddl_i++)
             {
-                if (ddl_i == -2)
+                employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+            }
+
+            str_query = "Select a.pn_EmployeeID, a.EmployeeCode, a.Employee_First_Name from paym_employee a, paym_employee_profile1 b where a.pn_CompanyID=b.pn_CompanyID and a.pn_BranchID=b.pn_BranchID and a.pn_EmployeeID=b.pn_EmployeeID and b.pn_DepartmentID=" + ddl_department.SelectedValue + " and b.pn_CompanyID=" + employee.CompanyId + " and a.status='y' and b.pn_BranchID=" + employee.BranchId;
+
+            EmployeeList = employee.fn_getEmplist(str_query);
+
+            if (EmployeeList.Count > 0)
+            {
+                for (ddl_i = -2; ddl_i < EmployeeList.Count; ddl_i++)
                 {
-                    ListItem e_list = new ListItem();
-                    e_list.Text = "All";
-                    e_list.Value = "All";
-                    ddl_Employee.Items.Add(e_list);
-                }
-                else if (ddl_i == -1)
-                {
-                    ListItem e_list = new ListItem();
-                    e_list.Text = "Show All Employees";
-                    e_list.Value = "Show All Employees";
-                    ddl_Employee.Items.Add(e_list);
-                }
-                else
-                {
-                    ListItem e_list = new ListItem();
-                    e_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
-                    e_list.Text = EmployeeList[ddl_i].LastName.ToString();
-                    ddl_Employee.Items.Add(e_list);
+                    if (ddl_i == -2)
+                    {
+                        ListItem e_list = new ListItem();
+                        e_list.Text = "All";
+                        e_list.Value = "All";
+                        ddl_Employee.Items.Add(e_list);
+                    }
+                    else if (ddl_i == -1)
+                    {
+                        ListItem e_list = new ListItem();
+                        e_list.Text = "Show All Employees";
+                        e_list.Value = "Show All Employees";
+                        ddl_Employee.Items.Add(e_list);
+                    }
+                    else
+                    {
+                        ListItem e_list = new ListItem();
+                        e_list.Value = EmployeeList[ddl_i].EmployeeId.ToString();
+                        e_list.Text = EmployeeList[ddl_i].LastName.ToString();
+                        ddl_Employee.Items.Add(e_list);
+                    }
                 }
             }
-        }
+        
         else
         {
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Employee');", true);

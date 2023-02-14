@@ -24,7 +24,7 @@ public partial class PayrollReports_Default : System.Web.UI.Page
     ePayHrms.Connection.Connection Con = new ePayHrms.Connection.Connection();
 
     string msg;
-    char s_login_role;
+    string s_login_role;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,13 +32,13 @@ public partial class PayrollReports_Default : System.Web.UI.Page
 
         if (CompanyList.Count > 0)
         {
-            s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+            s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
-            if (s_login_role == 'a' || s_login_role == 'h' || s_login_role == 'e' || s_login_role == 'u')
+            if (s_login_role == "a" || s_login_role == "h" || s_login_role == "e" || s_login_role == "u")
             {
                 msg = (string)Session["Msg_session"];
                 lbl_Error.Text = msg;
-                Session["Msg_session"] = "";
+                
             }
             else
             {

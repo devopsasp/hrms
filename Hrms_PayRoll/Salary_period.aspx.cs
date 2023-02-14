@@ -194,11 +194,10 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
         }
     }
-    
-
-                
+     
     public void clear()
     {
+        ddl_select_month.SelectedValue = "0";
         Txt_spcode.Text = "";
         Txt_fdate.Text = "";
         Txt_tdate.Text = "";

@@ -45,7 +45,7 @@ public partial class PayrollReports_EncashmentReport : System.Web.UI.Page
     int temp_count = 0;
     int company_Id, branch_Id, valid, temp_valid = 0, check, ddl_i, i;
     string _Value;
-    char s_login_role;
+    string s_login_role;
     bool grd_chk = true;
     string s_form = "";
     DataSet ds_userrights;
@@ -56,14 +56,14 @@ public partial class PayrollReports_EncashmentReport : System.Web.UI.Page
         string s = "'dafa'";
         Response.Write(s);
 
-        Session["Msg_session"] = "";
+        
         Session["Repordid"] = "";
         company.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         company.BranchCompanyId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         ddl_dept.Enabled = true;
         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        s_login_role = Convert.ToChar(Request.Cookies["Login_temp_Role"].Value);
+        s_login_role = Request.Cookies["Login_temp_Role"].Value;
         lbl_Error.Text = "";
         if (!IsPostBack)
         {
@@ -71,12 +71,12 @@ public partial class PayrollReports_EncashmentReport : System.Web.UI.Page
             switch (s_login_role)
             {
 
-                case 'h':
+                case "h":
                     ddl_Branch.Visible = false;
                     ddl_department_load1();
                     break;
 
-                case 'u': s_form = "22";
+                case "u": s_form = "22";
                     ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 
                     if (ds_userrights.Tables[0].Rows.Count > 0)
@@ -85,12 +85,12 @@ public partial class PayrollReports_EncashmentReport : System.Web.UI.Page
                     }
                     else
                     {
-                        Session["Msg_session"] = "Permission Restricted. Please Contact Administrator.";
+                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
                         Response.Redirect("~/Company_Home.aspx");
                     }
                     break;
 
-                default: Session["Msg_session"] = "Permission Restricted. Please Contact Administrator";
+                default: Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
                     Response.Redirect("~/Company_Home.aspx");
                     break;
             }
@@ -115,11 +115,11 @@ public partial class PayrollReports_EncashmentReport : System.Web.UI.Page
     {
         ddl_dept.Items.Clear();
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-        if (s_login_role == 'a')
+        if (s_login_role == "a")
         {
             DepartmentList = employee.fn_getDepartmentList1(Convert.ToInt32(ddl_Branch.SelectedItem.Value));
         }
-        else if (s_login_role == 'h')
+        else if (s_login_role == "h")
         {
             DepartmentList = employee.fn_getDepartmentList1(employee.BranchId);
         }

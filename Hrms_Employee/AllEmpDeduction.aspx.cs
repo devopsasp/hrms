@@ -52,8 +52,9 @@ public partial class Bank_Loan_Default : System.Web.UI.Page
                 case "a":
                     
                     ddl_branch_load();
-
-                     break;
+                        BindDepartment();
+                        BindDeduction();
+                        break;
 
                 case "h":
                      txt_date.Text = DateTime.Now.ToString("dd/MM/yyyy");

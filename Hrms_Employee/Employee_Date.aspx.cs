@@ -42,8 +42,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 if (Convert.ToInt32(Request.Cookies["Select_Employee"].Value) == 1)
                 {
                     
-                    r.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
-                    r.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
+                    //r.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
+                    //r.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
                     employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
                     employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
                     pr_emp = Convert.ToInt32(Request.Cookies["preview_emp"].Value);
@@ -63,8 +63,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                             {
                                 case "a": if (pr_emp == 1)
                                     {
-                                        employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                                        r.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //r.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
                                         btn_update.Visible = false;
                                         //row_curexp.Visible = false;
                                         //ddl();
@@ -73,8 +73,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                                     {
                                         btn_save.Visible = false;
                                         btn_skip.Visible = false;
-                                        employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
-                                        r.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                                        //r.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
                                         employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
                                         //ddl();
                                         admin();
@@ -222,7 +222,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             if (s_login_role == "a")
             {
                 employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //employee.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
             }
 
             if (s_login_role == "h")

@@ -244,6 +244,7 @@
                                          <tr>
                                              <td>
                                              <div id="diva" runat="server" class="checkbox1" align="left" style="overflow: auto; height: 250px;">
+                                                 <%--<asp:Label ID="Label2" runat="server"  ForeColor="Red" Font-Size="Medium">No Employees Found</asp:Label>--%>
                                                  <asp:CheckBoxList ID="chk_Empcode"  runat="server" 
                                                      class="table table-striped table-bordered table-hover" Width="90%">
                                                      

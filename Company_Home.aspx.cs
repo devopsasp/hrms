@@ -37,6 +37,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
     DropDownList ddl = new DropDownList();
     string s_login_role;
 
+    public string date { get; private set; }
+    public string count1 { get; private set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -53,7 +55,8 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
         c.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         c.BranchID = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
-      
+
+
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
         Chart_Leave();
         Employee_Distribution();
@@ -127,7 +130,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
     public void Employee_Distribution()
     {
         myConnection.Open();
-        ada1 = new SqlDataAdapter("select * from Vw_Dept_cout where Dep_count<>0", myConnection);
+        ada1 = new SqlDataAdapter(" select * from Vw_Dept_cout where Dep_count<>0", myConnection);
         DataSet ds1 = new DataSet();
         ada1.Fill(ds1, "Vw_Dept_cout");
         Chart2.DataSource = ds1;
@@ -162,10 +165,12 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         try
         {
             int cc = 0, oc = 0;
+            string datee;
+            DateTime temp;
             myConnection.Open();
             cmd = new SqlCommand("delete from temp_chart", myConnection);
             cmd.ExecuteNonQuery();
-            for (int c = 1; c <= 4; c++)
+            for (int c = 1; c <= 5; c++)
             {
                 if (c == 1)
                 {
@@ -199,8 +204,22 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                     cmd = new SqlCommand("insert into temp_chart values('" + employee.CompanyId + "','" + employee.BranchId + "','" + date + "','On Duty','" + cc.ToString() + "')", myConnection);
                     cmd.ExecuteNonQuery();
                 }
+                if (c == 5)
+                {
+                    cmd = new SqlCommand("select count(*) from time_card where pn_branchId = '" + employee.BranchId + "' and pn_Companyid = '" + employee.CompanyId + "' and dates = '" + date + "' and Status = 'AX' or Status = 'XA'", myConnection);
+                    cc = (int)cmd.ExecuteScalar();
+                    oc += cc;
+                    cmd = new SqlCommand("insert into temp_chart values('" + employee.CompanyId + "','" + employee.BranchId + "','" + date + "','HalfDay_Present','" + cc.ToString() + "')", myConnection);
+                    cmd.ExecuteNonQuery();
+                }
             }
-
+            int count1 = 0;
+            temp = Convert.ToDateTime(txt_date.Text);
+            datee = temp.ToString("yyyy/MM/dd");
+            cmd = new SqlCommand("select count(*) from time_card  where Dates='" + datee + "'and pn_branchid='" + employee.BranchId + "'", myConnection);
+            int s = (int)cmd.ExecuteScalar();
+            count1 = s;
+            
             ada = new SqlDataAdapter("select * from temp_chart where pn_branchid='" + employee.BranchId + "' and dates='" + date + "'", myConnection);
             DataSet ds = new DataSet();
             ada.Fill(ds, "temp_chart");
@@ -210,14 +229,13 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
             {
                 date = "No attendance Data Found";
             }
-
+           
             //Chart1.ChartAreas["ChartArea1"].AxisX.Enabled = AxisEnabled.False;
             //Chart1.ChartAreas["ChartArea1"].AxisY.Enabled = AxisEnabled.False;
             Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
             Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
             Chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
-            Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Total No. of Employees";
-
+            Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Total No. of Employees"+" "+":" + count1.ToString();
             Chart1.Titles.Add(new Title(date, Docking.Top, new Font("Verdana", 8f, FontStyle.Bold), System.Drawing.Color.Black));
             myConnection.Close();
         }
@@ -227,7 +245,16 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
         }
     }
+    //public int count()
+    //{
+    //    int count1 = 0;
+    //    //myConnection.Open();
+    //    cmd = new SqlCommand("select count(*) from temp_chart ", myConnection);
+    //    int s =(int) cmd.ExecuteScalar();
+    //    count1 = s;
+    //    return count1;
 
+    //}
     public void Chart_Leave()
     {
         try
@@ -258,6 +285,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
             Chart3.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
             Chart3.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
             Chart3.ChartAreas["ChartArea1"].AxisY.Title = "Total No. of Employees";
+           
             myConnection.Close();
         }
         catch
@@ -272,7 +300,7 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
     public void attend_load()
     {
         myConnection.Open();
-        SqlCommand cmd1 = new SqlCommand("select emp_code, emp_name from time_card where pn_branchID='" + employee.BranchId + "'and dates = '" + DateTime.Now.ToString("yyyy/MM/dd") + "' and status='AA'", myConnection);
+        SqlCommand cmd1 = new SqlCommand("select emp_code, emp_name,status from time_card where pn_branchID='" + employee.BranchId + "'and dates = '" + DateTime.Now.ToString("yyyy/MM/dd") + "'and status='AA'", myConnection);
         SqlDataAdapter da = new SqlDataAdapter(cmd1);
         DataSet ds = new DataSet();
         da.Fill(ds,"time_card");

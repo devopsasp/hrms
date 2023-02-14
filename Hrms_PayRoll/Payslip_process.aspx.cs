@@ -104,18 +104,19 @@ public partial class PayRoll_Default : System.Web.UI.Page
         pay.pay_mode = "";
 
         if (!IsPostBack)
-        {
-            
+        {   
             CompanyList = company.fn_getCompany();
             if (CompanyList.Count > 0)
             {
+                Btn_process.Enabled = false;
                 //ddl_year_load();
                 switch (s_login_role)
                 {
                     case "a":
-                        ddl_branch_load(); 
+                        ddl_branch_load();
+                        Emp.Visible = false;
                         break;
-
+                       
                     case "h":
                         ddl_Department_load();
                         ddl_branch.Visible = false;
@@ -227,7 +228,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
         }
     }
 
@@ -276,15 +277,15 @@ public partial class PayRoll_Default : System.Web.UI.Page
                 chk_Empcode.DataValueField = "EmployeeId";
                 chk_Empcode.DataTextField = "FirstName";
                 chk_Empcode.DataBind();
-                for (int em = 0; em < chk_Empcode.Items.Count; em++)
-                {
-                    chk_Empcode.Items[em].Selected = true;
-                }
+                //for (int em = 0; em < chk_Empcode.Items.Count; em++)
+                //{
+                //    chk_Empcode.Items[em].Selected = true;
+                //}
             }
             else
             {
                 chk_Empcode.Visible = false;
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Employees Available');", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Employees Available');};", true);
             }
         }
         catch (Exception ex)
@@ -298,7 +299,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
         try
         {
             con.Open();
-            Emp.Visible = false;
+            //Emp.Visible = false;
             ddl_year_load(ddl_year);
             ddl_month.SelectedValue = DateTime.Now.Month.ToString();
             ddl_year.SelectedValue = DateTime.Now.Year.ToString();
@@ -319,7 +320,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
         }
 
         finally
@@ -361,6 +362,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
         pay.Str_To_date = to_date;
         if (ddl_department.SelectedItem.Text == "Select Department")
         {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Select Department');};", true);
             CheckingList = pay.fn_Out_PayOutput_Netpay(pay);
             ccount = CheckingList.Count;
         }
@@ -388,7 +390,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert(Error Occured);", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
             }
             finally
             {
@@ -396,17 +398,17 @@ public partial class PayRoll_Default : System.Web.UI.Page
             }
             if (emp_count != 0)
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Process Done Successfully!');", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Process Done Successfully!');};", true);
                 clear();
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No Attendance Found!');", true);
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No Attendance Found!');};", true);
             }
         }
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Process Done for this month already!');", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Process Done for this month already!');", true);
         }
     }
 
@@ -448,7 +450,8 @@ public partial class PayRoll_Default : System.Web.UI.Page
                     }
                     else
                     {
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No attendance found for employees');", true);
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('No attendance found for employees');", true);
+                  
                     }
                 }
             }
@@ -457,7 +460,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
         else
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Enter Professional Tax Settings');", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Enter Professional Tax Settings');};", true);
         }
     }
 
@@ -1316,7 +1319,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
                     }
 
                     //cmd_ins.ExecuteNonQuery();
-                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('PF Generated');", true);
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('PF Generated');};", true);
 
                 }
 
@@ -1420,7 +1423,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
             pay.PayOutput_PF(pay);
 
-            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('PF Generated');", true);
+            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('PF Generated');};", true);
 
         }
         else if (chk_ceiling == 'Y')
@@ -1455,7 +1458,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
             pay.PayOutput_PF(pay);
 
-            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('PF Generated');", true);
+            //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('PF Generated');};", true);
 
         }
     }
@@ -2136,12 +2139,14 @@ public partial class PayRoll_Default : System.Web.UI.Page
             }
         }
 
-        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Roll Back Successful!');", true);
+        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Roll Back Successful!');};", true);
+       
         clear();
     }
 
     protected void ddl_periodcode_SelectedIndexChanged(object sender, EventArgs e)
     {
+        Btn_process.Enabled = true;
         try
         {
             con.Open();
@@ -2185,7 +2190,7 @@ public partial class PayRoll_Default : System.Web.UI.Page
 
         catch (Exception ex)
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
         }
 
         finally
@@ -2193,14 +2198,16 @@ public partial class PayRoll_Default : System.Web.UI.Page
             con.Close();
         }
     }
-    protected void Btn_Show_Click(object sender, EventArgs e)
-    {
-        Emp.Visible = true ;
-    }
+    //protected void Btn_Show_Click(object sender, EventArgs e)
+    //{
+    //    Emp.Visible = true ;
+    //}
     protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
     {
         ddl_employee_load();
+        ddl_Department_load();
         load();
+        Emp.Visible = true;
     }
     protected void ddl_department_SelectedIndexChanged(object sender, EventArgs e)
     {

@@ -20,17 +20,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ePayHrms.Leave;
 using ePayHrms.Employee;
-using zkemkeeper;
 using System.Text;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Collections;
 
 public partial class Hrms_TimeAndAttenence_Connection : System.Web.UI.Page
 {
 
     
     private int iMachineNumber = 1;
-    bool bIsConnected = false;
+ bool bIsConnected ;
     //***************
     Company company = new Company();
     Employee employee = new Employee();
@@ -88,6 +88,9 @@ public partial class Hrms_TimeAndAttenence_Connection : System.Web.UI.Page
                 {
                     case "a":
                         GridFill();
+                        
+                        access();
+
                         break;
 
                     case "h":
@@ -373,7 +376,7 @@ public partial class Hrms_TimeAndAttenence_Connection : System.Web.UI.Page
             string cmd_text = "IF EXISTS (SELECT * FROM sysobjects WHERE Name = 'current_details')" + "DROP TABLE current_details";
             SqlCommand com = new SqlCommand(cmd_text, con_new);
             com.ExecuteNonQuery();
-            com = new SqlCommand("create table current_details(machine_num int,enroll_num int,Name varchar(20) ,Days varchar(20) ,VerifyMode int,InOutMode int,year int,month int,day int,hour int,min int,sec int,pn_branchid int,pn_companyid int)", con_new);
+            com = new SqlCommand("create table current_details(machine_num int,enroll_num int,Name varchar(50) ,Days varchar(20) ,VerifyMode int,InOutMode int,year int,month int,day int,hour int,min int,sec int,pn_branchid int,pn_companyid int)", con_new);
             com.ExecuteNonQuery();
 
             foreach (GridViewRow row in GridMachine.Rows)
@@ -411,6 +414,7 @@ public partial class Hrms_TimeAndAttenence_Connection : System.Web.UI.Page
             lv_fingerDetails.DataSource = ds;
             lv_fingerDetails.DataBind();
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Data Downloaded Successfully');", true);
+            populate_lv();
 
             if (MacError != "")
             {

@@ -387,7 +387,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         if (s_login_role == "a")
         {
             //employee.EmployeeId = 0;
-            c.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+            //c.BranchID = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
 
         }
 

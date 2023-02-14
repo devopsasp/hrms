@@ -1181,7 +1181,7 @@ namespace ePayHrms.Leave
 
             Collection<Leave> LeaveList = new Collection<Leave>();
             _Connection = Con.fn_Connection();
-            string _SqlString = "select * from leave_apply  where pn_EmployeeID=" + le.EmployeeID + " and pn_leaveID=" + le.leaveID + " and yearend = '" + le.To_year + "' and record = 'T'";
+            string _SqlString = "select * from leave_apply  where pn_EmployeeID=" + le.EmployeeID + " and pn_leaveID=" + le.leaveID + " and DATEPART(YEAR, from_date) = '" + le.year + "' ";
             SqlCommand _SLeave = new SqlCommand(_SqlString, _Connection);
             _Connection.Open();
             SqlDataReader dr_Leave = _SLeave.ExecuteReader();

@@ -88,8 +88,7 @@
                                                  <td colspan="3">
                                                      <span style="color: #800000">
                                                      <asp:DropDownList ID="ddl_category" runat="server" AutoPostBack="True" 
-                                                         class="form-control" 
-                                                         onselectedindexchanged="ddl_category_SelectedIndexChanged">
+                                                         class="form-control"  onselectedindexchanged="ddl_category_SelectedIndexChanged">
                                                      </asp:DropDownList>
                                                      </span>
                                                  </td>
@@ -99,15 +98,16 @@
                                                      Report Type</td>
                                                  <td colspan="3">
                                                      <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control" 
-                                                         onselectedindexchanged="DropDownList1_SelectedIndexChanged" 
+                                                         
                                                          AutoPostBack="True">
                                                          <%--Width="127px" --%>
-                                                         <asp:ListItem Value="0">Acquittance</asp:ListItem>
-                                                         <asp:ListItem Value="1">Pay Bill</asp:ListItem>
-                                                         <asp:ListItem Value="2">PaySlip</asp:ListItem>
-                                                         <asp:ListItem Value="3">Pay Register</asp:ListItem>
-                                                         <asp:ListItem Value="4">Bank Report</asp:ListItem>
-                                                         <asp:ListItem Value="5">Salary Register</asp:ListItem>
+                                                         <asp:ListItem Value="0">Select your report type</asp:ListItem>
+                                                         <asp:ListItem Value="1">Acquittance</asp:ListItem>
+                                                         <asp:ListItem Value="2">Pay Bill</asp:ListItem>
+                                                         <asp:ListItem Value="3">PaySlip</asp:ListItem>
+                                                         <asp:ListItem Value="4">Pay Register</asp:ListItem>
+                                                         <asp:ListItem Value="5">Bank Report</asp:ListItem>
+                                                         <asp:ListItem Value="6">Salary Register</asp:ListItem>
                                                      </asp:DropDownList>
                                                  </td>
                                              </tr>

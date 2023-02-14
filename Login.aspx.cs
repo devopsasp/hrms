@@ -55,8 +55,7 @@ public partial class flash : System.Web.UI.Page
     {
         try
         {
-
-
+            
             user_id = emp_userid.Value;
             password = emp_password.Value;
 
@@ -212,7 +211,7 @@ public partial class flash : System.Web.UI.Page
 
                    // Response.Cookies["Cpage"].Value = Request.ServerVariables["HTTP_REFERER"];
                    // if (Request.Cookies["Cpage"].Value == "http://localhost:50964/Login.aspx" || Request.Cookies["Cpage"].Value == "http://192.168.1.10/HRMS/Login.aspx")
-                //    {
+                //    { 
                         Response.Redirect("Company_Home.aspx", false);
                    // }
                  //   else

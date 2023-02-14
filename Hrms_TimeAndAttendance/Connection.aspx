@@ -387,8 +387,8 @@
         <asp:ListView ID="lv_fingerDetails" runat="server" 
             onselectedindexchanged="lv_fingerDetails_SelectedIndexChanged">
         <LayoutTemplate>
-            <table border="1">
-                <tr style="font-family: calibri; color: Black; font-size: small; font-weight: bold;">
+            <table border="1" >
+                <tr style="font-family: calibri; color: Black; font-size: small; font-weight: bold;padding:initial">
                     <td>S. No.</td>
                     <td>Machine Number</td>
                     <td>Enroll Number</td>

@@ -51,7 +51,10 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
             {
                 switch (s_login_role)
                 {
-                    case "a": load();
+                    case "a":
+                    load();
+                
+                    
                         break;
 
                     case "h": load1();
@@ -163,7 +166,7 @@ public partial class Hrms_Master_Default : System.Web.UI.Page
         grid_Branch.Visible = false;
         Button2.Visible = false;
         ShiftList = employee.fn_Shift1(employee.BranchId);
-
+        
         if (ShiftList.Count > 0)
         {
             grid_Shift.DataSource = ShiftList;

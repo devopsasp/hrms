@@ -239,8 +239,16 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
         var myDate = DateTime.Now;
         var startOfMonth = new DateTime(myDate.Year, myDate.Month, 1);
         var endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
-
-        SqlDataAdapter da = new SqlDataAdapter("set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and date >='" + startOfMonth + "' and date <= '" + endOfMonth + "' order by date asc;set dateformat mdy;", con);
+        string select;
+        if (s_login_role == "e")
+        {
+            select = "set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and EmployeeID='"+employee.EmployeeId+"' and date >='" + startOfMonth + "' and date <= '" + endOfMonth + "' order by date asc;set dateformat mdy;";
+        }
+        else
+        {
+            select = "set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and date >='" + startOfMonth + "' and date <= '" + endOfMonth + "' order by date asc;set dateformat mdy;";
+        }
+        SqlDataAdapter da = new SqlDataAdapter(select, con);
         DataSet ds = new DataSet();
         da.Fill(ds);
         if (ds.Tables[0].Rows.Count == 0)
@@ -266,7 +274,16 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
     public void load_dates()
     {
         con.Open();
-        SqlDataAdapter da = new SqlDataAdapter("set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and date >='" + Txt_fdate.Text + "' and date <= '" + Txt_tdate.Text + "' order by date asc;set dateformat mdy;", con);
+        string select;
+        if (s_login_role == "e")
+        {
+            select = "set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and EmployeeID='"+ employee.EmployeeId + "' and date >='" + Txt_fdate.Text + "' and date <= '" + Txt_tdate.Text + "' order by date asc;set dateformat mdy;";
+        }
+        else
+        {
+            select = "set dateformat dmy;select * from Paym_Permission where CompanyID='" + employee.CompanyId + "' and BranchID='" + employee.BranchId + "' and date >='" + Txt_fdate.Text + "' and date <= '" + Txt_tdate.Text + "' order by date asc;set dateformat mdy;";
+          }
+        SqlDataAdapter da = new SqlDataAdapter(select, con);
         DataSet ds = new DataSet();
         da.Fill(ds);
         if (ds.Tables[0].Rows.Count == 0)

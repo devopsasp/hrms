@@ -175,7 +175,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             if (s_login_role == "a")
             {
                 //pay.EmployeeId = 0;
-                pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);                
+                //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);                
             }
             if (s_login_role == "h")
             {
@@ -262,8 +262,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
             if (s_login_role == "a")
             {
-                pay.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
-                pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
+                //pay.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+                //pay.BranchId = Convert.ToInt32(Request.Cookies["preview_BranchID"].Value);
 
             }
 
@@ -300,6 +300,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             if (_Value != "1")
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Updated Successfully');", true);
+                Response.Redirect("Employee_Preview.aspx");
             }
             else
             {

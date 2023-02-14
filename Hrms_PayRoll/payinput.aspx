@@ -9,7 +9,7 @@
     window.onload = function () {
         var seconds = 5;
         setTimeout(function () {
-            document.getElementById("<%=lbl_error.ClientID %>").innerHTML = "";
+          
         }, seconds * 1000);
     };
 </script>
@@ -215,39 +215,39 @@
         }                                 
      }
     </script>
-    <div><h2 class="page-header">Payroll Input Manual Entry<asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" CssClass="InputDefaultStyle"
-                    OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged">
-                </asp:DropDownList>
+    <div><h2 class="page-header">Payroll Input Manual Entry
         </h2></div>
-    <div>
-    <h3><asp:Label ID="lbl_error" runat="server" CssClass="Error" ForeColor="Red"></asp:Label></h3>
+
+   
     <div style="float:right;">
+        <asp:DropDownList ID="ddl_Branch" runat="server" AutoPostBack="True" CssClass="InputDefaultStyle form-control" 
+                    OnSelectedIndexChanged="ddl_Branch_SelectedIndexChanged" Height="45px" Width="157px">
+                </asp:DropDownList>
    </div>
-    </div>
+   
     
-    <table width="70%" cellpadding="0" cellspacing="0">
-        <tr valign="top">
-            <td >
+        <div style="width: 65%; height: 346px;">
             
-    <table width="100%" border="0" cellpadding="5" cellspacing="1" id="tbl_details" runat="server" class="table">
+    <table   border="0"  id="tbl_details" runat="server" class="table table-striped">
         <tr valign="middle">
           
-            <td align="left" >
+            <td align="left" class="modal-sm" style="width: 212px" >
                 <asp:Label ID="Label2" runat="server" Text="Calculation Method" 
                     ></asp:Label>
             </td>
-            <td colspan="2" >
-                <asp:Label ID="lblcalcmethod" runat="server" CssClass="form-control" 
-                    Text="None"></asp:Label>
+            <td  >
+                <asp:Label ID="lblcalcmethod" runat="server" CssClass="form-control" Enabled="False" Text="None" Height="35px" Width="307px"></asp:Label>
+                <br />
             </td>
         </tr>
-        <tr valign="middle">
+        <tr >
           
-            <td align="left" >
+            <td align="left" class="modal-sm" style="width: 212px" >
                 <asp:Label ID="Label1" runat="server" Text="Month" ></asp:Label>
             </td>
-            <td >
-                <asp:DropDownList ID="ddl_Month" runat="server" CssClass="form-control" >
+            <td  >
+                <asp:DropDownList ID="ddl_Month" runat="server" CssClass="form-control" Width="307px"  >
+                    <asp:ListItem Value="0">Select Month</asp:ListItem>
                     <asp:ListItem Value="1">January</asp:ListItem>
                     <asp:ListItem Value="2">February</asp:ListItem>
                     <asp:ListItem Value="3">March</asp:ListItem>
@@ -262,79 +262,88 @@
                     <asp:ListItem Value="12">December</asp:ListItem>
                 </asp:DropDownList>
                 </td>
-            <td>            &nbsp;</td>
+        
         </tr>
         <tr>
-            <td align="left" >
+            <td class="modal-sm" style="width: 212px"  >
                 <asp:Label ID="Label4" runat="server" Text="Year" ></asp:Label></td>
-            <td  colspan="2">
-            <table width="50%"><tr><td>
-                <asp:DropDownList ID="ddl_Year" runat="server" CssClass="form-control" >
+            <td >
+         
+                <asp:DropDownList ID="ddl_Year" runat="server" CssClass="form-control" Width="307px" >
+                <asp:ListItem Value="0">Select Year</asp:ListItem>
                 </asp:DropDownList>
-                </td><td>
-                <asp:DropDownList ID="ddl_Day" runat="server" Visible="false" 
-                        CssClass="form-control">
-                </asp:DropDownList>
-                </td><td>
-                <asp:Button ID="btn_refresh" runat="server"  Text="Show" CssClass="btn btn-primary" onclick="btn_refresh_Click1"  />
-                     
-                     </td>
-                     </tr>
-                     </table>
-                     </td>
+                </td>
 
         </tr>
         
         <tr id="row_category" runat="server">
-            <td align="left">
+            <td align="left" class="modal-sm" style="width: 212px">
                 <asp:Label ID="Label3" runat="server" Text="Category" ></asp:Label></td>
-            <td>
+            <td >
                 <asp:DropDownList ID="ddl_category" CssClass="form-control" runat="server" AutoPostBack="True"
-                    OnSelectedIndexChanged="ddl_category_SelectedIndexChanged" >
+                    OnSelectedIndexChanged="ddl_category_SelectedIndexChanged" Width="307px" >
                     <asp:ListItem Value="0">All</asp:ListItem>
                     <asp:ListItem Value="1">Employee</asp:ListItem>
                     <asp:ListItem Value="2">Department</asp:ListItem>
                     <asp:ListItem Value="3">Designation</asp:ListItem>
                     <asp:ListItem Value="4">Category</asp:ListItem>
                 </asp:DropDownList>
-                </td>
-            <td>
-               <input id="hdtxt_monthcalc" type="hidden" runat="server"   class="form-control" />
                </td>
                
                 </tr>
                 <tr>
-                    <td align="left"><asp:Label ID="txt_department" runat="server" Text="Department" Visible="false"></asp:Label></td>
+                    <td align="left" class="modal-sm" style="width: 212px"><asp:Label ID="txt_department" runat="server" Text="Department" Visible="false"></asp:Label></td>
                 <td>
-                <asp:DropDownList ID="ddl_department" CssClass="form-control" runat="server"
-                    AutoPostBack="True" OnSelectedIndexChanged="ddl_department_SelectedIndexChanged"
-                    Visible="false" >
-                </asp:DropDownList></td>
-                <td></td>
+                        <asp:DropDownList ID="ddl_department" runat="server" AutoPostBack="True" 
+                    class="form-control" Enabled="true" onselectedindexchanged="ddl_department_SelectedIndexChanged" Width="70%">
+                            <asp:ListItem>Select</asp:ListItem>
+                    
+                        </asp:DropDownList></td>
+        
             
         </tr>
+        <tr>
+            <td class="modal-sm" style="width: 212px">
+                 <input id="hdtxt_monthcalc" type="hidden" runat="server"   class="form-control" />
+                 <asp:Label ID="Label5" runat="server" Visible="false" forecolor="Red" Text ="No Records Found...." Font-Size="Medium" ></asp:Label>
+
+<%--                 <asp:Label ID="Label5" runat="server" Text="No Records Found...." ForeColor="Red" Font-Size="Medium"></asp:Label>--%>
+
+            </td>
+            <td>
+                   &nbsp;<asp:Label ID="Label6" runat="server" Text="Its show All Data" ForeColor="RosyBrown"></asp:Label>
+                   &nbsp;
+                   <asp:Button ID="btn_refresh" runat="server"  Text="Show" CssClass="btn btn-primary" onclick="btn_refresh_Click1" Height="32px" Width="64px"  />
+                          
+                &nbsp;
+                   <asp:Button ID="btn_reset" runat="server"  Text="Reset" CssClass="btn btn-primary" onclick="btn_reset1" Height="32px" Width="69px"  />
+                          
+                <asp:DropDownList ID="ddl_Day" runat="server" Visible="false" 
+                        CssClass="form-control" Width="305px">
+                </asp:DropDownList>
+            </td>
+        </tr>
+
     </table>
+            </div>
     <br />
     <asp:ScriptManager id="ScriptManager1" runat="server">
     </asp:ScriptManager>
+    <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Navy"></asp:Label>
     <asp:UpdatePanel id="UpdatePanel1" runat="server">
         <contenttemplate>
 
-
-    </td>
-        </tr>
-    </table>
-
-    <div  id="div_grd" runat="server"  style="width:100%; overflow:auto;">
+             </div>
+    <div  id="div_grd" runat="server"  style="width:100%; ">
     <asp:GridView ID="grid_input" runat="server" AllowPaging="True"  
             CssClass="table table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="CompanyId"  
         OnPageIndexChanging="gridinput_indexchanging" OnRowEditing="edit" 
-            OnRowUpdating="update" PageSize="20"  GridLines="None" Font-Size="Small">
+            OnRowUpdating="update"   GridLines="None" Font-Size="Small">
         <HeaderStyle Font-Size="Small" />
         <PagerSettings FirstPageImageUrl="~/Images/i_firstpage_disable.gif"
             LastPageImageUrl="~/Images/i_lastpage_disable.gif" Mode="NumericFirstLast" />
         <Columns>
-            <asp:TemplateField >
+            <asp:TemplateField HeaderStyle-Width="18%">
                 <HeaderTemplate >
                 
                    <b> Empcode</b>
@@ -344,14 +353,14 @@
                 
 
                     <asp:Label id="grd_txt_employeecode" runat="server"  Enabled="false"  Text='<%#Eval("LastName") %>'></asp:Label>
-                    <asp:DropDownList ID="grid_ddl_employee" runat="server" Enabled="false"  style="border:0;width:100%; background-color:White;" 
+                    <asp:DropDownList ID="grid_ddl_employee" runat="server" Enabled="false" CssClass="form-control"  style="border:0;width:100%; background-color:White;" 
                         Visible="false" >
                     </asp:DropDownList>
              
                 </ItemTemplate>
                 
             </asp:TemplateField>
-            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" HeaderStyle-Width="20px">
+            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" >
                 <HeaderTemplate>
                 <center>
                  <b> Calc. Days</b>
@@ -359,12 +368,12 @@
                 </HeaderTemplate>
                 <ItemTemplate >
                 </center>
-                <asp:TextBox id="grd_txt_calcdays" runat="server"   Enabled="false" Text='<%#Eval("Calc_Days") %>' Width="100%"></asp:TextBox>
+                <asp:TextBox id="grd_txt_calcdays" CssClass="form-control" runat="server"   Enabled="false" Text='<%#Eval("Calc_Days") %>' Width="100%"></asp:TextBox>
                         </center>
                 </ItemTemplate>
                 
             </asp:TemplateField>
-            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" HeaderStyle-Width="20px">
+            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" >
                 <HeaderTemplate>
                 <center>
                 <b>Paid Days</b>
@@ -372,14 +381,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="grd_txt_paiddays" runat="server"  Enabled="false" Width="100%" Text='<%#Eval("Paid_Days") %>'></asp:TextBox>
+                <asp:TextBox id="grd_txt_paiddays" CssClass="form-control" runat="server"  Enabled="false" Width="100%" Text='<%#Eval("Paid_Days") %>'></asp:TextBox>
                    
                       </center>
                 </ItemTemplate>
-                <HeaderStyle BackColor="#E6E6E6" Width="20px" />
+                <HeaderStyle BackColor="#E6E6E6"  />
                 <ItemStyle BackColor="#E6E6E6" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate >
                 <center>
                 <b > Prs. Days</b>
@@ -387,14 +396,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="grd_txt_presdays" runat="server" AutoPostBack="true"
+                <asp:TextBox id="grd_txt_presdays" runat="server" AutoPostBack="true" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Width="100%" 
                         Text='<%#Eval("Present_Days") %>' ontextchanged="grd_txt_presdays_TextChanged"></asp:TextBox>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="20px" />
+                <HeaderStyle />
             </asp:TemplateField>
-            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" HeaderStyle-Width="20px">
+            <asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6" >
                 <HeaderTemplate>
                 <center>
                 <b > Abs. Days</b>
@@ -402,15 +411,15 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="grd_txt_absdays" runat="server" Width="100%" Enabled="false"
+                <asp:TextBox id="grd_txt_absdays" runat="server" Width="100%" Enabled="false" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Absent_Days") %>' 
                         AutoPostBack="True" ontextchanged="grd_txt_absdays_TextChanged"></asp:TextBox>
                 </center>
                 </ItemTemplate>
-                <HeaderStyle BackColor="#E6E6E6" Width="20px" />
+                <HeaderStyle BackColor="#E6E6E6"  />
                 <ItemStyle BackColor="#E6E6E6" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate>
                 <center>
                   <b>Leave Days</b>
@@ -418,13 +427,13 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="txt_leavedays" runat="server" Width="100%"  AutoPostBack="True" 
+                <asp:TextBox id="txt_leavedays" runat="server" Width="100%"  AutoPostBack="True"  CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("TotLeave_Days") %>' 
                         ontextchanged="txt_leavedays_TextChanged"></asp:TextBox>
                 </center>
                 </ItemTemplate>
                 
-                <HeaderStyle Width="20px" />
+                <HeaderStyle />
                 
             </asp:TemplateField>
             <%--<asp:TemplateField ItemStyle-BackColor="#E6E6E6" HeaderStyle-BackColor="#E6E6E6">
@@ -440,7 +449,7 @@
                         </center>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate>
                 <center>
                 <b> Holi days</b>
@@ -448,14 +457,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="text_holiday" runat="server" Width="100%"  AutoPostBack="True"
+                <asp:TextBox id="text_holiday" runat="server" Width="100%"  AutoPostBack="True" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Holidays") %>' 
                         ontextchanged="text_holiday_TextChanged"></asp:TextBox>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="20px" />
+                <HeaderStyle />
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate>
                 <center>
                 <b> Duty Days</b>
@@ -463,14 +472,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="txt_dutyday" runat="server" Width="100%"  AutoPostBack="True"
+                <asp:TextBox id="txt_dutyday" runat="server" Width="100%"  AutoPostBack="True" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("OnDuty_days") %>' 
                         ontextchanged="txt_dutyday_TextChanged"></asp:TextBox>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="20px" />
+                <HeaderStyle  />
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate>
                 <center>
                 <b> Comp Days</b>
@@ -478,14 +487,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="txt_compday" runat="server" Width="100%"  AutoPostBack="True"
+                <asp:TextBox id="txt_compday" runat="server" Width="100%"  AutoPostBack="True" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Compoff_Days") %>' 
                         ontextchanged="txt_compday_TextChanged"></asp:TextBox>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="20px" />
+                <HeaderStyle />
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField >
                 <HeaderTemplate >
                  <center>
                  <b> Tour Days</b>
@@ -493,12 +502,12 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="txt_tourday" runat="server" Width="100%"  AutoPostBack="True"
+                <asp:TextBox id="txt_tourday" runat="server" Width="100%" AutoPostBack="True" CssClass="form-control"
                         onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Tour_Days") %>' 
                         ontextchanged="txt_tourday_TextChanged"></asp:TextBox>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="20px" />
+                <HeaderStyle />
             </asp:TemplateField>
             <%--<asp:TemplateField>
                 <HeaderTemplate>
@@ -512,7 +521,7 @@
                         </center>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <asp:TemplateField HeaderStyle-Width="20px">
+            <asp:TemplateField HeaderStyle-Width="">
                 <HeaderTemplate>
                 <center>
                 <b> OT Hrs (HH:MM)</b>
@@ -520,7 +529,7 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                 <center>
-                <asp:TextBox id="text_othours" runat="server" Width="100%" onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Date","{0:HH:mm}") %>'></asp:TextBox>
+                <asp:TextBox id="text_othours" runat="server" Width="100%" CssClass="form-control" onkeydown="AllowOnlyNumeric1(event);" Text='<%#Eval("Date","{0:HH:mm}") %>'></asp:TextBox>
                 </center>
                 </ItemTemplate>
                 <HeaderStyle Font-Bold="False" />
@@ -534,7 +543,7 @@
                         CommandName="update" ></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderStyle-Width="25px">
+            <asp:TemplateField >
                 <HeaderTemplate>
                     <asp:Button ID="btn_saveall" runat="server" Text="Save All" CssClass="btn btn-success"
                         onclick="btn_saveall_Click1" />
@@ -542,10 +551,10 @@
                 <ItemTemplate>
                 <center>
                     <asp:LinkButton ID="img_save" runat="server" AlternateText="" Text="Save" 
-                        CommandName="edit" Height="20"></asp:LinkButton>
+                        CommandName="edit" style="font-size:15px; font-weight:500"></asp:LinkButton>
                         </center>
                 </ItemTemplate>
-                <HeaderStyle Width="25px" />
+                <HeaderStyle />
             </asp:TemplateField>
             <asp:TemplateField Visible="true">
                 <ItemTemplate>
@@ -553,7 +562,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-        <PagerStyle HorizontalAlign="Justify" VerticalAlign="Middle" Width="300px" 
+        <PagerStyle HorizontalAlign="Justify" VerticalAlign="Middle" Width="" 
             Wrap="False" />
         <RowStyle BorderColor="Silver" BorderStyle="Groove" BorderWidth="1px" />
     </asp:GridView>
