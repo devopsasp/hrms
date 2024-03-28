@@ -238,7 +238,7 @@ function fn_save()
         </SelectParameters>
     </asp:SqlDataSource>
     </div>
-   <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+  <%-- <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
                             <ProgressTemplate>
                             <div class="divWaiting">
                             
@@ -248,7 +248,7 @@ function fn_save()
                             </div>
                             </ProgressTemplate>
                             </asp:UpdateProgress>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">--%>
     <ContentTemplate>
     <fieldset style="border-style: none">
 

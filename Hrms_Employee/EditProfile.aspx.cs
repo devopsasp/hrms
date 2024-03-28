@@ -49,6 +49,13 @@ public partial class Hrms_Employee_EditProfile : System.Web.UI.Page
             c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
             Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
         }
+        if (s_login_role == "M")
+        {
+            employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            pay.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
+        }
 
         if (!IsPostBack)
         {
@@ -66,6 +73,13 @@ public partial class Hrms_Employee_EditProfile : System.Web.UI.Page
                     break;
 
                 case "e":
+                    dllEmployeeLoad();
+                    AccessEmployeeProfile();
+                    //Rolelode.Enabled = false;
+                    ddl_rep.Enabled = false;
+                    txt_rep.Disabled = true;
+                    break;
+                case "M":
                     dllEmployeeLoad();
                     AccessEmployeeProfile();
                     //Rolelode.Enabled = false;
@@ -155,8 +169,8 @@ public partial class Hrms_Employee_EditProfile : System.Web.UI.Page
                 {
                     ListItem e_list = new ListItem();
 
-                    e_list.Value = EmpFirstList[ddl_i].EmployeeId.ToString();
-                    e_list.Text = EmpFirstList[ddl_i].LastName.ToString();
+                    e_list.Value = EmpFirstList[ddl_i].DesignationId.ToString();
+                    e_list.Text = EmpFirstList[ddl_i].DesignationName.ToString();
                     ddl_rep.Items.Add(e_list);
                 }
             }

@@ -185,12 +185,20 @@ public partial class flash : System.Web.UI.Page
                         //Session["Login_temp_Photo"] = Server.MapPath("~/Photo/") + "Admin.GIF";
                         Response.Cookies["Login_Name"].Value = "Hi Administrator!";
                     }
-                    else if (Request.Cookies["Roleid"].Value == "251")
+                  // else if (Request.Cookies["Roleid"].Value == "251")
+                   else if (Request.Cookies["Roleid"].Value == "263")
                     {
                         Response.Cookies["Login_temp_Role"].Value = "h";
                         //Session["Login_temp_Photo"] = Server.MapPath("~/Photo/") + "HR.JPG";
                         Response.Cookies["Login_temp_Photo"].Value = "~/Photo/" + "HR.JPG";
                         Response.Cookies["Login_Name"].Value = "Hi HR!";
+                    }
+                    else if (Request.Cookies["Roleid"].Value == "261")
+                    {
+                        Response.Cookies["Login_temp_Role"].Value = "M";
+                        //Session["Login_temp_Photo"] = Server.MapPath("~/Photo/") + "HR.JPG";
+                       Response.Cookies["Login_temp_Photo"].Value = "~/Photo/" + "HR.JPG";
+                        Response.Cookies["Login_Name"].Value = "Hi Manager!";
                     }
                     else
                     {

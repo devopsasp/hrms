@@ -158,6 +158,7 @@
                                         </td>
                                     <td width="12.5%" style="height: 35px">
                                     <asp:LinkButton id="Btn_del" onclick="Btn_del_Click" OnClientClick="return validate()" runat="server" class="btn btn-danger btn-circle" CommandName="Update"><i class="glyphicon glyphicon-remove"></i></asp:LinkButton>
+<%--                                    <asp:LinkButton id="Btn_del" onclick="Btn_del_Click" OnClientClick="return validate()" runat="server" class="btn btn-danger btn-circle" CommandName="Update"><i class="glyphicon glyphicon-remove"></i></asp:LinkButton>--%>
                                         </td>
                                 </tr>
                                 <tr>

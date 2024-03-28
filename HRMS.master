@@ -212,12 +212,14 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav " id="side-menu">
                               <li ><a href="<%= ResolveUrl("~/Company_Home.aspx") %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                             
                             <li id="menuA" ></li>
                             <li id="menuB"></li>
                             <li id="menuC"></li>
                             <li id="menuD"></li>
-                            <li id="menuE" style="display:none"></li>
+                            <li id="menuE" display="none" ></li>
                             <li id="menuF"></li>
+
                         </ul>
                         <ul class="nav " id="side-menu1"> 
                            <li ><a href="<%= ResolveUrl("~/Company_Home.aspx") %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
@@ -459,7 +461,18 @@
                                 </ul>--%>
                                 <!-- /.nav-second-level -->
                             </li>
-                       
+                         <%-- <li>
+                                <a ><i class="fa  fa-plane fa-fw"></i> Training and Placements<span class="fa arrow"></span></a>--%>
+                               <%--<ul class="nav nav-second-level">
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/EmployeeGeneral.aspx") %>">Employee General</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/Attendance.aspx") %>">Attendance</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/PFReport.aspx") %>">PF Monthly</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/EsiReport.aspx") %>">ESI Monthly</a></li>
+                                    <li><a href="<%= ResolveUrl("~/PayrollReports/Payslip.aspx") %>">Payslip</a></li>
+                                </ul>--%>
+                                <!-- /.nav-second-level -->
+                            <%--</li>---%>
+                      
                     </div>
                     <!-- /.sidebar-collapse -->
                 </div>

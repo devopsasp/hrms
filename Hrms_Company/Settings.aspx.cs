@@ -63,6 +63,10 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
                 break;
 
+            case "M":
+
+                break;
+
             case "u": s_form = "12";
                 ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 

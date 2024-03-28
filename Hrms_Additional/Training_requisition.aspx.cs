@@ -1,33 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
-using ePayHrms.Login;
-using ePayHrms.Connection;
 using ePayHrms.Candidate;
-using System.IO;
 using ePayHrms.Company;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ePayHrms.BE.Recruitment;
 using ePayHrms.Employee;
 using ePayHrms.Leave;
-using CrystalDecisions.Web;
-using CrystalDecisions.Enterprise;
-using CrystalDecisions.ReportAppServer;
-using CrystalDecisions.Reporting;
-using CrystalDecisions.ReportSource;
-using CrystalDecisions.Shared;
-using CrystalDecisions.CrystalReports.Engine;
-using System.Data;
-using System.Configuration;
 
 public partial class Hrms_Additional_Training_requisition : System.Web.UI.Page
 {

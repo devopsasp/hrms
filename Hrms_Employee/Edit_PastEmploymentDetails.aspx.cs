@@ -46,6 +46,13 @@ public partial class Hrms_Employee_Edit_PastEmploymentDetails : System.Web.UI.Pa
             c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
             Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
         }
+        if (s_login_role == "M")
+        {
+            employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            pay.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
+        }
         if (!IsPostBack)
         {
 
@@ -62,6 +69,8 @@ public partial class Hrms_Employee_Edit_PastEmploymentDetails : System.Web.UI.Pa
                     break;
 
                 case "e":
+                    break;
+                case "M":
                     break;
 
                 case "u":

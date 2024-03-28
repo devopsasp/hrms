@@ -21,6 +21,14 @@ background-color:#ffeb95;
 text-decoration:underline;
 cursor:pointer;
 }
+    .auto-style1 {
+        height: 134px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .auto-style2 {
+        width: 234px;
+    }
     </style>
 
 
@@ -36,45 +44,37 @@ cursor:pointer;
 
 <script type="text/javascript">
 
-function check_uncheck(Val)
-{
-  var ValChecked = Val.checked;
-  var ValId = Val.id;
-  var frm = document.forms[0];
-  for (i = 0; i < frm.length; i++)
-  {
-    if (this != null)
-    {
-      if (ValId.indexOf('CheckAll') !=  - 1)
-      {
-        if (ValChecked)
-          frm.elements[i].checked = true;
-        else
-          frm.elements[i].checked = false;
-      }
-      else if (ValId.indexOf('deleteRec') !=  - 1)
-      {
-        if (frm.elements[i].checked == false)
-          frm.elements[1].checked = false;
-      }
-    } 
-  } 
-} 
-
-function confirmMsg(frm)
-{
-  // loop through all elements
-  for (i = 0; i < frm.length; i++)
-  {
-    // Look for our checkboxes only
-    if (frm.elements[i].name.indexOf("deleteRec") !=  - 1)
-    {
-      // If any are checked then confirm alert, otherwise nothing happens
-      if (frm.elements[i].checked)
-      return confirm('Are you sure you want to delete your selection(s)?')
+    function check_uncheck(Val) {
+        var ValChecked = Val.checked;
+        var ValId = Val.id;
+        var frm = document.forms[0];
+        for (i = 0; i < frm.length; i++) {
+            if (this != null) {
+                if (ValId.indexOf('CheckAll') != - 1) {
+                    if (ValChecked)
+                        frm.elements[i].checked = true;
+                    else
+                        frm.elements[i].checked = false;
+                }
+                else if (ValId.indexOf('deleteRec') != - 1) {
+                    if (frm.elements[i].checked == false)
+                        frm.elements[1].checked = false;
+                }
+            }
+        }
     }
-  }
-}
+
+    function confirmMsg(frm) {
+        // loop through all elements
+        for (i = 0; i < frm.length; i++) {
+            // Look for our checkboxes only
+            if (frm.elements[i].name.indexOf("deleteRec") != - 1) {
+                // If any are checked then confirm alert, otherwise nothing happens
+                if (frm.elements[i].checked)
+                    return confirm('Are you sure you want to delete your selection(s)?')
+            }
+        }
+    }
 </script>
 
      
@@ -87,9 +87,9 @@ function confirmMsg(frm)
                         <asp:DropDownList ID="DropDownList3" runat="server" Visible="False">
                         </asp:DropDownList>
 
-<div class="row">
+<%--<div class="row">
 
-                <div class="row">
+<%--                <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
                 </div>
@@ -99,7 +99,7 @@ function confirmMsg(frm)
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
+                        <%--<div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
                                     <i class="fa fa-pencil-square-o fa-5x"></i>
@@ -110,17 +110,17 @@ function confirmMsg(frm)
                                     <div>New Leave Requests!</div>
                                 </div>
                             </div>
-                        </div>
-                        <a href="#">
+                        </div>--%>
+                       <%-- <a href="#">
                             <div class="panel-footer">
                                <a href="<%# ResolveUrl("~/Hrms_Attendance/LeaveDetails.aspx") %>"><span class="pull-left">View Details</span></a>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                        </a>--%>
+                   <%-- </div>
+                </div>--%>
+         <%--       <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
@@ -141,8 +141,8 @@ function confirmMsg(frm)
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                </div>--%>
+              <%--  <div class="col-lg-3 col-md-6">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
@@ -150,25 +150,24 @@ function confirmMsg(frm)
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge">
+                                        <asp:Label ID="Label1" runat="server" ></asp:Label>
+
+                                    </div>
                                     <div>No. of Present</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp; 
-                                 <asp:ImageButton ID="ImageButton2" runat="server" Height="16px" ImageUrl="~/Images/Arrow_Yelloe.png" Width="15px" />
-                                <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
-                        <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
-                        <div class="clearfix">
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                </div>--%>
+    <%--            <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -177,24 +176,23 @@ function confirmMsg(frm)
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">
-                                        <asp:Label ID="Label1" runat="server"></asp:Label>
-                                        </div>
+                                        <asp:Label ID="Label2" runat="server" ></asp:Label>
+
+                                    </div>
                                     <div>No. of Absent</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 
-                                <asp:ImageButton ID="ImageButton1" runat="server" Height="16px" ImageUrl="~/Images/arrow_red.gif" Width="29px" />
-                                <%--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>--%>
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
-                        </a>
                     </div>
-                </div>
-            </div>
+                </div>--%>
+           <%-- </div>
               
 
            
@@ -203,8 +201,8 @@ function confirmMsg(frm)
 
  <div class="row">
                 <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">--%>
+                        <%--<div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Employee Distribution by Department
                             <div class="pull-right">
                                 <div class="btn-group">
@@ -222,13 +220,13 @@ function confirmMsg(frm)
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.panel-heading --> 
-                        <div class="panel-body">
-                            <div class="panel panel-info panel-body" >
-                                <asp:Chart ID="Chart2" runat="server" 
+                        </div>--%>
+                        <!-- /.panel-heading -->
+                       <%-- <div class="panel-body">
+                            <div class="panel panel-info panel-body" >--%>
+                                <%--<asp:Chart ID="Chart2" runat="server" 
                                 Palette="Excel" Width="600px">
-                                                        
+                                                       
                                 <Series>
                                     <asp:Series Name="Series1" XValueMember="v_Departmentname" 
                                         YValueMembers="Dep_Count" IsValueShownAsLabel="true"
@@ -247,15 +245,15 @@ function confirmMsg(frm)
                                 <asp:Legend Name="Legend1" Alignment="Center"></asp:Legend>
                                 </Legends> 
 
-                            </asp:Chart>
+                            </asp:Chart>--%>
                                                          
-                                                         </div>
+                    <%--                                     </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">--%>
+                        <%--<div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Attendance Chart
                             <div class="pull-right">
                                 <div class="btn-group">
@@ -265,18 +263,18 @@ function confirmMsg(frm)
                                     <asp:CalendarExtender ID="CalendarExtender2" TargetControlID="txt_date" runat="server" Format="dd/MM/yyyy" />
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" style="font-family: 'Times New Roman', Times, serif; font-size: medium; font-weight: normal; font-style: normal; font-variant: inherit; text-transform: inherit">
+                        <%--<div class="panel-body">
 
-                                        <div class="panel panel-info panel-body">
+                                        <div class="panel panel-info panel-body">--%>
 
-                                         <asp:Chart ID="Chart1" runat="server" BackImageAlignment="Center" Width="600px">
+                                     <%--    <asp:Chart ID="Chart1" runat="server" BackImageAlignment="Center" Width="600px">
                                             <Series>
                                                 <asp:Series Name="Series1" XValueMember="Status" YValueMembers="Numbers" 
-                                                    Legend="Present" ChartType="Bar" IsXValueIndexed="True" 
+                                                    Legend="Legend1" ChartType="Bar" IsXValueIndexed="True" 
                                                     Palette="Excel" Label="#VALX #VAL" LegendText="#LEGENDTEXT" 
-                                                    YValuesPerPoint="6" BorderColor="Gray" ChartArea="ChartArea1">
+                                                    YValuesPerPoint="6" BorderColor="Gray">
                                                     <EmptyPointStyle AxisLabel="No Data Found.." />
                                                 </asp:Series>
                                             </Series>
@@ -284,13 +282,11 @@ function confirmMsg(frm)
                                                 <asp:ChartArea Name="ChartArea1">
                                                     <Area3DStyle Rotation="10" Perspective="10" Inclination="15" IsRightAngleAxes="true"
                         WallWidth="0" IsClustered="False" Enable3D="true"></Area3DStyle>
-                                                  <AxisY2></AxisY2>
                                                 </asp:ChartArea>
                                             </ChartAreas>
                                         </asp:Chart>  
-                                      
-                                         </div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   </div>
+
                                 <div class="col-lg-8">
                                     <div id="morris-bar-chart"></div>
                                 </div>
@@ -305,11 +301,11 @@ function confirmMsg(frm)
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <%--<div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Today&#39;s Absentees List
-                        </div>
+                        </div>--%>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+   <%--                     <div class="panel-body">
                             
                             <div id="diva" runat="server" align="left" style="overflow: auto; height: 355px;">
                        <asp:GridView ID="Grid_attend" runat="server" AutoGenerateColumns="False"  CssClass="table table-bordered table-hover table-striped" Width="95%" DataKeyNames="emp_code" 
@@ -320,18 +316,18 @@ function confirmMsg(frm)
                                                     <ItemTemplate>
                                                         <asp:Label ID="lnk_leave_list" runat="server" Text='<%#Eval("emp_code")%>'></asp:Label> 
                                                             <%--<asp:Label ID="lnk_leave_list" runat="server" Text='<%# Eval("leave") %>'></asp:Label> --%>
-                                                            <asp:LinkButton ID="LinkButton1" runat="server"   
+                                                          <%--  <asp:LinkButton ID="LinkButton1" runat="server"   
                                                                 CommandName="cmd"  Text='<%#Eval("emp_name")%>' ForeColor="#666666"></asp:LinkButton>
                                                         
                                                     </ItemTemplate>
-        
+        --%>
 
-                                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
+<%--                                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField>    
                                                         <ItemTemplate>
                                                             <%--<asp:Label ID="lnk_leave_list" runat="server" Text='<%# Eval("leave") %>'></asp:Label> --%>
-                                                            <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="#666666"  CommandName="cmd"  Text='<%#Eval("emp_name")%>'></asp:LinkButton>
+                                                     <%--       <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="#666666"  CommandName="cmd"  Text='<%#Eval("emp_name")%>'></asp:LinkButton>
                                                         <asp:Label ID="lnk_leave_list" runat="server" Text='<%#Eval("emp_code")%>'></asp:Label> 
                                                     
                                                         </ItemTemplate>
@@ -343,16 +339,16 @@ function confirmMsg(frm)
                                                </div>
 
                         </div>
-                        <!-- /.panel-body -->
-                    </div>
+                        <!-- /.panel-body -->--%>
+                   <%-- </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="panel panel-default">--%>
+                        <%--<div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Monthly Leave Chart
-                        </div>
-                        <div class="panel-body">
+                        </div>--%>
+                 <%--       <div class="panel-body">
                             <div id="morris-donut-chart">
-                                <asp:Chart ID="Chart3" runat="server" BackImageAlignment="Center" Palette="SemiTransparent">
+                            --%>    <%--<asp:Chart ID="Chart3" runat="server" BackImageAlignment="Center">
                                             <Series>
                                                 <asp:Series Name="Series1" XValueMember="Status" YValueMembers="Numbers" 
                                                     Legend="Legend1" IsXValueIndexed="True" 
@@ -367,8 +363,8 @@ function confirmMsg(frm)
                                                      WallWidth="0" IsClustered="False" Enable3D="false"></Area3DStyle>
                                                 </asp:ChartArea>
                                             </ChartAreas>
-                                 </asp:Chart>
-                            </div>
+                                 </asp:Chart>--%>
+                          <%--  </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -376,7 +372,118 @@ function confirmMsg(frm)
                     <!-- /.panel .chat-panel -->
                 </div>
                 <!-- /.col-lg-4 -->
-            </div>
+            </div>--%>
+                   
+                    <br />
+                   <div class="auto-style1">
+
+                       <br />
+                       <div class="row">
+                           <table style="padding:20px">
+                               <tr>
+                                   <td style="padding:20px">
+                                       &nbsp;<asp:Panel ID="Panel1" runat="server" BackColor="#3399FF" Height="99px" Width="318px">
+                                           &nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="nofd" runat="server" Text="Number of Department" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                                           <br />
+                                           &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <asp:Label ID="txtnofd" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </asp:Panel>
+                                   </td>
+                                   <td style="padding:20px" class="auto-style2">
+                                       <asp:Panel ID="Panel2" runat="server" BackColor="#FF99FF" Height="99px" Width="300px">
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="nofe" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Number of Employee"></asp:Label>
+                                           <br />
+                                           &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <asp:Label ID="txtnofe" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <br />
+                                       </asp:Panel>
+                                   </td>
+                                   <td style="padding:20px">
+                                     <asp:Panel ID="Panel3" runat="server" BackColor="#00FF99" Height="99px" Width="277px">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="prsnt" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Number of present"></asp:Label>
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <asp:Label ID="txtprnt" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </asp:Panel>
+                                  
+                                       </td>
+                                   </tr>
+                               <tr>
+                                  <td style="padding:20px">
+                                     <asp:Panel ID="Panel4" runat="server" BackColor="#00FF99" Height="99px" Width="316px">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="absnt" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Number of absent"></asp:Label>
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                                           <asp:Label ID="txtabsnt" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </asp:Panel>
+                                   </td>
+                                    <td style="padding:20px" class="auto-style2">
+                                     <asp:Panel ID="Panel5" runat="server" BackColor="#00FF99" Height="99px" Width="296px">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="lve" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Number of leave"></asp:Label>
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <asp:Label ID="txtlve" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </asp:Panel>
+                                   </td>
+                                        <td style="padding:20px">
+                                     <asp:Panel ID="Panel6" runat="server" BackColor="#00FF99" Height="99px" Width="278px">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="hliday" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Number of holiday"></asp:Label>
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;
+                                           <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                           <asp:Label ID="txthliday" runat="server" Text="Label"></asp:Label>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       </asp:Panel>
+                                   </td>
+                               </tr>
+                             
+                           </table>
+                           <div>
+                               <div>
+                                    <asp:Chart ID="Chart2" runat="server" 
+                                Palette="Excel" Width="600px" ImageLocation="~/delete_icon.gif">
+                                                       
+                                <Series>
+                                    <asp:Series Name="Series1" XValueMember="v_Departmentname" 
+                                        YValueMembers="Dep_Count" IsValueShownAsLabel="true"
+                             Palette="Excel" LabelForeColor="#FF3300" YValuesPerPoint="4">
+                                        <EmptyPointStyle AxisLabel="No Data Found.." />
+                                    </asp:Series>
+                                </Series>
+                                <chartareas>
+                                    <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="false">
+                                       <%--<Area3DStyle Rotation="10" Perspective="10" Inclination="15" IsRightAngleAxes="False"
+                        WallWidth="0" IsClustered="False" Enable3D="True"></Area3DStyle>--%>
+                                    </asp:ChartArea>
+                                                            
+                                </chartareas>
+                                <Legends>
+                                <asp:Legend Name="Legend1" Alignment="Center"></asp:Legend>
+                                </Legends> 
+
+                            </asp:Chart>
+
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
             </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

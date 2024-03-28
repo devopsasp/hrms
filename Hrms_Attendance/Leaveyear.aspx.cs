@@ -87,6 +87,10 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                     case "e": ddl_Branch.Visible = false;
                         break;
 
+                    case "M":
+                        ddl_Branch.Visible = false;
+                        break;
+
                     case "u": s_form = "43";
 
                         ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);

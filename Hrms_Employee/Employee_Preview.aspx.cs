@@ -80,6 +80,14 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
             Response.Cookies["Employee_Code_FirstLastName"].Value = "";
         }
+        if (s_login_role == "M")
+        {
+            employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            pay.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            Response.Cookies["preview_EmployeeID"].Value = employee.EmployeeId.ToString();
+            Response.Cookies["Employee_Code_FirstLastName"].Value = "";
+        }
 
         //label_clear();
 
@@ -175,9 +183,40 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                         access();
                         grid_transport_load();
                         break;
-                       
+                case "M": //btn_hide();
+                    Emp_access();
+                    tab_profile.Visible = true;
+                    tab_address.Visible = true;
+                    tab_bank.Visible = true;
+                    tab_date.Visible = true;
+                    tab_Dedu.Visible = true;
+                    tab_Overhead.Visible = true;
+                    tab_Earn.Visible = true;
+                    tab_edu.Visible = true;
+                    tab_family.Visible = true;
+                    tab_photo.Visible = true;
+                    tab_ref.Visible = true;
+                    tab_Skills.Visible = true;
+                    //tab_Train.Visible = true;
+                    tab_workdet.Visible = true;
+                    tab_workexp.Visible = true;
+                    tab_asset.Visible = true;
+                    Table_bus.Visible = true;
 
-                    case "u":
+                    get_employee_details();
+                    //grid_training_load();
+                    grid_exp_load();
+                    grid_qualfication_load();
+                    grid_skill_load();
+                    grid_earnings_load();
+                    grid_deductions_load();
+                    grid_OverHeading_load();
+                    grid_Asset_load();
+                    access();
+                    grid_transport_load();
+                    break;
+
+                case "u":
                         get_employee_details();
                         break;
 
@@ -1488,6 +1527,18 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         grid_qualfication_load();
         //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Record has Deleted');", true);
         ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Record has Deleted');};", true);
+    }
+
+    protected void btn_Remove_Click(object sender, EventArgs e)
+    {
+        employee.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+        pay.EmployeeId = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+        c.EmployeeID = Convert.ToInt32(Request.Cookies["preview_EmployeeID"].Value);
+
+        myConnection.Open();
+        SqlCommand cmd = new SqlCommand("update paym_employee set status='N' where pn_CompanyID = '" + employee.CompanyId + "' and pn_branchId = '" + employee.BranchId + "' and pn_EmployeeID = '" + employee.EmployeeId + "'", myConnection);
+        cmd.ExecuteNonQuery();
+        myConnection.Close();
     }
 }
 

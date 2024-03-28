@@ -99,6 +99,12 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                               lreq.Visible = false;
                         ddl_department.Enabled = false;
                               break;
+                    case "M":
+                        ddl_Branch.Visible = false;
+                        row_emp.Visible = false;
+                        lreq.Visible = false;
+                        ddl_department.Enabled = false;
+                        break;
 
                     case "u": s_form = "42";
                            

@@ -29,7 +29,7 @@ public partial class Hrms_Master_Leave_Add_approval : System.Web.UI.Page
 
         cmd.Parameters.AddWithValue("@form_id", Form.FormId);
         cmd.Parameters.AddWithValue("@form_name", Form.FormName);
-        cmd.Parameters.AddWithValue("@Level", Form.Level);
+        cmd.Parameters.AddWithValue("@Level", Form.Hierarchy);
         cmd.Parameters.AddWithValue("@time", Form.Time);
         cmd.Parameters.AddWithValue("@user_id", Form.Userid);
         con.Open();
@@ -42,7 +42,7 @@ public partial class Hrms_Master_Leave_Add_approval : System.Web.UI.Page
     public static void clearr(Add_approval Form)
     {
         Form.FormName = "";
-        Form.Level = 00;
+        Form.Hierarchy = 00;
         //Form.Time = 00;
         Form.Userid =0;
     }
@@ -50,7 +50,7 @@ public partial class Hrms_Master_Leave_Add_approval : System.Web.UI.Page
     {
         public int FormId { get; set; }
         public string FormName { get; set; }
-        public int Level { get; set; }
+        public int Hierarchy { get; set; }
         public TimeSpan Time { get; set; }
         public int Userid { get; set; }
     }

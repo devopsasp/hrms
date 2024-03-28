@@ -117,6 +117,17 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
                 bindDepDetails(); //ddl Dept Permission
                 // BindDepartment();
             }
+            else if (s_login_role == "M")
+            {
+                employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+                load_request();
+                //employee_load(); //Emp onduty Load
+                //hr_load(); // HR onduty Load
+                empload(); //Emp paym_permission
+                bindempDetails(); //ddl Emp Permission
+                bindDepDetails(); //ddl Dept Permission
+                // BindDepartment();
+            }
         }        
     }
 

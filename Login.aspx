@@ -1,6 +1,6 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="flash" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
 
@@ -156,7 +156,7 @@ Recruiting , Learning management, Performance record , Employee self-service ,Sc
        
     </div>
     <!--/.fluid-container-->
-            <script src='<%= ResolveUrl("~/JQuery/jquery-1.10.2.js") %>'></script>
+
         <script src='<%= ResolveUrl("~/Libraries/jquery-1.9.1.min.js") %>'></script>
         <script src='<%= ResolveUrl("~/JQuery/jquery-ui.min.js") %>'></script>
         <script src='<%= ResolveUrl("~/Libraries/bootstrap.min.js") %>'></script>
@@ -165,4 +165,4 @@ Recruiting , Learning management, Performance record , Employee self-service ,Sc
                 <p> <a style="padding-top: 7%; float: right;">© 2015 hesperusinfo.com - All rights reserved.</a> </p>
             </footer>
 </body>
-</html>
+</html>--%>

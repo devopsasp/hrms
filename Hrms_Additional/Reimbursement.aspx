@@ -273,6 +273,69 @@
                     </EmptyDataTemplate>
                     
                 </asp:ListView>
+    <HeaderStyle BackColor="#7779AF" ForeColor="White"></HeaderStyle>
+                    <br />
+                    <asp:ListView ID="lv_hrr" runat="server" 
+        onselectedindexchanged="lv_hr_SelectedIndexChanged" 
+        onitemediting="lv_hr_ItemEditing" onitemcanceling="lv_hr_ItemCanceling" 
+        DataKeyNames="Id" onitemcommand="lv_hr_ItemCommand" onitemdatabound="lv_hr_ItemDataBound" >
+       
+                    <LayoutTemplate>
+                    
+                        <table   border="1" align="center">
+                            <tr >
+                            <td style="font-family: Calibri;   font-weight: bold;">ID</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">Emp.ID</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">Emp.Name</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">From</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">To</td>            
+                                <td style="font-family: Calibri;   font-weight: bold;">Total Days</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">Travel Mode</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">Destination</td> 
+                                <td style="font-family: Calibri;   font-weight: bold;">Total Expenses</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">Purpose</td>                                
+                                <td style="font-family: Calibri;  font-weight: bold;">Status</td>
+                                <%--<td style="font-family: Calibri;   font-weight: bold;">Approve</td>                            
+                                <td style="font-family: Calibri;   font-weight: bold;">Reject</td>
+                                <td style="font-family: Calibri;   font-weight: bold;">View Bill</td>--%>
+                            </tr>
+                            <tr id="itemplaceholder" runat="server"></tr>                     
+                        </table>           
+                    </LayoutTemplate>
+                    
+                    <ItemTemplate>
+                        <tr id="temp_id" runat="server">
+                            <%--<asp:Label ID="lblid" runat="server" Text='<%#Eval("id") %>' Visible="false"></asp:Label>--%>
+                            <td style="font-family: Calibri"><asp:Label ID="lblBillId" runat="server" Text='<%#Eval("ID") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lblempid" runat="server" Text='<%#Eval("pn_employeeid") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="Label7" runat="server" Text='<%#Eval("pn_employeename") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="Label8" runat="server" Text='<%#Eval("from_date","{0:dd/MM/yyyy}") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="Label9" runat="server" Text='<%#Eval("to_date","{0:dd/MM/yyyy}") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lbldays" runat="server" Text='<%#Eval("total_days") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lblmode" runat="server" Text='<%#Eval("mode") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lbldest" runat="server" Text='<%#Eval("destination") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lblexp" runat="server" Text='<%#Eval("expense") %>'></asp:Label></td>
+                            <td style="font-family: Calibri"><asp:Label ID="lblpurpose" runat="server" Text='<%#Eval("purpose") %>'></asp:Label></td>                           
+                            <td style="font-family: Calibri"><asp:Label ID="lblresult" runat="server" Text='<%#Eval("Status") %>'></asp:Label></td>                       
+<%--                            <td style="font-family: Calibri"><asp:LinkButton ID="lnk_approve" runat="server" Text="Approve" CommandName="Edit"></asp:LinkButton></td>
+                            <td style="font-family: Calibri"><asp:LinkButton ID="LinkButton1" runat="server" Text="Reject" CommandName="Reject"></asp:LinkButton></td>                        --%>
+                            <td style="font-family: Calibri"><asp:LinkButton ID="lnk_view" runat="server" Text="View Bill" CommandName="View" CommandArgument= "<%# Container.DataItemIndex %>"></asp:LinkButton></td>                     
+                        </tr>   
+                                    
+                    </ItemTemplate>        
+                    <EmptyItemTemplate>
+                        <asp:Label ID="lblempty" runat="server" Text="Updated Successfully" ForeColor="Red"></asp:Label> 
+                        <%--<asp:LinkButton ID="lnk_bk" runat="server" Text="Back" PostBackUrl="~/Hrms_Additional/Reimbursement.aspx"></asp:LinkButton> --%>
+                        <a href ="Reimbursement.aspx">Back</a>
+                        
+                    </EmptyItemTemplate>
+                    <EmptyDataTemplate>
+                        <asp:Label ID="lblempty1" runat="server" Text="Updated Successfully" ForeColor="Red"></asp:Label>
+                        <a href ="Reimbursement.aspx">Back</a> 
+                       <%-- <asp:LinkButton ID="lnk_bk" runat="server" Text="Back" PostBackUrl="~/Hrms_Additional/Reimbursement.aspx"></asp:LinkButton>--%>
+                    </EmptyDataTemplate>
+                    
+                </asp:ListView>
                 
                  <div>
                      <br />

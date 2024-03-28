@@ -87,14 +87,23 @@ public partial class Hrms_Attendance_Default : System.Web.UI.Page
                         ddl_leave_load();                        
                         Get_Year();
                         break;
-
+                    case "M":
+                        ddl_Branch.Visible = false;
+                        ddl_employee_load();
+                        ddl_Department_load();
+                        ddl_leave_load();
+                        emp();
+                        Get_Year();
+                        //ddl_department.Enabled = false;
+                        break;
                     case "e":
                         ddl_Branch.Visible = false;
                         ddl_employee_load();
+                        ddl_Department_load();
                         ddl_leave_load();                        
                         emp();
                         Get_Year();
-                        ddl_department.Enabled = false;
+                        //ddl_department.Enabled = false;
                         break;
 
                     case "u": s_form = "41";
@@ -737,6 +746,7 @@ public partial class Hrms_Attendance_Default : System.Web.UI.Page
 
             
             }
+            
         }
         catch (Exception e)
         {

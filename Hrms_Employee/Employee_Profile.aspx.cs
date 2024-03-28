@@ -557,8 +557,8 @@ public partial class Hrms_Employee_Default2 : System.Web.UI.Page
                 {
                     ListItem e_list = new ListItem();
 
-                    e_list.Value = EmpFirstList[ddl_i].EmployeeId.ToString();
-                    e_list.Text = EmpFirstList[ddl_i].LastName.ToString();
+                    e_list.Value = EmpFirstList[ddl_i].DesignationId.ToString();
+                    e_list.Text = EmpFirstList[ddl_i].DesignationName.ToString();
                     txt_rep.Items.Add(e_list);
                 }
             }

@@ -1,28 +1,18 @@
 using System;
-using System.Data;
+using System.Data.SqlClient;
 using System.Configuration;
-using System.Collections;
-using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using System.Data.SqlClient;
-using ePayHrms.Login;
-using ePayHrms.BE.Recruitment;
-using ePayHrms.Connection;
-using ePayHrms.Candidate;
-using System.IO;
+
 using ePayHrms.Company;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ePayHrms.Leave;
 //using System.Drawing;
 //using System.Drawing.Imaging;
 using ePayHrms.Employee;
+using System.Data;
 
 public partial class Hrms_Additional_Default : System.Web.UI.Page
 {
@@ -54,7 +44,7 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         l.CompanyID = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
-        hr_reimburse_id = (int)Session["reimburse_id"];
+        //hr_reimburse_id = (int)Session["reimburse_id"];
         if (!IsPostBack)
         {
             String name = Request.QueryString["name"];
@@ -68,17 +58,21 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
                 
                 switch (s_login_role)
                 {
-                    case "a": 
+                    case "a":
+                        load_lv();
                         break;
 
                     case "h":
                         hr();
+                        
                         BindGridData();
                         break;
 
                     case "e":
                         employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
                         emp();
+                        load_lvv();
+                        lv_hrr.Visible = false;
                         BindGridData();
                         break;
 
@@ -117,7 +111,7 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
             Fileupload4.Visible = false;
             Fileupload5.Visible = false;
 
-            lv_hr.Visible = true;
+            lv_hrr.Visible = true;
             var sqlCon = ConfigurationManager.ConnectionStrings["connectionstring"];
             string constr = sqlCon.ConnectionString;
             SqlConnection con = new SqlConnection(constr);
@@ -126,8 +120,8 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
             SqlDataAdapter ada = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             ada.Fill(ds);
-            lv_hr.DataSource = ds;
-            lv_hr.DataBind();
+            lv_hrr.DataSource = ds;
+            lv_hrr.DataBind();
             con.Close();
         reimburse_notification_load();
     }
@@ -147,8 +141,22 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
         lv_hr.DataBind();
         con.Close();
     }
-    
-   
+    public void load_lvv()
+    {
+        lv_hrr.Visible = true;
+        var sqlCon = ConfigurationManager.ConnectionStrings["connectionstring"];
+        string constr = sqlCon.ConnectionString;
+        SqlConnection con = new SqlConnection(constr);
+        con.Open();
+        SqlCommand cmd = new SqlCommand("select * from reimbursement where pn_branchid='" + employee.BranchId + "' and pn_companyid='" + employee.CompanyId + "'", con);
+        SqlDataAdapter ada = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        ada.Fill(ds);
+        lv_hrr.DataSource = ds;
+        lv_hrr.DataBind();
+        con.Close();
+    }
+
     protected void lv_hr_ItemEditing(object sender, ListViewEditEventArgs e)
     {
         var sqlCon = ConfigurationManager.ConnectionStrings["connectionstring"];
@@ -173,7 +181,7 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
             string constr = sqlCon.ConnectionString;
             SqlConnection con = new SqlConnection(constr);
             con.Open();
-            Label lblid = (Label)e.Item.FindControl("lblid");
+            Label lblid = (Label)e.Item.FindControl("lblBillId");
             SqlCommand cmd = new SqlCommand("update reimbursement set status='N' where id='" + lblid.Text + "' and pn_CompanyID = '" + employee.CompanyId + "' and pn_BranchID = '" + employee.BranchId + "'", con);
             cmd.ExecuteNonQuery();
             lblerror.Text = "Request Rejected";
@@ -209,7 +217,7 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
                 //Image5.ImageUrl = "~/Handler3.ashx?ImID=" + lblempid;
                 //Image2.ImageUrl = "~/Handler3.ashx?ImID=" + lblempid.Text;
 
-  
+
 
             }
             dr.Close();
@@ -594,7 +602,7 @@ public partial class Hrms_Additional_Default : System.Web.UI.Page
 
 
                 int rows = cmd2.ExecuteNonQuery();
-                string string1 = "N";
+                string string1 = "Null";
                 //SqlCommand cmd2 = new SqlCommand("insert into paym_employee_bill_photo(pn_companyid,pn_branchid,pn_employeeid,from_date,to_date,billimage1,billimage2,billimage3,billimage4,billimage5)values('" + employee.CompanyId + "','" + employee.BranchId + "','" + employee.EmployeeId + "','" + employee.Convert_ToSqlDatestring(txtfrom.Text) + "','" + employee.Convert_ToSqlDatestring(txtto.Text) + "',)", con);
                 SqlCommand cmd1 = new SqlCommand("insert into reimbursement(pn_companyid,pn_branchid,pn_employeeid,pn_EmployeeName,from_date,to_date,total_days,mode,destination,expense,purpose,other,status,billimage1,billimage2,billimage3,billimage4,billimage5)VALUES (@pn_companyid,@pn_branchid,@pn_employeeid,@pn_EmployeeName,@from_date,@to_date,@total_days,@mode,@destination,@expense,@purpose,@other,@status,@billimage1,@billimage2,@billimage3,@billimage4,@billimage5)", con);
                 cmd1.Parameters.AddWithValue("@pn_companyid", employee.CompanyId);

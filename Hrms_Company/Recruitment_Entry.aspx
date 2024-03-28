@@ -13,7 +13,8 @@
    <table width="100%" class="Content" cellpadding="5px" cellspacing="1px" id="tab1">
              
              <tr>
-                <td colspan="4" align="center">&nbsp;<asp:Label ID="lbl_Error" runat="server" ForeColor="Red" 
+                <td colspan="4" align="center">&nbsp;<asp:Label ID="lbl_Error" runat="server" ForeColor="Red" 
+
 Font-Bold="True"></asp:Label></td>
            
              </tr>

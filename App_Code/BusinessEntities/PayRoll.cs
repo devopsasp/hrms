@@ -119,7 +119,7 @@ public class PayRoll
     private string max_ceiling;
     private double upper_limit;
     private int max_amount;
-
+    public string leave_name;
     private int _temp_int;
     private string _temp_str;
 
@@ -594,6 +594,21 @@ public class PayRoll
         set { _d_EffDate = value; }
     }
 
+    public string leavename
+    {
+        get { return _leave_name; }
+        set { _leave_name = value; }
+    }
+    public string leavecode
+    {
+        get { return _leave_code; }
+        set { _leave_code = value; }
+    }
+    public int  leaveId
+    {
+        get { return _leave_Id; }
+        set { _leave_Id = value; }
+    }
 
     public double Amount
     {
@@ -1588,6 +1603,10 @@ public class PayRoll
         get { return _emailid; }
         set { _emailid = value; }
     }
+
+    public string _leave_name { get; private set; }
+    public int _leave_Id { get; private set; }
+    public string _leave_code { get; private set; }
 
 
     //Loan procedures functions

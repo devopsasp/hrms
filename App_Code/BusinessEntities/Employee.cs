@@ -1735,7 +1735,88 @@ namespace ePayHrms.Employee
         public object e { get; private set; }
 
         //##########################################################################################
+        public string _leave_Code;
+        public int _leave_id;
+        public string _leave_name;
+        public DateTime _from_date;
+        public DateTime _to_date;
+        public DateTime _Submit_date;
+        public int _yearend;
+        public string _approve;
+        public string _reason;
+        public string _priority;
+        public string _from_status;
+        public string _to_status;
+        public double _day;
+        public string leave_Code
+        {
+            get { return _leave_Code; }
+            set { _leave_Code = value; }
+        }
+        public int leave_id
+        {
+            get { return _leave_id; }
+            set { _leave_id = value; }
+        }
+        public string leave_name
+        {
+            get { return _leave_name; }
+            set { _leave_name = value; }
+        }
+        public DateTime from_date
+        {
+            get { return _from_date; }
+            set { _from_date = value; }
+        }
+        public DateTime to_date
+        {
+            get { return _to_date; }
+            set { _to_date = value; }
+        }
+        public DateTime Submit_date
+        {
+            get { return _Submit_date; }
+            set { _Submit_date = value; }
+        }
+        public string approve
+        {
+            get { return _approve; }
+            set { _approve = value; }
 
+        }
+        public int yearend
+        {
+            get { return _yearend; }
+            set { _yearend = value; }
+
+        }
+        public string reason
+        {
+            get { return _reason; }
+            set { _reason = value; }
+        }
+        public string priority
+        {
+            get { return _priority; }
+            set { _priority = value; }
+        }
+        public string from_status
+        {
+            get { return _from_status; ; }
+            set { _from_status = value; }
+        }
+        
+        public string to_status
+        {
+            get { return _to_status; }
+            set { _to_status = value; }
+        }
+        public double day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+        //##########################################################################################
         public Collection<Employee> EmployeeDesignation(Employee e)
         {
             Collection<Employee> EmployeeDesignationList=new Collection<Employee>();
@@ -3339,7 +3420,9 @@ namespace ePayHrms.Employee
         {
             Collection<Employee> DepartmentList = new Collection<Employee>();
             _Connection = Con.fn_Connection();
-            string _SqlString = "select * from paym_Department where status='Y' and pn_BranchID='" + e + "'";
+            string _SqlString = "select * from paym_Department where status='Y' and pn_BranchID='" + e + "' order by v_DepartmentName ";
+
+            //string _SqlString = "select * from paym_Department where status='Y' and pn_BranchID='" + e + "'";
             SqlCommand _SSDepartment = new SqlCommand(_SqlString, _Connection);
             _Connection.Open();
             SqlDataReader dr_Department = _SSDepartment.ExecuteReader();
@@ -3352,7 +3435,45 @@ namespace ePayHrms.Employee
             }
             return DepartmentList;
         }
+        public Collection<Employee> leave_process(int e)
+        {
+            string _SqlString = "SELECT * FROM leave_apply INNER JOIN paym_employee_Profile1 ON leave_apply.pn_EmployeeID=paym_employee_Profile1.pn_EmployeeID where  leave_apply.pn_BranchID='" + e + "' and FLAG IS NULL";
+            Collection<Employee> leave_Processs = new Collection<Employee>();
+            _Connection = Con.fn_Connection();
+            _Connection.Open();
+            SqlCommand _SSleaveprocess = new SqlCommand(_SqlString, _Connection);
+            SqlDataReader dr = _SSleaveprocess.ExecuteReader();
+            while (dr.Read())
+            {
+                Employee employee = new Employee();
+                employee.EmployeeId = (int)dr["pn_EmployeeID"];
+                employee.EmployeeCode = Convert.IsDBNull(dr["Emp_code"]) ? "" : (string)dr["Emp_code"];
+                employee.FirstName = Convert.IsDBNull(dr["Emp_name"]) ? "" : (string)dr["Emp_name"];
+                employee.leave_name= Convert.IsDBNull(dr["pn_Leavename"]) ? "" : (string)dr["pn_Leavename"];
+                employee.leave_id= (int)dr["pn_LeaveID"];
+                employee.leave_Code = Convert.IsDBNull(dr["pn_leavecode"]) ? "" : (string)dr["pn_leavecode"];
+                employee.from_date=Convert.IsDBNull(dr["from_date"]) ? DateTime.Now : Convert.ToDateTime(dr["from_date"]);
+               // employee.from_date= Convert.IsDBNull(dr["from_date"]) ? "" : (string)dr["from_date"];
+                employee.to_date = Convert.IsDBNull(dr["to_date"]) ? DateTime.Now : Convert.ToDateTime(dr["to_date"]);
+                employee.Submit_date = Convert.IsDBNull(dr["submitted_date"]) ? DateTime.Now : Convert.ToDateTime(dr["submitted_date"]);
+                //employee.to_date = Convert.IsDBNull(dr["to_date"]) ? "" : (string)dr["to_date"];
+                //employee.Submit_date = Convert.IsDBNull(dr["submitted_date"]) ? "" : (string)dr["submitted_date"];
+                employee.approve= Convert.IsDBNull(dr["approve"]) ? "" : (string)dr["approve"];
+                employee.yearend = (int)dr["yearend"];
+                //employee.yearend = Convert.IsDBNull(dr["yearend"]) ? "":(string)dr["yearend"];
+                //employee.from_status = Convert.IsDBNull(dr["from_status"]) ? DateTime.Now : Convert.ToDateTime(dr["from_status"]);
+                //employee.to_status = Convert.IsDBNull(dr["to_date"]) ? DateTime.Now : Convert.ToDateTime(dr["to_date"]);
+                employee.from_status = Convert.IsDBNull(dr["from_status"]) ? "" : (string)dr["from_status"];
+                employee.to_status = Convert.IsDBNull(dr["status"]) ? "" : (string)dr["status"];
+               // employee.DesignationId = Convert.IsDBNull(dr["status"]) ? "" : (int)dr["status"];
+                employee.DesignationId = (int)dr["pn_DesingnationId"];
+                //employee.day = (int)dr["days"];
+                employee.day = (double)dr["days"];
 
+                leave_Processs.Add(employee);
+            }
+            return leave_Processs;
+        }
         public Collection<Employee> fn_getPatternList(int e)
         {
             Collection<Employee> PList = new Collection<Employee>();
@@ -4174,7 +4295,7 @@ namespace ePayHrms.Employee
             return skillList;
         }
 
-
+  
         public Collection<Employee> fn_projectsite()
         {
             Collection<Employee> projectsiteList = new Collection<Employee>();
@@ -5207,6 +5328,25 @@ namespace ePayHrms.Employee
             }
             return EmployeeList;
         }
+        public Collection<Employee> fn_getEmployeeDepartment1(Employee e)
+        {
+            Collection<Employee> EmployeeList = new Collection<Employee>();
+            _Connection = Con.fn_Connection();  //order by Employee_First_Name asc
+            SqlCommand _Course = new SqlCommand("select a.pn_employeeid,b.EmployeeCode,b.employee_First_Name from paym_employee_profile1 a,paym_employee b where a.pn_branchid='" + e.BranchId + "' and  a.pn_employeeid=b.pn_employeeid and a.pn_companyid='" + e.CompanyId + "' and b.status != 'N' order by b.EmployeeCode asc ", _Connection);
+            _Connection.Open();
+            SqlDataReader dr = _Course.ExecuteReader();
+            while (dr.Read())
+            {
+                Employee employee = new Employee();
+                employee.EmployeeId = (int)dr["pn_EmployeeID"];
+                employee.EmployeeCode = Convert.IsDBNull(dr["EmployeeCode"]) ? "" : (string)dr["EmployeeCode"];
+                employee.FirstName = Convert.IsDBNull(dr["Employee_First_Name"]) ? "" : (string)dr["Employee_First_Name"];
+                employee.LastName = (string)dr["EmployeeCode"] + " - " + (string)dr["Employee_First_Name"];
+                employee.FullName = (int)dr["pn_EmployeeID"] + "-" + (string)dr["Employee_First_Name"];
+                EmployeeList.Add(employee);
+            }
+            return EmployeeList;
+        }
 
         public Collection<Employee> fn_getEmployeeCategory(Employee e)
         {
@@ -5713,7 +5853,7 @@ namespace ePayHrms.Employee
             Collection<Employee> EmployeeList = new Collection<Employee>();
             _Connection = Con.fn_Connection();
             //SqlCommand _Course = new SqlCommand("select * from time_card where pn_CompanyID=" + e.CompanyId + " and pn_BranchID =" + e.BranchId + " and dates = '" + e.d_Date + "' and pn_employeeid = '" + e.EmployeeId + "' order by emp_name asc", _Connection);
-            SqlCommand _Course = new SqlCommand("select a.*, b.pn_gradeid from time_card a, paym_employee_profile1 b where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.dates between '" + e.d_Date + "' and'"+e.e_date+"' and a.pn_employeeid = '" + e.EmployeeId + "' and a.pn_Employeeid = b.pn_Employeeid order by b.pn_gradeid asc", _Connection);
+            SqlCommand _Course = new SqlCommand("select a.*, b.pn_gradeid from time_card a, paym_employee_profile1 b where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.dates between '" + e.d_Date + "' and'"+e.e_date+ "' and a.shift_code ='"+e.shiftcode+"' and a.pn_employeeid = '" + e.EmployeeId + "' and a.pn_Employeeid = b.pn_Employeeid order by b.pn_gradeid asc", _Connection);
             _Connection.Open();
             SqlDataReader dr = _Course.ExecuteReader();
             while (dr.Read())
@@ -8008,26 +8148,42 @@ namespace ePayHrms.Employee
             }
             return DeductionList;
         }
-
         public Collection<Employee> fn_getReportingList(Employee e)
         {
             Collection<Employee> EmployeeList = new Collection<Employee>();
             _Connection = Con.fn_Connection();//order by Employee_First_Name asc
-            SqlCommand _Course = new SqlCommand("select a.* from paym_Employee a where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.status!='N' and Flag != 'N' order by a.employeecode asc", _Connection);
+            SqlCommand _Course = new SqlCommand("select * from paym_Designation where pn_CompanyID=" + e.CompanyId + " and BranchID =" + e.BranchId + " and status = 'Y' ", _Connection);
             _Connection.Open();
             SqlDataReader dr = _Course.ExecuteReader();
             while (dr.Read())
             {
                 Employee employee = new Employee();
-                employee.EmployeeId = (int)dr["pn_EmployeeID"];
-                employee.EmployeeCode = Convert.IsDBNull(dr["EmployeeCode"]) ? "" : (string)dr["EmployeeCode"];
-                employee.FirstName = Convert.IsDBNull(dr["Employee_First_Name"]) ? "" : (string)dr["Employee_First_Name"];
-                employee.LastName = (string)dr["EmployeeCode"] + "-" + (string)dr["Employee_First_Name"];
-                employee.FullName = (int)dr["pn_EmployeeID"] + "-" + (string)dr["Employee_First_Name"];
+                employee.DesignationId = (int)dr["pn_DesignationID"];
+                employee.DesignationName = Convert.IsDBNull(dr["v_DesignationName"]) ? "" : (string)dr["v_DesignationName"];
+                
                 EmployeeList.Add(employee);
             }
             return EmployeeList;
         }
+        //public Collection<Employee> fn_getReportingList(Employee e)
+        //{
+        //    Collection<Employee> EmployeeList = new Collection<Employee>();
+        //    _Connection = Con.fn_Connection();//order by Employee_First_Name asc
+        //    SqlCommand _Course = new SqlCommand("select a.* from paym_Employee a where a.pn_CompanyID=" + e.CompanyId + " and a.pn_BranchID =" + e.BranchId + " and a.status!='N' and Flag != 'N' order by a.employeecode asc", _Connection);
+        //    _Connection.Open();
+        //    SqlDataReader dr = _Course.ExecuteReader();
+        //    while (dr.Read())
+        //    {
+        //        Employee employee = new Employee();
+        //        employee.EmployeeId = (int)dr["pn_EmployeeID"];
+        //        employee.EmployeeCode = Convert.IsDBNull(dr["EmployeeCode"]) ? "" : (string)dr["EmployeeCode"];
+        //        employee.FirstName = Convert.IsDBNull(dr["Employee_First_Name"]) ? "" : (string)dr["Employee_First_Name"];
+        //        employee.LastName = (string)dr["EmployeeCode"] + "-" + (string)dr["Employee_First_Name"];
+        //        employee.FullName = (int)dr["pn_EmployeeID"] + "-" + (string)dr["Employee_First_Name"];
+        //        EmployeeList.Add(employee);
+        //    }
+        //    return EmployeeList;
+        //}
 
         public Collection<Employee> fn_getEmployeeReporting(Employee e)
         {

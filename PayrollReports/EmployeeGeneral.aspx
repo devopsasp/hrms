@@ -6,6 +6,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
 
+    kklljjhhggffddssaaaaaaaaaaaaa<asp:Localize ID="Localize1" runat="server"></asp:Localize>
+
+
     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
     <%--http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js--%>
     <script type="text/javascript">
@@ -68,7 +71,7 @@
         &nbsp;
     </div>
 
-    <%--<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
                             <ProgressTemplate>
                             <div class="divWaiting">
                             
@@ -79,7 +82,7 @@
                             </ProgressTemplate>
                             </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>--%>
+    <ContentTemplate>
     <div>
 
         <table align="left" class="table table-striped table-bordered table-hover"
@@ -143,6 +146,6 @@
 
 
     </div>
-    <%--    </ContentTemplate>
-    </asp:UpdatePanel>--%>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

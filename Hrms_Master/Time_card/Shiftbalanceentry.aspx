@@ -179,13 +179,12 @@
 
     </script>
 
-    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+    <asp:ToolkitScriptManager ID="ToolkitScriptManager1"   AsyncPostBackTimeout="3000"  runat="server">
     </asp:ToolkitScriptManager>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
-            <div class="divWaiting">
-
-                <asp:Image ID="imgWait" runat="server" ImageAlign="Middle" ImageUrl="~/Images/loading2.gif" Height="100px" Width="100px" />
+            <div class="divWaiting" >
+                <asp:Image ID="imgWait" runat="server"  ImageUrl="~/Images/loading2.gif"  ImageAlign="bottom" Height="110px" Width="111px" />
                 <%--<img src="../loading.gif" alt="Loading" style="position:relative;" />--%>
             </div>
         </ProgressTemplate>
@@ -239,7 +238,7 @@
 
                         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" onrowediting="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit"
                             OnRowCommand="GridView1_RowCommand" OnRowDataBound="GridView1_RowDataBound" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating"
-                            OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True" CssClass="table table-hover table-no-bordered" Height="435px" Width="751px">
+                            OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowFooter="True" CssClass="table table-hover table-no-bordered">
 
                             <Columns>
                                 <asp:TemplateField Visible="false" HeaderStyle-HorizontalAlign="Left" HeaderText="Branch"
@@ -568,10 +567,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                      <Itemtemplate>
-                                                <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit" ImageUrl="~/Images/edit_icon.png" />
-                                                <asp:ImageButton ID="btnDelete" runat="server" CommandName="Delete" ImageUrl="~/Images/delete_icon.jpg" />
-                                            </Itemtemplate>
+                                      <asp:ImageButton ID="btnEdit" runat="server" CommandName="Edit"  ImageUrl="~/Images/edit_icon.png" />
+                                        <asp:ImageButton ID="btnDelete" ImageUrl="~/Images/delete_icon.jpg" runat="server" OnClientClick="return confirm('Are you sure you want to delete this record?');"  CommandName="Delete" />
                                     </ItemTemplate>
                                       <EditItemTemplate>
                                                 <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Update" CssClass="btn btn-xs btn-success "><i class="glyphicon glyphicon-saved"></i> Update</asp:LinkButton>
@@ -592,6 +589,8 @@
                 <h3>&nbsp;</h3>
             </div>
             <div style="height: 50%; overflow: auto;">
+                
+
                 <table style="width: 100%" class="table table-striped table-bordered">
 
                     <tr>

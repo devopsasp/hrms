@@ -1820,7 +1820,9 @@
     </div>
 
     <center>
-                          <div> <asp:Button ID="btn_Back" runat="server" CssClass="btn btn-primary" OnClick="btn_Back_Click" Text="Back" /></div>
-                    </center>
+                          <div> <asp:Button ID="btn_Back" runat="server" CssClass="btn btn-primary" OnClick="btn_Back_Click" Text="Back" />
+                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="btn_Remove_Click" Text="Remove" /></div>
+                
+    </center>
 
 </asp:Content>

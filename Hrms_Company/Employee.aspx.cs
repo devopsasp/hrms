@@ -53,6 +53,17 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
             Response.Redirect("../Hrms_Employee/Employee_Preview.aspx");
         }
 
+        if (s_login_role == "M")
+        {
+            employee.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            pay.EmployeeId = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+            c.EmployeeID = Convert.ToInt32(Request.Cookies["Login_temp_EmployeeID"].Value);
+          
+            Session["emp_menu"] = 0;
+            Response.Cookies["Select_Employee"].Value = "1";
+            Response.Redirect("../Hrms_Employee/Employee_Preview.aspx");
+        }
+
         if (!IsPostBack)
         {
          Response.Cookies["Select_Employee"].Value = "0";
@@ -81,6 +92,11 @@ public partial class Hrms_Company_Default : System.Web.UI.Page
 
                     case "e":
                         Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
+                        Response.Redirect("Company_Home.aspx");
+                        break;
+
+                    case "M":
+                        Response.Cookies["Msg_Session"].Value = "Permission Restricted. Please Contact Administrator";
                         Response.Redirect("Company_Home.aspx");
                         break;
 

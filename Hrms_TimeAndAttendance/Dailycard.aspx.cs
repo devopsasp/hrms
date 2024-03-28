@@ -30,10 +30,10 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
     Collection<Employee> EmployeeList;
     Collection<Employee> EmpProfileList;
     string s_login_role;
-    string s_form = "" , shift="";
+    string s_form = "", shift = "";
     string ec = "", en = "", cur_day = "", BranCode = "";
     static int deptid = 0;
-    
+
     DataSet ds_userrights;
 
     public class Shift
@@ -79,12 +79,12 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-         employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
+
+        employee.CompanyId = Convert.ToInt32(Request.Cookies["Login_temp_CompanyID"].Value);
         employee.BranchId = Convert.ToInt32(Request.Cookies["Login_temp_BranchID"].Value);
         s_login_role = Request.Cookies["Login_temp_Role"].Value;
 
-        
+
         if (!IsPostBack)
         {
 
@@ -102,7 +102,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     access();
                     break;
 
-                case "u": s_form = "37";
+                case "u":
+                    s_form = "37";
                     ds_userrights = company.check_Userrights((int)Session["Login_temp_EmployeeID"], s_form);
 
                     if (ds_userrights.Tables[0].Rows.Count > 0)
@@ -112,12 +113,13 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     }
                     else
                     {
-                        Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator.";
+                        Response.Cookies["Msg_Session"].Value = "Permission Restricted. Please Contact Administrator.";
                         Response.Redirect("~/Company_Home.aspx");
                     }
                     break;
 
-                default: Response.Cookies["Msg_Session"].Value=  "Permission Restricted. Please Contact Administrator";
+                default:
+                    Response.Cookies["Msg_Session"].Value = "Permission Restricted. Please Contact Administrator";
                     Response.Redirect("~/Company_Home.aspx");
                     break;
 
@@ -147,21 +149,13 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
     //    EmployeeList = employee.fn_getEmployeeDepartment(employee);
     //    if (EmployeeList.Count > 0)
     //    {
-    //        for (int ddl_i = -2; ddl_i < EmployeeList.Count; ddl_i++)
+    //        for (int ddl_i = -1; ddl_i < EmployeeList.Count; ddl_i++)
     //        {
     //            if (ddl_i == -1)
     //            {
     //                ListItem es_list = new ListItem();
     //                es_list.Text = "Select Employee";
     //                es_list.Value = "0";
-    //                ddl_ename.Items.Add(es_list);
-    //            }
-    //            else if (ddl_i == -1)
-    //            {
-    //                ListItem es_list = new ListItem();
-
-    //                es_list.Text = "All";
-    //                es_list.Value = "1";
     //                ddl_ename.Items.Add(es_list);
     //            }
     //            else
@@ -255,14 +249,6 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                         es_list.Text = "Select Employee";
                         ddl_ename.Items.Add(es_list);
                     }
-                    //else if (ddl_i == -1)
-                    //{
-                    //    ListItem es_list = new ListItem();
-
-                    //    es_list.Text = "All";
-                    //    es_list.Value = "1";
-                    //    ddl_ename.Items.Add(es_list);
-                    //}
                     else
                     {
                         ListItem es_list = new ListItem();
@@ -287,15 +273,6 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                         es_list.Text = "Select Employee";
                         ddl_ename.Items.Add(es_list);
                     }
-                    //else if (ddl_i == -1)
-                    //{
-                    //    ListItem es_list = new ListItem();
-
-                    //    es_list.Text = "All";
-                    //    es_list.Value = "1";
-                    //    ddl_ename.Items.Add(es_list);
-                    //}
-
                     else
                     {
                         ListItem es_list = new ListItem();
@@ -314,7 +291,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         DataSet ds = new DataSet();
         ad.Fill(ds, "paym_branch");
         ddl_branch.DataSource = ds;
-        
+
         ddl_branch.DataTextField = "branchname";
         ddl_branch.DataValueField = "pn_branchid";
         ddl_branch.DataBind();
@@ -362,16 +339,16 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
     public void load1()
     {
-        
+
         SqlDataAdapter ad = new SqlDataAdapter();
         if (s_login_role == "a")
         {
-            ad = new SqlDataAdapter("SELECT * FROM time_card  where pn_companyid = '" + ddl_branch.Text + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
+            ad = new SqlDataAdapter("SELECT * FROM temp_timecard  where pn_companyid = '" + ddl_branch.Text + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
         }
 
         if (s_login_role == "h" || s_login_role == "u")
         {
-            ad = new SqlDataAdapter("SELECT * FROM time_card  where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
+            ad = new SqlDataAdapter("SELECT * FROM temp_timecard  where pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' ", myConnection);
         }
         DataSet ds = new DataSet();
 
@@ -415,7 +392,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         SqlDataReader rdredit = cmd.ExecuteReader();
         if (rdredit.Read())
         {
-          
+
         }
         rdredit.Close();
         cmd = new SqlCommand("Select * from hr_authentication where pn_CompanyID = '" + employee.CompanyId + "' and pn_BranchID='" + employee.BranchId + "' and sectionid=7 and  section_delete='No'", _connection);
@@ -426,7 +403,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         }
         rdrdel.Close();
     }
-    
+
     protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         GridView1.EditIndex = -1;
@@ -462,7 +439,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             {
                 if (Btn_view.Text == "Save")
                 {
-                    
+
                 }
                 else if (Btn_view.Text == "View")
                 {
@@ -565,8 +542,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         //}
         if (status == "Import")
         {
-            ViewAttendance();
             //load1();
+            ViewAttendance();
         }
         else
         {
@@ -598,7 +575,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Update Failed. Check Leave Name and Status');", true);
                 return;
             }
-            myConnection.Open(); 
+            myConnection.Open();
             if (s_login_role == "a")
             {
                 SqlCommand updat = new SqlCommand("set dateformat dmy;update time_card set intime = '" + start_time + "', late_in = '" + latein + "',late_out = '" + break_timeo + "',early_out = '" + break_timei + "',outtime ='" + end_time + "',status='" + status + "',leave_code = '" + leave + "' ,data='M' where emp_code = '" + emp_code + "' and emp_name = '" + emp_name + "' and dates = '" + date_edit + "';set dateformat mdy;", myConnection);
@@ -608,7 +585,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
             if (s_login_role == "h")
             {
-                SqlCommand updat = new SqlCommand("set dateformat dmy;update temp_timecard set intime = '" + start_time + "', late_in = '"+latein+"', late_out = '" + break_timeo + "',early_out = '" + break_timei + "',outtime ='" + end_time + "',status='" + status + "',leave_code = '" + leave + "' where emp_code = '" + emp_code + "' and emp_name = '" + emp_name + "' and dates = '" + date_edit + "';set dateformat mdy;", myConnection);
+                SqlCommand updat = new SqlCommand("set dateformat dmy;update temp_timecard set intime = '" + start_time + "', late_in = '" + latein + "', late_out = '" + break_timeo + "',early_out = '" + break_timei + "',outtime ='" + end_time + "',status='" + status + "',leave_code = '" + leave + "' where emp_code = '" + emp_code + "' and emp_name = '" + emp_name + "' and dates = '" + date_edit + "';set dateformat mdy;", myConnection);
                 updat.ExecuteNonQuery();
             }
 
@@ -631,12 +608,12 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         string date = lbldate.Text;
         string date1 = d1.ToShortDateString();
         string date2 = d2.ToShortDateString();
-        string[] dat = date.Split('/','-');
+        string[] dat = date.Split('/', '-');
         string act_date = dat[1] + "/" + dat[0] + "/" + dat[2];
-        string[] dat1 = date1.Split('/','-');
+        string[] dat1 = date1.Split('/', '-');
         string act_date1 = dat1[1] + "/" + dat1[0] + "/" + dat1[2];
-        string[] dat2 = date2.Split('/','-');
-        string act_date2 = dat2[1]+"/" + dat2[0] + "/" + dat2[2];
+        string[] dat2 = date2.Split('/', '-');
+        string act_date2 = dat2[1] + "/" + dat2[0] + "/" + dat2[2];
         lb_current.Items.Clear();
         lb_previous.Items.Clear();
         lb_next.Items.Clear();
@@ -697,7 +674,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 cmd2.ExecuteNonQuery();
                 myConnection.Close();
 
-                
+
                 fdate = Convert.ToDateTime(txt_fromdate.Text);
                 tdate = Convert.ToDateTime(txt_todate.Text);
                 TimeSpan diff = tdate - fdate;
@@ -750,7 +727,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     string lin = "00:00:00", lout = "00:00:00", e_out = "00:00:00";
                     string[] code = ddl_ename.SelectedItem.Text.Split('-');
                     ec = code[0];
-                    //ec = ddl_ename.SelectedItem.Value;
+                    //ec = ddl_en66ame.SelectedItem.Value;
                     employee.EmployeeId = Convert.ToInt32(ddl_ename.SelectedValue);
                     en = ddl_ename.SelectedItem.Text;
                     string[] name = en.Split('-');
@@ -762,8 +739,21 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
                     cmd = new SqlCommand("delete from daily_timecard_new", myConnection);
                     cmd.ExecuteNonQuery();
-                    cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times < '" + Attend[0].break_intime + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc ) as intime,(select top 1 aa.times as break_out from punch_details aa where times between '" + Attend[0].break_intime + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_out,(select top 1 aa.times as break_in from punch_details aa where times between '" + Attend[0].breakout + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_in,(select top 1 aa.times as outtime from punch_details aa where times > '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
-                    cmd.ExecuteNonQuery();
+                    if (Attend[0].stat == "Next Day")
+                    {
+                        TimeSpan tInc = new TimeSpan(1, 0, 0);
+                        TimeSpan tDec = new TimeSpan(-1, 0, 0);
+                        string dtend = Convert.ToString(fdate.AddDays(1));
+                        string[] datend = dtend.Split('/', '-');
+                        string txt_date1 = datend[1] + "/" + datend[0] + "/" + datend[2];
+                        cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times between '" + Attend[0].intime.Add(tDec) + "' and '" + Attend[0].intime.Add(tInc) + "' and aa.emp_code=a.emp_code and aa.dates='" + txt_date + "' order by aa.times desc ) as intime,'00:00' as break_out,'00:00' as break_in,(select top 1 aa.times as outtime from punch_details aa where times between '" + Attend[0].outtime.Add(tDec) + "' and '" + Attend[0].outtime.Add(tInc) + "' and aa.emp_code=a.emp_code and aa.dates='" + txt_date1 + "' order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times < '" + Attend[0].break_intime + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc ) as intime,(select top 1 aa.times as break_out from punch_details aa where times between '" + Attend[0].break_intime + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_out,(select top 1 aa.times as break_in from punch_details aa where times between '" + Attend[0].breakout + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_in,(select top 1 aa.times as outtime from punch_details aa where times > '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
+                        cmd.ExecuteNonQuery();
+                    }
                     SqlCommand cmd_dt = new SqlCommand("Select * from daily_timecard_new where pn_branchid = '" + employee.BranchId + "' and pn_companyid = '" + employee.CompanyId + "' and dates = '" + txt_date + "' and emp_code='" + ec + "'", myConnection);
                     SqlDataReader rd_time = cmd_dt.ExecuteReader();
                     if (rd_time.Read())
@@ -786,6 +776,18 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                                 lin = Convert.ToString(inchk - Attend[0].starttime);
                             }
                         }
+                        //if (Attend[0].stat == "Next Day")
+                        //{
+                        //    if (cin != "")
+                        //    {
+                        //        string stim = rd_time["intime"].ToString();
+                        //        inchk = TimeSpan.Parse(stim);
+                        //        if (inchk > Attend[0].starttime)
+                        //        {
+                        //            lin = Convert.ToString(inchk - Attend[0].starttime);
+                        //        }
+                        //    }
+                        //}
                         if (cout != "")
                         {
 
@@ -800,6 +802,23 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                                 e_out = Convert.ToString(Attend[0].outtime - outchk);
                             }
                         }
+                        //if (Attend[0].stat == "Next Day")
+                        //{
+                        //    if (cout != "")
+                        //    {
+
+                        //        string etim = rd_time["outtime"].ToString();
+                        //        outchk = TimeSpan.Parse(etim);
+                        //        if (outchk > Attend[0].outtime)
+                        //        {
+                        //            lout = Convert.ToString(outchk - Attend[0].outtime);
+                        //        }
+                        //        else
+                        //        {
+                        //            e_out = Convert.ToString(Attend[0].outtime - outchk);
+                        //        }
+                        //    }
+                        //}
                         if (cin != "" && cout != "")
                         {
                             stats = "XX";
@@ -994,11 +1013,12 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     //cmd.ExecuteNonQuery();
                 }
                 myConnection.Close();
-                
+
             }
 
             else if (ddl_type.SelectedItem.Text == "All")
             {
+
                 SqlCommand comm = new SqlCommand();
                 TimeSpan inchk = new TimeSpan(0, 0, 0);
                 TimeSpan outchk = new TimeSpan(0, 0, 0);
@@ -1009,27 +1029,32 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 TimeSpan start_time = new TimeSpan(0, 0, 0);
                 TimeSpan breakin_time = new TimeSpan(0, 0, 0);
                 TimeSpan breakout_time = new TimeSpan(0, 0, 0);
-                
+
                 DateTime inc, outc, chkin, chkout;
                 TimeSpan halfLmt = new TimeSpan(0, 0, 0);
-                
+
                 TimeSpan diff = new TimeSpan(0, 0, 0);
                 TimeSpan in_time, daily_in, daily_out, ot_hours, ein, eout;
-                
-                string cin="", cbin="", cbout="", cout="", ecod, stats="", outdate, dat1, leav = "";
+
+                string cin = "", cbin = "", cbout = "", cout = "", ecod, stats = "", outdate, dat1, leav = "";
                 int otc = 0;
                 //txt_fromdate.Text = DateTime.Now.ToShortDateString();
                 myConnection.Open();
                 string cmd_text = "IF EXISTS (SELECT * FROM sysobjects WHERE Name = 'temp_timecard')" + "DROP TABLE temp_timecard";
                 SqlCommand cmd2 = new SqlCommand(cmd_text, myConnection);
                 cmd2.ExecuteNonQuery();
+                fdate = Convert.ToDateTime(txt_fromdate.Text);
+                tdate = Convert.ToDateTime(DateTime.Now);
+                TimeSpan difff = tdate - fdate;
+                int date_difff = difff.Days;
 
                 string dt1 = Convert.ToString(txt_fromdate.Text);
                 string[] date1 = dt1.Split('/');
                 string txt_date = date1[1] + "/" + date1[0] + "/" + date1[2];
                 DateTime day = Convert.ToDateTime(txt_fromdate.Text);
                 cur_day = day.DayOfWeek.ToString();
-
+                cmd = new SqlCommand("delete from daily_timecard_new", myConnection);
+                cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("create table temp_timecard(pn_companyid int, pn_branchid int, BranchCode varchar(10), emp_code varchar(10), emp_name varchar(50),shift_code varchar(10),dates datetime,days varchar(15),intime time , break_out time, break_in time , outtime time, late_in time, late_out time, early_out time, ot_hrs datetime ,leave_code varchar(20), status varchar(2))", myConnection);
                 cmd.ExecuteNonQuery();
                 if (s_login_role == "a")
@@ -1061,10 +1086,25 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     Collection<Shift> Attend;
                     Attend = Shift_Details(dt1);
 
-                    cmd = new SqlCommand("delete from daily_timecard_new", myConnection);
-                    cmd.ExecuteNonQuery();
-                    cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times < '" + Attend[0].break_intime + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc ) as intime,(select top 1 aa.times as break_out from punch_details aa where times between '" + Attend[0].break_intime + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_out,(select top 1 aa.times as break_in from punch_details aa where times between '" + Attend[0].breakout + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_in,(select top 1 aa.times as outtime from punch_details aa where times > '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
-                    cmd.ExecuteNonQuery();
+                    if (Attend[0].stat == "Next Day")
+                    {
+                        TimeSpan tInc = new TimeSpan(1, 0, 0);
+                        TimeSpan tDec = new TimeSpan(-1, 0, 0);
+                        string dtend = Convert.ToString(fdate.AddDays(1));
+                        string[] datend = dtend.Split('/', '-');
+                        string txt_date1 = datend[1] + "/" + datend[0] + "/" + datend[2];
+                        cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times  between '" + Attend[0].intime.Add(tDec) + "' and '" + Attend[0].intime.Add(tInc) + "' and aa.emp_code=a.emp_code and aa.dates='" + txt_date + "' order by aa.times desc ) as intime,'00:00' as break_out,'00:00' as break_in,(select top 1 aa.times as outtime from punch_details aa where times  between '" + Attend[0].outtime.Add(tDec) + "' and '" + Attend[0].outtime.Add(tInc) + "' and aa.emp_code=a.emp_code and aa.dates='" + txt_date1 + "' order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times < '" + Attend[0].break_intime + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc ) as intime,(select top 1 aa.times as break_out from punch_details aa where times between '" + Attend[0].break_intime + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_out,(select top 1 aa.times as break_in from punch_details aa where times between '" + Attend[0].breakout + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_in,(select top 1 aa.times as outtime from punch_details aa where times > '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
+                        cmd.ExecuteNonQuery();
+                    }
+                    //cmd = new SqlCommand("delete from daily_timecard_new", myConnection);
+                    //cmd.ExecuteNonQuery();
+                    //cmd = new SqlCommand("Insert into daily_timecard_new select distinct a.pn_companyid,a.pn_branchid,a.machine_num,a.card_no,a.emp_code,a.emp_name,a.VerifyMode,a.InOutMode,a.shift_code,a.dates,a.days,(select top 1 aa.times as Intime from punch_details aa where times < '" + Attend[0].break_intime + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc ) as intime,(select top 1 aa.times as break_out from punch_details aa where times between '" + Attend[0].break_intime + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_out,(select top 1 aa.times as break_in from punch_details aa where times between '" + Attend[0].breakout + "' and '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as break_in,(select top 1 aa.times as outtime from punch_details aa where times > '" + Attend[0].breakin + "' and aa.emp_code=a.emp_code and aa.dates=a.dates order by aa.times desc) as outtime , a.ot_hrs , a.status from (select * from punch_details) as a where dates = '" + txt_date + "' and emp_code = '" + ec + "'", myConnection);
+                    //cmd.ExecuteNonQuery();
                     SqlCommand cmd_dt = new SqlCommand("Select * from daily_timecard_new where pn_branchid = '" + employee.BranchId + "' and pn_companyid = '" + employee.CompanyId + "' and dates = '" + txt_date + "' and emp_code='" + ec + "'", myConnection);
                     SqlDataReader rd_time = cmd_dt.ExecuteReader();
                     if (rd_time.Read())
@@ -1101,6 +1141,34 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                                 e_out = Convert.ToString(Attend[0].outtime - outchk);
                             }
                         }
+                        if (Attend[0].stat == "Next Day")
+                            {
+                            if (cin != "")
+                            {
+                                string stim = rd_time["intime"].ToString();
+                                inchk = TimeSpan.Parse(stim);
+                                
+                                if (inchk > Attend[0].starttime)
+                                {
+                                    lin = Convert.ToString(inchk - Attend[0].starttime);
+                                }
+                            }
+                            
+                        }
+                        if (cout != "")
+                        {
+
+                            string etim = rd_time["outtime"].ToString();
+                            outchk = TimeSpan.Parse(etim);
+                            if (outchk > Attend[0].outtime)
+                            {
+                                lout = Convert.ToString(outchk - Attend[0].outtime);
+                            }
+                            else
+                            {
+                                e_out = Convert.ToString(Attend[0].outtime - outchk);
+                            }
+                        }
                         if (cin != "" && cout != "")
                         {
                             stats = "XX";
@@ -1113,10 +1181,25 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                             {
                                 stats = "AX";
                             }
+                            if (Attend[0].stat == "Next Day")
+                            {
+                                stats = "XX";
+                                leav = "";
+                                chkin = Convert.ToDateTime(cin);
+                                cin = chkin.ToString("HH:mm:ss");
+                                ein = TimeSpan.Parse(cin);
+                                diff = Attend[0].break_intime - ein;
+                                if (diff > Attend[0].halflimit)
+                                {
+                                    stats = "AX";
+                                }
+
+
+                            }
                             chkout = Convert.ToDateTime(cout);
                             cout = chkout.ToString("HH:mm:ss");
                             eout = TimeSpan.Parse(cout);
-                            diff = eout - Attend[0].break_outtime; 
+                            diff = eout - Attend[0].break_outtime;
                             if (diff < Attend[0].halflimit)
                             {
                                 stats = "XA";
@@ -1124,10 +1207,10 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                             string perm = Check_Permission(dt1);
                             if (perm != "")
                             {
-                                if(perm == "FN")
-                                {stats = "PX";}
+                                if (perm == "FN")
+                                { stats = "PX"; }
                                 else
-                                {stats="XP";}
+                                { stats = "XP"; }
                             }
 
                         }
@@ -1147,7 +1230,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                             leav = "Absent";
                         }
 
-                        
+
                     }
                     else
                     {
@@ -1289,7 +1372,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     //cmd.ExecuteNonQuery();
                 }
                 myConnection.Close();
-                
+
             }
 
             load1();
@@ -1302,7 +1385,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
     public string Check_Permission(string dt1)
     {
-        string pm = "",stat="";
+        string pm = "", stat = "";
         string[] date1 = dt1.Split('/');
         string txt_date = date1[1] + "/" + date1[0] + "/" + date1[2];
         SqlCommand com = new SqlCommand("select * from paym_permission where companyID = '" + employee.CompanyId + "' and BranchID = '" + employee.BranchId + "' and EmployeeID = '" + employee.EmployeeId + "' and date = '" + txt_date + "'", myConnection);
@@ -1405,11 +1488,12 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             {
                 halfLmt = TimeSpan.Parse(hd[1]);
             }
+
         }
         rd_out.Close();
 
 
-       
+
         cmd = new SqlCommand("Select * from shift_month where date='" + txt_date + "' and pn_branchid ='" + employee.BranchId + "' and pn_Employeecode = '" + ec + "'", myConnection);
         SqlDataReader rd1 = cmd.ExecuteReader();
         if (rd1.Read())
@@ -1449,6 +1533,8 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             et = Convert.ToDateTime(rd_out["end_time"]);
             otime = et.ToString("HH:mm:ss");
             out_time = TimeSpan.Parse(otime);
+            //Shift Indicator
+            sh.stat = rd_out["Shift_indicator"].ToString();
         }
         rd_out.Close();
         //max_in1 = start_time + in_limit;
@@ -1485,7 +1571,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             }
             //txt_fromdate.Text = "";
         }
-        else if(ddl_type.SelectedItem.Text == "All")
+        else if (ddl_type.SelectedItem.Text == "All")
         {
             ddl_ename.Enabled = false;
             ddl_department.Enabled = false;
@@ -1502,7 +1588,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         try
         {
             ClearList();
-            
+
             if (Btn_view.Text == "Save")
             {
                 try
@@ -1531,11 +1617,11 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                     }
 
 
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Attendance Saved Successfully');", true);                          
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Attendance Saved Successfully');", true);
                     Btn_view.Text = "View";
                     Btn_view.CssClass = "btn btn-info";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Attendance Saved Successfully');", true);
                 }
@@ -1584,6 +1670,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             {
                 string stats = "";
                 TimeSpan tot_ot = new TimeSpan(0, 0, 0);
+
                 double abs = 0.0, prs = 0.0, hday = 0.0, ldays = 0.0, rc = 0.0, wkoff = 0.0;
                 //DateTime othr;
                 string[] name = ddl_ename.SelectedItem.Text.Split('-');
@@ -1594,7 +1681,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 string[] td = tdate.Split('/');
                 string fr_date = fd[1] + "/" + fd[0] + "/" + fd[2];
                 string to_date = td[1] + "/" + td[0] + "/" + td[2];
-                SqlDataAdapter ada = new SqlDataAdapter("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' and emp_code = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
+                SqlDataAdapter ada = new SqlDataAdapter("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' and pn_employeeID = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
 
                 DataSet dset = new DataSet();
 
@@ -1620,17 +1707,18 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
                 if (s_login_role == "a")
                 {
-                    cmd1 = new SqlCommand("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + ddl_branch.Text + "' and emp_code = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
+                    cmd1 = new SqlCommand("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + ddl_branch.Text + "' and pn_employeeId = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
                 }
 
                 if (s_login_role == "h")
                 {
-                    cmd1 = new SqlCommand("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' and emp_code = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
+                    cmd1 = new SqlCommand("SELECT * FROM time_card where dates between '" + fr_date + "' and '" + to_date + "' and pn_companyid = '" + employee.CompanyId + "' and  pn_BranchID = '" + employee.BranchId + "' and pn_employeeId = '" + ddl_ename.SelectedItem.Value + "' order by dates ", myConnection);
                 }
                 SqlDataReader rd_calc = cmd1.ExecuteReader();
                 while (rd_calc.Read())
                 {
                     rc++;
+
                     DateTime othr = Convert.ToDateTime(rd_calc["ot_hrs"]);
                     string otim = othr.ToString("HH:mm");
                     tot_ot += TimeSpan.Parse(otim);
@@ -1694,6 +1782,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
             {
                 string stats = "";
                 TimeSpan tot_ot = new TimeSpan(0, 0, 0);
+
                 int abs = 0, prs = 0, hday = 0, ldays = 0, rc = 0, wkoff = 0;
                 //DateTime othr;
                 string fdate = txt_fromdate.Text;
@@ -1739,6 +1828,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
                 SqlDataReader rd_calc = cmd1.ExecuteReader();
                 while (rd_calc.Read())
                 {
+
                     DateTime othr = Convert.ToDateTime(rd_calc["ot_hrs"]);
                     string otim = othr.ToString("HH:mm");
                     tot_ot += TimeSpan.Parse(otim);
@@ -1792,7 +1882,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
     }
 
-   
+
     protected void ddl_branch_SelectedIndexChanged(object sender, EventArgs e)
     {
         //populate_ddlbranch();
@@ -1816,7 +1906,7 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
         SqlCommand cmd = new SqlCommand();
         if (ddl_time.SelectedItem.Text == "Intime")
         {
-            string intime =  txt_mtime.Text + ":00";
+            string intime = txt_mtime.Text + ":00";
             cmd = new SqlCommand("update temp_timecard set intime ='" + intime + "'", myConnection);
             cmd.ExecuteNonQuery();
             for (int i = 0; i < GridView1.Rows.Count; i++)
@@ -1867,4 +1957,4 @@ public partial class Hrms_Employee_Default : System.Web.UI.Page
 
         }
     }
-}                                                                                                                                                                                            
+}

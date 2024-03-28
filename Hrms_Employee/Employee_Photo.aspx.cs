@@ -237,21 +237,20 @@ public partial class Hrms_Employee_Default5 : System.Web.UI.Page
             }
 
             if (_Value != "1")
-            {
-
+            {  
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Added Successfully');};", true);
-                   Response.Redirect("Employee_Preview.aspx");
+                Response.Redirect("Employee_Preview.aspx");
                 img_emp_photo.ImageUrl = Server.MapPath("~/Photo/") + Photo_name;
                 //img_emp_photo.AlternateText = "Employee Code -" + employee.EmployeeCode;
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
+              ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Error Occured');", true);
             }
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
+          ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "window.onload=function(){alert('Error Occured');};", true);
         }
     }
 

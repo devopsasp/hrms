@@ -199,6 +199,8 @@ INSERT INTO tbl_Menu(PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent
 
 
 
+INSERT INTO tbl_Menu (PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES (71,' Training and Placements','H','#',1,null,1,1,1,1)
 
+INSERT INTO tbl_Menu (PK_Menu_Id,Menu_Name,Menu_Code,Menu_Link,Menu_Access,Parent_Id,Select_Field,View_Status,Save_Status,Delete_Status) VALUES (72,' Reimbursement','HA','/Hrms_Additional/Reimbursement.aspx',1,1,1,1,1,1)
 
 SELECT * FROM tbl_Menu
